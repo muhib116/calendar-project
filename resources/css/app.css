@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+    --header-bg-color: #2b2c3b;
+    --footer-bg-color: #333;
+    --text-color: #202124;
+    --link-color: #fb5214;
+    --notification-badge-color: #f75c5d;
+    --offCanvas-bg-color: #f75c5d;
+}
+
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color);
+    font-weight: 400;
+}
