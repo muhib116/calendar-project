@@ -5,7 +5,7 @@
             class="filter invert h-[100px] block mx-auto" 
             alt="#"
         >
-        <div class="max-w-[600px] w-full mx-auto">
+        <div class="max-w-[600px] w-full mx-auto px-[5vw]">
             <input 
                 type="search" 
                 class="bg-white bg-opacity-10 block w-full border-2 border-[#fff] border-opacity-20 rounded-full px-6 py-3"
@@ -19,6 +19,6 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

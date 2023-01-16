@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="fixed top-0  w-[400px] h-[100vh] bg-white z-20 transition-all -left-full"
+        class="fixed top-0  w-[400px] h-[100vh] bg-white z-20 transition-all -left-full shadow"
         :class="modelValue && '-left-0'"
 
     >

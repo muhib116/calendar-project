@@ -1,11 +1,10 @@
 <template>
     <div class="py-6">
         <CInput type="email" placeholder="Email" v-model="loginPayload.email" class="mb-6" />
-        <CInput type="password" placeholder="Password" v-model="loginPayload.password" class="mb-6" />
-
         <div class="">
-            <button @click="$emit('forgotPassword')" class="block opacity-70 hover:opacity-100 hover:text-[var(--link-color)]">Forgot password ?</button>
-            <button class="bg-[var(--btn-bg-color)] text-[var(--btn-text-color)] rounded-full px-5 py-2 shadow uppercase ml-auto block">Sign In</button>
+            <button class="bg-[var(--btn-bg-color)] text-[var(--btn-text-color)] rounded-full px-5 py-2 shadow uppercase ml-auto block">
+                Recover
+            </button>
             <div>
                 Don't have account ?
                 <button @click="$emit('register')" class="text-[var(--link-color)]">Signup</button>

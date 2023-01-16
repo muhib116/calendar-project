@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-    import OffCanvas from '@/Components/Backend/Global/OffCanvas.vue'
+    import OffCanvas from '@/Components/Global/OffCanvas.vue'
     import { ref } from 'vue'
     const isOpen = ref(false)
 </script>

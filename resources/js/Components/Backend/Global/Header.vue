@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-[var(--header-bg-color)] text-white px-4 py-4 sticky top-0">
+    <header class="bg-[var(--header-bg-color)] text-white px-4 py-4 sticky top-0 z-50">
         <div class="navWrapper container mx-auto text-white items-center">
             <Navigation class="w-10" />
 
