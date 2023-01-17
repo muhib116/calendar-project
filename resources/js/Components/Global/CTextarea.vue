@@ -1,26 +1,41 @@
 <template>
     <label class="relative block">
         <span v-if="!writtenCharacter" class="absolute left-0 top-3 opacity-40">{{ placeholder }}</span>
-        <input @input="updateValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow">
+        <textarea 
+            :rows="rows"
+            @input="updateValue" 
+            class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow"
+        ></textarea>
         <span class="customBorder"></span>
+        <div 
+            class="limit block text-right mt-1 italic text-xs"
+            :class="(writtenCharacter >= characterLimit) && 'text-red-500 font-bold text-md'"
+        >
+           {{ writtenCharacter }}/{{ characterLimit }}
+        </div>
     </label>
 </template>
 
 <script setup>
     import { ref } from 'vue'
-    import { isEmpty } from 'lodash'
-    defineProps({
-        type: String,
+    
+    const props = defineProps({
         placeholder: String,
-        modelValue: String
+        characterLimit: Number,
+        modelValue: String,
+        rows: [Number, String]
     })
 
     const writtenCharacter = ref(0)
+
     const emit = defineEmits()
     const updateValue = (e) => {
         let value = e.target.value
         writtenCharacter.value = value.length
-        emit('update:modelValue', value)
+        if(value.length >= props.characterLimit){
+            e.target.value = value.slice(0, (props.characterLimit - 1))
+        }
+        emit('update:modelValue', e.target.value)
     }
 </script>
 

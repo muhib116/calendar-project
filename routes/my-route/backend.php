@@ -14,6 +14,18 @@ Route::get('/category/{categorySlug}', function () {
     return Inertia::render('Backend/Landing');
 })->middleware(['auth', 'verified'])->name('category.items');
 
+Route::get('/details/{slug}', function () {
+    return Inertia::render('Backend/ItemDetails');
+})->middleware(['auth', 'verified'])->name('item.details');
+
+Route::get('/payment/info', function () {
+    return Inertia::render('Backend/Payment/Info');
+})->middleware(['auth', 'verified'])->name('payment.info');
+
+Route::get('/payment/gateway', function () {
+    return Inertia::render('Backend/Payment/Gateway');
+})->middleware(['auth', 'verified'])->name('payment.gateway');
+
 
 
 
