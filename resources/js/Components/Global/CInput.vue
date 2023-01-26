@@ -3,15 +3,23 @@
         <span v-if="!writtenCharacter" class="absolute left-0 top-3 opacity-40">{{ placeholder }}</span>
         <input @input="updateValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow">
         <span class="customBorder"></span>
+        <div 
+            v-if="characterLimit"
+            class="limit block text-right mt-1 italic text-xs"
+            :class="(writtenCharacter >= characterLimit) && 'text-red-500 font-bold text-md'"
+        >
+           {{ writtenCharacter }}/{{ characterLimit }}
+        </div>
     </label>
 </template>
 
 <script setup>
     import { ref } from 'vue'
-    import { isEmpty } from 'lodash'
-    defineProps({
+    
+    const props = defineProps({
         type: String,
         placeholder: String,
+        characterLimit: Number,
         modelValue: String
     })
 
@@ -20,6 +28,9 @@
     const updateValue = (e) => {
         let value = e.target.value
         writtenCharacter.value = value.length
+        if(value.length >= props.characterLimit){
+            e.target.value = value.slice(0, (props.characterLimit - 1))
+        }
         emit('update:modelValue', value)
     }
 </script>

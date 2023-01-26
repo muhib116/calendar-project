@@ -86,6 +86,22 @@ Route::get('/account2/tips', function () {
     return Inertia::render('Backend/Account2/Tips');
 })->middleware(['auth', 'verified'])->name('account2.tips');
 
+Route::get('/account2/my-life', function () {
+    return Inertia::render('Backend/Account2/MyLife');
+})->middleware(['auth', 'verified'])->name('account2.myLife');
+
+Route::get('/account2/wish-request', function () {
+    return Inertia::render('Backend/Account2/WishRequest');
+})->middleware(['auth', 'verified'])->name('account2.wish.request');
+
+Route::get('/account2/analytics', function () {
+    return Inertia::render('Backend/Account2/Analytics');
+})->middleware(['auth', 'verified'])->name('account2.analytics');
+
+Route::get('/account2/payout', function () {
+    return Inertia::render('Backend/Account2/Payout');
+})->middleware(['auth', 'verified'])->name('account2.payout');
+
 
 
 
