@@ -8,6 +8,7 @@
         ></textarea>
         <span class="customBorder"></span>
         <div 
+            v-if="characterLimit"
             class="limit block text-right mt-1 italic text-xs"
             :class="(writtenCharacter >= characterLimit) && 'text-red-500 font-bold text-md'"
         >

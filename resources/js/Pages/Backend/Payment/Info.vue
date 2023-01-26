@@ -59,7 +59,7 @@
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
 import CTextarea from '@/Components/Global/CTextarea.vue'
-import MemberCard from '@/Components/Global/MemberCard.vue';
+import MemberCard from '@/Components/Global/MemberCard.vue'
 import { Link } from '@inertiajs/inertia-vue3';
 import Master from '../Master.vue'
 </script>

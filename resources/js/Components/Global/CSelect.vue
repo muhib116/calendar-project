@@ -1,7 +1,7 @@
 <template>
     <label class="relative block">
         <span v-if="isEmpty(modelValue)" class="absolute left-0 top-3 opacity-40">{{ placeholder }}</span>
-        <select @input="updateValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow">
+        <select @input="updateValue" v-model="getModelValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow">
             <option v-for="option in options" :value="getKey(option)">{{ getValue(option) }}</option>
         </select>
         <span class="customBorder"></span>
@@ -10,11 +10,15 @@
 
 <script setup>
     import { isEmpty } from 'lodash'
-    defineProps({
+    import { computed } from 'vue';
+
+    const props = defineProps({
         options: Array,
         modelValue: String
     })
 
+
+    const getModelValue = computed(() => props.modelValue)
     const emit = defineEmits()
     const updateValue = (e) => {
         emit('update:modelValue', e.target.value)
@@ -24,7 +28,6 @@
         if(typeof option == 'string'){
             return option
         }
-
         return option.key
     }
     const getValue = (option) => {
