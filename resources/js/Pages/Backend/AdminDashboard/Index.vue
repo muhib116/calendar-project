@@ -1,17 +1,17 @@
 <template>
-    <DashboardLayout>
+    <DashboardLayout :header="false" :footer="false">
         <template v-slot:leftSidebar>
             <LeftSide />
         </template>
         <template v-slot:content>
-            This is guid page
+            This is Dashboard
         </template>
     </DashboardLayout>
 </template>
 
 <script setup>
-    import DashboardLayout from '../DashboardLayout.vue'
-    import LeftSide from '@/Components/Backend/Account/LeftSide.vue';
+    import DashboardLayout from './DashboardLayout.vue'
+    import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue';
 </script>
 
 

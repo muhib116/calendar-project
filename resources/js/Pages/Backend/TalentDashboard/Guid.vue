@@ -11,7 +11,7 @@
 
 <script setup>
     import DashboardLayout from '../DashboardLayout.vue'
-    import LeftSide from '@/Components/Backend/Account/LeftSide.vue';
+    import LeftSide from '@/Components/Backend/TalentDashboard/LeftSide.vue';
 </script>
 
 

@@ -4,8 +4,9 @@
             <LeftSide />
         </template>
         <template v-slot:content>
-            <Header />
-            <Table class="border border-b-0 mt-5"/>
+            <Widget />
+            <Table class="border border-b-0 mt-10"/>
+
             <div class="flex justify-between items-center mt-4">
                 <h3 class="">Showing 1 to 3 of 3 entries</h3>
                 <div class="flex gap-4">
@@ -23,9 +24,9 @@
 
 <script setup>
 import DashboardLayout from '../DashboardLayout.vue'
-import LeftSide from '@/Components/Backend/Account/LeftSide.vue'
-import Header from '@/Components/Backend/Account/History/Header.vue'
-import Table from '@/Components/Backend/Account/History/Table.vue'
+import LeftSide from '@/Components/Backend/TalentDashboard/LeftSide.vue'
+import Table from '@/Components/Backend/TalentDashboard/Payout/Table.vue'
+import Widget from '@/Components/Backend/TalentDashboard/Payout/Widget.vue';
 </script>
 
 
