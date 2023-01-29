@@ -2,10 +2,8 @@
     <Master>
         <div class="wrapper grid h-[100vh] overflow-y-auto">
             <div class="p-4 bg-[#0b021a] relative flex items-center justify-center h-full">
-                <!-- <div class=""> -->
-                    <CanvasMenu />
-                    <Search class="absolute top-[250px]" />
-                <!-- </div> -->
+                <CanvasMenu />
+                <Search class="absolute top-[250px]" />
             </div>
 
             <div class="py-10 px-8 bg-[#1c2130] text-white relative">

@@ -2,21 +2,21 @@
     <div class="grid gap-10 sticky top-10">
         <div class="grid gap-2">
             <Link 
-                class="px-4 py-1 border font-semibold border-sky-500 hover:bg-sky-500 hover:text-white rounded"
+                class="px-4 py-1 border font-semibold text-gray-400 rounded"
                 :class="route().current('admin.dashboard') ? 'bg-sky-500 text-white' : ''"
                 :href="route('admin.dashboard')"
             >
                 Dashboard
             </Link>
             <Link 
-                class="px-4 py-1 border font-semibold border-sky-500 hover:bg-sky-500 hover:text-white rounded"
+                class="px-4 py-1 border font-semibold text-gray-400 rounded"
                 :class="route().current('admin.dashboard.analytics') ? 'bg-sky-500 text-white' : ''"
                 :href="route('admin.dashboard.analytics')"
             >
                 Analytics
             </Link>
             <Link 
-                class="px-4 py-1 border font-semibold border-sky-500 hover:bg-sky-500 hover:text-white rounded"
+                class="px-4 py-1 border font-semibold text-gray-400 rounded"
                 :class="route().current('admin.dashboard.payments') ? 'bg-sky-500 text-white' : ''"
                 :href="route('admin.dashboard.payments')"
             >
