@@ -26,8 +26,8 @@
 
         <div class="grid gap-2">
             <Link 
-                class="px-4 py-1 border font-semibold hover:bg-gray-500 hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.talent.applications') ? 'bg-gray-500 text-white' : ''"
+                class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
+                :class="route().current('admin.dashboard.talent.applications') ? 'bg-[#130121] text-white' : ''"
                 :href="route('admin.dashboard.talent.applications')"
             >
                 T-Applications
@@ -36,11 +36,39 @@
                 </span>
             </Link>
             <Link 
-                class="px-4 py-1 border font-semibold hover:bg-gray-500 hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.users') ? 'bg-gray-500 text-white' : ''"
+                class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
+                :class="route().current('admin.dashboard.users') ? 'bg-[#130121] text-white' : ''"
                 :href="route('admin.dashboard.users')"
             >
                 Users
+            </Link>
+            <Link 
+                class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
+                :class="route().current('admin.dashboard.talents') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.dashboard.talents')"
+            >
+                Talents
+            </Link>
+            <Link 
+                class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
+                :class="route().current('admin.dashboard.categories') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.dashboard.categories')"
+            >
+                Categories
+            </Link>
+            <Link 
+                class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
+                :class="route().current('admin.dashboard.countries') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.dashboard.countries')"
+            >
+                Countries
+            </Link>
+            <Link 
+                class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
+                :class="route().current('admin.dashboard.countries') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.dashboard.countries')"
+            >
+                Settings
             </Link>
         </div>
         <div class="grid gap-2">

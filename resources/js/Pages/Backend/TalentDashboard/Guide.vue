@@ -4,7 +4,7 @@
             <LeftSide />
         </template>
         <template v-slot:content>
-            This is guid page
+            This is guide page
         </template>
     </DashboardLayout>
 </template>

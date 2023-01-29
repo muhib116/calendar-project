@@ -14,9 +14,3 @@
         lock: Boolean
     })
 </script>
-
-<style scoped>
-    .customRatio{
-        aspect-ratio: 9/16;
-    }
-</style>

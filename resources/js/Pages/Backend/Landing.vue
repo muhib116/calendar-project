@@ -54,7 +54,7 @@
 
 <style scoped>
     .customRatio{
-        aspect-ratio: 9/16;
+        aspect-ratio: 3/4;
         object-fit: cover;
         object-position: center;
     }

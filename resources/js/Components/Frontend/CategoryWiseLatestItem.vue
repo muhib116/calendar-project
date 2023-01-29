@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex justify-between items-center mb-3">
-            <h3 class="font-bold text-xl">Actors</h3>
+            <h3 class="font-bold text-xl">{{ title }}</h3>
             <Link :href="route('category.items', 'actors')" class="text-white text-opacity-60 cursor-pointer hover:text-opacity-100">More</Link>
         </div>
         <div class="grid grid-cols-4 gap-4">
@@ -16,6 +16,10 @@
 <script setup>
     import { Link } from '@inertiajs/inertia-vue3'
     import Video from '@/Components/Global/Video.vue'
+
+    defineProps({
+        title: String
+    })
 </script>
 
 <style scoped>

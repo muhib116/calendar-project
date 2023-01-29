@@ -23,9 +23,9 @@
 
 <script setup>
 import DashboardLayout from '../DashboardLayout.vue'
-import LeftSide from '@/Components/Backend/Account/LeftSide.vue'
-import Header from '@/Components/Backend/Account/History/Header.vue'
-import Table from '@/Components/Backend/Account/History/Table.vue'
+import LeftSide from '@/Components/Backend/UserDashboard/LeftSide.vue'
+import Header from '@/Components/Backend/UserDashboard/History/Header.vue'
+import Table from '@/Components/Backend/UserDashboard/History/Table.vue'
 </script>
 
 

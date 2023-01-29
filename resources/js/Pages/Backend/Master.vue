@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header v-if="header" />
-        <div class="min-h-[85.46vh]">
+        <div class="min-h-[88.4vh] pt-5">
             <slot></slot>
         </div>
         <Footer v-if="footer" />

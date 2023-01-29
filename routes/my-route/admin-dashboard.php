@@ -22,3 +22,15 @@ Route::get('/admin/dashboard/talent-applications', function () {
 Route::get('/admin/dashboard/users', function () {
     return Inertia::render('Backend/AdminDashboard/Users');
 })->middleware(['auth', 'verified'])->name('admin.dashboard.users');
+
+Route::get('/admin/dashboard/talents', function () {
+    return Inertia::render('Backend/AdminDashboard/Talents');
+})->middleware(['auth', 'verified'])->name('admin.dashboard.talents');
+
+Route::get('/admin/dashboard/categories', function () {
+    return Inertia::render('Backend/AdminDashboard/Categories');
+})->middleware(['auth', 'verified'])->name('admin.dashboard.categories');
+
+Route::get('/admin/dashboard/countries', function () {
+    return Inertia::render('Backend/AdminDashboard/Countries');
+})->middleware(['auth', 'verified'])->name('admin.dashboard.countries');

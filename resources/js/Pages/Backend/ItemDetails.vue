@@ -3,7 +3,7 @@
         <div class="px-4">
             <div class="container mx-auto py-5">
                 <div class="grid grid-cols-3 gap-6">
-                    <div class="video">
+                    <div class="video customRatio">
                         <Video poster="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" />
                     </div>
                     <div class="grid grid-rows-3 items-baseline">
@@ -20,7 +20,7 @@
                             Follow
                         </button>
                     </div>
-                    <div class="calendar flex flex-col">
+                    <div class="calendar flex flex-col customRatio">
                         <div class="bg-red-100 h-full relative">
                             <span class="price absolute top-4 right-4 shadow bg-sky-500 font-bold px-4 py-1 rounded text-white">$10.00</span>
                             <img class="block h-full w-full object-cover object-center" src="https://images.unsplash.com/photo-1673762482215-33acd768cb46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2250&q=80" />

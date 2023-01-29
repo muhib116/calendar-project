@@ -87,7 +87,7 @@
 <script setup>
     import { Link } from '@inertiajs/inertia-vue3';
     import DashboardLayout from '../DashboardLayout.vue'
-    import LeftSide from '@/Components/Backend/Account/LeftSide.vue';
+    import LeftSide from '@/Components/Backend/UserDashboard/LeftSide.vue';
 </script>
 
 

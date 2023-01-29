@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white w-[600px] p-4">
+    <div class="bg-white w-[600px] p-10 shadow">
         <div class="font-semibold flex gap-10 items-center pb-3 mb-3 border-b">
             <button 
                 @click="templateName='SignIn'"
@@ -21,7 +21,7 @@
             </button>
         </div>
 
-        <h1 class="font-bold">{{ componentList[templateName].title }}</h1>
+        <h1 class="font-bold mt-5">{{ componentList[templateName].title }}</h1>
 
         <component 
             @login="templateName='SignIn'" 
@@ -45,7 +45,7 @@
 
     const componentList = {
         SignIn: {
-            title: 'SignIn Here',
+            title: 'Sign In Here',
             component: SignIn
         },
         SignUp: {

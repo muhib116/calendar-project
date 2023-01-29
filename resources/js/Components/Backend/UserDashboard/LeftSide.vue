@@ -2,10 +2,10 @@
     <div class="grid gap-2">
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
-            :class="route().current('guid') ? 'bg-gray-100' : ''"
-            :href="route('guid')"
+            :class="route().current('guide') ? 'bg-gray-100' : ''"
+            :href="route('guide')"
         >
-            Guid
+            Guide
         </Link>
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"

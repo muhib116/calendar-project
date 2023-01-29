@@ -13,10 +13,10 @@
 
 <script setup>
 import DashboardLayout from '../DashboardLayout.vue'
-import LeftSide from '@/Components/Backend/Account/LeftSide.vue'
-import PersonalInformation from '@/Components/Backend/Account/PersonalInformation.vue'
-import PasswordChange from '@/Components/Backend/Account/PasswordChange.vue'
-import DeleteAccount from '@/Components/Backend/Account/DeleteAccount.vue';
+import LeftSide from '@/Components/Backend/UserDashboard/LeftSide.vue'
+import PersonalInformation from '@/Components/Backend/UserDashboard/PersonalInformation.vue'
+import PasswordChange from '@/Components/Backend/UserDashboard/PasswordChange.vue'
+import DeleteAccount from '@/Components/Backend/UserDashboard/DeleteAccount.vue'
 </script>
 
 

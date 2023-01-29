@@ -1,5 +1,5 @@
 <template>
-    <DashboardLayout :header="false" :footer="false" title="Users">
+    <DashboardLayout :header="false" :footer="false" title="Active Talents">
         <template v-slot:leftSidebar>
             <LeftSide />
         </template>
@@ -18,10 +18,10 @@
                     <div class="flex gap-6 items-center w-full">
                         <CInput type="search" placeholder="Search" class="mx-auto max-w-[400px] w-full" />
                         <button class="px-4 py-1 rounded bg-green-400 text-white font-bold">
-                            Active (200)
+                            Active (3500)
                         </button>
                         <button class="px-4 py-1 rounded bg-red-400 text-white font-bold">
-                            Deleted (15)
+                            Deleted (150)
                         </button>
                     </div>
                 </div>
@@ -46,8 +46,23 @@
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Email
                                     </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Country
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Social Link
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Category
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Verification
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
                                         Action
+                                    </th>
+                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
+                                        Files
                                     </th>
                                 </tr>
                             </thead>
@@ -68,13 +83,25 @@
                                     <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                         test@exm.com
                                     </td>
-                                    <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
+                                    <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                        USA
+                                    </td>
+                                    <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                        http://social.com/username
+                                    </td>
+                                    <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                        Artist
+                                    </td>
+                                    <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                        Verified
+                                    </td>
+                                    <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-2">
                                         <button class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
                                             <EyeIcon class="w-4 h-4" />
                                         </button>
-                                        <button class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
-                                            <CloseIcon class="w-4 h-4" />
-                                        </button>
+                                    </td>
+                                    <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap font-semibold">
+                                        <span class="text-green-500">Access</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -102,7 +129,6 @@
 <script setup>
 import DashboardLayout from './DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
-import CloseIcon from '@/Icons/CloseIcon.vue'
 import CInput from '@/Components/Global/CInput.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'

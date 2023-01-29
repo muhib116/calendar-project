@@ -9,7 +9,7 @@
                     image="https://images.unsplash.com/photo-1619895862022-09114b41f16f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHVzZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
                 />
 
-                <div class="flex gap-4 items-center py-3 font-bold">
+                <div class="flex gap-4 items-center py-3 font-bold mt-5">
                     <label class="flex gap-2 items-center cursor-pointer">
                         <input type="radio" name="who" checked class="accent-black">
                         Myself
@@ -26,7 +26,7 @@
                 <CInput placeholder="From" />
 
                 <h3 class="mt-6 font-bold text-lg">Gender</h3>
-                <div class="flex gap-4 items-center py-3">
+                <div class="flex gap-4 items-center pt-3">
                     <label class="flex gap-2 items-center cursor-pointer">
                         <input type="radio" name="gander" class="accent-black">
                         Female
@@ -45,7 +45,7 @@
                 <CSelect :options="['Select', 'New year', 'Birthday']" />
 
                 <h3 class="mt-6 font-bold text-lg">Instructions</h3>
-                <CTextarea placeholder="Write Instructions" characterLimit="20" rows="4" />
+                <CTextarea placeholder="Write Instructions" characterLimit="500" rows="4" />
 
                 <Link :href="route('payment.gateway')" class="bg-[var(--btn-bg-color)] text-white px-6 py-2 rounded block max-w-fit mx-auto mt-4">
                     Continue to payment

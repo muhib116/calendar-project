@@ -10,7 +10,8 @@
           <strong class="text-blue-500">Tips</strong>
           option to receive tips from your fans or followers
       </h2>
-      <div class="font-bold mt-10 flex">
+      <div class="font-bold mt-10 grid">
+        <h2 class="text-lg mb-2">Activate</h2>
         <Switch />
       </div>
     </template>

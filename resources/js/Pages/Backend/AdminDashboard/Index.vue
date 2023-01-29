@@ -20,7 +20,7 @@
                             <span class="">Talents Applications</span>
                             <span class="">44</span>
                         </div>
-                        <div class="flex justify-between items-center text-red-400">
+                        <div class="flex justify-between items-center text-sky-500">
                             <span class="">Talents Applications Approved</span>
                             <span class="">44</span>
                         </div>

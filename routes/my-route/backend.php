@@ -40,24 +40,24 @@ Route::get('/subscribe', function () {
 
 
 
-Route::get('/account/guid', function () {
-    return Inertia::render('Backend/Account/Guid');
-})->middleware(['auth', 'verified'])->name('guid');
+Route::get('/user-dashboard/guide', function () {
+    return Inertia::render('Backend/UserDashboard/Guide');
+})->middleware(['auth', 'verified'])->name('guide');
 
-Route::get('/account/account', function () {
-    return Inertia::render('Backend/Account/Account');
+Route::get('/user-dashboard/account', function () {
+    return Inertia::render('Backend/UserDashboard/Account');
 })->middleware(['auth', 'verified'])->name('account');
 
-Route::get('/account/following', function () {
-    return Inertia::render('Backend/Account/Following');
+Route::get('/user-dashboard/following', function () {
+    return Inertia::render('Backend/UserDashboard/Following');
 })->middleware(['auth', 'verified'])->name('following');
 
-Route::get('/account/subscription', function () {
-    return Inertia::render('Backend/Account/Subscription');
+Route::get('/user-dashboard/subscription', function () {
+    return Inertia::render('Backend/UserDashboard/Subscription');
 })->middleware(['auth', 'verified'])->name('subscription');
 
-Route::get('/account/history', function () {
-    return Inertia::render('Backend/Account/History');
+Route::get('/user-dashboard/history', function () {
+    return Inertia::render('Backend/UserDashboard/History');
 })->middleware(['auth', 'verified'])->name('history');
 
 

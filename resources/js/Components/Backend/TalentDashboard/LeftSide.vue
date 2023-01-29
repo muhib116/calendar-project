@@ -1,11 +1,11 @@
 <template>
-    <div class="grid gap-2 sticky top-24">
+    <div class="grid gap-3 sticky top-24">
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
-            :class="route().current('talent-dashboard.guid') ? 'bg-gray-100' : ''"
-            :href="route('talent-dashboard.guid')"
+            :class="route().current('talent-dashboard.guide') ? 'bg-gray-100' : ''"
+            :href="route('talent-dashboard.guide')"
         >
-            Guid
+            Guide
         </Link>
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"

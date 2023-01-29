@@ -1,0 +1,44 @@
+<template>
+    <div>
+        <button @click="activeComponent='All'" class="flex gap-4 items-center mb-4 font-semibold w-full pb-4">
+            <AngleLeftIcon class="w-5 h-5" />
+            Back
+        </button>
+        <div class="max-w-[500px]">
+            <h1 class="text-lg font-semibold mb-4">Add Country</h1>
+            <CInput type="text" placeholder="Country Code" />
+            <CInput type="text" placeholder="Mobile Code" />
+            <CInput type="text" placeholder="Country Name" />
+            <CSelect :options="options" v-model="options[0].key"/>
+            <button class="bg-green-500 text-white ml-auto block font-semibold px-4 py-2 rounded mt-2">Save</button>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import CInput from '@/Components/Global/CInput.vue'
+import CSelect from '@/Components/Global/CSelect.vue'
+import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
+import useCountry from '@/Pages/Backend/AdminDashboard/useCountry.js'
+
+const { activeComponent } = useCountry()
+
+const options = [
+    {
+        key: null,
+        value: 'Select Status'
+    },
+    {
+        key: 1,
+        value: 'Enable'
+    },
+    {
+        key: 0,
+        value: 'Disable'
+    },
+]
+</script>
+
+<style lang="scss" scoped>
+
+</style>

@@ -15,7 +15,7 @@
                 </div>
                 <div class="flex flex-col items-center justify-center gap-4 mt-10">
                     <h1 class="text-xl font-semibold">Tip Payment (min $10)</h1>
-                    <CInput type="number" placeholder="Enter Amount"/>
+                    <CInput type="number" placeholder="Enter Amount" class="max-w-[258px] w-full" />
                     <button class="px-4 py-2 rounded text-xl bg-red-600 text-white font-bold text-center">
                         Continue To Payment
                     </button>

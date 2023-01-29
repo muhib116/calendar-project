@@ -4,14 +4,14 @@
             <LeftSide />
         </template>
         <template v-slot:content>
-            This is guid page
+            This is guide page
         </template>
     </DashboardLayout>
 </template>
 
 <script setup>
     import DashboardLayout from '../DashboardLayout.vue'
-    import LeftSide from '@/Components/Backend/Account/LeftSide.vue';
+    import LeftSide from '@/Components/Backend/UserDashboard/LeftSide.vue';
 </script>
 
 

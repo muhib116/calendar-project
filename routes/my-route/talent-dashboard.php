@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/talent-dashboard/guid', function () {
-    return Inertia::render('Backend/TalentDashboard/Guid');
-})->middleware(['auth', 'verified'])->name('talent-dashboard.guid');
+Route::get('/talent-dashboard/guide', function () {
+    return Inertia::render('Backend/TalentDashboard/Guide');
+})->middleware(['auth', 'verified'])->name('talent-dashboard.guide');
 
 Route::get('/talent-dashboard/account', function () {
     return Inertia::render('Backend/TalentDashboard/Account');

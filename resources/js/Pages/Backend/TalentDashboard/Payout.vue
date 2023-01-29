@@ -5,7 +5,16 @@
         </template>
         <template v-slot:content>
             <Widget />
-            <Table class="border border-b-0 mt-10"/>
+
+            <div class="flex justify-between items-center mt-10">
+                <h1 class="font-semibold">Payout History</h1>
+                <button @click="payoutModal = true" class="bg-red-500 px-4 py-1 rounded text-white font-semibold">Request Payout</button>
+            </div>
+            <Modal v-model="payoutModal">
+                <PayoutRequest @close="payoutModal=false" />
+            </Modal>
+
+            <Table class="border border-b-0"/>
 
             <div class="flex justify-between items-center mt-4">
                 <h3 class="">Showing 1 to 3 of 3 entries</h3>
@@ -23,10 +32,15 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import DashboardLayout from '../DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/TalentDashboard/LeftSide.vue'
 import Table from '@/Components/Backend/TalentDashboard/Payout/Table.vue'
-import Widget from '@/Components/Backend/TalentDashboard/Payout/Widget.vue';
+import Widget from '@/Components/Backend/TalentDashboard/Payout/Widget.vue'
+import Modal from '@/Components/Library/Modal.vue'
+import PayoutRequest from '@/Pages/Backend/TalentDashboard/PayoutRequest.vue'
+
+const payoutModal = ref(false)
 </script>
 
 
