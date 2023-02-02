@@ -13,7 +13,7 @@
             <button class="font-semibold border rounded px-4 py-1 bg-blue-500 text-white">Tips</button>
             <button class="font-semibold border rounded px-4 py-1">Wishes</button>
             <button class="font-semibold border rounded px-4 py-1">My Life</button>
-            <button class="font-semibold border rounded px-4 py-1">Calender</button>
+            <button class="font-semibold border rounded px-4 py-1">Calendar</button>
         </div>
         <div class="">
             <CInput type="search" placeholder="Search" />

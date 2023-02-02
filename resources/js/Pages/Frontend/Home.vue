@@ -27,7 +27,15 @@
                     </div>
                 </div>
 
-                <div class="grid mb-8">
+                <div class="grid mb-8 relative">
+                    <div class="absolute w-full top-[1/2] left-0 right-0 flex justify-between">
+                        <button class="-ml-5 opacity-50 hover:opacity-100">
+                            <AngleLeftIcon />
+                        </button>
+                        <button class="-mr-5 opacity-50 hover:opacity-100">
+                            <AngleRightIcon />
+                        </button>
+                    </div>
                     <div class="grid mt-10 gap-5 px-[30px]">
                         <CategoryWiseLatestItem title="Actors" />
                         <CategoryWiseLatestItem title="Artists"/>
@@ -55,6 +63,9 @@ import CustomAuth from '@/Components/Frontend/CustomAuth/Index.vue'
 import Notification from '@/Components/Backend/Global/Components/Notification.vue'
 import Profile from '@/Components/Backend/Global/Components/Profile.vue'
 import Footer from '@/Components/Backend/Global/Footer.vue'
+import BackIcon from '@/Icons/BackIcon.vue';
+import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue';
+import AngleRightIcon from '@/Icons/AngleRightIcon.vue';
 
 const showAuthModal = ref(false)
 </script>

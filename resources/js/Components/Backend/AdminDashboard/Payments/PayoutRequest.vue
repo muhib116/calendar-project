@@ -85,7 +85,7 @@
                                 Fab 6th, 2023
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <button class="bg-green-200 px-3 text-sm font-bold">Active</button>
+                                <button class="bg-orange-100 text-orange-400 px-3 text-sm">Pending</button>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 <button class="bg-sky-500 px-4 py-1 rounded text-white text-sm font-bold">Pay now</button>

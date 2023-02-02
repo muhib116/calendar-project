@@ -22,7 +22,7 @@
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                             Payment Date
                         </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
                             Status
                         </th>
                     </tr>
@@ -32,23 +32,23 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             156124
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             Jan 7th, 2023
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             Master Card
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             ----
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             $20
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             Jan 29th, 2023
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <button class="bg-green-200 px-3 text-sm font-bold">Active</button>
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap text-right">
+                            <button class="bg-green-100 text-green-600 px-3 text-sm ">Active</button>
                         </td>
                     </tr>
                 </tbody>

@@ -16,7 +16,7 @@
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                             Date & Time
                         </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
                             Status
                         </th>
                     </tr>
@@ -26,17 +26,17 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             {{ index }}
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             Mark
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             $50
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             Jan 29th, 2023
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <button class="bg-green-200 px-3 text-sm font-bold">Active</button>
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap text-right">
+                            <button class="bg-green-100 px-3 text-sm text-green-600">Paid</button>
                         </td>
                     </tr>
                 </tbody>

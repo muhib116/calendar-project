@@ -4,7 +4,8 @@
             <LeftSide />
         </template>
         <template v-slot:content>
-            <div class="container mx-auto py-5">
+            <div class="container mx-auto">
+                <h1 class="font-semibold text-xl mb-2">Following</h1>
                 <div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
                     <Link :href="route('item.details', 'slug')" class="relative hover:shadow-xl transition-all">
                         <img class="customRatio" src="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" alt="">
@@ -31,7 +32,6 @@
                             <h2 class="text-sm truncate">Actors</h2>
                             <button class="bg-red-500 text-white px-4 mt-2 rounded-xl text-sm">UnFollow</button>
                         </div>
-
                     </Link>
                     <Link :href="route('item.details', 'slug')" class="relative hover:shadow-xl transition-all">
                         <img class="customRatio" src="https://images.unsplash.com/photo-1673845861099-2785734e247c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60" alt="">

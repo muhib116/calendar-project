@@ -53,7 +53,7 @@
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 Payment Date
                             </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
                                 Status
                             </th>
                         </tr>
@@ -73,10 +73,15 @@
                                 Demo Name
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Master Card
+                                Stripe / Bank
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Info
+                                <span class="mr-2">
+                                    Bank Name / Stripe Mail
+                                </span>
+                                <button class="text-[10px] bg-gray-500 text-white rounded-full p-1 ml-auto" title="See Bank Details">
+                                    <InfoIcon class="w-3 h-3" />
+                                </button>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 ${{ Math.floor(Math.random() * 200) }}
@@ -84,8 +89,8 @@
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 Fab 6th, 2023
                             </td>
-                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <button class="bg-green-200 px-3 text-sm font-bold">Active</button>
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap text-right">
+                                <button class="bg-green-100 text-green-600 px-3 text-sm">Paid</button>
                             </td>
                         </tr>
                     </tbody>
@@ -113,6 +118,7 @@ import CInput from '@/Components/Global/CInput.vue'
 import SortIcon from '@/Icons/SortIcon.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
+import InfoIcon from '@/Icons/InfoIcon.vue';
 </script>
 
 <style lang="scss" scoped>

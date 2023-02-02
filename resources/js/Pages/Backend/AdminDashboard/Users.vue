@@ -38,12 +38,6 @@
                                         Username
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        First Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Last Name
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Email
                                     </th>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
@@ -58,12 +52,6 @@
                                     </td>
                                     <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                         Demo User name
-                                    </td>
-                                    <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                        Jhon
-                                    </td>
-                                    <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                        Doe
                                     </td>
                                     <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                         test@exm.com

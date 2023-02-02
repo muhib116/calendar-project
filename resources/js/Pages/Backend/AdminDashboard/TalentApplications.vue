@@ -26,7 +26,7 @@
                 <div class="flex flex-col mt-4">
                     <div class="overflow-x-auto">
                         <table class="w-full">
-                            <thead class="border-b whit">
+                            <thead class="border-b whitespace-nowrap">
                                 <tr>
                                     <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         #
@@ -87,7 +87,10 @@
                                         Actress
                                     </td>
                                     <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                        <button class="bg-green-200 px-3 text-sm font-bold">Verified</button>
+                                        <button @click="showModal = true" class="mx-auto block btn_ripple" title="See Talent Video.">
+                                            <PlayIcon class="" />
+                                        </button>
+                                        <!-- <button class="bg-green-100 text-green-600 px-3 text-sm">Verified</button> -->
                                     </td>
                                     <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-0">
                                         <button class="bg-green-500 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
@@ -118,19 +121,70 @@
             </div>
         </template>
     </DashboardLayout>
+    <Modal v-model="showModal">
+        <div class="relative p-2 pt-8 bg-white w-[450px]">
+            <button @click="showModal = false" class="absolute top-2 right-2 text-red-500">
+                <CloseIcon class="w-4 h-4" />
+            </button>
+            <div class="">
+                <img src="https://images.unsplash.com/photo-1675277456530-ffdfd0ff8548?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
+            </div>
+            <div class="flex gap-4 justify-center mt-2 font-semibold">
+                <button class="px-4 py-1 bg-green-600 text-white rounded shadow">Approved</button>
+                <button class="px-4 py-1 bg-red-400 text-white rounded shadow">Decline</button>
+            </div>
+        </div>
+    </Modal>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import DashboardLayout from './DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
 import CloseIcon from '@/Icons/CloseIcon.vue'
 import CheckIcon from '@/Icons/CheckIcon.vue'
 import CInput from '@/Components/Global/CInput.vue'
-import SortIcon from '@/Icons/SortIcon.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
+import PlayIcon from '@/Icons/PlayIcon.vue'
+import Modal from '@/Components/Library/Modal.vue'
+
+const showModal = ref(false)
 </script>
 
 
 <style scoped>
+.btn_ripple {
+    border: none;
+    outline: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: block;
+    background-color: #e73212;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    cursor: pointer;
+
+    animation-name: ripple;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes ripple {
+    0% {
+        box-shadow: 0 0 0 0 #0002, 0 0 0 0 #0002;
+    }
+
+    80% {
+        box-shadow: 0 0 0 10px #0000, 0 0 0 20px #0000;
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 #0000, 0 0 0 0 #0000;
+    }
+}
 </style>

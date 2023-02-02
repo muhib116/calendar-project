@@ -1,7 +1,10 @@
 <template>
     <Master>
         <div class="px-4">
-            <div class="container mx-auto py-5">
+            <div class="container mx-auto py-5 relative">
+                <Link :href="route('dashboard')" class="mb-4 absolute right-full mr-2">
+                    <BackIcon />
+                </Link>
                 <div class="grid grid-cols-3 gap-6">
                     <div class="video customRatio">
                         <Video poster="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" />
@@ -34,9 +37,10 @@
 </template>
 
 <script setup>
-    import Master from './Master.vue';
-    import Video from '@/Components/Global/Video.vue'
-    import { Link } from '@inertiajs/inertia-vue3';
+import Master from './Master.vue';
+import Video from '@/Components/Global/Video.vue';
+import { Link } from '@inertiajs/inertia-vue3';
+import BackIcon from '@/Icons/BackIcon.vue';
 </script>
 
 <style lang="scss" scoped>

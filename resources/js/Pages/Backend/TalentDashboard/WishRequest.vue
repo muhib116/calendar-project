@@ -5,7 +5,7 @@
         </template>
         <template v-slot:content>
             <h1 class="text-lg">
-                Please setup a <strong>yearly</strong> subscription price (min $30/year)
+                Please setup an amount to charge for <strong>Wish Request</strong> (min $30/year)
             </h1>
         
             <div class="grid gap-6">

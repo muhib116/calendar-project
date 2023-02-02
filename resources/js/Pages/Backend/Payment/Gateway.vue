@@ -5,8 +5,10 @@
                 <div class="cardWrapper grid gap-6">
                     <div class="border p-6 rounded-lg grid gap-4">
                         <div class="border flex items-center rounded-lg bg-gray-100 px-2">
-                            <div class="px-2">
-                                <CardIcon />
+                            <div class="px-2 flex gap-1">
+                                <CardIcon class="shrink-0 w-4 h-4"/>
+                                <VisaIcon class="shrink-0 w-4 h-4"/>
+                                <AmericanExpressIcon class="shrink-0 w-4 h-4"/>
                             </div>
                             <input type="text" class="w-full border-0 focus-within:ring-0 bg-transparent py-4">
                             <div class="bg-blue-500 text-white w-7 h-7 flex items-center justify-center rounded-full mr-2">
@@ -47,7 +49,11 @@
                         <div class="card w-full h-[200px] bg-blue-400 rounded-lg mb-4 shadow-lg py-6 px-5 relative overflow-hidden">
                             <img :src="masterCardImg" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                             <div class="relative z-10">
-                                <CardIcon class="transform scale-150" />
+                                <div class="flex gap-1 items-center">
+                                    <CardIcon class="shrink-0 w-6 h-6"/>
+                                    <VisaIcon class="shrink-0 w-6 h-6"/>
+                                    <AmericanExpressIcon class="shrink-0 w-4 h-4"/>
+                                </div>
                                 <h1 class="uppercase font-bold text-[14px] mt-2 text-white">Mr. Cardholder</h1>
                                 <h1 class="uppercase font-bold text-[14px] mt-2 text-white">1563 2156 8972</h1>
                                 <h1 class="uppercase font-bold text-[14px] mt-8 text-white">
@@ -93,6 +99,8 @@ import Master from '../Master.vue'
 import CardIcon from '@/Pages/Backend/Payment/icons/CardIcon.vue'
 import CheckIcon from '@/Icons/CheckIcon.vue'
 import masterCardImg from './icons/masterCard.jpg'
+import VisaIcon from './icons/VisaIcon.vue';
+import AmericanExpressIcon from '@/Icons/AmericanExpressIcon.vue'
 </script>
 
 <style scope>
