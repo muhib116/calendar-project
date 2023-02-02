@@ -20,6 +20,8 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
-        "@types/lodash": "^4.14.191"
+        "@types/lodash": "^4.14.191",
+        "apexcharts": "^3.36.3",
+        "vue3-apexcharts": "^1.4.1"
     }
 }
