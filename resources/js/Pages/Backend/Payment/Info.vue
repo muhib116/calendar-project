@@ -9,8 +9,6 @@
                     image="https://images.unsplash.com/photo-1619895862022-09114b41f16f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHVzZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
                 />
 
-                {{ datatype }}
-
                 <div class="flex gap-4 items-center py-3 font-bold mt-5">
                     <label class="flex gap-2 items-center cursor-pointer">
                         <input type="radio" v-model="datatype" value="myself" checked class="accent-black">

@@ -1,6 +1,6 @@
 <template>
     <label class="relative block">
-        <span v-if="!writtenCharacter" class="absolute left-0 top-3 opacity-40">{{ placeholder }}</span>
+        <span v-if="!writtenCharacter" class="absolute left-0 top-3 pointer-events-none opacity-40">{{ placeholder }}</span>
         <input @input="updateValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow bg-transparent">
         <span class="customBorder"></span>
         <div 

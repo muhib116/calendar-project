@@ -2,7 +2,7 @@
     <Master>
         <div class="px-4">
             <div class="container mx-auto py-5 relative">
-                <Link :href="route('dashboard')" class="mb-4 absolute right-full mr-2">
+                <Link :href="route('category.items', 'actress')" class="mb-4 absolute right-full mr-2">
                     <BackIcon />
                 </Link>
                 <div class="grid grid-cols-3 gap-6">

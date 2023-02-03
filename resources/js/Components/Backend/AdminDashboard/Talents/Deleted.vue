@@ -10,11 +10,9 @@
                 </select>
                 Entries
             </div>
-            <div class="flex gap-4 items-center w-full">
-                <CInput type="search" placeholder="Search" class="ml-auto" />
-                <button class="w-6">
-                    <SortIcon class="w-5 h-5 ml-auto" />
-                </button>
+            <div class="flex gap-6 items-center w-full">
+                <CInput type="search" placeholder="Search" class="mx-auto max-w-[400px] w-full" />
+                <TabChanger />
             </div>
         </div>
 
@@ -27,73 +25,65 @@
                                 #
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Invoice ID
+                                Username
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Request Date
+                                First Name
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Username/Name
+                                Last Name
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Payment Method
+                                Email
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Payment Info
+                                Country
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Amount
+                                Social Link
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Payment Date
+                                Category
                             </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Status
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                                Deleted By
                             </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Proceed
-                            </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Cancel
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
+                                Date
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 5" :index="index" class="border-b">
+                        <tr v-for="index in 10" :index="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ index }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ Math.floor(Math.random() * 200) }}
+                                Demo User name
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Jan 29th, 2023
+                                Jhon
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Demo Name
+                                Doe
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Master Card
+                                test@exm.com
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Info
+                                USA
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                ${{ Math.floor(Math.random() * 200) }}
+                                http://social.com/username
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Fab 6th, 2023
+                                Artist
                             </td>
-                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <button class="bg-orange-100 text-orange-400 px-3 text-sm">Pending</button>
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-2">
+                                Talent / Admin
                             </td>
-                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <button class="bg-sky-500 px-4 py-1 rounded text-white text-sm font-bold">Pay now</button>
-                            </td>
-                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <button class="bg-red-400 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
-                                    <CloseIcon class="w-4 h-4" />
-                                </button>
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap font-semibold">
+                                Fab 1, 2023
                             </td>
                         </tr>
                     </tbody>
@@ -118,12 +108,12 @@
 
 <script setup>
 import CInput from '@/Components/Global/CInput.vue'
-import SortIcon from '@/Icons/SortIcon.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
-import CloseIcon from '@/Icons/CloseIcon.vue'
+import EyeIcon from '@/Icons/EyeIcon.vue'
+import TabChanger from '@/Components/Backend/AdminDashboard/Talents/TabChanger.vue'
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

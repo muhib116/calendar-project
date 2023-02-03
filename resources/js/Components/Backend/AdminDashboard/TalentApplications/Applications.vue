@@ -10,10 +10,10 @@
                 </select>
                 Entries
             </div>
-            <div class="flex gap-4 items-center w-full">
-                <CInput type="search" placeholder="Search" class="ml-auto" />
-                <button class="w-6">
-                    <SortIcon class="w-5 h-5 ml-auto" />
+            <div class="flex gap-6 items-center w-full">
+                <CInput type="search" placeholder="Search" class="mx-auto max-w-[400px] w-full" />
+                <button @click="activeComponent = 'Declined'" class="px-4 py-1 rounded bg-red-400 text-white font-bold">
+                    Application declined
                 </button>
             </div>
         </div>
@@ -27,70 +27,70 @@
                                 #
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Invoice ID
+                                Username
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Request Date
+                                First Name
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Username/Name
+                                Last Name
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Payment Method
+                                Email
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Payment Info
+                                Country
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Amount
+                                Social Link
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Payment Date
+                                Category
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Status
+                                Verification
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Proceed
-                            </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Cancel
+                                Approved/Decline
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 5" :index="index" class="border-b">
+                        <tr v-for="index in 10" :index="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ index }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ Math.floor(Math.random() * 200) }}
+                                Demo User name
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Jan 29th, 2023
+                                Jhon
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Demo Name
+                                Doe
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Master Card
+                                test@exm.com
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Info
+                                USA
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                ${{ Math.floor(Math.random() * 200) }}
+                                http://social.com/username
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Fab 6th, 2023
+                                Actress
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <button class="bg-orange-100 text-orange-400 px-3 text-sm">Pending</button>
+                                <button @click="showModal = true" class="mx-auto block btn_ripple" title="See Talent Video.">
+                                    <PlayIcon class="" />
+                                </button>
+                                <!-- <button class="font-bold text-green-600 px-3 text-sm">Verified</button> -->
                             </td>
-                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <button class="bg-sky-500 px-4 py-1 rounded text-white text-sm font-bold">Pay now</button>
-                            </td>
-                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-0">
+                                <button class="bg-green-500 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
+                                    <CheckIcon class="w-4 h-4" />
+                                </button>
                                 <button class="bg-red-400 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
                                     <CloseIcon class="w-4 h-4" />
                                 </button>
@@ -113,17 +113,69 @@
                 </button>
             </div>
         </div>
+
+        <Modal v-model="showModal">
+            <div class="relative p-2 pt-8 bg-white w-[450px]">
+                <button @click="showModal = false" class="absolute top-2 right-2 text-red-500">
+                    <CloseIcon class="w-4 h-4" />
+                </button>
+                <div class="">
+                    <img src="https://images.unsplash.com/photo-1675277456530-ffdfd0ff8548?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
+                </div>
+                <div class="flex gap-4 justify-center mt-2 font-semibold">
+                    <button class="px-4 py-1 bg-green-600 text-white rounded shadow">Approve</button>
+                    <button class="px-4 py-1 bg-red-400 text-white rounded shadow">Decline</button>
+                </div>
+            </div>
+        </Modal>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import CloseIcon from '@/Icons/CloseIcon.vue'
+import CheckIcon from '@/Icons/CheckIcon.vue'
 import CInput from '@/Components/Global/CInput.vue'
-import SortIcon from '@/Icons/SortIcon.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
-import CloseIcon from '@/Icons/CloseIcon.vue'
+import PlayIcon from '@/Icons/PlayIcon.vue'
+import Modal from '@/Components/Library/Modal.vue'
+import useTalentApplications from '@/Pages/Backend/AdminDashboard/useTalentApplications.js'
+
+const { activeComponent } = useTalentApplications()
+const showModal = ref(false)
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.btn_ripple {
+    border: none;
+    outline: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: block;
+    background-color: #e73212;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    cursor: pointer;
 
+    animation-name: ripple;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes ripple {
+    0% {
+        box-shadow: 0 0 0 0 #0002, 0 0 0 0 #0002;
+    }
+    80% {
+        box-shadow: 0 0 0 10px #0000, 0 0 0 20px #0000;
+    }
+    100% {
+        box-shadow: 0 0 0 0 #0000, 0 0 0 0 #0000;
+    }
+}
 </style>

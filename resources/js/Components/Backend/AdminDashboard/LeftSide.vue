@@ -37,14 +37,14 @@
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.users') ? 'bg-[#130121] text-white' : ''"
+                :class="route().current('admin.dashboard.users') || route().current('admin.dashboard.user.detail') ? 'bg-[#130121] text-white' : ''"
                 :href="route('admin.dashboard.users')"
             >
                 Users
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.talents') ? 'bg-[#130121] text-white' : ''"
+                :class="route().current('admin.dashboard.talents') || route().current('admin.dashboard.talent.detail') ? 'bg-[#130121] text-white' : ''"
                 :href="route('admin.dashboard.talents')"
             >
                 Talents

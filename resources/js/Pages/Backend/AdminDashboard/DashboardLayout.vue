@@ -13,7 +13,7 @@
                             </div>
                             <h2 v-if="title" class="text-lg font-semibold mb-2 uppercase">{{ title }}</h2>
                         </div>
-                        <div class="border p-6 flex flex-col gap-6 min-h-[91.5%]">
+                        <div class="border p-6 flex flex-col gap-6 min-h-[90.5%] overflow-y-auto">
                             <slot name="content"></slot>
                         </div>
                     </div>

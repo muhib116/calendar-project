@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="grid mb-8 relative">
-                    <div class="absolute w-full top-[1/2] left-0 right-0 flex justify-between">
+                    <div class="absolute w-full top-1/2 left-0 right-0 flex justify-between">
                         <button class="-ml-5 opacity-50 hover:opacity-100">
                             <AngleLeftIcon />
                         </button>
