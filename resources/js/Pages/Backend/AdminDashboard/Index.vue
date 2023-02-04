@@ -9,9 +9,9 @@
             <div class="graph-wrapper grid gap-6 mt-5">
                 <div class="grid gap-6">
                     <div class="border p-4 rounded min-h-[200px]">
-                        <h1 class="font-black text-2xl">Graph goes here</h1>
+                        <Big />
                     </div>
-                    <div class="border p-4 rounded font-semibold capitalize text-lg">
+                    <div class="border p-4 rounded font-medium capitalize">
                         <div class="flex justify-between items-center text-green-500">
                             <span class="">New users</span>
                             <span class="">380</span>
@@ -26,8 +26,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="border p-4 rounded">
-                    <h1 class="font-black text-2xl">Demography goes here</h1>
+                <div class="border p-4 rounded flex flex-col items-center">
+                    <h1 class="font-semibold text-center mb-10 mt-5">Demography</h1>
+                    <Small />
                 </div>
             </div>
         </template>
@@ -35,10 +36,12 @@
 </template>
 
 <script setup>
-    import DashboardLayout from './DashboardLayout.vue'
-    import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
-    import Header from '@/Components/Backend/AdminDashboard/Dashboard/Header.vue'
-    import Widget from '@/Components/Backend/AdminDashboard/Dashboard/Widget.vue'
+import DashboardLayout from './DashboardLayout.vue'
+import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
+import Header from '@/Components/Backend/AdminDashboard/Dashboard/Header.vue'
+import Widget from '@/Components/Backend/AdminDashboard/Dashboard/Widget.vue'
+import Big from '@/Components/Backend/AdminDashboard/Dashboard/Chart/Big.vue';
+import Small from '@/Components/Backend/AdminDashboard/Dashboard/Chart/Small.vue';
 </script>
 
 

@@ -19,12 +19,7 @@
                 </div>
             </div>
             <Widget />
-            <VueApexCharts
-                height="500"
-                type="bar"
-                :options="chartOptions"
-                :series="series"
-            ></VueApexCharts>
+            <Chart />
         </template>
     </DashboardLayout>
 </template>
@@ -32,10 +27,10 @@
 <script setup>
 import DashboardLayout from '../DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/TalentDashboard/LeftSide.vue'
-import VueApexCharts from "vue3-apexcharts"
 import Widget from '@/Components/Backend/TalentDashboard/Analytics/Widget.vue'
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
+import Chart from '@/Components/Backend/TalentDashboard/Analytics/Chart.vue'
 
 const filterOptions = [
     {
@@ -49,21 +44,6 @@ const filterOptions = [
     {
         key: 'last Month',
         value: 'Last Month'
-    },
-]
-
-const chartOptions = {
-    chart: {
-        id: "vuechart-example",
-    },
-    xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-    },
-}
-const series = [
-    {
-        name: "series-1",
-        data: [30, 40, 35, 50, 49, 60, 70, 91],
     },
 ]
 </script>
