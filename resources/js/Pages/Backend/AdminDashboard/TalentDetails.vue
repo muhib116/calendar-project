@@ -20,10 +20,18 @@
                             >
                                 Wish Sent
                             </button>
-                            <button class="border px-2 py-1 rounded w-full text-left hover:bg-gray-100">
+                            <button 
+                                @click="detailsActiveComponent = 'CalendarsPosted'"
+                                class="border px-2 py-1 rounded w-full text-left"
+                                :class="detailsActiveComponent == 'CalendarsPosted' && 'bg-gray-100'"
+                            >
                                 Calendars Posted
                             </button>
-                            <button class="border px-2 py-1 rounded w-full text-left hover:bg-gray-100">
+                            <button 
+                                @click="detailsActiveComponent = 'MyLifeVideos'"
+                                class="border px-2 py-1 rounded w-full text-left"
+                                :class="detailsActiveComponent == 'MyLifeVideos' && 'bg-gray-100'"
+                            >
                                 My Life Videos
                             </button>
                             <button 

@@ -13,8 +13,8 @@
 <script setup>
 import IconPlay from '@/Components/Global/Icons/IconPlay.vue'
 import LockIcon from '@/Components/Global/Icons/LockIcon.vue'
-import CloseIcon from '@/Icons/CloseIcon.vue';
-import DownloadIcon from '@/Icons/DownloadIcon.vue';
+import CloseIcon from '@/Icons/CloseIcon.vue'
+import DownloadIcon from '@/Icons/DownloadIcon.vue'
 defineProps({
     poster: String,
     lock: {
