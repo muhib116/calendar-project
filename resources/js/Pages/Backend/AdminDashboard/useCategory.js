@@ -8,12 +8,30 @@ const components = {
     Add,
     Edit
 }
+
 const activeComponent = ref('All')
+const selectedCategory = ref({})
 
 export default function useCategory(){
+    const categoryStatus = ref([
+        {
+            key: '',
+            value: 'Select Status'
+        },
+        {
+            key: 1,
+            value: 'Enable'
+        },
+        {
+            key: 0,
+            value: 'Disable'
+        },
+    ])
 
     return {
         components,
-        activeComponent
+        activeComponent,
+        selectedCategory,
+        categoryStatus
     }
 }

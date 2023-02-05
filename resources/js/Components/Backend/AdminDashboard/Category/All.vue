@@ -1,14 +1,8 @@
 <template>
     <div>
         <div class="flex gap-4 justify-between items-center">
-            <div class="flex gap-2 items-center">
-                Show 
-                <select class="border-[#0001] rounded-lg">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                Entries
+            <div class="flex gap-2 items-center font-bold text-lg">
+                Category List
             </div>
             <button @click="activeComponent = 'Add'" class="px-4 py-1 rounded bg-sky-500 text-white font-bold">
                 Add Category
@@ -35,21 +29,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 10" :index="index" class="border-b">
+                        <tr v-for="(category, index) in categories" :index="category.id" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index }}
+                                {{ index+1 }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Actors
+                                {{ category.name }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <span class="text-green-500 font-semibold">Active</span>
+                                <span class="font-semibold" :class="category.status ? 'text-green-500' : 'text-red-500'">
+                                    {{ category.status ? 'Enabled' : 'Disabled' }}
+                                </span>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
-                                <button @click="activeComponent = 'Edit'" class="bg-gray-800 px-2 py-1 rounded text-white text-sm font-bold block">
+                                <button @click="handleEdit(category)" class="bg-gray-800 px-2 py-1 rounded text-white text-sm font-bold block">
                                     <EditIcon class="w-4 h-4" />
                                 </button>
-                                <button class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
+                                <button @click="deleteCategory(category.id)" class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
                                     <CloseIcon class="w-4 h-4" />
                                 </button>
                             </td>
@@ -58,30 +54,34 @@
                 </table>
             </div>
         </div>
-
-        <div class="flex items-center justify-between mt-5 text-sm">
-            <div class="">Showing 1 to 10 of 10 entries</div>
-            <div class="flex gap-2 items-center">
-                <button>
-                    <AngleLeftIcon class="w-4 h-4" />
-                </button>
-                1/2
-                <button>
-                    <AngleRightIcon class="w-4 h-4" />
-                </button>
-            </div>
-        </div>
     </div>
 </template>
 
 <script setup>
-import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
-import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
+import { computed } from 'vue'
 import EditIcon from '@/Icons/EditIcon.vue'
 import useCategory from '@/Pages/Backend/AdminDashboard/useCategory.js'
 import CloseIcon from '@/Icons/CloseIcon.vue'
+import { usePage } from '@inertiajs/inertia-vue3'
+import Helper from '@/Helper.js'
+import { Inertia } from '@inertiajs/inertia'
 
-const { activeComponent } = useCategory()
+
+const { activeComponent, selectedCategory } = useCategory()
+const categories = computed(() => {
+    return usePage().props.value.categories
+})
+
+const handleEdit = (category) => {
+    activeComponent.value = 'Edit'
+    selectedCategory.value = category
+}
+
+const deleteCategory = (id) => {
+    Helper.confirm("Are you sure to delete?", ()=>{
+        Inertia.delete(route('admin.category.delete', id))
+    })
+}
 </script>
 
 <style lang="scss" scoped>

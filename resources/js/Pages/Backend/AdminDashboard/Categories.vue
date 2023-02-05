@@ -1,5 +1,5 @@
 <template>
-    <DashboardLayout :header="false" :footer="false" title="Active Talents">
+    <DashboardLayout :header="false" :footer="false" title="Category Management">
         <template v-slot:leftSidebar>
             <LeftSide />
         </template>

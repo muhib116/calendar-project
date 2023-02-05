@@ -11,7 +11,7 @@
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.name }}</span>
             </div>
             <div class="relative">
-                <CSelect :options="options" v-model="form.status"/>
+                <CSelect :options="categoryStatus" v-model="form.status"/>
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.status }}</span>
             </div>
             <button
@@ -30,33 +30,22 @@ import CSelect from '@/Components/Global/CSelect.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import useCategory from '@/Pages/Backend/AdminDashboard/useCategory.js'
 import { useForm } from '@inertiajs/inertia-vue3'
+import { isEmpty } from 'lodash'
 
-const { activeComponent } = useCategory()
-
-const options = [
-    {
-        key: '',
-        value: 'Select Status'
-    },
-    {
-        key: 1,
-        value: 'Enable'
-    },
-    {
-        key: 0,
-        value: 'Disable'
-    },
-]
+const { activeComponent, categoryStatus } = useCategory()
 
 const form = useForm({
     name: '',
-    status: ''
+    status: categoryStatus.value[0].key
 })
 
 const submit = () => {
     form.post(route('admin.category'), {
         onFinish: () => {
             form.reset('name', 'status')
+            if(isEmpty(form.errors)){
+                activeComponent.value = 'All'
+            }
         }
     })
 }

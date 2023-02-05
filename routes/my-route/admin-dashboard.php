@@ -4,7 +4,8 @@ use App\Http\Controllers\Backend\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function(){
+Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
+{
     Route::get('/admin/dashboard', function () {
         return Inertia::render('Backend/AdminDashboard/Index');
     })->name('admin.dashboard');
@@ -37,13 +38,13 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function(){
         return Inertia::render('Backend/AdminDashboard/TalentDetails');
     })->name('admin.talent.detail');
 
-
-
-    Route::get('/admin/dashboard/categories', function () {
-        return Inertia::render('Backend/AdminDashboard/Categories');
-    })->name('admin.categories');
-    Route::post('/admin/dashboard/category', [CategoryController::class, 'store'])->name('admin.category');
-
+    Route::group(['prefix' => '/admin/dashboard'], function()
+    {
+        Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories');
+        Route::post('/category', [CategoryController::class, 'store'])->name('admin.category');
+        Route::post('/category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+        Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
+    });
 
 
     Route::get('/admin/dashboard/countries', function () {

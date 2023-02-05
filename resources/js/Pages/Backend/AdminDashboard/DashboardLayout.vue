@@ -26,6 +26,7 @@
 <script setup>
 import Logo from '@/Components/Global/Logo.vue'
 import Master from '../Master.vue'
+
 defineProps({
     header: {
         type: Boolean,
