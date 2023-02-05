@@ -25,7 +25,7 @@ class User extends Authenticatable
         'country',
         'category_id',
         'link',
-        'video_path',
+        'video',
         'email',
         'password',
         'is_agree',

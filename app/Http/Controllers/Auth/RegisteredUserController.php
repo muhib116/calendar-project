@@ -44,10 +44,16 @@ class RegisteredUserController extends Controller
             $validation_item['country'] = ['required', 'string', 'max:255'];
             $validation_item['category_id'] = ['required', 'string', 'max:255'];
             $validation_item['link'] = ['required', 'string', 'max:255'];
-            // $validation_item['video_path'] = ['required', 'string', 'max:255'];
+            $validation_item['video'] = ['required', 'mimes:mp4,ogx,oga,ogv,ogg,webm'];
         }
 
         $request->validate($validation_item);
+
+
+        $fileName = time().'.'.$request->file->extension();
+        $request->file->move(public_path('uploads'), $fileName);
+
+        dd($fileName);
 
         $user = User::create([
             'name' => $request->name,

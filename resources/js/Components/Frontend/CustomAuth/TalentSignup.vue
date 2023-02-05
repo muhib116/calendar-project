@@ -48,11 +48,23 @@
             <CInput type="url" placeholder="Link" v-model="form.link" class="w-full" />
             <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">{{ form.errors.link }}</span>
         </div>
-        <p class="text-gray-500 mb-1">Verification: please upload a 5-10 sec video of yourself</p>
-        <div class="fileUpload mb-4 relative">
-            <input class="block w-full text-sm text-gray-900 border border-gray-400 p-2 rounded cursor-pointer bg-white focus:outline-none" aria-describedby="file_input_help" id="file_input" type="file">
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Max Upload Size 20MB.</p>
-            <!-- <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">{{ form.errors.link }}</span> -->
+
+        <div class="mb-2">
+            <p class="text-gray-500 mb-1">Verification: please upload a 5-10 sec video of yourself</p>
+            <div class="fileUpload mb-4 relative">
+                <input 
+                    class="block w-full text-sm text-gray-900 border border-gray-400 p-2 rounded cursor-pointer bg-white focus:outline-none" 
+                    aria-describedby="file_input_help" 
+                    id="file_input" 
+                    type="file"
+                    @input="form.video = $event.target.files[0]"
+                >
+                <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">{{ form.errors.video }}</span>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Max Upload Size 20MB.</p>
+            </div>
+            <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                {{ form.progress.percentage }}%
+            </progress>
         </div>
 
         <label class="flex items-center gap-2 select-none">
@@ -102,6 +114,7 @@ const form = useForm({
     email: '',
     country: '-select country-',
     category_id: 0,
+    video: '',
     link: '',
     password: '',
     password_confirmation: '',
