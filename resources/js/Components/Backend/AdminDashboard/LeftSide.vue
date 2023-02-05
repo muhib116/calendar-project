@@ -3,21 +3,21 @@
         <div class="grid gap-2">
             <Link 
                 class="px-4 py-1 border font-semibold text-gray-400 rounded"
-                :class="route().current('admin.dashboard') ? 'bg-sky-500 text-white' : ''"
+                :class="route().current('admin.dashboard') ? 'bg-sky-500 text-gray-50' : ''"
                 :href="route('admin.dashboard')"
             >
                 Dashboard
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold text-gray-400 rounded"
-                :class="route().current('admin.analytics') ? 'bg-sky-500 text-white' : ''"
+                :class="route().current('admin.analytics') ? 'bg-sky-500 text-gray-50' : ''"
                 :href="route('admin.analytics')"
             >
                 Analytics
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold text-gray-400 rounded"
-                :class="route().current('admin.payments') ? 'bg-sky-500 text-white' : ''"
+                :class="route().current('admin.payments') ? 'bg-sky-500 text-gray-50' : ''"
                 :href="route('admin.payments')"
             >
                 Payments
