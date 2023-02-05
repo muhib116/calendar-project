@@ -13,17 +13,18 @@
                         <h2 class="text-white text-opacity-30 text-xl">For any occasion, from your preferred personality</h2>
                     </div>
                     <div>
-                        <!-- <button 
+                        <div v-if="isLogin" class="flex gap-4 items-center justify-end">
+                            <Notification />
+                            <Profile />
+                        </div>
+                        <button 
+                            v-else
                             @click="showAuthModal = true" 
                             class="font-black lg:px-6 px-3 py-2 border border-white border-opacity-50 text-white text-opacity-60 hover:text-opacity-100 rounded-full"
                         >
                             Sign Up
-                        </button> -->
+                        </button>
                         <!-- after login -->
-                        <div class="flex gap-4 items-center justify-end">
-                            <Notification />
-                            <Profile />
-                        </div>
                     </div>
                 </div>
 
@@ -53,8 +54,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import Master from '@/Components/Frontend/Master.vue';
+import { ref, computed } from 'vue'
+import Master from '@/Components/Frontend/Master.vue'
 import CategoryWiseLatestItem from '@/Components/Frontend/CategoryWiseLatestItem.vue'
 import Search from '@/Components/Frontend/Home/Search.vue'
 import CanvasMenu from '@/Components/Frontend/Home/CanvasMenu.vue'
@@ -63,11 +64,13 @@ import CustomAuth from '@/Components/Frontend/CustomAuth/Index.vue'
 import Notification from '@/Components/Backend/Global/Components/Notification.vue'
 import Profile from '@/Components/Backend/Global/Components/Profile.vue'
 import Footer from '@/Components/Backend/Global/Footer.vue'
-import BackIcon from '@/Icons/BackIcon.vue';
-import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue';
-import AngleRightIcon from '@/Icons/AngleRightIcon.vue';
+import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
+import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 
 const showAuthModal = ref(false)
+const props = defineProps({
+    isLogin: Boolean,
+})
 </script>
 
 <style scoped>

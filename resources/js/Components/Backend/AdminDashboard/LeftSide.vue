@@ -10,15 +10,15 @@
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold text-gray-400 rounded"
-                :class="route().current('admin.dashboard.analytics') ? 'bg-sky-500 text-white' : ''"
-                :href="route('admin.dashboard.analytics')"
+                :class="route().current('admin.analytics') ? 'bg-sky-500 text-white' : ''"
+                :href="route('admin.analytics')"
             >
                 Analytics
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold text-gray-400 rounded"
-                :class="route().current('admin.dashboard.payments') ? 'bg-sky-500 text-white' : ''"
-                :href="route('admin.dashboard.payments')"
+                :class="route().current('admin.payments') ? 'bg-sky-500 text-white' : ''"
+                :href="route('admin.payments')"
             >
                 Payments
             </Link>
@@ -27,8 +27,8 @@
         <div class="grid gap-2">
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.talent.applications') ? 'bg-[#130121] text-white' : ''"
-                :href="route('admin.dashboard.talent.applications')"
+                :class="route().current('admin.talent.applications') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.talent.applications')"
             >
                 T-Applications
                 <span class="text-[10px] bg-red-400 w-6 h-6 flex items-center justify-center rounded-full text-white absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
@@ -37,36 +37,36 @@
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.users') || route().current('admin.dashboard.user.detail') ? 'bg-[#130121] text-white' : ''"
-                :href="route('admin.dashboard.users')"
+                :class="route().current('admin.users') || route().current('admin.user.detail') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.users')"
             >
                 Users
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.talents') || route().current('admin.dashboard.talent.detail') ? 'bg-[#130121] text-white' : ''"
-                :href="route('admin.dashboard.talents')"
+                :class="route().current('admin.talents') || route().current('admin.talent.detail') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.talents')"
             >
                 Talents
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.categories') ? 'bg-[#130121] text-white' : ''"
-                :href="route('admin.dashboard.categories')"
+                :class="route().current('admin.categories') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.categories')"
             >
                 Categories
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.countries') ? 'bg-[#130121] text-white' : ''"
-                :href="route('admin.dashboard.countries')"
+                :class="route().current('admin.countries') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.countries')"
             >
                 Countries
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
-                :class="route().current('admin.dashboard.countries') ? 'bg-[#130121] text-white' : ''"
-                :href="route('admin.dashboard.countries')"
+                :class="route().current('admin.countries') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.countries')"
             >
                 Settings
             </Link>
@@ -75,9 +75,9 @@
             <button class="px-4 py-1 border font-semibold bg-orange-500 text-white rounded relative">
                 Send Emails
             </button>
-            <button class="px-4 py-1 border font-semibold bg-red-500 text-white rounded relative">
+            <Link :href="route('logout')" method="post" as="button" class="px-4 py-1 border font-semibold bg-red-500 text-white rounded relative">
                 Logout
-            </button>
+            </Link>
         </div>
     </div>
 </template>

@@ -62,7 +62,7 @@
                                 {{ index }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <Link :href="route('admin.dashboard.talent.detail', 1)" class="text-sky-500 font-medium">
+                                <Link :href="route('admin.talent.detail', 1)" class="text-sky-500 font-medium">
                                     Demo Talent name
                                 </Link>
                             </td>
