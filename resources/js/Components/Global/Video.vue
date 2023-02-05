@@ -4,8 +4,8 @@
         <LockIcon v-if="lock" class="absolute right-4 top-4 w-6 h-6 cursor-pointer drop-shadow-lg" />
         <DownloadIcon v-if="download" class="absolute right-4 top-4 w-6 h-6 cursor-pointer drop-shadow-lg" />
         <img class="customRatio" :src="poster" alt="">
-        <button class="absolute left-1/2 bottom-4 transform -translate-x-1/2 cursor-pointer p-2 rounded-full transition-all bg-red-400 hover:shadow-lg hover:bg-red-500 hover:bottom-5">
-            <CloseIcon v-if="delete" class="w-4 h-4" />
+        <button v-if="delete" class="absolute left-1/2 bottom-4 transform -translate-x-1/2 cursor-pointer p-2 rounded-full transition-all bg-red-400 hover:shadow-lg hover:bg-red-500 hover:bottom-5">
+            <CloseIcon class="w-4 h-4" />
         </button>
     </div>
 </template>

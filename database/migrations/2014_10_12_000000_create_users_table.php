@@ -16,11 +16,19 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('username')->nullable();
+            $table->string('country')->nullable();
+            $table->integer('category_id')->unsigned()->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->longText('link')->nullable();
+            $table->string('video_path')->nullable();
+            $table->tinyInteger('is_agree')->default(1);
             $table->rememberToken();
-            $table->string('role', 100)->default('admin');
+            $table->string('role')->default('admin');
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 <template>
     <Master>
+        <Head title="Home" />
         <div class="wrapper grid h-[100vh] overflow-y-auto">
             <div class="p-4 bg-[#0b021a] relative flex items-center justify-center h-full">
                 <CanvasMenu />
@@ -24,7 +25,6 @@
                         >
                             Sign Up
                         </button>
-                        <!-- after login -->
                     </div>
                 </div>
 
@@ -55,6 +55,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { Head } from '@inertiajs/inertia-vue3'
 import Master from '@/Components/Frontend/Master.vue'
 import CategoryWiseLatestItem from '@/Components/Frontend/CategoryWiseLatestItem.vue'
 import Search from '@/Components/Frontend/Home/Search.vue'

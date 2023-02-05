@@ -1,27 +1,61 @@
 <template>
     <div class="py-6">
-        <CInput type="email" placeholder="Email" v-model="loginPayload.email" class="mb-6" />
-        <CInput type="password" placeholder="Password" v-model="loginPayload.password" class="mb-6" />
-
-        <div class="">
-            <button @click="$emit('forgotPassword')" class="block opacity-70 hover:opacity-100 hover:text-[var(--link-color)]">Forgot password ?</button>
-            <button class="bg-[var(--btn-bg-color)] text-[var(--btn-text-color)] rounded-full px-5 py-2 shadow uppercase ml-auto block">Sign In</button>
-            <div>
-                Don't have account ?
-                <button @click="$emit('register')" class="text-[var(--link-color)]">Signup</button>
+        <form @submit.prevent="submit">
+            <div class="relative">
+                <CInput type="email" placeholder="Email" v-model="form.email" class="mb-6" />
+                <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">{{ form.errors.email }}</span>
             </div>
+            <div class="relative">
+                <CInput type="password" placeholder="Password" v-model="form.password" class="mb-6" />
+                <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">{{ form.errors.password }}</span>
+            </div>
+            <label class="relative block mb-4">
+                <Checkbox name="remember" v-model:checked="form.remember" />
+                <span class="ml-2 text-sm text-gray-600">Remember me</span>
+            </label>
+
+            <button @click="$emit('forgotPassword')" class="block opacity-70 hover:opacity-100 hover:text-[var(--link-color)]">Forgot password ?</button>
+            <button 
+                class="bg-[var(--btn-bg-color)] text-[var(--btn-text-color)] rounded-full px-5 py-2 shadow uppercase ml-auto block"
+                :class="!!form.processing && 'pointer-events-none opacity-70'"
+            >
+                Sign In
+            </button>
+        </form>
+        <div>
+            Don't have account ?
+            <button @click="$emit('register')" class="text-[var(--link-color)]">Signup</button>
         </div>
     </div>
 </template>
 
-<script setup>
-    import { ref } from 'vue'
-    import CInput from '@/Components/Global/CInput.vue'
-    const loginPayload = ref({
-        email: null,
-        password: null
-    })
-</script>
 
-<style scoped>
-</style>
+<script setup>
+import { isEmpty } from 'lodash'
+import CInput from '@/Components/Global/CInput.vue'
+import { useForm } from '@inertiajs/inertia-vue3'
+import Checkbox from '@/Components/Global/Checkbox.vue'
+
+defineProps({
+    canResetPassword: Boolean,
+    status: String,
+})
+
+const form = useForm({
+    email: '',
+    password: '',
+    remember: false,
+})
+
+const emit = defineEmits('close')
+const submit = () => {
+    form.post(route('login'), {
+        onFinish: () => {
+            form.reset('password')
+            if(isEmpty(form.errors)){
+                emit('close')
+            }
+        }
+    })
+}
+</script>

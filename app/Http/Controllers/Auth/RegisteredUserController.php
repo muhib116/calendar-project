@@ -31,15 +31,37 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+        $validation_item = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        ];
+        
+        if($request->role == 'talent'){
+            $validation_item['first_name'] = ['required', 'string', 'max:255'];
+            $validation_item['last_name'] = ['required', 'string', 'max:255'];
+            $validation_item['username'] = ['required', 'string', 'max:255'];
+            $validation_item['country'] = ['required', 'string', 'max:255'];
+            $validation_item['category_id'] = ['required', 'string', 'max:255'];
+            $validation_item['link'] = ['required', 'string', 'max:255'];
+            // $validation_item['video_path'] = ['required', 'string', 'max:255'];
+        }
+
+        $request->validate($validation_item);
 
         $user = User::create([
             'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'username' => $request->username,
+            'country' => $request->country,
+            'category_id' => $request->category_id,
+            'video_path' => $request->video_path,
+            'link' => $request->link,
+            'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role,
+            'is_agree' => $request->is_agree,
             'password' => Hash::make($request->password),
         ]);
 

@@ -21,12 +21,13 @@
             </button>
         </div>
 
-        <h1 class="font-bold mt-5">{{ componentList[templateName].title }}</h1>
+        <h1 class="font-bold fs-xl mt-5">{{ componentList[templateName].title }}</h1>
 
         <component 
             @login="templateName='SignIn'" 
             @register="templateName='SignUp'" 
             @forgotPassword="templateName='ForgotPassword'"
+            @close="$emit('close')"
             :is="componentList[templateName].component" 
         />
 

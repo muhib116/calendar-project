@@ -6,9 +6,11 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
+import axios from 'axios'
 
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
+axios.defaults.baseURL = `${document.location.origin}/api/`;
+const appName = window.document.getElementsByTagName('title')[0]?.innerText
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
