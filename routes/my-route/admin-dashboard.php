@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CountryController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -40,14 +41,18 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
 
     Route::group(['prefix' => '/admin/dashboard'], function()
     {
+        // categories start
         Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories');
         Route::post('/category', [CategoryController::class, 'store'])->name('admin.category');
         Route::post('/category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
+        // categories end
+
+        // country start
+        Route::get('/countries', [CountryController::class, 'index'])->name('admin.countries');
+        Route::post('/country', [CountryController::class, 'store'])->name('admin.country');
+        Route::post('/country/{id}', [CountryController::class, 'edit'])->name('admin.country.edit');
+        Route::delete('/country/delete/{id}', [CountryController::class, 'delete'])->name('admin.country.delete');
+        // country end
     });
-
-
-    Route::get('/admin/dashboard/countries', function () {
-        return Inertia::render('Backend/AdminDashboard/Countries');
-    })->name('admin.countries');
 });

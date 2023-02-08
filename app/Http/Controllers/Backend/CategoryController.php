@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
-use Illuminate\Validation\Rule;
 
 
 class CategoryController extends Controller

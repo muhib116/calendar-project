@@ -1,4 +1,5 @@
 <template>
+    <Head title="Category Management" />
     <DashboardLayout :header="false" :footer="false" title="Category Management">
         <template v-slot:leftSidebar>
             <LeftSide />
@@ -13,6 +14,7 @@
     import DashboardLayout from './DashboardLayout.vue'
     import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
     import useCategory from '@/Pages/Backend/AdminDashboard/useCategory.js'
+    import { Head } from '@inertiajs/inertia-vue3';
 
     const { components, activeComponent } = useCategory()
 </script>

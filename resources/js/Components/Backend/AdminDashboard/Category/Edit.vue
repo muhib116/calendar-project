@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="submit" class="block">
-        <button @click="activeComponent='All'" class="flex gap-4 items-center mb-4 font-semibold w-full pb-4">
+        <button @click="activeComponent='All'" class="p-1 px-2 pr-4 rounded bg-gray-500 text-white inline-flex items-center w-fit gap-2 mb-4">
             <AngleLeftIcon class="w-5 h-5" />
             Back
         </button>

@@ -1,46 +1,59 @@
 <template>
-    <div>
-        <div class="">
-            <button @click="activeComponent='All'" class="flex gap-4 items-center mb-4 font-semibold w-full pb-4">
+    <form  @submit.prevent="submit" class="block">
+        <div>
+            <button @click="activeComponent='All'" class="p-1 px-2 pr-4 rounded bg-gray-500 text-white inline-flex items-center w-fit gap-2 mb-4">
                 <AngleLeftIcon class="w-5 h-5" />
                 Back
             </button>
         </div>
         <div class="max-w-[500px]">
             <h1 class="text-lg font-semibold mb-4">Edit Country</h1>
-            <CInput type="text" placeholder="Country Code" />
-            <CInput type="text" placeholder="Mobile Code" />
-            <CInput type="text" placeholder="Country Name" />
-            <CSelect :options="options" v-model="options[0].key"/>
+            <div class="relative mb-6">
+                <CInput type="text" v-model="form.country_code" placeholder="Country Code" />
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.country_code }}</span>
+            </div>
+            <div class="relative mb-6">
+                <CInput type="text" v-model="form.phone_code" placeholder="Phone Code" />
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.phone_code }}</span>
+            </div>
+            <div class="relative mb-6">
+                <CInput type="text" v-model="form.name" placeholder="Country Name" />
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.name }}</span>
+            </div>
+            <div class="relative">
+                <CSelect :options="countryStatus" v-model="form.status"/>
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.status }}</span>
+            </div>
             <button class="bg-green-500 text-white ml-auto block font-semibold px-4 py-2 rounded mt-2">Update</button>
         </div>
-    </div>
+    </form>
 </template>
 
 <script setup>
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
-import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import useCountry from '@/Pages/Backend/AdminDashboard/useCountry.js'
+import { useForm } from '@inertiajs/inertia-vue3'
+import { isEmpty } from 'lodash'
+import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 
-const { activeComponent } = useCountry()
+const { activeComponent, countryStatus, selectedCountry } = useCountry()
+const form = useForm({
+    id: selectedCountry.value.id,
+    country_code: selectedCountry.value.country_code,
+    phone_code: selectedCountry.value.phone_code,
+    name: selectedCountry.value.name,
+    status: countryStatus.value[0].key
+})
 
-const options = [
-    {
-        key: null,
-        value: 'Select Status'
-    },
-    {
-        key: 1,
-        value: 'Enable'
-    },
-    {
-        key: 0,
-        value: 'Disable'
-    },
-]
+const submit = () => {
+    form.post(route('admin.country.edit', form.id), {
+        onFinish: () => {
+            if(isEmpty(form.errors)){
+                form.reset('country_code', 'phone_code', 'name', 'status')
+                activeComponent.value = 'All'
+            }
+        }
+    })
+}
 </script>
-
-<style lang="scss" scoped>
-
-</style>
