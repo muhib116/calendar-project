@@ -77,12 +77,20 @@
 </template>
 
 <script setup>
-import CloseIcon from '@/Icons/CloseIcon.vue'
+import { computed, onMounted } from 'vue'
 import CInput from '@/Components/Global/CInput.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
-import EyeIcon from '@/Icons/EyeIcon.vue'
 import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
+import { usePage } from '@inertiajs/inertia-vue3'
+
+const users = computed(() => {
+    return usePage().props.value.deletedUsers
+})
+
+onMounted(() => {
+    console.log(usePage().props.value.deletedUsers);
+})
 </script>
 
 <style scoped>

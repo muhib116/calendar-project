@@ -15,7 +15,7 @@
                 <TabChanger />
             </div>
         </div>
-
+        {{ users }}
         <div class="flex flex-col mt-4">
             <div class="overflow-x-auto">
                 <table class="w-full">
@@ -61,7 +61,7 @@
                 </table>
             </div>
         </div>
-
+        
         <div class="flex items-center justify-between mt-5 text-sm">
             <div class="">Showing 1 to 10 of 10 entries</div>
             <div class="flex gap-2 items-center">
@@ -78,6 +78,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import CloseIcon from '@/Icons/CloseIcon.vue'
 import CInput from '@/Components/Global/CInput.vue'
@@ -85,6 +86,11 @@ import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import EyeIcon from '@/Icons/EyeIcon.vue'
 import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
+import { usePage } from '@inertiajs/inertia-vue3'
+
+const users = computed(() => {
+    return usePage().props.value.users
+})
 </script>
 
 <style scoped>

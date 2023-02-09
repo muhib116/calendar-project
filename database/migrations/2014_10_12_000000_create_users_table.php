@@ -26,10 +26,11 @@ return new class extends Migration
             $table->string('password');
             $table->longText('link')->nullable();
             $table->string('video_path')->nullable();
-            $table->tinyInteger('is_agree')->default(1);
+            $table->tinyInteger('is_agree')->default(1)->nullable();
             $table->rememberToken();
-            $table->string('role')->default('admin');
+            $table->string('role')->default('admin')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

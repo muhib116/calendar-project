@@ -13,7 +13,7 @@ Route::get('/mail', function () {
 
 require_once('user-dashboard.php');
 require_once('talent-dashboard.php');
-require_once('admin-dashboard.php');
+require_once('admin.php');
 
 
 

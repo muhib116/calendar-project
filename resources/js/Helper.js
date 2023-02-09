@@ -23,6 +23,27 @@ Helper.confirm = (msg, cb) => {
     }
 }
 
+Helper.dateFormate = (date) => {
+    return date
+}
 
+Helper.priceFormate = (price) => {
+    return price
+}
+
+Helper.translate = (text) => {
+    return text
+}
+
+Helper.companyName = () => {
+    return 'company name'
+}
+
+Helper.stripeKey = () => {
+    return {
+        public: '',
+        private: ''
+    }
+}
 
 export default Helper

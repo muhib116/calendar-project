@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CountryController;
+use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,13 +25,7 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         return Inertia::render('Backend/AdminDashboard/TalentApplications');
     })->name('admin.talent.applications');
 
-    Route::get('/admin/dashboard/users', function () {
-        return Inertia::render('Backend/AdminDashboard/Users');
-    })->name('admin.users');
 
-    Route::get('/admin/dashboard/user/{id}', function () {
-        return Inertia::render('Backend/AdminDashboard/UserDetails');
-    })->name('admin.user.detail');
 
     Route::get('/admin/dashboard/talents', function () {
         return Inertia::render('Backend/AdminDashboard/Talents');
@@ -55,6 +50,14 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         Route::post('/country/{id}', [CountryController::class, 'edit'])->name('admin.country.edit');
         Route::delete('/country/delete/{id}', [CountryController::class, 'delete'])->name('admin.country.delete');
         // country end
+
+        // users start
+        Route::get('/users', [UserController::class, 'index'])->name('admin.users');
+    
+        Route::get('/user/{id}', function () {
+            return Inertia::render('Backend/AdminDashboard/UserDetails');
+        })->name('admin.user.detail');
+        // users end
 
         // settings start
         Route::get('/settings', [SettingsController::class, 'index'])->name('admin.settings');

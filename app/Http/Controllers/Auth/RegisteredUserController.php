@@ -14,6 +14,8 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
+use function PHPUnit\Framework\isEmpty;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -50,10 +52,10 @@ class RegisteredUserController extends Controller
         $request->validate($validation_item);
 
 
-        $fileName = time().'.'.$request->file->extension();
-        $request->file->move(public_path('uploads'), $fileName);
+        // $fileName = time().'.'.$request->file->extension();
+        // $request->file->move(public_path('uploads'), $fileName);
 
-        dd($fileName);
+        // dd($fileName);
 
         $user = User::create([
             'name' => $request->name,
@@ -75,6 +77,12 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        if(Auth::user()->role == 'admin'){
+            return redirect(RouteServiceProvider::ADMIN_DASHBOARD);
+        }
+        if(Auth::user()->role == 'talent'){
+            return redirect(RouteServiceProvider::TALENT_DASHBOARD);
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 }
