@@ -4,7 +4,7 @@
             <LeftSide />
         </template>
         <template v-slot:content>
-            <Link :href="route('admin.dashboard.users')" class="p-1 px-3 pr-4 rounded bg-gray-500 text-white inline-flex items-center w-fit gap-2">
+            <Link :href="route('admin.users')" class="p-1 px-3 pr-4 rounded bg-gray-500 text-white inline-flex items-center w-fit gap-2">
                 <AngleLeftIcon class="w-4 h-4" />
                 Back
             </Link>
