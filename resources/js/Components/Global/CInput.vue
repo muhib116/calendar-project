@@ -1,6 +1,6 @@
 <template>
     <label class="relative block">
-        <span v-if="modelValue && !modelValue.length" class="absolute left-0 top-3 pointer-events-none opacity-40">{{ placeholder }}</span>
+        <span v-if="!modelValue && !modelValue.length" class="absolute left-0 top-3 pointer-events-none opacity-40">{{ placeholder }}</span>
         <input @input="updateValue" :value="modelValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow bg-transparent">
         <span class="customBorder"></span>
         <div 
@@ -20,7 +20,10 @@
         type: String,
         placeholder: String,
         characterLimit: Number,
-        modelValue: String
+        modelValue: {
+            type: String,
+            default: ''
+        }
     })
 
     const writtenCharacter = ref(0)

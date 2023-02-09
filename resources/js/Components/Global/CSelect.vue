@@ -1,6 +1,6 @@
 <template>
     <label class="relative block">
-        <span v-if="isEmpty(modelValue)" class="absolute left-0 top-3 opacity-40">{{ placeholder }}</span>
+        <span v-if="!modelValue && isEmpty(modelValue)" class="absolute left-0 top-3 opacity-40">{{ placeholder }}</span>
         <select @input="updateValue" v-model="getModelValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow">
             <option v-for="option in options" :value="getKey(option)">{{ getValue(option) }}</option>
         </select>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CountryController;
 use Illuminate\Support\Facades\Route;
@@ -54,5 +55,9 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         Route::post('/country/{id}', [CountryController::class, 'edit'])->name('admin.country.edit');
         Route::delete('/country/delete/{id}', [CountryController::class, 'delete'])->name('admin.country.delete');
         // country end
+
+        // settings start
+        Route::get('/settings', [SettingsController::class, 'index'])->name('admin.settings');
+        // settings end
     });
 });

@@ -24,3 +24,10 @@ body{
 .customRatio {
     aspect-ratio: 3/4;
 }
+
+::-webkit-scrollbar {
+    width: 3px;
+  }
+::-webkit-scrollbar-thumb {
+    background: #0005;
+}
