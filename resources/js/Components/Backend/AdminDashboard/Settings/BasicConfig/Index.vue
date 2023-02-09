@@ -8,7 +8,7 @@
                     <CInput 
                         class="w-[300px]"
                         type="text" 
-                        placeholder="ex: NE**X**TWISHER" 
+                        placeholder="ex: NE[red]X[red][blue]TWISHER[blue]"
                         v-model="form.logo"
                     />
                 </td>
