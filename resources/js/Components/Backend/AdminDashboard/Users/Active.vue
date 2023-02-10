@@ -2,20 +2,14 @@
     <div>
         <div class="flex gap-4 justify-between">
             <div class="flex gap-2 items-center">
-                Show 
-                <select class="border-[#0001] rounded-lg">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                Entries
+                <component :is="components['PageSize']" />
             </div>
             <div class="flex gap-6 items-center w-full">
-                <CInput type="search" placeholder="Search" class="mx-auto max-w-[400px] w-full" />
-                <TabChanger />
+                <component :is="components['Search']" />
+                <TabChanger :activeItems="data.length" :deleteItems="4" />
             </div>
         </div>
-        {{ users }}
+
         <div class="flex flex-col mt-4">
             <div class="overflow-x-auto">
                 <table class="w-full">
@@ -36,22 +30,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 10" :index="index" class="border-b">
+                        <tr v-for="(user, index) in result" :index="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index }}
+                                {{ index + 1 }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <Link :href="route('admin.user.detail', 1)" class="text-sky-500 font-medium">
-                                    Demo User name
+                                <Link :href="route('admin.user.detail', user.id)" class="text-sky-500 font-medium">
+                                    {{ user.name }}
                                 </Link>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                test@exm.com
+                                {{ user.email }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
-                                <button class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
+                                <Link :href="route('admin.user.detail', user.id)" class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
                                     <EyeIcon class="w-4 h-4" />
-                                </button>
+                                </Link>
                                 <button class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
                                     <CloseIcon class="w-4 h-4" />
                                 </button>
@@ -62,37 +56,18 @@
             </div>
         </div>
         
-        <div class="flex items-center justify-between mt-5 text-sm">
-            <div class="">Showing 1 to 10 of 10 entries</div>
-            <div class="flex gap-2 items-center">
-                <button>
-                    <AngleLeftIcon class="w-4 h-4" />
-                </button>
-                1/2
-                <button>
-                    <AngleRightIcon class="w-4 h-4" />
-                </button>
-            </div>
-        </div>
+        <component :is="components['Pagination']" />
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import CloseIcon from '@/Icons/CloseIcon.vue'
-import CInput from '@/Components/Global/CInput.vue'
-import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
-import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import EyeIcon from '@/Icons/EyeIcon.vue'
 import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
 import { usePage } from '@inertiajs/inertia-vue3'
+import useTable from '@/Components/Backend/Global/Table/useTable.js'
 
-const users = computed(() => {
-    return usePage().props.value.users
-})
+const { components, data, result } = useTable()
+data.value = usePage().props.value.users
 </script>
-
-<style scoped>
-
-</style>
