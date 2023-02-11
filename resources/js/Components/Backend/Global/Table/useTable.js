@@ -9,15 +9,22 @@ const pageSizeArray = ref([2, 10, 50, 100, 500])
 const defaultPageSize = ref(50)
 const pageSize = ref(defaultPageSize.value)
 const result = ref([])
+const resultPerPage = ref([])
 const searchString = ref('')
+const pageNumber   = ref(1)
+const totalPage   = ref(0)
 
 export default function tableHelper()
 {
     const search = () => 
     {
+        pageNumber.value = 1
         if(isEmpty(searchString.value)){
             result.value = cloneDeep(data.value)
-            result.value.length = (result.value.length > pageSize.value) ? pageSize.value : result.value.length
+            resultPerPage.value = cloneDeep(data.value)
+            resultPerPage.value.length = (result.value.length > pageSize.value) ? pageSize.value : result.value.length
+            totalPage.value = Math.ceil(result.value.length / pageSize.value)
+            return
         }
 
         let response = data.value.filter(item => {
@@ -30,7 +37,9 @@ export default function tableHelper()
         })
         
         result.value = response
-        result.value.length = (result.value.length > pageSize.value) ? pageSize.value : result.value.length
+        resultPerPage.value = response
+        resultPerPage.value.length = (result.value.length > pageSize.value) ? pageSize.value : result.value.length
+        totalPage.value = Math.ceil(result.value.length / pageSize.value)
     }
 
     const components = {
@@ -51,6 +60,9 @@ export default function tableHelper()
         pageSize,
         pageSizeArray,
         result,
-        search
+        search,
+        pageNumber,
+        resultPerPage,
+        totalPage
     }
 }

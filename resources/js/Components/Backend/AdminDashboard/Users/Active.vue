@@ -30,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(user, index) in result" :index="index" class="border-b">
+                        <tr v-for="(user, index) in resultPerPage" :index="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ index + 1 }}
                             </td>
@@ -68,6 +68,6 @@ import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue
 import { usePage } from '@inertiajs/inertia-vue3'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 
-const { components, data, result } = useTable()
+const { components, data, resultPerPage } = useTable()
 data.value = usePage().props.value.users
 </script>
