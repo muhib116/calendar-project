@@ -6,7 +6,7 @@ import { cloneDeep, isEmpty } from 'lodash'
 
 const data = ref([])
 const pageSizeArray = ref([2, 10, 50, 100, 500])
-const defaultPageSize = ref(50)
+const defaultPageSize = ref(10)
 const pageSize = ref(defaultPageSize.value)
 const result = ref([])
 const resultPerPage = ref([])
