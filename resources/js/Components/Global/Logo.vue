@@ -1,5 +1,5 @@
 <template>
-    <Link :href="route('home')" class="logo text-2xl">
+    <Link :href="route('home')" class="logo text-2xl w-fit mx-auto">
         <span :class="light ? 'text-white' : 'text-black'">NE</span>
         <span class="text-sky-500">X</span>
         <span :class="light ? 'text-white' : 'text-black'">T</span>

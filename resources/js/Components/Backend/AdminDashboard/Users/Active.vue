@@ -19,28 +19,28 @@
                                 #
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Username
+                                {{ Helper.translate("Username") }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Email
+                                {{ Helper.translate("Email") }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
-                                Action
+                                {{ Helper.translate("Action") }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(user, index) in resultPerPage" :index="index" class="border-b">
+                        <tr v-for="(user, index) in resultPerPage" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ index + 1 }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 <Link :href="route('admin.user.detail', user.id)" class="text-sky-500 font-medium">
-                                    {{ user.name }}
+                                    {{ Helper.translate(user.name, true) }}
                                 </Link>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ user.email }}
+                                {{ Helper.translate(user.email, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
                                 <Link :href="route('admin.user.detail', user.id)" class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
@@ -67,6 +67,7 @@ import EyeIcon from '@/Icons/EyeIcon.vue'
 import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
+import Helper from '@/Helper'
 
 const { components, data, resultPerPage } = useTable()
 data.value = usePage().props.value.users

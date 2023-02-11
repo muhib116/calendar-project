@@ -31,7 +31,7 @@ Helper.priceFormate = (price) => {
     return price
 }
 
-Helper.translate = (text) => {
+Helper.translate = (text, isDynamic=false) => {
     return text
 }
 

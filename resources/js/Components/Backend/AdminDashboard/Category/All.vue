@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(category, index) in categories" :index="category.id" class="border-b">
+                        <tr v-for="(category, index) in categories" :key="category.id" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ index+1 }}
                             </td>
