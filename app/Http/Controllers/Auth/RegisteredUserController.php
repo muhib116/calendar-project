@@ -51,11 +51,14 @@ class RegisteredUserController extends Controller
 
         $request->validate($validation_item);
 
-
-        // $fileName = time().'.'.$request->file->extension();
-        // $request->file->move(public_path('uploads'), $fileName);
-
-        // dd($fileName);
+        $file = $request->file('video');
+        $path = '';
+        try {
+            $fileName = time().'.'.$file->extension();
+            if($file->move('uploads/', $fileName)) {
+                $path = 'uploads/'.$fileName;
+            }
+        } catch (\Throwable $th) {}
 
         $user = User::create([
             'name' => $request->name,
@@ -64,7 +67,7 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'country' => $request->country,
             'category_id' => $request->category_id,
-            'video_path' => $request->video_path,
+            'video_path' => $path,
             'link' => $request->link,
             'name' => $request->name,
             'email' => $request->email,

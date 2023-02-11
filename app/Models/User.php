@@ -31,6 +31,7 @@ class User extends Authenticatable
         'password',
         'is_agree',
         'role',
+        'deleted_by',
     ];
 
     /**
@@ -51,4 +52,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function deletedBy() {
+        return $this->belongsTo(User::class, 'deleted_by', 'id');
+    }
 }

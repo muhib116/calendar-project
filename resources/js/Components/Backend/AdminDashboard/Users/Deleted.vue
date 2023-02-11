@@ -1,18 +1,13 @@
 <template>
     <div>
+        
         <div class="flex gap-4 justify-between">
             <div class="flex gap-2 items-center">
-                Show 
-                <select class="border-[#0001] rounded-lg">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                Entries
+                <component :is="components['PageSize']" />
             </div>
             <div class="flex gap-6 items-center w-full">
-                <CInput type="search" placeholder="Search" class="mx-auto max-w-[400px] w-full" />
-                <TabChanger />
+                <CInput type="search" :placeholder="Helper.translate('Search')" class="mx-auto max-w-[400px] w-full" />
+                <TabChanger :activeItems="activeUsers.length" :deleteItems="data.length" />
             </div>
         </div>
 
@@ -25,35 +20,44 @@
                                 #
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Username
+                                {{ Helper.translate('Username') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Email
+                                {{ Helper.translate('Email') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Deleted By
+                                {{ Helper.translate('Deleted By') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
-                                Date
+                                {{ Helper.translate('Date') }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 10" :index="index" class="border-b">
+                        <tr v-for="(user, index) in resultPerPage" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index }}
+                                {{ index + 1 }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Demo User name
+                                <Link :href="route('admin.user.detail', user.id)" class="text-sky-500 font-medium">
+                                    {{ Helper.translate(user.name, true) }}
+                                </Link>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                test@exm.com
+                                {{ Helper.translate(user.email, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Admin
+                                <Link :href="route('admin.user.detail', user.id)" class="text-sky-500 font-medium">
+                                    {{ Helper.translate(get(user, 'deleted_by.name'), true) }} 
+                                </Link>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
-                                Fab 29th, 2023
+                                <Link :href="route('admin.user.detail', user.id)" class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
+                                    <EyeIcon class="w-4 h-4" />
+                                </Link>
+                                <button class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
+                                    <RestoreIcon @click="handleRestoreUser(user.id)" class="w-4 h-4" />
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -61,18 +65,8 @@
             </div>
         </div>
 
-        <div class="flex items-center justify-between mt-5 text-sm">
-            <div class="">Showing 1 to 10 of 10 entries</div>
-            <div class="flex gap-2 items-center">
-                <button>
-                    <AngleLeftIcon class="w-4 h-4" />
-                </button>
-                1/2
-                <button>
-                    <AngleRightIcon class="w-4 h-4" />
-                </button>
-            </div>
-        </div>
+        <component :is="components['Pagination']" />
+        
     </div>
 </template>
 
@@ -82,15 +76,35 @@ import CInput from '@/Components/Global/CInput.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
-import { usePage } from '@inertiajs/inertia-vue3'
+import useTable from '@/Components/Backend/Global/Table/useTable.js'
+import { Link, usePage } from '@inertiajs/inertia-vue3'
+import { get } from 'lodash'
+import Helper from '@/Helper'
+import EyeIcon from '@/Icons/EyeIcon.vue'
+import RestoreIcon from '@/Icons/RestoreIcon.vue'
+import { Inertia } from '@inertiajs/inertia'
 
 const users = computed(() => {
     return usePage().props.value.deletedUsers
 })
 
+const activeUsers = computed(() => {
+    return usePage().props.value.users;
+});
+
+const { components, data, resultPerPage } = useTable()
+data.value = users.value;
+
 onMounted(() => {
-    console.log(usePage().props.value.deletedUsers);
+    // console.log(usePage().props.value.deletedUsers);
 })
+
+const handleRestoreUser = (id) => {
+    Helper.confirm("Are you sure to restore?", ()=>{
+        Inertia.delete(route('admin.restore_user', id))
+    });
+}
+
 </script>
 
 <style scoped>

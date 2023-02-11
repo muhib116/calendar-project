@@ -2,16 +2,10 @@
     <div>
         <div class="flex gap-4 justify-between items-center">
             <div class="flex gap-2 items-center">
-                Show 
-                <select class="border-[#0001] rounded-lg">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                Entries
+                <component :is="components['PageSize']" />
             </div>
             <button @click="activeComponent = 'Add'" class="px-4 py-1 rounded bg-sky-500 text-white font-bold">
-                Add Country
+                {{ Helper.translate('Add Country') }}
             </button>
         </div>
 
@@ -24,39 +18,39 @@
                                 #
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Phone Code
+                                {{ Helper.translate('Phone Code') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Country Code
+                                {{ Helper.translate('Country Code') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Country Name
+                                {{ Helper.translate('Country Name') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Status
+                                {{ Helper.translate('Status') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
-                                Action
+                                {{ Helper.translate('Action') }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(country, index) in countries" :key="country.id" class="border-b">
+                        <tr v-for="(country, index) in resultPerPage" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index+1 }}
+                                {{ Helper.translate(index+1, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ country.phone_code }}
+                                {{ Helper.translate(country.phone_code, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ country.country_code }}
+                                {{ Helper.translate(country.country_code, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ country.name }}
+                                {{ Helper.translate(country.name, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 <span class="font-semibold" :class="country.status ? 'text-green-500' : 'text-red-500'">
-                                    {{ country.status ? 'Enabled' : 'Disabled' }}
+                                    {{ country.status ? Helper.translate('Enabled') : Helper.translate('Disabled') }}
                                 </span>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
@@ -71,19 +65,7 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="flex items-center justify-between mt-5 text-sm">
-                <div class="">Showing 1 to 10 of 10 entries</div>
-                <div class="flex gap-2 items-center">
-                    <button>
-                        <AngleLeftIcon class="w-4 h-4" />
-                    </button>
-                    1/2
-                    <button>
-                        <AngleRightIcon class="w-4 h-4" />
-                    </button>
-                </div>
-            </div>
+            <component :is="components['Pagination']" />
         </div>
     </div>
 </template>
@@ -92,16 +74,20 @@
 import { computed } from 'vue'
 import EditIcon from '@/Icons/EditIcon.vue'
 import useCountry from '@/Pages/Backend/AdminDashboard/useCountry.js'
+import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import CloseIcon from '@/Icons/CloseIcon.vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 import Helper from '@/Helper.js'
 import { Inertia } from '@inertiajs/inertia'
 
-
+const { components, data, resultPerPage } = useTable()
 const { activeComponent, selectedCountry } = useCountry()
+
 const countries = computed(() => {
     return usePage().props.value.countries
 })
+
+data.value = countries.value;
 
 const handleEdit = (country) => {
     activeComponent.value = 'Edit'
