@@ -32,11 +32,5 @@
 </template>
 
 <script setup>
-import AngleUpIcon from '@/Icons/AngleUpIcon.vue';
-
-
+import AngleUpIcon from '@/Icons/AngleUpIcon.vue'
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -22,7 +22,3 @@ const options = {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

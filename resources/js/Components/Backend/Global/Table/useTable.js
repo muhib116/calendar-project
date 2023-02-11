@@ -11,14 +11,14 @@ const pageSize = ref(defaultPageSize.value)
 const result = ref([])
 const resultPerPage = ref([])
 const searchString = ref('')
-const pageNumber   = ref(1)
+const currentPageNumber   = ref(1)
 const totalPage   = ref(0)
 
 export default function tableHelper()
 {
     const search = () => 
     {
-        pageNumber.value = 1
+        currentPageNumber.value = 1
         if(isEmpty(searchString.value)){
             result.value = cloneDeep(data.value)
             resultPerPage.value = cloneDeep(data.value)
@@ -61,7 +61,7 @@ export default function tableHelper()
         pageSizeArray,
         result,
         search,
-        pageNumber,
+        currentPageNumber,
         resultPerPage,
         totalPage
     }

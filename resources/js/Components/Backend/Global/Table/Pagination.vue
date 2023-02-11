@@ -8,7 +8,7 @@
             <button>
                 <AngleLeftIcon @click="() => { handleResult(-1) }" class="w-4 h-4" />
             </button>
-            {{ pageNumber }} / {{ totalPage }}
+            {{ currentPageNumber }} / {{ totalPage }}
             <button>
                 <AngleRightIcon @click="() => { handleResult(+1) }" class="w-4 h-4" />
             </button>
@@ -22,28 +22,28 @@ import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 
-const { result, resultPerPage, pageSize, pageNumber, totalPage } = useTable()
+const { result, resultPerPage, pageSize, currentPageNumber, totalPage } = useTable()
 
 const from = computed(() => {
-    return (pageSize.value * (pageNumber.value - 1))
+    return (pageSize.value * (currentPageNumber.value - 1))
 })
 
 const to = computed(() => {
-    let toResult = (Number(pageNumber.value)  * Number(pageSize.value)) - 1
+    let toResult = (Number(currentPageNumber.value)  * Number(pageSize.value)) - 1
     // toResult = toResult > result.value.length ? result.value.length : toResult
     return toResult
 })
 
 const handleResult = (direction) => {
-    if( pageNumber.value > 1 && direction < 0){
-        pageNumber.value--
+    if( currentPageNumber.value > 1 && direction < 0){
+        currentPageNumber.value--
         resultPerPage.value = result.value.slice(from.value-1, to.value)
     }
 
     console.log(from.value, to.value);
     
-    if(pageNumber.value < totalPage.value && direction > 0){
-        pageNumber.value++
+    if(currentPageNumber.value < totalPage.value && direction > 0){
+        currentPageNumber.value++
         resultPerPage.value = result.value.slice(from.value-1, to.value)
     }
 }
