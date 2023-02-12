@@ -31,7 +31,7 @@ class UserController extends Controller
             'deleted_by' => auth()->id()
         ]);
         $user->delete();
-        return back();
+        return redirect()->back()->with('message', 'User deleted successfully!');
     }
     public function restore_user($user) {
         $user = User::onlyTrashed()->find($user);
@@ -39,6 +39,6 @@ class UserController extends Controller
             'deleted_by' => null,
         ]);
         $user->restore();
-        return back();
+        return redirect()->back()->with('message', 'User restored successfully!');
     }
 }
