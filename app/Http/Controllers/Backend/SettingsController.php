@@ -13,8 +13,12 @@ class SettingsController extends Controller
 {
     function index(){
         $settings = Settings::first();
+        $pages = Page::orderBy('id', 'DESC')->get();
+        $languages = Language::orderBy('id', 'DESC')->get();
         return Inertia::render('Backend/AdminDashboard/Settings/Index', [
             'settings' => $settings,
+            'pages' => $pages,
+            'languages' => $languages,
         ]);
     }
 
@@ -43,17 +47,32 @@ class SettingsController extends Controller
                 'settings' => $request->settings,
             ]);
         }
-        return redirect()->back()->with('success', 'Settings updated successfully');;
+        return redirect()->back()->with('message', 'Settings updated successfully');;
     }
 
     public function saveLanguage(Request $request) {
-        Language::create([
+        $id = $request->id;
+
+        $except = $id ? $id : Language::class;
+        $request->validate([
+            'english' => 'required|unique:languages,english,'.$except,
+            'french' => 'required|unique:languages,french,'.$except,
+            'spanish' => 'required|unique:languages,spanish,'.$except,
+        ]);
+
+        $data = [
             'english' => $request->english,
             'french' => $request->french,
             'spanish' => $request->spanish,
             'settings' => $request->settings,
-        ]);
-        return redirect()->back()->with('success', 'Language created successfully');
+        ];
+        $lang = null;
+        if ($request->id) {
+            $lang = Language::find($request->id);
+        }
+        $lang ? $lang->update($data) : Language::create($data);
+
+        return redirect()->back()->with('message', 'Language created successfully');
     }
 
     public function savepage(Request $request) {
@@ -67,6 +86,6 @@ class SettingsController extends Controller
             'settings' => $request->settings,
             'description' => $request->description,
         ]);
-        return redirect()->back()->with('success', 'Page created successfully');
+        return redirect()->back()->with('message', 'Page created successfully');
     }
 }

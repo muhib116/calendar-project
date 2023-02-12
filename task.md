@@ -18,9 +18,10 @@ Meeting: 001;
 ✅4::Settings module (1D)
     -- ✅English, Français, Español column (settings(additional))
     -- ✅Basic configuration (settings(additional))
-    -- Page title, slug, email(opt), Description(text editor) (settings(additional))
+    -- ✅Page title, slug, Description(text editor) (settings(additional))
 
 Total: 1 Day;
 Next meeting: 13/Fab/2023 at 11:00PM
 -----------------------------------------
 Meeting: 002;
+

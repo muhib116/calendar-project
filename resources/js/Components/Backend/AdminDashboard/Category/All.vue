@@ -83,7 +83,3 @@ const deleteCategory = (id) => {
     })
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

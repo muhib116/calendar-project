@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -33,6 +32,7 @@ class UserController extends Controller
         $user->delete();
         return redirect()->back()->with('message', 'User deleted successfully!');
     }
+    
     public function restore_user($user) {
         $user = User::onlyTrashed()->find($user);
         $user->update([

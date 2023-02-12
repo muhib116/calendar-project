@@ -7,7 +7,7 @@
             </div>
             <div class="flex gap-6 items-center w-full">
                 <CInput type="search" :placeholder="Helper.translate('Search')" class="mx-auto max-w-[400px] w-full" />
-                <TabChanger :activeItems="activeUsers.length" :deleteItems="data.length" />
+                <TabChanger :activeItems="activeUsers.length" :deleteItems="deletedUser.length" />
             </div>
         </div>
 
@@ -52,9 +52,6 @@
                                 </Link>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
-                                <Link :href="route('admin.user.detail', user.id)" class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
-                                    <EyeIcon class="w-4 h-4" />
-                                </Link>
                                 <button class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
                                     <RestoreIcon @click="handleRestoreUser(user.id)" class="w-4 h-4" />
                                 </button>
@@ -73,36 +70,28 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import CInput from '@/Components/Global/CInput.vue'
-import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
-import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import { Link, usePage } from '@inertiajs/inertia-vue3'
 import { get } from 'lodash'
 import Helper from '@/Helper'
-import EyeIcon from '@/Icons/EyeIcon.vue'
 import RestoreIcon from '@/Icons/RestoreIcon.vue'
 import { Inertia } from '@inertiajs/inertia'
 
-const users = computed(() => {
-    return usePage().props.value.deletedUsers
+const { components, data, resultPerPage } = useTable()
+const deletedUser = computed(() => {
+    data.value = usePage().props.value.deletedUsers
+    return data.value
 })
 
 const activeUsers = computed(() => {
-    return usePage().props.value.users;
-});
-
-const { components, data, resultPerPage } = useTable()
-data.value = users.value;
-
-onMounted(() => {
-    // console.log(usePage().props.value.deletedUsers);
+    return usePage().props.value.users
 })
 
 const handleRestoreUser = (id) => {
     Helper.confirm("Are you sure to restore?", ()=>{
         Inertia.delete(route('admin.restore_user', id))
-    });
+    })
 }
 
 </script>

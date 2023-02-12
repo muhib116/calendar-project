@@ -6,7 +6,7 @@
             </div>
             <div class="flex gap-6 items-center w-full">
                 <component :is="components['Search']" />
-                <TabChanger :activeItems="users.length" :deleteItems="deleteUsers.length" />
+                <TabChanger :activeItems="activeUsers.length" :deleteItems="deleteUsers.length" />
             </div>
         </div>
 
@@ -69,33 +69,23 @@ import CloseIcon from '@/Icons/CloseIcon.vue'
 import { Inertia } from '@inertiajs/inertia'
 import EyeIcon from '@/Icons/EyeIcon.vue'
 import { computed, onMounted, watch } from 'vue'
-import { cloneDeep } from 'lodash'
 import Helper from '@/Helper'
 
 const { components, data, resultPerPage, search } = useTable()
 
 const deleteUsers = computed(() => {
-    return usePage().props.value.deletedUsers;
-});
-
-const users = computed(() => {
-    data.value = usePage().props.value.users;
-    search();
-    return usePage().props.value.users;
-});
-
-watch(users.value, ()=> {
-    console.log(users.value);
-}, {
-    deep: true
+    return usePage().props.value.deletedUsers
 })
 
-data.value = usePage().props.value.users;
+const activeUsers = computed(() => {
+    data.value = usePage().props.value.users
+    return data.value
+})
 
 const handleDeleteUser = (id) => {
     Helper.confirm("Are you sure to delete?", ()=>{
         Inertia.delete(route('admin.delete_user', id))
-    });
+    })
 }
 
 </script>
