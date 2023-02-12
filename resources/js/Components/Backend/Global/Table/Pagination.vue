@@ -1,14 +1,14 @@
 <template>
     <div class="flex items-center justify-between mt-5 text-sm">
         <div class="">
-            Showing {{ from }} to {{ to }} 
+            Showing {{ from + 1 }} to {{ to }} 
             of {{ result.length }} entries
         </div>
         <div class="flex gap-2 items-center">
             <button>
                 <AngleLeftIcon @click="() => { handleResult(-1) }" class="w-4 h-4" />
             </button>
-            {{ pageNumber }} / {{ totalPage }}
+            {{ currentPageNumber }} / {{ totalPage }}
             <button>
                 <AngleRightIcon @click="() => { handleResult(+1) }" class="w-4 h-4" />
             </button>
@@ -17,34 +17,37 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 
-const { result, resultPerPage, pageSize, pageNumber, totalPage } = useTable()
+const { result, resultPerPage, pageSize, currentPageNumber, totalPage, hasPagination } = useTable()
+
 
 const from = computed(() => {
-    return (pageSize.value * (pageNumber.value - 1))
+    return ((Number(currentPageNumber.value) - 1)  * Number(pageSize.value))
 })
 
 const to = computed(() => {
-    let toResult = (Number(pageNumber.value)  * Number(pageSize.value)) - 1
-    // toResult = toResult > result.value.length ? result.value.length : toResult
+    let toResult = (Number(currentPageNumber.value)  * Number(pageSize.value))
+    toResult = (toResult > result.value.length) ? result.value.length : toResult
     return toResult
 })
 
 const handleResult = (direction) => {
-    if( pageNumber.value > 1 && direction < 0){
-        pageNumber.value--
-        resultPerPage.value = result.value.slice(from.value-1, to.value)
+    if( currentPageNumber.value > 1 && direction < 0){
+        currentPageNumber.value--
+    }else if(currentPageNumber.value < totalPage.value && direction > 0){
+        currentPageNumber.value++
+    }else{
+        return
     }
-
-    console.log(from.value, to.value);
     
-    if(pageNumber.value < totalPage.value && direction > 0){
-        pageNumber.value++
-        resultPerPage.value = result.value.slice(from.value-1, to.value)
-    }
+    resultPerPage.value = result.value.slice(from.value, to.value)
 }
+
+onMounted(() => {
+    hasPagination.value = true
+})
 </script>

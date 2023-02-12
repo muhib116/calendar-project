@@ -139,7 +139,7 @@ const submit = () => {
     form.post(route('register'), {
         onFinish: () => {
             form.reset('password', 'password_confirmation')
-            form.country = "-select country-"
+            form.country = ""
             form.category_id = 0
             if(isEmpty(form.errors)){
                 emit('close')
@@ -169,4 +169,19 @@ onMounted(async () => {
         })
     }
 })
+
+
+
+let person = {
+    teacher: {
+        name: 'niloy',
+        age: 26
+    },
+    student: {
+        name: 'niloy2',
+        age: 22
+    }
+}
+
+
 </script>
