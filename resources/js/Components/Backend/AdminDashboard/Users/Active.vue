@@ -46,8 +46,8 @@
                                 <Link :href="route('admin.user.detail', user.id)" class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
                                     <EyeIcon class="w-4 h-4" />
                                 </Link>
-                                <button class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
-                                    <CloseIcon @click="handleDeleteUser(user.id)" class="w-4 h-4" />
+                                <button @click="handleDeleteUser(user.id)" class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
+                                    <CloseIcon class="w-4 h-4" />
                                 </button>
                             </td>
                         </tr>

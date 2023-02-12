@@ -51,12 +51,12 @@
                                 Verification
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Approved/Decline
+                                Decline
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 10" :index="index" class="border-b">
+                        <tr v-for="index in 10" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ index }}
                             </td>
@@ -85,12 +85,12 @@
                                 <button @click="showModal = true" class="mx-auto block btn_ripple" title="See Talent Video.">
                                     <PlayIcon class="" />
                                 </button>
-                                <!-- <button class="font-bold text-green-600 px-3 text-sm">Verified</button> -->
+                                <!-- <span class="font-bold text-green-600 px-3 text-sm">Verified</span> -->
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-0">
-                                <button class="bg-green-500 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
+                                <!-- <button class="bg-green-500 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
                                     <CheckIcon class="w-4 h-4" />
-                                </button>
+                                </button> -->
                                 <button class="bg-red-400 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
                                     <CloseIcon class="w-4 h-4" />
                                 </button>

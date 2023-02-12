@@ -66,8 +66,7 @@ import Create from '@/Components/Backend/AdminDashboard/Settings/Pages/Create.vu
 
 const form = useForm({
     title: null,
-    slug: null,
-    email: null,
+    slug: null, 
     settings: null,
     description: null,
 });

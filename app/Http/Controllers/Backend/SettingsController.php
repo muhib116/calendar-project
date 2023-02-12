@@ -82,7 +82,6 @@ class SettingsController extends Controller
         Page::create([
             'title' => $request->title,
             'slug' => str()->slug($request->title),
-            'email' => $request->email,
             'settings' => $request->settings,
             'description' => $request->description,
         ]);
