@@ -32,7 +32,7 @@
                     <tbody>
                         <tr v-for="(user, index) in resultPerPage" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index + 1 }}
+                                {{ Helper.translate(index + 1, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 <Link :href="route('admin.user.detail', user.id)" class="text-sky-500 font-medium">
@@ -64,11 +64,11 @@
 import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import { usePage } from '@inertiajs/inertia-vue3'
-import { Link, Route } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/inertia-vue3'
 import CloseIcon from '@/Icons/CloseIcon.vue'
 import { Inertia } from '@inertiajs/inertia'
 import EyeIcon from '@/Icons/EyeIcon.vue'
-import { computed, onMounted, watch } from 'vue'
+import { computed } from 'vue'
 import Helper from '@/Helper'
 
 const { components, data, resultPerPage, search } = useTable()
@@ -87,5 +87,4 @@ const handleDeleteUser = (id) => {
         Inertia.delete(route('admin.delete_user', id))
     })
 }
-
 </script>
