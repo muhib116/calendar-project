@@ -6,7 +6,7 @@
             </div>
             <div class="flex gap-6 items-center w-full">
                 <component :is="components['Search']" />
-                <TabChanger :activeItems="users.length" :deleteItems="deleteUsers.length" />
+                <TabChanger :activeItems="activeUsers.length" :deleteItems="deleteUsers.length" />
             </div>
         </div>
 
@@ -77,11 +77,11 @@ const deleteUsers = computed(() => {
     return usePage().props.value.deletedUsers;
 });
 
-const users = computed(() => {
+const activeUsers = computed(() => {
     return usePage().props.value.users;
 });
 
-data.value = users.value;
+data.value = activeUsers.value;
 
 const handleDeleteUser = (id) => {
     Helper.confirm("Are you sure to delete?", ()=>{

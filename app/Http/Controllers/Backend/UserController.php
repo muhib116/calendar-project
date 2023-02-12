@@ -33,6 +33,7 @@ class UserController extends Controller
         $user->delete();
         return back();
     }
+    
     public function restore_user($user) {
         $user = User::onlyTrashed()->find($user);
         $user->update([
