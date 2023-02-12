@@ -11,15 +11,14 @@ const pageSize = ref(defaultPageSize.value)
 const result = ref([])
 const resultPerPage = ref([])
 const searchString = ref('')
-const currentPageNumber   = ref(1)
+const pageNumber   = ref(1)
 const totalPage   = ref(0)
-const hasPagination = ref(false)
 
 export default function tableHelper()
 {
     const search = () => 
     {
-        currentPageNumber.value = 1
+        pageNumber.value = 1
         if(isEmpty(searchString.value)){
             result.value = cloneDeep(data.value)
             resultPerPage.value = cloneDeep(data.value)
@@ -27,7 +26,7 @@ export default function tableHelper()
             totalPage.value = Math.ceil(result.value.length / pageSize.value)
             return
         }
-        
+
         let response = data.value.filter(item => {
             if(
                 item.name.toLowerCase().search(searchString.value.toLowerCase()) >= 0 
@@ -62,9 +61,8 @@ export default function tableHelper()
         pageSizeArray,
         result,
         search,
-        currentPageNumber,
+        pageNumber,
         resultPerPage,
-        totalPage,
-        hasPagination
+        totalPage
     }
 }

@@ -79,6 +79,8 @@ const deleteUsers = computed(() => {
 });
 
 const users = computed(() => {
+    data.value = usePage().props.value.users;
+    // search();
     return usePage().props.value.users;
 });
 
