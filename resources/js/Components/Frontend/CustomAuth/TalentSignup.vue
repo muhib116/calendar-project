@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submit" class="py-6 block">
+    <form @submit.prevent="submit" class="py-6 block" enctype="multipart/form-data">
         <div class="flex gap-5 justify-between mb-6">
             <div class="relative w-full">
                 <CInput type="text" placeholder="First name" v-model="form.first_name" class="w-full" />
