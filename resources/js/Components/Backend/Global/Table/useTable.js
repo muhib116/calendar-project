@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import Pagination from '@/Components/Backend/Global/Table/Pagination.vue'
 import PageSize from '@/Components/Backend/Global/Table/PageSize.vue'
 import Search from '@/Components/Backend/Global/Table/Search.vue'
@@ -50,8 +50,18 @@ export default function tableHelper()
     }
 
     onMounted(() => {
+        console.log('mounted');
         search()
     })
+
+    const initPagination = (dataList) => {
+        data.value = dataList
+        search()
+    }
+
+    watch(data, () => {
+        search()
+    }, {deep: true})
 
     return {
         components,
@@ -65,6 +75,7 @@ export default function tableHelper()
         currentPageNumber,
         resultPerPage,
         totalPage,
-        hasPagination
+        hasPagination,
+        initPagination
     }
 }

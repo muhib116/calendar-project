@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -31,7 +30,7 @@ class UserController extends Controller
             'deleted_by' => auth()->id()
         ]);
         $user->delete();
-        return back();
+        return redirect()->back()->with('message', 'User deleted successfully!');
     }
     
     public function restore_user($user) {
@@ -40,6 +39,6 @@ class UserController extends Controller
             'deleted_by' => null,
         ]);
         $user->restore();
-        return back();
+        return redirect()->back()->with('message', 'User restored successfully!');
     }
 }

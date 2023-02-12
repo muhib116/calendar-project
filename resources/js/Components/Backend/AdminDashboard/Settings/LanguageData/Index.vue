@@ -53,27 +53,41 @@
             <h3 class="mb-4 font-bold">Add/Edit Text</h3>
             <div class="flex items-center gap-6 justify-center">
                 <label class="flex items-center gap-4">
-                    <input type="radio">
+                    <input type="radio" v-model="selectedLanguage" name="language" value="english">
                     English
                 </label>
                 <label class="flex items-center gap-4">
-                    <input type="radio">
+                    <input type="radio" v-model="selectedLanguage" name="language" value="french">
                     English
                 </label>
                 <label class="flex items-center gap-4">
-                    <input type="radio">
+                    <input type="radio" v-model="selectedLanguage" name="language" value="spanish">
                     English
                 </label>
             </div>
             <div class="mt-5 text-center">
                 <CInput 
                     type="text" 
-                    placeholder="Enter your text" 
+                    placeholder="Enter English text"
+                    v-if="selectedLanguage == 'english'"
+                    v-model="form.english"
+                />
+                <CInput
+                    type="text" 
+                    placeholder="Enter Franch text" 
+                    v-if="selectedLanguage == 'french'"
+                    v-model="form.french"
+                />
+                <CInput 
+                    type="text" 
+                    placeholder="Enter Spanish text" 
+                    v-if="selectedLanguage == 'spanish'"
+                    v-model="form.spanish"
                 />
             </div>
             <div class="mt-5 flex gap-5 justify-center">
                 <button @click="showModal=false" class="px-3 py-1 rounded bg-red-500 font-semibold text-white shadow-lg">Cancel</button>
-                <button class="px-3 py-1 rounded bg-green-500 font-semibold text-white shadow-lg">Save/Update</button>
+                <button @click="handleSave" class="px-3 py-1 rounded bg-green-500 font-semibold text-white shadow-lg">Save/Update</button>
             </div>
         </div>
     </Modal>
@@ -84,8 +98,30 @@ import { ref } from 'vue'
 import CInput from '@/Components/Global/CInput.vue'
 import Modal from '@/Components/Library/Modal.vue'
 import EditIcon from '@/Icons/EditIcon.vue'
+import { useForm } from '@inertiajs/inertia-vue3'
 
 const showModal = ref(false)
+const selectedLanguage = ref('english')
+
+const form = useForm({
+    english: null,
+    french: null,
+    spanish: null,
+    settings: null,
+});
+
+const handleSave = () => {
+    form.post(route('admin.saveLanguage'), {
+        onFinish() {
+            showModal.value = false;
+            form.english = null;
+            form.french = null;
+            form.spanish = null;
+            form.settings = null;
+        }
+    });
+}
+
 </script>
 
 <style lang="scss" scoped>

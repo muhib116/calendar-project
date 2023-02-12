@@ -20,7 +20,7 @@
                         class="w-[300px]"
                         type="text" 
                         placeholder="Enter company name" 
-                        v-model="form.commission"
+                        v-model="form.companyName"
                     />
                 </td>
             </tr>
@@ -62,7 +62,7 @@
                         class="w-[300px]"
                         type="text" 
                         placeholder="Enter public key" 
-                        v-model="form.commission"
+                        v-model="form.stripePublicKey"
                     />
                 </td>
             </tr>
@@ -73,8 +73,16 @@
                         class="w-[300px]"
                         type="text" 
                         placeholder="Enter private key" 
-                        v-model="form.commission"
+                        v-model="form.stripePrivatKey"
                     />
+                </td>
+            </tr>
+            <tr>
+                <th class="font-medium text-sm text-right px-2"></th>
+                <td class="flex items-center gap-4 px-4">
+                    <button @click="handleSubmit" class="border px-4 mt-3 mx-auto py-2 rounded bg-gray-800 text-white font-medium">
+                        Save
+                    </button>
                 </td>
             </tr>
         </table>
@@ -84,7 +92,9 @@
 <script setup>
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
-import { useForm } from '@inertiajs/inertia-vue3'
+import { Inertia } from '@inertiajs/inertia'
+import { useForm, usePage } from '@inertiajs/inertia-vue3'
+import { computed, onMounted, ref } from 'vue'
 
 const dateFormats = [
     {
@@ -128,12 +138,38 @@ const currencyPosition = [
     },
 ]
 
+const page = usePage();
+
 const form = useForm({
-    login: '',
+    logo: '',
+    companyName: '',
     commission: '',
     dateFormate: '',
     currencyPosition: '',
+    stripePublicKey: '',
+    stripePrivatKey: '',
 })
+
+
+const settings = computed(() => {
+    return usePage().props.value.settings;
+});
+onMounted(()=> {
+    let settings = page.props.value.settings;
+    if (settings) {
+        form.logo = settings.logo;
+        form.companyName = settings.companyName;
+        form.commission = settings.commission;
+        form.dateFormate = settings.dateFormate;
+        form.currencyPosition = settings.currencyPosition;
+        form.stripePublicKey = settings.stripePublicKey;
+        form.stripePrivatKey = settings.stripePrivatKey;
+    }
+});
+
+const handleSubmit = () => {
+    form.post(route('admin.saveSettings'))
+}
 
 </script>
 

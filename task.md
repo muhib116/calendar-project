@@ -15,9 +15,9 @@ Meeting: 001;
 ✅::On Talent > Login > Video upload issue. (1H)
     ✅-- Upload 5s-10s video.
 
-4::Settings module (1D)
-    -- English, Français, Español column (settings(additional))
-    -- Basic configuration (settings(additional))
+✅4::Settings module (1D)
+    -- ✅English, Français, Español column (settings(additional))
+    -- ✅Basic configuration (settings(additional))
     -- Page title, slug, email(opt), Description(text editor) (settings(additional))
 
 Total: 1 Day;

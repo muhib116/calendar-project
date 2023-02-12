@@ -78,21 +78,20 @@ import Helper from '@/Helper'
 import RestoreIcon from '@/Icons/RestoreIcon.vue'
 import { Inertia } from '@inertiajs/inertia'
 
+const { components, data, resultPerPage } = useTable()
 const deletedUser = computed(() => {
-    return usePage().props.value.deletedUsers
+    data.value = usePage().props.value.deletedUsers
+    return data.value
 })
 
 const activeUsers = computed(() => {
-    return usePage().props.value.users;
-});
-
-const { components, data, resultPerPage } = useTable()
-data.value = deletedUser.value;
+    return usePage().props.value.users
+})
 
 const handleRestoreUser = (id) => {
     Helper.confirm("Are you sure to restore?", ()=>{
         Inertia.delete(route('admin.restore_user', id))
-    });
+    })
 }
 
 </script>

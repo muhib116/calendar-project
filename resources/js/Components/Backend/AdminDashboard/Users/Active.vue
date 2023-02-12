@@ -64,29 +64,28 @@
 import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import { usePage } from '@inertiajs/inertia-vue3'
-import { Link } from '@inertiajs/inertia-vue3'
+import { Link, Route } from '@inertiajs/inertia-vue3'
 import CloseIcon from '@/Icons/CloseIcon.vue'
 import { Inertia } from '@inertiajs/inertia'
 import EyeIcon from '@/Icons/EyeIcon.vue'
-import { computed } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import Helper from '@/Helper'
 
-const { components, data, resultPerPage } = useTable()
+const { components, data, resultPerPage, search } = useTable()
 
 const deleteUsers = computed(() => {
-    return usePage().props.value.deletedUsers;
-});
+    return usePage().props.value.deletedUsers
+})
 
 const activeUsers = computed(() => {
-    return usePage().props.value.users;
-});
-
-data.value = activeUsers.value;
+    data.value = usePage().props.value.users
+    return data.value
+})
 
 const handleDeleteUser = (id) => {
     Helper.confirm("Are you sure to delete?", ()=>{
         Inertia.delete(route('admin.delete_user', id))
-    });
+    })
 }
 
 </script>
