@@ -1,6 +1,5 @@
 <template>
     <div>
-        
         <div class="flex gap-4 justify-between">
             <div class="flex gap-2 items-center">
                 <component :is="components['PageSize']" />
@@ -15,7 +14,7 @@
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead class="border-b whitespace-nowrap">
-                        <tr>
+                        <tr v-if="!isEmpty(resultPerPage)">
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 #
                             </th>
@@ -31,12 +30,18 @@
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
                                 {{ Helper.translate('Date') }}
                             </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
+                                {{ Helper.translate('Action') }}
+                            </th>
+                        </tr>
+                        <tr v-else>
+                            <Alert title="No result found!" />
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(user, index) in resultPerPage" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index + 1 }}
+                                {{ Helper.translate(index + 1, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 <Link :href="route('admin.user.detail', user.id)" class="text-sky-500 font-medium">
@@ -51,6 +56,9 @@
                                     {{ Helper.translate(get(user, 'deleted_by.name'), true) }} 
                                 </Link>
                             </td>
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                {{ Helper.dateFormate(get(user, 'deleted_at')) }} 
+                            </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
                                 <button class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
                                     <RestoreIcon @click="handleRestoreUser(user.id)" class="w-4 h-4" />
@@ -61,14 +69,13 @@
                 </table>
             </div>
         </div>
-
         <component :is="components['Pagination']" />
-        
     </div>
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
+import { isEmpty } from 'lodash'
 import CInput from '@/Components/Global/CInput.vue'
 import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
@@ -77,6 +84,7 @@ import { get } from 'lodash'
 import Helper from '@/Helper'
 import RestoreIcon from '@/Icons/RestoreIcon.vue'
 import { Inertia } from '@inertiajs/inertia'
+import Alert from '@/Components/Global/Alert.vue'
 
 const { components, data, resultPerPage } = useTable()
 const deletedUser = computed(() => {
@@ -93,9 +101,4 @@ const handleRestoreUser = (id) => {
         Inertia.delete(route('admin.restore_user', id))
     })
 }
-
 </script>
-
-<style scoped>
-
-</style>
