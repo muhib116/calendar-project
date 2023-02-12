@@ -3,28 +3,28 @@
         <div>
             <button @click="activeComponent='All'" class="p-1 px-2 pr-4 rounded bg-gray-500 text-white inline-flex items-center w-fit gap-2 mb-4">
                 <AngleLeftIcon class="w-5 h-5" />
-                Back
+                {{ Helper.translate('Back') }}
             </button>
         </div>
         <div class="max-w-[500px]">
-            <h1 class="text-lg font-semibold mb-4">Edit Country</h1>
+            <h1 class="text-lg font-semibold mb-4">{{ Helper.translate('Edit Country') }}</h1>
             <div class="relative mb-6">
-                <CInput type="text" v-model="form.country_code" placeholder="Country Code" />
-                <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.country_code }}</span>
+                <CInput type="text" v-model="form.country_code" :placeholder="Helper.translate('Country Code')" />
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.country_code, true) }}</span>
             </div>
             <div class="relative mb-6">
-                <CInput type="text" v-model="form.phone_code" placeholder="Phone Code" />
-                <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.phone_code }}</span>
+                <CInput type="text" v-model="form.phone_code" :placeholder="Helper.translate('Phone Code')" />
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.phone_code, true) }}</span>
             </div>
             <div class="relative mb-6">
-                <CInput type="text" v-model="form.name" placeholder="Country Name" />
-                <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.name }}</span>
+                <CInput type="text" v-model="form.name" :placeholder="Helper.translate('Country Name')" />
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.name, true) }}</span>
             </div>
             <div class="relative">
                 <CSelect :options="countryStatus" v-model="form.status"/>
-                <span class="absolute top-full left-0 text-xs text-red-500">{{ form.errors.status }}</span>
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.status, true) }}</span>
             </div>
-            <button class="bg-green-500 text-white ml-auto block font-semibold px-4 py-2 rounded mt-2">Update</button>
+            <button class="bg-green-500 text-white ml-auto block font-semibold px-4 py-2 rounded mt-2">{{ Helper.translate('Update') }}</button>
         </div>
     </form>
 </template>
@@ -36,6 +36,7 @@ import useCountry from '@/Pages/Backend/AdminDashboard/useCountry.js'
 import { useForm } from '@inertiajs/inertia-vue3'
 import { isEmpty } from 'lodash'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
+import Helper from '@/Helper'
 
 const { activeComponent, countryStatus, selectedCountry } = useCountry()
 const form = useForm({

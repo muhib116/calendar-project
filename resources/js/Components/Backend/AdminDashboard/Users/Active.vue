@@ -6,7 +6,7 @@
             </div>
             <div class="flex gap-6 items-center w-full">
                 <component :is="components['Search']" />
-                <TabChanger :activeItems="data.length" :deleteItems="4" />
+                <TabChanger :activeItems="users.length" :deleteItems="deleteUsers.length" />
             </div>
         </div>
 
@@ -47,7 +47,7 @@
                                     <EyeIcon class="w-4 h-4" />
                                 </Link>
                                 <button class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
-                                    <CloseIcon class="w-4 h-4" />
+                                    <CloseIcon @click="handleDeleteUser(user.id)" class="w-4 h-4" />
                                 </button>
                             </td>
                         </tr>
@@ -61,14 +61,32 @@
 </template>
 
 <script setup>
+import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
+import useTable from '@/Components/Backend/Global/Table/useTable.js'
+import { usePage } from '@inertiajs/inertia-vue3'
 import { Link } from '@inertiajs/inertia-vue3'
 import CloseIcon from '@/Icons/CloseIcon.vue'
+import { Inertia } from '@inertiajs/inertia'
 import EyeIcon from '@/Icons/EyeIcon.vue'
-import TabChanger from '@/Components/Backend/AdminDashboard/Users/TabChanger.vue'
-import { usePage } from '@inertiajs/inertia-vue3'
-import useTable from '@/Components/Backend/Global/Table/useTable.js'
+import { computed } from 'vue'
 import Helper from '@/Helper'
 
 const { components, data, resultPerPage } = useTable()
-data.value = usePage().props.value.users
+
+const deleteUsers = computed(() => {
+    return usePage().props.value.deletedUsers;
+});
+
+const users = computed(() => {
+    return usePage().props.value.users;
+});
+
+data.value = users.value;
+
+const handleDeleteUser = (id) => {
+    Helper.confirm("Are you sure to delete?", ()=>{
+        Inertia.delete(route('admin.delete_user', id))
+    });
+}
+
 </script>
