@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Language;
+use App\Models\Page;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -42,7 +43,7 @@ class SettingsController extends Controller
                 'settings' => $request->settings,
             ]);
         }
-        return back();
+        return redirect()->back()->with('success', 'Settings updated successfully');;
     }
 
     public function saveLanguage(Request $request) {
@@ -52,6 +53,20 @@ class SettingsController extends Controller
             'spanish' => $request->spanish,
             'settings' => $request->settings,
         ]);
-        return back();
+        return redirect()->back()->with('success', 'Language created successfully');
+    }
+
+    public function savepage(Request $request) {
+        $request->validate([
+            'title' => 'required|unique:pages,title',
+        ]);
+        Page::create([
+            'title' => $request->title,
+            'slug' => str()->slug($request->title),
+            'email' => $request->email,
+            'settings' => $request->settings,
+            'description' => $request->description,
+        ]);
+        return redirect()->back()->with('success', 'Page created successfully');
     }
 }

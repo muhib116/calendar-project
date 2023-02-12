@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('slug');
             $table->string('email')->nullable();
             $table->json('settings')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

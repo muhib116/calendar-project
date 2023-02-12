@@ -6,6 +6,7 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
+import CKEditor from '@ckeditor/ckeditor5-vue';
 import axios from 'axios'
 import 'vue3-toastify/dist/index.css'
 
@@ -21,6 +22,7 @@ createInertiaApp({
         return createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
+            .use(CKEditor)
             .mount(el);
     },
 })

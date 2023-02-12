@@ -65,6 +65,7 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         Route::get('/settings', [SettingsController::class, 'index'])->name('admin.settings');
         Route::post('/save-settings', [SettingsController::class, 'saveSettings'])->name('admin.saveSettings');
         Route::post('/save-language', [SettingsController::class, 'saveLanguage'])->name('admin.saveLanguage');
+        Route::post('/save-page', [SettingsController::class, 'savepage'])->name('admin.savePage');
         // settings end
     });
 });
