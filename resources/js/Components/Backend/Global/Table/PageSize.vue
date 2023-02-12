@@ -9,14 +9,15 @@
 </template>
 
 <script setup>
+    import { onMounted } from 'vue'
     import useTable from '@/Components/Backend/Global/Table/useTable.js'
     
-    const { pageSize, pageSizeArray, search } = useTable()
+    const { pageSize, pageSizeArray, search, hasPagination } = useTable()
     defineProps({
         defaultPageSize: [Number, String],
     })
+
+    onMounted(() => {
+        hasPagination.value = true
+    })
 </script>
-
-<style lang="scss" scoped>
-
-</style>

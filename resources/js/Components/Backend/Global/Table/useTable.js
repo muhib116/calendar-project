@@ -13,6 +13,7 @@ const resultPerPage = ref([])
 const searchString = ref('')
 const currentPageNumber   = ref(1)
 const totalPage   = ref(0)
+const hasPagination = ref(false)
 
 export default function tableHelper()
 {
@@ -26,7 +27,7 @@ export default function tableHelper()
             totalPage.value = Math.ceil(result.value.length / pageSize.value)
             return
         }
-
+        
         let response = data.value.filter(item => {
             if(
                 item.name.toLowerCase().search(searchString.value.toLowerCase()) >= 0 
@@ -63,6 +64,7 @@ export default function tableHelper()
         search,
         currentPageNumber,
         resultPerPage,
-        totalPage
+        totalPage,
+        hasPagination
     }
 }

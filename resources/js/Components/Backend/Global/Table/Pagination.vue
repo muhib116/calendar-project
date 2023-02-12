@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center justify-between mt-5 text-sm">
         <div class="">
-            Showing {{ from }} to {{ to }} 
+            Showing {{ from + 1 }} to {{ to }} 
             of {{ result.length }} entries
         </div>
         <div class="flex gap-2 items-center">
@@ -17,34 +17,37 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 
-const { result, resultPerPage, pageSize, currentPageNumber, totalPage } = useTable()
+const { result, resultPerPage, pageSize, currentPageNumber, totalPage, hasPagination } = useTable()
+
 
 const from = computed(() => {
-    return (pageSize.value * (currentPageNumber.value - 1))
+    return ((Number(currentPageNumber.value) - 1)  * Number(pageSize.value))
 })
 
 const to = computed(() => {
-    let toResult = (Number(currentPageNumber.value)  * Number(pageSize.value)) - 1
-    // toResult = toResult > result.value.length ? result.value.length : toResult
+    let toResult = (Number(currentPageNumber.value)  * Number(pageSize.value))
+    toResult = (toResult > result.value.length) ? result.value.length : toResult
     return toResult
 })
 
 const handleResult = (direction) => {
     if( currentPageNumber.value > 1 && direction < 0){
         currentPageNumber.value--
-        resultPerPage.value = result.value.slice(from.value-1, to.value)
-    }
-
-    console.log(from.value, to.value);
-    
-    if(currentPageNumber.value < totalPage.value && direction > 0){
+    }else if(currentPageNumber.value < totalPage.value && direction > 0){
         currentPageNumber.value++
-        resultPerPage.value = result.value.slice(from.value-1, to.value)
+    }else{
+        return
     }
+    
+    resultPerPage.value = result.value.slice(from.value, to.value)
 }
+
+onMounted(() => {
+    hasPagination.value = true
+})
 </script>
