@@ -9,7 +9,6 @@
                 <TabChanger :activeItems="activeUsers.length" :deleteItems="deleteUsers.length" />
             </div>
         </div>
-
         <div class="flex flex-col mt-4">
             <div class="overflow-x-auto">
                 <table class="w-full">

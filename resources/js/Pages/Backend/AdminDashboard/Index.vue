@@ -1,4 +1,5 @@
 <template>
+    <Head title="Dashboard" />
     <DashboardLayout :header="false" :footer="false" title="Dashboard">
         <template v-slot:leftSidebar>
             <LeftSide />
@@ -40,8 +41,9 @@ import DashboardLayout from './DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
 import Header from '@/Components/Backend/AdminDashboard/Dashboard/Header.vue'
 import Widget from '@/Components/Backend/AdminDashboard/Dashboard/Widget.vue'
-import Big from '@/Components/Backend/AdminDashboard/Dashboard/Chart/Big.vue';
-import Small from '@/Components/Backend/AdminDashboard/Dashboard/Chart/Small.vue';
+import Big from '@/Components/Backend/AdminDashboard/Dashboard/Chart/Big.vue'
+import Small from '@/Components/Backend/AdminDashboard/Dashboard/Chart/Small.vue'
+import { Head } from '@inertiajs/inertia-vue3'
 </script>
 
 

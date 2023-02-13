@@ -1,4 +1,5 @@
 <template>
+    <Head title="User's details" />
     <DashboardLayout :header="false" :footer="false" title="User Detail">
         <template v-slot:leftSidebar>
             <LeftSide />
@@ -50,7 +51,7 @@ import DashboardLayout from './DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
 import useUser from '@/Pages/Backend/AdminDashboard/useUser.js'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link, Head } from '@inertiajs/inertia-vue3';
 
 const { detailsComponents, detailsActiveComponent } = useUser()
 </script>

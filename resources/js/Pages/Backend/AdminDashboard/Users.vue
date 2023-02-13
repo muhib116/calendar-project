@@ -1,4 +1,5 @@
 <template>
+    <Head title="Users" />
     <DashboardLayout :header="false" :footer="false" title="Users">
         <template v-slot:leftSidebar>
             <LeftSide />
@@ -13,6 +14,7 @@
 import DashboardLayout from './DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
 import useUser from '@/Pages/Backend/AdminDashboard/useUser.js'
+import { Head } from '@inertiajs/inertia-vue3'
 
 const { components, activeComponent } = useUser()
 </script>

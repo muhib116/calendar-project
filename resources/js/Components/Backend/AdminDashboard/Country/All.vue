@@ -9,7 +9,7 @@
             </button>
         </div>
 
-        <div class="flex flex-col mt-4">
+        <div v-if="countries.length" class="flex flex-col mt-4">
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead class="border-b whitespace-nowrap">
@@ -67,6 +67,7 @@
             </div>
             <component :is="components['Pagination']" />
         </div>
+        <Alert v-else title="No result found !" />
     </div>
 </template>
 
@@ -79,6 +80,7 @@ import CloseIcon from '@/Icons/CloseIcon.vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 import Helper from '@/Helper.js'
 import { Inertia } from '@inertiajs/inertia'
+import Alert from '@/Components/Global/Alert.vue'
 
 const { components, data, resultPerPage } = useTable()
 const { activeComponent, selectedCountry } = useCountry()

@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Models\Category;
 use \App\Models\Country;
+use App\Models\Language;
+use App\Models\Settings;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +31,14 @@ Route::get('/categories', function(){
 Route::get('/countries', function(){
     $countries = Country::where(['status' => 1])->get();
     return response()->json($countries);
+});
+
+Route::get('/languages', function(){
+    $languages = Language::get();
+    return response()->json($languages);
+});
+
+Route::get('/settings', function(){
+    $settings = Settings::first();
+    return response()->json($settings);
 });
