@@ -11,21 +11,21 @@
                     class="border px-4 py-2 rounded"
                     :class="activeComponent == 'BasicConfig' && 'bg-gray-800 text-white font-medium'"
                 >
-                    Basic Config
+                {{ Helper.translate('Basic Config') }}
                 </button>
                 <button 
                     @click="activeComponent = 'LanguageData'"
                     class="border px-4 py-2 rounded"
                     :class="activeComponent == 'LanguageData' && 'bg-gray-800 text-white font-medium'"
                 >
-                    Language Data
+                    {{ Helper.translate('Language Data') }}
                 </button>
                 <button 
                     @click="activeComponent = 'Pages'"
                     class="border px-4 py-2 rounded"
                     :class="activeComponent == 'Pages' && 'bg-gray-800 text-white font-medium'"
                 >
-                    Pages
+                    {{ Helper.translate('Pages') }}
                 </button>
             </div>
             <div class="">
@@ -40,6 +40,7 @@ import DashboardLayout from '../DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
 import useSettings from '@/Pages/Backend/AdminDashboard/Settings/useSettings.js'
 import { Head } from '@inertiajs/inertia-vue3'
+import Helper from '@/Helper';
 
 const { components, activeComponent } = useSettings()
 </script>

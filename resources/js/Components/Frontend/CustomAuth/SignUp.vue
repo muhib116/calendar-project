@@ -20,7 +20,7 @@
         <label class="flex items-center gap-2 select-none text-sm">
             <input type="checkbox" v-model="form.is_agree" />
             <div>
-                By signup, you agree to our 
+                By signup, you agree to our
                 <a href="#" class="text-[var(--link-color)]">Terms of service</a> 
                 and <a href="#" class="text-[var(--link-color)]">Privacy policy</a>.
             </div>

@@ -59,14 +59,14 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useForm } from '@inertiajs/inertia-vue3';
-import Helper from '@/Helper';
-import EditIcon from '@/Icons/EditIcon.vue';
-import CloseIcon from '@/Icons/CloseIcon.vue';
+import { useForm } from '@inertiajs/inertia-vue3'
+import Helper from '@/Helper'
+import EditIcon from '@/Icons/EditIcon.vue'
+import CloseIcon from '@/Icons/CloseIcon.vue'
 import Create from '@/Components/Backend/AdminDashboard/Settings/Pages/Create.vue'
 import Edit from '@/Components/Backend/AdminDashboard/Settings/Pages/Edit.vue'
 import { isEmpty, size } from 'lodash'
-import { Inertia } from '@inertiajs/inertia';
+import { Inertia } from '@inertiajs/inertia'
 
 const form = useForm({
     title: null,

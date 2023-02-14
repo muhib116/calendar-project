@@ -31,17 +31,21 @@
                 </label>
             </div>
             <div class="mt-5 flex gap-5 justify-center">
-                <button @click="$emit('close')" class="px-3 py-1 rounded bg-red-500 font-semibold text-white shadow-lg">Cancel</button>
-                <button @click="handleSave" class="px-3 py-1 rounded bg-green-500 font-semibold text-white shadow-lg">Save</button>
+                <button @click="$emit('close')" class="px-3 py-1 rounded bg-red-500 font-semibold text-white shadow-lg">
+                    {{ Helper.translate('Cancel') }}
+                </button>
+                <button @click="handleSave" class="px-3 py-1 rounded bg-green-500 font-semibold text-white shadow-lg">
+                    {{ Helper.translate('Save') }}
+                </button>
             </div>
         </div>
 </template>
 
 <script setup>
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/inertia-vue3"
 import { isEmpty } from 'lodash'
 import CInput from '@/Components/Global/CInput.vue'
-import Helper from "@/Helper";
+import Helper from "@/Helper"
 
 const form = useForm({
     english: null,

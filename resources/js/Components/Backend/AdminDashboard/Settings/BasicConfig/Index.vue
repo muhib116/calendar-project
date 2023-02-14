@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-lg my-2 text-center mb-4">Basic Configuration</h1>
+    <h1 class="text-lg my-2 text-center mb-4">{{ Helper.translate('Basic Configuration') }}</h1>
     <div class="border border-sky-400 border-opacity-40 rounded shadow p-10 w-fit mx-auto">
         <table>
             <!-- <tr>
@@ -14,7 +14,7 @@
                 </td>
             </tr> -->
             <tr>
-                <th class="font-medium text-sm text-right px-2">Company name : </th>
+                <th class="font-medium text-sm text-right px-2">{{ Helper.translate('Company name') }} :</th>
                 <td class="flex items-center gap-4 px-4">
                     <CInput 
                         class="w-[300px]"
@@ -25,7 +25,7 @@
                 </td>
             </tr>
             <tr>
-                <th class="font-medium text-sm text-right px-2">Commission in percentage : </th>
+                <th class="font-medium text-sm text-right px-2">{{ Helper.translate('Commission in percentage') }} :</th>
                 <td class="flex items-center gap-4 px-4">
                     <CInput 
                         class="w-[300px]"
@@ -36,7 +36,7 @@
                 </td>
             </tr>
             <tr>
-                <th class="font-medium text-sm text-right px-2">Date Formate : </th>
+                <th class="font-medium text-sm text-right px-2">{{ Helper.translate('Date Formate') }} :</th>
                 <td class="flex items-center gap-4 px-4">
                     <CSelect
                         class="w-[300px]"
@@ -46,7 +46,7 @@
                 </td>
             </tr>
             <tr>
-                <th class="font-medium text-sm text-right px-2">Currency Position : </th>
+                <th class="font-medium text-sm text-right px-2">{{ Helper.translate('Currency Position') }} :</th>
                 <td class="flex items-center gap-4 px-4">
                     <CSelect
                         class="w-[300px]"
@@ -56,7 +56,7 @@
                 </td>
             </tr>
             <tr>
-                <th class="font-medium text-sm text-right px-2">Stripe Public Key : </th>
+                <th class="font-medium text-sm text-right px-2">{{ Helper.translate('Stripe Public Key') }} :</th>
                 <td class="flex items-center gap-4 px-4">
                     <CInput 
                         class="w-[300px]"
@@ -67,7 +67,7 @@
                 </td>
             </tr>
             <tr>
-                <th class="font-medium text-sm text-right px-2">Stripe Privet Key : </th>
+                <th class="font-medium text-sm text-right px-2">{{ Helper.translate('Stripe Privet Key') }} :</th>
                 <td class="flex items-center gap-4 px-4">
                     <CInput 
                         class="w-[300px]"
@@ -81,7 +81,7 @@
                 <th class="font-medium text-sm text-right px-2"></th>
                 <td class="flex items-center gap-4 px-4">
                     <button @click="handleSubmit" class="border px-4 mt-3 ml-auto mr-7 py-2 rounded bg-green-500 text-white font-medium">
-                        Save
+                        {{ Helper.translate('Save') }}
                     </button>
                 </td>
             </tr>
@@ -92,9 +92,9 @@
 <script setup>
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
-import { Inertia } from '@inertiajs/inertia'
 import { useForm, usePage } from '@inertiajs/inertia-vue3'
 import { computed, onMounted, ref } from 'vue'
+import Helper from '@/Helper'
 
 const dateFormats = [
     {

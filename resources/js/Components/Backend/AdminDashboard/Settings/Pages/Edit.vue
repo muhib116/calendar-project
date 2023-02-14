@@ -17,7 +17,7 @@
 
 <script setup>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/inertia-vue3'
 import CInput from '@/Components/Global/CInput.vue'
 import { onMounted, ref } from 'vue'
 import Helper from '@/Helper'

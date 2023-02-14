@@ -1,7 +1,7 @@
 <template>
     <div class="relative group">
         <span 
-            class="font-black w-10 h-10 grid content-center justify-center rounded-full p-2 text-xs cursor-pointer"
+            class="font-black w-10 h-10 grid content-center justify-center rounded-full p-2 text-xs cursor-pointer uppercase"
             :class="
                 user.role && user.role == 'talent' ? 'bg-blue-500' : 
                 user.role && user.role == 'admin' ? 'bg-green-500' : 

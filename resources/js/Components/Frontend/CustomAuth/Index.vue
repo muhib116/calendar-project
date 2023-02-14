@@ -5,23 +5,23 @@
                 @click="templateName='SignIn'"
                 :class="templateName == 'SignIn' ? 'opacity-100' : 'opacity-50'"
             >
-                Login
+                {{ Helper.translate('Login') }}
             </button>
             <button 
                 @click="templateName='SignUp'"
                 :class="templateName == 'SignUp' ? 'opacity-100' : 'opacity-50'"
             >
-                Signup
+                {{ Helper.translate('Signup') }}
             </button>
             <button 
                 @click="templateName='TalentSignup'"
                 :class="templateName == 'TalentSignup' ? 'opacity-100' : 'opacity-50'"
             >
-                Become a Talent
+                {{ Helper.translate('Become a Talent') }}
             </button>
         </div>
 
-        <h1 class="font-bold fs-xl mt-5">{{ componentList[templateName].title }}</h1>
+        <h1 class="font-bold fs-xl mt-5">{{ Helper.translate(componentList[templateName].title, true) }}</h1>
 
         <component 
             @login="templateName='SignIn'" 
@@ -32,7 +32,9 @@
         />
 
         <div class="flex justify-between gap-3 items-center">
-            <button class="bg-black text-white px-4 py-2" @click="$emit('close')">Close</button>
+            <button class="bg-black text-white px-4 py-2" @click="$emit('close')">
+                {{ Helper.translate('Close') }}
+            </button>
         </div>
     </div>
 </template>
@@ -43,6 +45,7 @@
     import SignUp from '@/Components/Frontend/CustomAuth/SignUp.vue'
     import TalentSignup from '@/Components/Frontend/CustomAuth/TalentSignup.vue'
     import ForgotPassword from '@/Components/Frontend/CustomAuth/ForgotPassword.vue'
+    import Helper from '@/Helper'
 
     const componentList = {
         SignIn: {
