@@ -13,14 +13,14 @@ class TalentController extends Controller
         $talents = User::where([
                 'role' => 'talent',
             ])
-            ->with(['category', 'country'])
+            ->with(['category', 'country', 'deletedBy'])
             ->orderBy('id', 'DESC')
             ->get();
 
         $deletedTalents = User::where([
                 'role' => 'talent',
             ])
-            ->with(['category', 'country'])
+            ->with(['category', 'country', 'deletedBy'])
             ->orderBy('id', 'DESC')
             ->onlyTrashed()
             ->get();
@@ -75,16 +75,15 @@ class TalentController extends Controller
     }
 
     public function delete($id) {
-        $talent = User::where(['role', 'talent'])->find($id);
+        $talent = User::where(['role' => 'talent'])->find($id);
         if($talent) {
-            $talent->update([
-                'deleted_at' => now(),
-                'deleted_by' => auth()->id()
-            ]);
+            $talent->forceDelete();
+            return redirect()->back()->with('message', 'Deleted Successfully');
         }
     }
-    public function restore($id) {
-        $talent = User::where(['role', 'talent'])->find($id);
+
+    public function restore(User $user) {
+        $talent = User::where(['role', 'talent'])->find($user->id);
         if($talent) {
             $talent->update([
                 'deleted_at' => null,

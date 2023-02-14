@@ -24,7 +24,7 @@
 
         <div class="flex gap-5 justify-between mb-6">
             <div class="relative w-full">
-                <CSelect v-model="form.country" :options="countries" class="w-full" />
+                <CSelect v-model="form.country_id" :options="countries" class="w-full" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">{{ form.errors.country }}</span>
             </div>
             <div class="relative w-full">
@@ -116,7 +116,7 @@ const form = useForm({
     name: '',
     username: '',
     email: '',
-    country: '',
+    country_id: '',
     category_id: 0,
     video: '',
     link: '',
@@ -128,8 +128,8 @@ const form = useForm({
 })
 
 const submit = () => {
-    if(form.country == "-select country-"){
-        form.country = ''
+    if(form.country_id == 0){
+        form.country_id = ''
     }
     if(form.category_id == 0){
         form.category_id = ''
@@ -139,7 +139,7 @@ const submit = () => {
     form.post(route('register'), {
         onFinish: () => {
             form.reset('password', 'password_confirmation')
-            form.country = ""
+            form.country_id = ""
             form.category_id = 0
             if(isEmpty(form.errors)){
                 emit('close')
@@ -163,8 +163,8 @@ onMounted(async () => {
     if(!isEmpty(countryRes.data)){
         countryRes.data.forEach(item => {
             countries.value.push({
-                key: item.name,
-                value: item.id
+                key: item.id,
+                value: item.name
             })
         })
     }

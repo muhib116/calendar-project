@@ -69,13 +69,13 @@
                                 {{ Helper.translate(item.email, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ Helper.translate(item.country, true) }}
+                                {{ Helper.translate(get(item, 'country.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 {{ Helper.translate(item.link, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ Helper.translate(item.category.name, true) }}
+                                {{ Helper.translate(get(item, 'category.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 <span class="font-bold text-red-600 px-3 text-sm">
@@ -83,7 +83,7 @@
                                 </span>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-0">
-                                <button class="bg-red-400 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
+                                <button @click="handleDelete(item.id)" class="bg-red-400 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
                                     <CloseIcon class="w-4 h-4" />
                                 </button>
                             </td>
@@ -104,8 +104,10 @@ import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import useTalentApplications from '@/Pages/Backend/AdminDashboard/useTalentApplications.js'
 import Helper from '@/Helper'
+import { get } from 'lodash'
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
+import { Inertia } from '@inertiajs/inertia'
 
 const { components, data, resultPerPage, search } = useTable()
 const { activeComponent } = useTalentApplications()
@@ -115,6 +117,12 @@ const declinedTelent = computed(() => {
     console.log(data.value[0]);
     return data.value
 })
+
+const handleDelete = (id) => {
+    Helper.confirm('Are you sure?', () => {
+        Inertia.delete(route('admin.delete_talent', id))
+    })
+}
 
 </script>
 

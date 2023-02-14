@@ -31,6 +31,7 @@ return new class extends Migration
             $table->dropColumn('status');
             $table->dropColumn('file_access');
             $table->dropColumn('country_id');
+            $table->dropColumn('country');
         });
     }
 };

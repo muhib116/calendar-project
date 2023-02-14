@@ -19,31 +19,34 @@
                                 #
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Username
+                                {{ Helper.translate('Username') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                First Name
+                                {{ Helper.translate('First Name') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Last Name
+                                {{ Helper.translate('Last Name') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Email
+                                {{ Helper.translate('Email') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Country
+                                {{ Helper.translate('Country') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Social Link
+                                {{ Helper.translate('Social Link') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Category
+                                {{ Helper.translate('Category') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
-                                Deleted By
+                                {{ Helper.translate('Deleted By') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
-                                Date
+                                {{ Helper.translate('Date') }}
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
+                                {{ Helper.translate('Action') }}
                             </th>
                         </tr>
                     </thead>
@@ -74,10 +77,20 @@
                                 {{ Helper.translate(get(item, 'category.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-2">
-                                {{ Helper.translate(item.deleted_by, true) }}
+                                <template v-if="get(item, 'deleted_by.role')=='admin'">
+                                    {{ Helper.translate('Admin') }}
+                                </template>
+                                <template v-else>
+                                    {{ Helper.translate('User') }}
+                                </template>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap font-semibold">
                                 {{ Helper.dateFormate(item.deleted_at) }}
+                            </td>
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
+                                <button @click="handleRestoreUser(item.id)" class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
+                                    <RestoreIcon class="w-4 h-4" />
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -100,6 +113,8 @@ import Helper from '@/Helper'
 import { computed } from 'vue'
 import { get } from 'lodash'
 import { usePage } from '@inertiajs/inertia-vue3'
+import RestoreIcon from '@/Icons/RestoreIcon.vue'
+import { Inertia } from '@inertiajs/inertia'
 
 
 const { components, data, resultPerPage, search } = useTable()
@@ -111,6 +126,12 @@ const deletedTalents = computed(() => {
     data.value = usePage().props.value.deletedTalents
     return data.value
 })
+
+const handleRestoreUser = (id) => {
+    Helper.confirm("Are you sure to restore?", ()=>{
+        Inertia.delete(route('admin.restore_user', id))
+    })
+}
 
 </script>
 

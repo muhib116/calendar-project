@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
 
 
     Route::get('/admin/dashboard/talents', [TalentController::class, 'talents'])->name('admin.talents');
-    Route::delete('/admin/dashboard/talents-delete', [TalentController::class, 'delete'])->name('admin.delete');
+    Route::delete('/admin/dashboard/talents-delete/{id}', [TalentController::class, 'delete'])->name('admin.delete_talent');
     Route::post('/admin/dashboard/talents-restore', [TalentController::class, 'restore'])->name('admin.restore');
 
     Route::get('/admin/dashboard/talent/{id}', function () {
@@ -65,6 +65,7 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         Route::post('/save-settings', [SettingsController::class, 'saveSettings'])->name('admin.saveSettings');
         Route::post('/save-language', [SettingsController::class, 'saveLanguage'])->name('admin.saveLanguage');
         Route::post('/save-page', [SettingsController::class, 'savepage'])->name('admin.savePage');
+        Route::delete('/delete-page/{page}', [SettingsController::class, 'deletepage'])->name('admin.deletepage');
         // settings end
     });
 });

@@ -1,5 +1,6 @@
 <template>
-    <Create />
+    <Create v-if="isEmpty(selectedPage) && size($page.props.pages) <= 2" />
+    <Edit v-if="!isEmpty(selectedPage)" @cancel="selectedPage=null" :selectedPage="selectedPage" />
 
     <div class="flex flex-col mt-4">
         <h1 class="text-lg my-2 mb-4 flex items-center gap-6">{{ Helper.translate('Page List') }}</h1>
@@ -42,10 +43,10 @@
                         </td>
                         
                         <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
-                            <button @click="handleEdit(page)" class="bg-gray-800 px-2 py-1 rounded text-white text-sm font-bold block">
+                            <button @click="selectedPage = page" class="bg-gray-800 px-2 py-1 rounded text-white text-sm font-bold block">
                                 <EditIcon class="w-4 h-4" />
                             </button>
-                            <button @click="handleDelete(page)" class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
+                            <button @click="handleDelete(page.id)" class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
                                 <CloseIcon class="w-4 h-4" />
                             </button>
                         </td>
@@ -63,6 +64,9 @@ import Helper from '@/Helper';
 import EditIcon from '@/Icons/EditIcon.vue';
 import CloseIcon from '@/Icons/CloseIcon.vue';
 import Create from '@/Components/Backend/AdminDashboard/Settings/Pages/Create.vue'
+import Edit from '@/Components/Backend/AdminDashboard/Settings/Pages/Edit.vue'
+import { isEmpty, size } from 'lodash'
+import { Inertia } from '@inertiajs/inertia';
 
 const form = useForm({
     title: null,
@@ -71,8 +75,13 @@ const form = useForm({
     description: null,
 });
 
-const handleEdit = (page) => {}
-const handleDelete = (page) => {}
+const selectedPage = ref(null);
+
+const handleDelete = (id) => {
+    Helper.confirm('Are you sure to delete?', () => {
+        Inertia.delete(route('admin.deletepage', id))
+    })
+}
 
 </script>
 

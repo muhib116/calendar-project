@@ -70,7 +70,7 @@
                                 {{ Helper.translate(item.email, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ Helper.translate(item.country, true) }}
+                                {{ Helper.translate(get(item, 'country.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 {{ Helper.translate(item.link, true) }}
@@ -82,6 +82,7 @@
                                 <button v-if="!item.status" @click="() => {
                                     showModal = true;
                                     selectedTalent = item.id;
+                                    videoPath = item.video_path
                                 }" class="mx-auto block btn_ripple" title="See Talent Video.">
                                     <PlayIcon class="" />
                                 </button>
@@ -93,6 +94,7 @@
                                 </button> -->
                                 <button :disabled="loading" v-if="!item.status" @click="() => {
                                     selectedTalent = item.id;
+                                    videoPath = item.video_path
                                     handleAction(false);
                                 }" class="bg-red-400 px-2 py-2 rounded-full text-white text-sm font-bold ml-auto block">
                                     <CloseIcon class="w-4 h-4" />
@@ -112,7 +114,12 @@
                     <CloseIcon class="w-4 h-4" />
                 </button>
                 <div class="">
-                    <img src="https://images.unsplash.com/photo-1675277456530-ffdfd0ff8548?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="">
+                    <!-- <img src="https://images.unsplash.com/photo-1675277456530-ffdfd0ff8548?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt=""> -->
+                    <video class="w-full" v-if="videoPath" controls>
+                        <source :src="`${$page.props.ziggy.url}/${videoPath}`" type="video/mp4">
+                        <source :src="`${$page.props.ziggy.url}/${videoPath}`" type="video/ogg">
+                    </video>
+
                 </div>
                 <div class="flex gap-4 justify-center mt-2 font-semibold">
                     <button :disabled="loading" @click="handleAction(true)" class="px-4 py-1 bg-green-600 text-white rounded shadow">Approve</button>
@@ -144,11 +151,13 @@ const { activeComponent } = useTalentApplications()
 const showModal = ref(false)
 
 const selectedTalent = ref(null)
+const videoPath = ref(null)
 const loading = ref(false)
 
 watch(showModal, () => {
     if (showModal.value == false) {
         selectedTalent.value = null;
+        videoPath.value = null;
     }
 })
 
