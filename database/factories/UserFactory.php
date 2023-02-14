@@ -15,6 +15,8 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    private $type = ['user', 'admin', 'talent'];
+
     public function definition()
     {
         $name = fake()->name();
@@ -33,9 +35,9 @@ class UserFactory extends Factory
             // 'email_verified_at' => '',
             // 'password' => '',
             // 'link' => '',
-            // 'video_path' => '',
+            'video_path' => 'uploads/1676149441.mp4',
             'is_agree' => 1,
-            'role' => 'user',
+            'role' => $this->type[rand(0, count($this->type)-1)],
         ];
     }
     // array('id' => '1',

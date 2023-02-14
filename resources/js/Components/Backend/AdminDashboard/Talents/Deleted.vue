@@ -2,18 +2,12 @@
     <div>
         <div class="flex gap-4 justify-between">
             <div class="flex gap-2 items-center">
-                Show 
-                <select class="border-[#0001] rounded-lg">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                Entries
+                <component :is="components['PageSize']" />
             </div>
             <div class="flex gap-6 items-center w-full">
-                <CInput type="search" placeholder="Search" class="mx-auto max-w-[400px] w-full" />
-                <TabChanger />
-            </div>
+                <component :is="components['Search']" />
+                <TabChanger :activeItems="talents.length" :deleteItem="deletedTalents.length" />
+            </div>  
         </div>
 
         <div class="flex flex-col mt-4">
@@ -25,65 +19,78 @@
                                 #
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Username
+                                {{ Helper.translate('Username') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                First Name
+                                {{ Helper.translate('First Name') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Last Name
+                                {{ Helper.translate('Last Name') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Email
+                                {{ Helper.translate('Email') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Country
+                                {{ Helper.translate('Country') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Social Link
+                                {{ Helper.translate('Social Link') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Category
+                                {{ Helper.translate('Category') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
-                                Deleted By
+                                {{ Helper.translate('Deleted By') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
-                                Date
+                                {{ Helper.translate('Date') }}
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
+                                {{ Helper.translate('Action') }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 10" :index="index" class="border-b">
+                        <tr v-for="(item, index) in resultPerPage" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index }}
+                                {{ Helper.translate(index+1, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Demo User name
+                                {{ Helper.translate(item.username, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Jhon
+                                {{ Helper.translate(item.first_name, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Doe
+                                {{ Helper.translate(item.last_name, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                test@exm.com
+                                {{ Helper.translate(item.email, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                USA
+                                {{ Helper.translate(get(item, 'country.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                http://social.com/username
+                                {{ Helper.translate(item.link, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Artist
+                                {{ Helper.translate(get(item, 'category.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-2">
-                                Talent / Admin
+                                <template v-if="get(item, 'deleted_by.role')=='admin'">
+                                    {{ Helper.translate('Admin') }}
+                                </template>
+                                <template v-else>
+                                    {{ Helper.translate('User') }}
+                                </template>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap font-semibold">
-                                Fab 1, 2023
+                                {{ Helper.dateFormate(item.deleted_at) }}
+                            </td>
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
+                                <button @click="handleRestoreUser(item.id)" class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
+                                    <RestoreIcon class="w-4 h-4" />
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -91,18 +98,7 @@
             </div>
         </div>
 
-        <div class="flex items-center justify-between mt-5 text-sm">
-            <div class="">Showing 1 to 10 of 10 entries</div>
-            <div class="flex gap-2 items-center">
-                <button>
-                    <AngleLeftIcon class="w-4 h-4" />
-                </button>
-                1/2
-                <button>
-                    <AngleRightIcon class="w-4 h-4" />
-                </button>
-            </div>
-        </div>
+        <component :is="components['Pagination']" />
     </div>
 </template>
 
@@ -111,7 +107,32 @@ import CInput from '@/Components/Global/CInput.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import EyeIcon from '@/Icons/EyeIcon.vue'
+import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import TabChanger from '@/Components/Backend/AdminDashboard/Talents/TabChanger.vue'
+import Helper from '@/Helper'
+import { computed } from 'vue'
+import { get } from 'lodash'
+import { usePage } from '@inertiajs/inertia-vue3'
+import RestoreIcon from '@/Icons/RestoreIcon.vue'
+import { Inertia } from '@inertiajs/inertia'
+
+
+const { components, data, resultPerPage, search } = useTable()
+
+const talents = computed(() => {
+    return usePage().props.value.talents
+})
+const deletedTalents = computed(() => {
+    data.value = usePage().props.value.deletedTalents
+    return data.value
+})
+
+const handleRestoreUser = (id) => {
+    Helper.confirm("Are you sure to restore?", ()=>{
+        Inertia.delete(route('admin.restore_user', id))
+    })
+}
+
 </script>
 
 <style scoped>

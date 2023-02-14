@@ -87,4 +87,9 @@ class SettingsController extends Controller
         ]);
         return redirect()->back()->with('message', 'Page created successfully');
     }
+
+    public function deletepage(Page $page) {
+        $page->delete();
+        return redirect()->back()->with('message', 'Page Deleted Successfully');
+    }
 }

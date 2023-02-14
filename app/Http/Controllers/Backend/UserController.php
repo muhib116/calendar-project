@@ -41,4 +41,10 @@ class UserController extends Controller
         $user->restore();
         return redirect()->back()->with('message', 'User restored successfully!');
     }
+
+    public function userDetails(User $user) {
+        return Inertia::render('Backend/AdminDashboard/UserDetails', [
+            'user' => $user,
+        ]);
+    }
 }

@@ -1,0 +1,76 @@
+<template>
+    <h1 class="text-lg my-2 mb-4 flex items-center gap-6">{{ Helper.translate('Crate Page') }}</h1>
+    <div class="relative mb-6">
+        <CInput type="text" v-model="form.title" :placeholder="Helper.translate('Title')" />
+        <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.title, true) }}</span>
+    </div> 
+    <ckeditor class="mb-4" :editor="ClassicEditor" v-model="form.description" :config="editorConfig"></ckeditor>
+    <div class="flex gap-5 justify-end">
+        <button @click="$emit('cancel')" class="bg-red-500 text-white block font-semibold px-4 py-2 rounded mt-2">
+            {{ Helper.translate('Cancel') }}
+        </button>
+        <button @click="handleSave" class="bg-green-500 text-white block font-semibold px-4 py-2 rounded mt-2">
+            {{ Helper.translate('Update') }}
+        </button>
+    </div>
+</template>
+
+<script setup>
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { useForm } from '@inertiajs/inertia-vue3';
+import CInput from '@/Components/Global/CInput.vue'
+import { onMounted, ref } from 'vue'
+import Helper from '@/Helper'
+import { isEmpty } from 'lodash'
+
+const props = defineProps({
+    selectedPage: Object,
+});
+
+const editorConfig = ref({
+    toolbar: {
+        items: [
+            'bold',
+            'italic',
+            'link',
+            'bulletedList',
+            'numberedList',
+            'undo',
+            'redo'
+        ]
+    }
+})
+
+const form = useForm({
+    id: null,
+    title: null,
+    slug: null, 
+    settings: null,
+    description: '',
+})
+
+onMounted(()=>{
+    let selectedPage = props.selectedPage;
+    form.id = selectedPage.id;
+    form.title = selectedPage.title;
+    form.slug = selectedPage.slug;
+    form.email = selectedPage.email;
+    form.settings = selectedPage.settings;
+    form.description = selectedPage.description;
+});
+
+
+const handleSave = () => {
+    form.post(route('admin.savePage'), {
+        onSuccess(e) {
+            if (!isEmpty(e.props.errors)) return;
+            form.reset()
+            let editorContent = document.querySelector('.ck-editor__main>.ck-content');
+            console.log(editorContent);
+            if(editorContent) editorContent.innerHTML = '';
+        }
+    })
+}
+
+
+</script>

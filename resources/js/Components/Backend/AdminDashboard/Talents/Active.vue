@@ -2,18 +2,12 @@
     <div>
         <div class="flex gap-4 justify-between">
             <div class="flex gap-2 items-center">
-                Show 
-                <select class="border-[#0001] rounded-lg">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                Entries
+                <component :is="components['PageSize']" />
             </div>
             <div class="flex gap-6 items-center w-full">
-                <CInput type="search" placeholder="Search" class="mx-auto max-w-[400px] w-full" />
-                <TabChanger />
-            </div>
+                <component :is="components['Search']" />
+                <TabChanger :activeItems="talents.length" :deleteItem="deletedTalents.length" />
+            </div>  
         </div>
 
         <div class="flex flex-col mt-4">
@@ -25,77 +19,80 @@
                                 #
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Username
+                                {{ Helper.translate('Username') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                First Name
+                                {{ Helper.translate('First Name') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Last Name
+                                {{ Helper.translate('Last Name') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Email
+                                {{ Helper.translate('Email') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Country
+                                {{ Helper.translate('Country') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Social Link
+                                {{ Helper.translate('Social Link') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Category
+                                {{ Helper.translate('Category') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Verification
+                                {{ Helper.translate('Verification') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
-                                Files
+                                {{ Helper.translate('Files') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
-                                Action
+                                {{ Helper.translate('Action') }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 10" :key="index" class="border-b">
+                        <tr v-for="(item, index) in resultPerPage" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index }}
+                                {{ Helper.translate(index+1, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <Link :href="route('admin.talent.detail', 1)" class="text-sky-500 font-medium">
-                                    Demo Talent name
+                                <Link :href="route('admin.talent.detail', item.id)" class="text-sky-500 font-medium">
+                                    {{ Helper.translate(item.username, true) }}
                                 </Link>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Jhon
+                                {{ Helper.translate(item.first_name, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Doe
+                                {{ Helper.translate(item.last_name, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                test@exm.com
+                                {{ Helper.translate(item.email, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                USA
+                                {{ Helper.translate(get(item, 'country.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                http://social.com/username
+                                {{ Helper.translate(item.link, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Artist
+                                {{ Helper.translate(get(item, 'country.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Verified
+                                <template v-if="item.status">
+                                    Verified
+                                </template>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-2">
+                                <!-- file_access -->
                                 <span class="text-green-500">Access</span>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap font-semibold">
                                 <div class="flex gap-2 justify-end">
-                                    <button class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
+                                    <Link :href="route('admin.talent.detail', item.id)" class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
                                         <EyeIcon class="w-4 h-4" />
-                                    </button>
-                                    <button class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
+                                    </Link>
+                                    <button @click="handleDeleteUser(item.id)" class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
                                         <CloseIcon class="w-4 h-4" />
                                     </button>
                                 </div>
@@ -106,18 +103,7 @@
             </div>
         </div>
 
-        <div class="flex items-center justify-between mt-5 text-sm">
-            <div class="">Showing 1 to 10 of 10 entries</div>
-            <div class="flex gap-2 items-center">
-                <button>
-                    <AngleLeftIcon class="w-4 h-4" />
-                </button>
-                1/2
-                <button>
-                    <AngleRightIcon class="w-4 h-4" />
-                </button>
-            </div>
-        </div>
+        <component :is="components['Pagination']" />
     </div>
 </template>
 
@@ -127,8 +113,33 @@ import CInput from '@/Components/Global/CInput.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import EyeIcon from '@/Icons/EyeIcon.vue'
+import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import TabChanger from '@/Components/Backend/AdminDashboard/Talents/TabChanger.vue'
+
+import { usePage } from '@inertiajs/inertia-vue3'
 import CloseIcon from '@/Icons/CloseIcon.vue'
+import Helper from '@/Helper'
+import { computed } from 'vue'
+import { get } from 'lodash'
+import { Inertia } from '@inertiajs/inertia'
+
+const { components, data, resultPerPage, search } = useTable()
+
+const talents = computed(() => {
+    data.value = usePage().props.value.talents
+    console.log(data.value[0]);
+    return data.value
+})
+const deletedTalents = computed(() => { 
+    return usePage().props.value.deletedTalents 
+})
+
+const handleDeleteUser = (id) => {
+    Helper.confirm("Are you sure to delete?", ()=>{
+        Inertia.delete(route('admin.delete_user', id))
+    })
+}
+
 </script>
 
 <style scoped>
