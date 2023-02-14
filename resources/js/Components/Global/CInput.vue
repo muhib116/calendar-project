@@ -1,7 +1,7 @@
 <template>
     <label class="relative block" :class="disabled && 'pointer-events-none opacity-70'">
         <span v-if="isEmpty(modelValue)" class="absolute left-0 top-3 pointer-events-none opacity-40 whitespace-nowrap">{{ placeholder }}</span>
-        <input @input="updateValue" :value="modelValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow bg-transparent">
+        <input @input="updateValue" :value="modelValue" :type="type" :disabled="disabled" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow bg-transparent">
         <span class="customBorder"></span>
         <div 
             v-if="characterLimit"
@@ -21,6 +21,10 @@
         type: String,
         placeholder: String,
         characterLimit: Number,
+        disabled: {
+            type: [Boolean, String],
+            default: false,
+        },
         modelValue: {
             type: String,
             default: ''

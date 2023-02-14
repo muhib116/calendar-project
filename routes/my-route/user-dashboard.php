@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -10,10 +12,9 @@ Route::middleware(['auth', 'verified', 'user-role:user'])->group(function(){
             'user' => Auth::user()
         ]);
     })->name('user.dashboard');
-    
-    Route::get('/user/dashboard/account', function () {
-        return Inertia::render('Backend/UserDashboard/Account');
-    })->name('user.account');
+
+    Route::get('/user/dashboard/account', [UserController::class, 'account'])->name('user.account');
+    Route::put('/account-update', [UserController::class, 'accountUpdate'])->name('user.accountUpdate');
     
     Route::get('/user/dashboard/following', function () {
         return Inertia::render('Backend/UserDashboard/Following');

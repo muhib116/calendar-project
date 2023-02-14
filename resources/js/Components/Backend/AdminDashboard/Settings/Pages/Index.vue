@@ -1,6 +1,7 @@
 <template>
     <Create v-if="isEmpty(selectedPage) && size($page.props.pages) <= 2" />
-    <Edit v-if="!isEmpty(selectedPage)" @cancel="selectedPage=null" :selectedPage="selectedPage" />
+    {{ selectedPage }}
+    <Edit v-if="!isEmpty(selectedPage)" @canceledit="selectedPage=null" :selectedPage="selectedPage" />
 
     <div class="flex flex-col mt-4">
         <h1 class="text-lg my-2 mb-4 flex items-center gap-6">{{ Helper.translate('Page List') }}</h1>

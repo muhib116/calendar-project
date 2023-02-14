@@ -51,7 +51,7 @@ Meeting: 002;
     -- ✅soft delete, restore
 Total: 1 Day;
 
-Next meeting: 15/Fab/2023 at 11:00PM
+Next meeting: 14/Fab/2023 at 11:00PM
 -----------------------------------------
 Meeting: 003;
 
@@ -65,22 +65,27 @@ Meeting: 003;
     -- password change
     -- account soft delete
 
-
-Datos de idioma
 4:: talent dashboard>account module 5min
     -- personal information.(disable email)
     -- password change
     -- account soft delete
     -- rename email name to email
 
-5:: talent dashboard>profile setup module
+5:: talent dashboard>profile setup module 35min
     -- replace video
     -- change category
     -- when video selected, show Close icon component.
-6:: By clicking talents navigate to talents profile
+
+6:: By clicking talents navigate to talents profile 50min
     -- talent profile render talents information, video.
     -- user follow talents, unfollow talents
-7:: user dashboard>following module,
+
+7:: user dashboard>following module, 30min
     -- render following talents.
     -- unfollow talents
     -- try video thumbnail https://codepen.io/aertmann/pen/mrVaPx
+
+
+Next meeting: 16/Fab/2023 at 11:00PM
+-----------------------------------------
+Meeting: 004;

@@ -2,18 +2,46 @@
     <div>
         <h1 class="font-semibold text-xl mb-4">Change Password</h1>
         <div class="grid usernameAndEmailWrapper items-center gap-5 flex-wrap">
-            <CInput type="password" placeholder="Old Password"/>
-            <CInput type="password" placeholder="New Password"/>
-            <CInput type="password" placeholder="Confirm Password"/>
+            <div class="relative mb-6">
+                <CInput v-model="form.current_password" type="password" :placeholder="Helper.translate('Old Password')"/>
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.current_password, true) }}</span>
+            </div>
+            <div class="relative mb-6">
+                <CInput v-model="form.password" type="password" :placeholder="Helper.translate('New Password')"/>
+                <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.password, true) }}</span>
+            </div>
+            <div class="relative mb-6">
+                <CInput v-model="form.password_confirmation" type="password" :placeholder="Helper.translate('Confirm Password')"/>
+            </div>
         </div>
-        <button class="bg-red-500 text-white text-bold rounded shadow px-4 py-2 whitespace-nowrap block w-fit ml-auto mt-4">
-            Update / Save
+        <button @click="handleSave" class="bg-red-500 text-white text-bold rounded shadow px-4 py-2 whitespace-nowrap block w-fit ml-auto mt-4">
+            {{ Helper.translate('Update') }} / {{ Helper.translate('Save') }}
         </button>
     </div>
 </template>
 
 <script setup>
 import CInput from '@/Components/Global/CInput.vue'
+import { useForm } from '@inertiajs/inertia-vue3'
+import Helper from '@/Helper';
+import { ref } from 'vue'
+import { isEmpty, get } from 'lodash';
+
+const form = useForm({
+    current_password: null,
+    password: null,
+    password_confirmation: null,
+});
+
+const handleSave = () => {
+    form.put(route('user.accountUpdate'), {
+        onSuccess(e) {
+            if (isEmpty(e.props.errors)) {
+                form.reset();
+            }
+        }
+    })
+}
 </script>
 
 <style scoped>

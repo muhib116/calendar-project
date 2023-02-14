@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\TalentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -9,9 +10,8 @@ Route::middleware(['auth', 'verified', 'user-role:talent'])->group(function(){
         return Inertia::render('Backend/TalentDashboard/Guide');
     })->name('talent.dashboard');
     
-    Route::get('/talent/dashboard/account', function () {
-        return Inertia::render('Backend/TalentDashboard/Account');
-    })->name('talent.account');
+    Route::get('/talent/dashboard/account', [TalentController::class, 'account'])->name('talent.account');
+    Route::put('/account-update', [TalentController::class, 'accountUpdate'])->name('user.accountUpdate');
     
     Route::get('/talent/dashboard/profile/setup', function () {
         return Inertia::render('Backend/TalentDashboard/ProfileSetup');
