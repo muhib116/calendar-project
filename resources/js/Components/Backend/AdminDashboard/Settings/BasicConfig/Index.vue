@@ -2,7 +2,7 @@
     <h1 class="text-lg my-2 text-center mb-4">Basic Configuration</h1>
     <div class="border border-sky-400 border-opacity-40 rounded shadow p-10 w-fit mx-auto">
         <table>
-            <tr>
+            <!-- <tr>
                 <th class="font-medium text-sm text-right px-2">Logo : </th>
                 <td class="flex items-center gap-4 px-4">
                     <CInput 
@@ -12,7 +12,7 @@
                         v-model="form.logo"
                     />
                 </td>
-            </tr>
+            </tr> -->
             <tr>
                 <th class="font-medium text-sm text-right px-2">Company name : </th>
                 <td class="flex items-center gap-4 px-4">

@@ -9,7 +9,6 @@
 
 <script setup>
     import { Link } from '@inertiajs/inertia-vue3'
-    import Helper from '@/Helper'
 
     defineProps({
         light: {
