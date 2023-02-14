@@ -164,7 +164,7 @@ onMounted(async () => {
         countryRes.data.forEach(item => {
             countries.value.push({
                 key: item.name,
-                value: item.name
+                value: item.id
             })
         })
     }

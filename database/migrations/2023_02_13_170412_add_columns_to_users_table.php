@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->tinyInteger('status')->default(false);
             $table->tinyInteger('file_access')->default(false);
+            $table->foreignId('country_id')->nullable()->constrained('countries');
         });
     }
 
@@ -29,6 +30,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('status');
             $table->dropColumn('file_access');
+            $table->dropColumn('country_id');
         });
     }
 };

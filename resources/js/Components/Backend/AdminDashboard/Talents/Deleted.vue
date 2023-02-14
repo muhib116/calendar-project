@@ -2,18 +2,12 @@
     <div>
         <div class="flex gap-4 justify-between">
             <div class="flex gap-2 items-center">
-                Show 
-                <select class="border-[#0001] rounded-lg">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                Entries
+                <component :is="components['PageSize']" />
             </div>
             <div class="flex gap-6 items-center w-full">
-                <CInput type="search" placeholder="Search" class="mx-auto max-w-[400px] w-full" />
-                <TabChanger />
-            </div>
+                <component :is="components['Search']" />
+                <TabChanger :activeItems="talents.length" :deleteItem="deletedTalents.length" />
+            </div>  
         </div>
 
         <div class="flex flex-col mt-4">
@@ -54,36 +48,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 10" :index="index" class="border-b">
+                        <tr v-for="(item, index) in resultPerPage" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index }}
+                                {{ Helper.translate(index+1, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Demo User name
+                                {{ Helper.translate(item.username, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Jhon
+                                {{ Helper.translate(item.first_name, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Doe
+                                {{ Helper.translate(item.last_name, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                test@exm.com
+                                {{ Helper.translate(item.email, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                USA
+                                {{ Helper.translate(get(item, 'country.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                http://social.com/username
+                                {{ Helper.translate(item.link, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                Artist
+                                {{ Helper.translate(get(item, 'category.name'), true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-2">
-                                Talent / Admin
+                                {{ Helper.translate(item.deleted_by, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap font-semibold">
-                                Fab 1, 2023
+                                {{ Helper.dateFormate(item.deleted_at) }}
                             </td>
                         </tr>
                     </tbody>
@@ -91,18 +85,7 @@
             </div>
         </div>
 
-        <div class="flex items-center justify-between mt-5 text-sm">
-            <div class="">Showing 1 to 10 of 10 entries</div>
-            <div class="flex gap-2 items-center">
-                <button>
-                    <AngleLeftIcon class="w-4 h-4" />
-                </button>
-                1/2
-                <button>
-                    <AngleRightIcon class="w-4 h-4" />
-                </button>
-            </div>
-        </div>
+        <component :is="components['Pagination']" />
     </div>
 </template>
 
@@ -111,7 +94,24 @@ import CInput from '@/Components/Global/CInput.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import EyeIcon from '@/Icons/EyeIcon.vue'
+import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import TabChanger from '@/Components/Backend/AdminDashboard/Talents/TabChanger.vue'
+import Helper from '@/Helper'
+import { computed } from 'vue'
+import { get } from 'lodash'
+import { usePage } from '@inertiajs/inertia-vue3'
+
+
+const { components, data, resultPerPage, search } = useTable()
+
+const talents = computed(() => {
+    return usePage().props.value.talents
+})
+const deletedTalents = computed(() => {
+    data.value = usePage().props.value.deletedTalents
+    return data.value
+})
+
 </script>
 
 <style scoped>

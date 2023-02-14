@@ -18,21 +18,22 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'username',
-        'first_name',
-        'last_name',
-        'country',
-        'category_id',
-        'link',
-        'video',
-        'email',
-        'password',
-        'is_agree',
-        'role',
-        'deleted_by',
-    ];
+    protected $guarded = ['id'];
+    // protected $fillable = [
+    //     'name',
+    //     'username',
+    //     'first_name',
+    //     'last_name',
+    //     'country',
+    //     'category_id',
+    //     'link',
+    //     'video',
+    //     'email',
+    //     'password',
+    //     'is_agree',
+    //     'role',
+    //     'deleted_by',
+    // ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -55,5 +56,12 @@ class User extends Authenticatable
 
     public function deletedBy() {
         return $this->belongsTo(User::class, 'deleted_by', 'id');
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+    public function country() {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }
