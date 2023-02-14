@@ -6,7 +6,7 @@
     </div> 
     <ckeditor class="mb-4" :editor="ClassicEditor" v-model="form.description" :config="editorConfig"></ckeditor>
     <div class="flex gap-5 justify-end">
-        <button @click="$emit('cancel')" class="bg-red-500 text-white block font-semibold px-4 py-2 rounded mt-2">
+        <button @click="$emit('canceledit')" class="bg-red-500 text-white block font-semibold px-4 py-2 rounded mt-2">
             {{ Helper.translate('Cancel') }}
         </button>
         <button @click="handleSave" class="bg-green-500 text-white block font-semibold px-4 py-2 rounded mt-2">
@@ -19,7 +19,7 @@
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { useForm } from '@inertiajs/inertia-vue3';
 import CInput from '@/Components/Global/CInput.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, defineEmits } from 'vue'
 import Helper from '@/Helper'
 import { isEmpty } from 'lodash'
 
@@ -59,12 +59,14 @@ onMounted(()=>{
     form.description = selectedPage.description;
 });
 
+const emit = defineEmits(['canceledit']);
 
 const handleSave = () => {
     form.post(route('admin.savePage'), {
         onSuccess(e) {
             if (!isEmpty(e.props.errors)) return;
             form.reset()
+            emit('canceledit');
             let editorContent = document.querySelector('.ck-editor__main>.ck-content');
             console.log(editorContent);
             if(editorContent) editorContent.innerHTML = '';

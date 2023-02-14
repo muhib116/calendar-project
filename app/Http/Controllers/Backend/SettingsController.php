@@ -76,10 +76,11 @@ class SettingsController extends Controller
     }
 
     public function savepage(Request $request) {
+        $except = $request->id ? $request->id : Page::class;
         $request->validate([
-            'title' => 'required|unique:pages,title',
+            'title' => 'required|unique:pages,title,'.$except,
         ]);
-        Page::create([
+        Page::updateOrCreate(['id' => $request->id],[
             'title' => $request->title,
             'slug' => str()->slug($request->title),
             'settings' => $request->settings,
