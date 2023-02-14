@@ -51,6 +51,7 @@
                                 </button>
                             </td>
                         </tr>
+                        <Alert />
                     </tbody>
                 </table>
             </div>
@@ -70,6 +71,7 @@ import { Inertia } from '@inertiajs/inertia'
 import EyeIcon from '@/Icons/EyeIcon.vue'
 import { computed } from 'vue'
 import Helper from '@/Helper'
+import Alert from '@/Components/Global/Alert.vue'
 
 const { components, data, resultPerPage, search } = useTable()
 

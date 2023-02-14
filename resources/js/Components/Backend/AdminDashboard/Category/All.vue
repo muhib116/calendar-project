@@ -52,6 +52,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <Alert v-if="isEmpty(categories)" />
             </div>
         </div>
     </div>
@@ -65,6 +66,8 @@ import CloseIcon from '@/Icons/CloseIcon.vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 import Helper from '@/Helper.js'
 import { Inertia } from '@inertiajs/inertia'
+import Alert from '@/Components/Global/Alert.vue'
+import { isEmpty } from 'lodash'
 
 
 const { activeComponent, selectedCategory } = useCategory()
