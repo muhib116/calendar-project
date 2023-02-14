@@ -49,15 +49,15 @@
                                 Verification
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
-                                Action
+                                Files
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
-                                Files
+                                Action
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="index in 10" :index="index" class="border-b">
+                        <tr v-for="index in 10" :key="index" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ index }}
                             </td>
@@ -88,12 +88,17 @@
                                 Verified
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-2">
-                                <button class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
-                                    <EyeIcon class="w-4 h-4" />
-                                </button>
+                                <span class="text-green-500">Access</span>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap font-semibold">
-                                <span class="text-green-500">Access</span>
+                                <div class="flex gap-2 justify-end">
+                                    <button class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
+                                        <EyeIcon class="w-4 h-4" />
+                                    </button>
+                                    <button class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
+                                        <CloseIcon class="w-4 h-4" />
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -123,6 +128,7 @@ import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import EyeIcon from '@/Icons/EyeIcon.vue'
 import TabChanger from '@/Components/Backend/AdminDashboard/Talents/TabChanger.vue'
+import CloseIcon from '@/Icons/CloseIcon.vue'
 </script>
 
 <style scoped>

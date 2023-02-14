@@ -52,6 +52,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <Alert v-if="isEmpty(categories)" />
             </div>
             <component :is="components['Pagination']" />
         </div>
@@ -59,7 +60,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import EditIcon from '@/Icons/EditIcon.vue'
 import useCategory from '@/Pages/Backend/AdminDashboard/useCategory.js'
 import CloseIcon from '@/Icons/CloseIcon.vue'
@@ -67,15 +67,13 @@ import { usePage } from '@inertiajs/inertia-vue3'
 import Helper from '@/Helper.js'
 import { Inertia } from '@inertiajs/inertia'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
+import Alert from '@/Components/Global/Alert.vue'
+import { isEmpty } from 'lodash'
 
 const { components, data, resultPerPage } = useTable()
 const { activeComponent, selectedCategory } = useCategory()
 
 data.value = usePage().props.value.categories
-
-// const categories = computed(() => {
-//     return usePage().props.value.categories
-// })
 
 const handleEdit = (category) => {
     activeComponent.value = 'Edit'

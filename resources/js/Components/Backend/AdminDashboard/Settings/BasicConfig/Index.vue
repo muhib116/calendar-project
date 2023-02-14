@@ -80,7 +80,7 @@
             <tr>
                 <th class="font-medium text-sm text-right px-2"></th>
                 <td class="flex items-center gap-4 px-4">
-                    <button @click="handleSubmit" class="border px-4 mt-3 mx-auto py-2 rounded bg-gray-800 text-white font-medium">
+                    <button @click="handleSubmit" class="border px-4 mt-3 ml-auto mr-7 py-2 rounded bg-green-500 text-white font-medium">
                         Save
                     </button>
                 </td>

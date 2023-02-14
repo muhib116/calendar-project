@@ -60,8 +60,8 @@
                                 {{ Helper.dateFormate(get(user, 'deleted_at')) }} 
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
-                                <button class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
-                                    <RestoreIcon @click="handleRestoreUser(user.id)" class="w-4 h-4" />
+                                <button @click="handleRestoreUser(user.id)" class="bg-red-400 px-2 py-1 rounded text-white text-sm font-bold block">
+                                    <RestoreIcon class="w-4 h-4" />
                                 </button>
                             </td>
                         </tr>
