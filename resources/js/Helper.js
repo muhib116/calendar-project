@@ -62,6 +62,13 @@ Helper.companyName = () => {
     }
 }
 
+Helper.logo = () => {
+    if(settings.data && settings.data.logo){
+        let logo = settings.data.logo
+        return logo
+    }
+}
+
 Helper.stripeKey = () => {
     const data = {
         public: '',
