@@ -1,14 +1,14 @@
 <template>
-    <div class="flex items-center justify-between mt-5 text-sm">
+    <div v-if="data.length > pageSize" class="flex items-center justify-between mt-5 text-sm">
         <div class="">
-            Showing {{ from + 1 }} to {{ to }} 
+            Showing {{ to > 0 ? from + 1 : 0 }} to {{ to }} 
             of {{ result.length }} entries
         </div>
         <div class="flex gap-2 items-center">
             <button>
                 <AngleLeftIcon @click="() => { handleResult(-1) }" class="w-4 h-4" />
             </button>
-            {{ currentPageNumber }} / {{ totalPage }}
+            {{ totalPage > 0  ? currentPageNumber : 0 }} / {{ totalPage }}
             <button>
                 <AngleRightIcon @click="() => { handleResult(+1) }" class="w-4 h-4" />
             </button>
@@ -22,7 +22,7 @@ import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 
-const { result, resultPerPage, pageSize, currentPageNumber, totalPage, hasPagination } = useTable()
+const { result, data, resultPerPage, pageSize, currentPageNumber, totalPage, hasPagination } = useTable()
 
 
 const from = computed(() => {

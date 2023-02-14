@@ -1,4 +1,5 @@
 <template>
+    <Head title="Talent's Detail"/>
     <DashboardLayout :header="false" :footer="false" title="Talent Detail">
         <template v-slot:leftSidebar>
             <LeftSide />
@@ -57,7 +58,7 @@ import DashboardLayout from './DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
 import useTalents from '@/Pages/Backend/AdminDashboard/useTalents.js'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link, Head } from '@inertiajs/inertia-vue3'
 
 const { detailsComponents, detailsActiveComponent } = useTalents()
 </script>

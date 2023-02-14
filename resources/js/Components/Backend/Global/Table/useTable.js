@@ -50,7 +50,6 @@ export default function tableHelper()
     }
 
     onMounted(() => {
-        console.log('mounted');
         search()
     })
 

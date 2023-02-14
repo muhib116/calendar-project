@@ -1,4 +1,5 @@
 <template>
+    <Head title="Payments"/>
     <DashboardLayout :header="false" :footer="false" title="Payments">
         <template v-slot:leftSidebar>
             <LeftSide />
@@ -15,6 +16,7 @@ import DashboardLayout from './DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
 import Header from '@/Components/Backend/AdminDashboard/Payments/Header.vue'
 import usePayments from '@/Pages/Backend/AdminDashboard/usePayments.js'
+import { Head } from '@inertiajs/inertia-vue3'
 
 const {components, activeComponent} = usePayments()
 </script>

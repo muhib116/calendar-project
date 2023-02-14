@@ -1,4 +1,5 @@
 <template>
+    <Head title="Analytics"/>
     <DashboardLayout :header="false" :footer="false" title="Analytics">
         <template v-slot:leftSidebar>
             <LeftSide />
@@ -32,6 +33,7 @@ import Widget from "@/Components/Backend/AdminDashboard/Dashboard/Widget.vue"
 import Chart from "@/Components/Backend/AdminDashboard/Analytics/Chart.vue"
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
+import { Head } from '@inertiajs/inertia-vue3'
 
 const filterOptions = [
     {

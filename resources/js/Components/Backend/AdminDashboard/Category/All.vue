@@ -2,7 +2,7 @@
     <div>
         <div class="flex gap-4 justify-between items-center">
             <div class="flex gap-2 items-center font-bold text-lg">
-                Category List
+                <component :is="components['PageSize']" />
             </div>
             <button @click="activeComponent = 'Add'" class="px-4 py-1 rounded bg-sky-500 text-white font-bold">
                 Add Category
@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(category, index) in categories" :key="category.id" class="border-b">
+                        <tr v-for="(category, index) in resultPerPage" :key="category.id" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ index+1 }}
                             </td>
@@ -54,26 +54,26 @@
                 </table>
                 <Alert v-if="isEmpty(categories)" />
             </div>
+            <component :is="components['Pagination']" />
         </div>
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import EditIcon from '@/Icons/EditIcon.vue'
 import useCategory from '@/Pages/Backend/AdminDashboard/useCategory.js'
 import CloseIcon from '@/Icons/CloseIcon.vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 import Helper from '@/Helper.js'
 import { Inertia } from '@inertiajs/inertia'
+import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import Alert from '@/Components/Global/Alert.vue'
 import { isEmpty } from 'lodash'
 
-
+const { components, data, resultPerPage } = useTable()
 const { activeComponent, selectedCategory } = useCategory()
-const categories = computed(() => {
-    return usePage().props.value.categories
-})
+
+data.value = usePage().props.value.categories
 
 const handleEdit = (category) => {
     activeComponent.value = 'Edit'
