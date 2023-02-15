@@ -4,13 +4,13 @@
             <div class="relative">
                 <CInput type="email" placeholder="Email" v-model="form.email" class="mb-6" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.email', true) }}
+                    {{ Helper.translate(form.errors.email, true) }}
                 </span>
             </div>
             <div class="relative">
                 <CInput type="password" placeholder="Password" v-model="form.password" class="mb-6" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.password', true) }}
+                    {{ Helper.translate(form.errors.password, true) }}
                 </span>
             </div>
             <label class="relative block mb-4">

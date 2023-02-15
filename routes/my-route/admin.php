@@ -65,7 +65,7 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         Route::post('/save-settings', [SettingsController::class, 'saveSettings'])->name('admin.saveSettings');
         Route::post('/save-language', [SettingsController::class, 'saveLanguage'])->name('admin.saveLanguage');
         Route::post('/save-page', [SettingsController::class, 'savepage'])->name('admin.savePage');
-        Route::delete('/delete-page/{page}', [SettingsController::class, 'deletepage'])->name('admin.deletepage');
+        Route::delete('/delete-page/{page}', [SettingsController::class, 'deletepage'])->name('admin.deleted.page');
         // settings end
     });
 });
