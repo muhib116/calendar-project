@@ -59,17 +59,13 @@ class UserController extends Controller
                 ]);
             }
         }
-        try {
-            DB::beginTransaction();
-
-            $user->username && $data['username'] = $request->username;
-            
-            $user->save();
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return redirect()->back()->with('message', 'Opps! Something wrong');
+        
+        if($user->username) {            
+            $user->update([
+                'username' => $request->username
+            ]);
         }
+
         return redirect()->back()->with('message', 'Update successfully');
     }
 

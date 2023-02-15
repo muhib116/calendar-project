@@ -10,7 +10,10 @@ class FrontendController extends Controller
 {
     function index(){
         $countries = Country::all();
-        return Inertia::render('Frontend/Home', ['countries' => $countries]);
+        return Inertia::render('Frontend/Home', [
+            'countries' => $countries,
+            'isLogin' => auth()->check()
+        ]);
     }
     function pages($slug){
         $page = Page::where('slug', $slug)->orderBy('id', 'desc')->first();
