@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Models\Category;
 use \App\Models\Country;
 use App\Models\Language;
+use App\Models\Page;
 use App\Models\Settings;
 
 /*
@@ -41,4 +42,9 @@ Route::get('/languages', function(){
 Route::get('/settings', function(){
     $settings = Settings::first();
     return response()->json($settings);
+});
+
+Route::get('/pages', function(){
+    $pages = Page::get();
+    return response()->json($pages);
 });

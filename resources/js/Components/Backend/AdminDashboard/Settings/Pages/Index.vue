@@ -1,5 +1,5 @@
 <template>
-    <Create v-if="isEmpty(selectedPage) && size($page.props.pages) <= 2" />
+    <Create v-if="isEmpty(selectedPage) && size($page.props.pages) < 2" />
     <Edit v-if="!isEmpty(selectedPage)" @cancel="selectedPage=null" :selectedPage="selectedPage" />
 
     <div class="flex flex-col mt-4">
@@ -34,7 +34,7 @@
                             {{ Helper.translate(page.title, true) }}
                         </td>
                         <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                            {{ Helper.translate(page.slug) }}
+                            {{ Helper.translate(page.slug, true) }}
                         </td>
                         <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             <span class="font-semibold" :class="page.status ? 'text-green-500' : 'text-red-500'">
@@ -59,7 +59,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useForm } from '@inertiajs/inertia-vue3'
 import Helper from '@/Helper'
 import EditIcon from '@/Icons/EditIcon.vue'
 import CloseIcon from '@/Icons/CloseIcon.vue'
@@ -68,18 +67,11 @@ import Edit from '@/Components/Backend/AdminDashboard/Settings/Pages/Edit.vue'
 import { isEmpty, size } from 'lodash'
 import { Inertia } from '@inertiajs/inertia'
 
-const form = useForm({
-    title: null,
-    slug: null, 
-    settings: null,
-    description: null,
-});
-
 const selectedPage = ref(null);
 
 const handleDelete = (id) => {
     Helper.confirm('Are you sure to delete?', () => {
-        Inertia.delete(route('admin.deletepage', id))
+        Inertia.delete(route('admin.deleted.page', id))
     })
 }
 

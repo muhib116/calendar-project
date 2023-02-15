@@ -4,13 +4,13 @@
             <div class="relative w-full">
                 <CInput type="text" placeholder="First name" v-model="form.first_name" class="w-full" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.first_name', true) }}
+                    {{ Helper.translate(form.errors.first_name, true) }}
                 </span>
             </div>
             <div class="relative w-full">
                 <CInput type="text" placeholder="Last name" v-model="form.last_name" class="w-full" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.last_name', true) }}
+                    {{ Helper.translate(form.errors.last_name, true) }}
                 </span>
             </div>
         </div>
@@ -19,13 +19,13 @@
             <div class="relative w-full">
                 <CInput type="text" placeholder="Username (Known as)" v-model="form.username" class="w-full" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.username', true) }}
+                    {{ Helper.translate(form.errors.username, true) }}
                 </span>
             </div>
             <div class="relative w-full">
                 <CInput type="email" placeholder="Email" v-model="form.email" class="w-full" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.email', true) }}
+                    {{ Helper.translate(form.errors.email, true) }}
                 </span>
             </div>
         </div>
@@ -34,13 +34,13 @@
             <div class="relative w-full">
                 <CSelect v-model="form.country_id" :options="countries" class="w-full" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.country', true) }}
+                    {{ Helper.translate(form.errors.country, true) }}
                 </span>
             </div>
             <div class="relative w-full">
                 <CSelect v-model="form.category_id" :options="categories" placeholder="select category" class="w-full" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.category_id', true) }}
+                    {{ Helper.translate(form.errors.category_id, true) }}
                 </span>
             </div>
         </div>
@@ -49,13 +49,13 @@
             <div class="relative w-full">
                 <CInput type="password" placeholder="Password" v-model="form.password" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.password', true) }}
+                    {{ Helper.translate(form.errors.password, true) }}
                 </span>
             </div>
             <div class="relative w-full">
                 <CInput type="password" placeholder="Confirm Password" v-model="form.password_confirmation" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.password_confirmation', true) }}
+                    {{ Helper.translate(form.errors.password_confirmation, true) }}
                 </span>
             </div>
         </div>
@@ -63,7 +63,7 @@
         <div class="relative w-full mb-6">
             <CInput type="url" placeholder="Link" v-model="form.link" class="w-full" />
             <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                {{ Helper.translate('form.errors.link', true) }}
+                {{ Helper.translate(form.errors.link, true) }}
             </span>
         </div>
 
@@ -80,23 +80,28 @@
                     @input="form.video = $event.target.files[0]"
                 >
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-                    {{ Helper.translate('form.errors.video', true) }}
+                    {{ Helper.translate(form.errors.video, true) }}
                 </span>
                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
                     {{ Helper.translate('Max Upload Size 20MB') }}
                 </p>
+                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                    {{ form.progress.percentage }}%
+                </progress>
             </div>
-            <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-                {{ form.progress.percentage }}%
-            </progress>
         </div>
 
         <label class="flex items-center gap-2 select-none">
             <input type="checkbox" v-model="form.is_agree" />
             <div>
-                I certify that I am at least 18 years old. I have read and I agree to the 
-                <a href="#" class="text-[var(--link-color)]">Terms of service</a> 
-                and <a href="#" class="text-[var(--link-color)]">Privacy policy</a>.
+                {{ Helper.translate('I certify that I am at least 18 years old. I have read and I agree to the') }}
+                <Link target="_blank" :href="route('pages', 'terms-of-service')" class="text-[var(--link-color)]">
+                    {{ Helper.translate('Terms of service') }}
+                </Link> 
+                and 
+                <Link target="_blank" :href="route('pages', 'privacy-policy')" class="text-[var(--link-color)]">
+                    {{ Helper.translate('Privacy policy') }}
+                </Link>.
             </div>
         </label>
 
@@ -125,6 +130,7 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import axios from 'axios'
 import { isEmpty } from 'lodash'
 import Helper from '@/Helper'
+import { Link } from '@inertiajs/inertia-vue3'
 
 const countries = ref([{
     key: '',
@@ -212,3 +218,23 @@ let person = {
 
 
 </script>
+
+<style scoped>
+    progress[value]{
+        height: 10px;
+        width: 100%;
+    }
+    progress[value]::-webkit-progress-value {
+        background-image:
+            -webkit-linear-gradient(-45deg, 
+                                    transparent 33%, rgba(0, 0, 0, .1) 33%, 
+                                    rgba(0,0, 0, .1) 66%, transparent 66%),
+            -webkit-linear-gradient(top, 
+                                    rgba(255, 255, 255, .25), 
+                                    rgba(0, 0, 0, .25)),
+            -webkit-linear-gradient(left, #09c, #f44);
+
+        border-radius: 2px; 
+        background-size: 35px 20px, 100% 100%, 100% 100%;
+    }
+</style>

@@ -1,6 +1,8 @@
 <template>
     <label class="relative block" :class="disabled && 'pointer-events-none opacity-70'">
-        <span v-if="isEmpty(modelValue)" class="absolute left-0 top-3 pointer-events-none opacity-40 whitespace-nowrap">{{ placeholder }}</span>
+        <span v-if="isEmpty(modelValue)" class="absolute left-0 top-3 pointer-events-none opacity-40 whitespace-nowrap">
+            {{ Helper.translate(placeholder) }}
+        </span>
         <input @input="updateValue" :value="modelValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow bg-transparent">
         <span class="customBorder"></span>
         <div 
@@ -16,6 +18,7 @@
 <script setup>
     import { isEmpty } from 'lodash'
     import { ref } from 'vue'
+    import Helper from '@/Helper'
     
     const props = defineProps({
         type: String,
