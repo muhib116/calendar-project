@@ -14,7 +14,7 @@ Route::middleware(['auth', 'verified', 'user-role:user'])->group(function(){
     })->name('user.dashboard');
 
     Route::get('/user/dashboard/account', [UserController::class, 'account'])->name('user.account');
-    Route::put('/account-update', [UserController::class, 'accountUpdate'])->name('user.accountUpdate');
+    Route::put('user/account/update', [UserController::class, 'accountUpdate'])->name('user.account.update');
     
     Route::get('/user/dashboard/following', function () {
         return Inertia::render('Backend/UserDashboard/Following');

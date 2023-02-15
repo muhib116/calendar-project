@@ -34,7 +34,10 @@ class TalentController extends Controller
     }
 
     public function account() {
-        return Inertia::render('Backend/TalentDashboard/Account');
+        $user = User::find(auth()->id());
+        return Inertia::render('Backend/TalentDashboard/Account', [
+            'user' => $user
+        ]);
     }
     
     public function accountUpdate(Request $request) {
@@ -46,24 +49,27 @@ class TalentController extends Controller
                 'deleted_by' => auth()->id(),
             ]);
             auth()->logout();
-            return redirect()->route('home')->with('message', 'Account deleted successfully');
+            return redirect()->back()->with('message', 'Account deleted successfully');
         }
 
-        if (isset($request->current_password)) {
+        if (isset($request->old_password)) {
             $request->validate([
+                'old_password' => 'required',
                 'password' => 'required|confirmed'
             ]);
-            if (Hash::check($request->password, $user->password)) {
+            
+            if (Hash::check($request->old_password, $user->password)) {
                 $user->update([
                     'password' => Hash::make($request->password)
                 ]);
                 return redirect()->back()->with('message', 'Password updated successfully');
             } else {
                 return redirect()->back()->withErrors([
-                    'password' => "Password doesn't metch"
+                    'password' => "Password doesn't match"
                 ]);
             }
         }
+
         try {
             DB::beginTransaction();
 
@@ -73,11 +79,11 @@ class TalentController extends Controller
 
             $user->save();
             DB::commit();
+            return redirect()->back()->with('message', 'Update update successfully');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('message', 'Opps! Something wrong');
         }
-        return redirect()->back()->with('message', 'Update successfully');
     }
     public function applications() {
         $talents = User::where([

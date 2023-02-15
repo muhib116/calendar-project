@@ -50,7 +50,7 @@ Helper.translate = (text, isDynamic=false) => {
         return item.english == text
     })
 
-    if(data){
+    if(!isDynamic && data){
         return data[localStorage.language]
     }
     return text

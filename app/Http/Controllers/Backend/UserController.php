@@ -29,7 +29,10 @@ class UserController extends Controller
     }
 
     public function account() {
-        return Inertia::render('Backend/UserDashboard/Account');
+        $user = User::find(auth()->id());
+        return Inertia::render('Backend/UserDashboard/Account', [
+            'user' => $user
+        ]);
     }
 
     public function accountUpdate(Request $request) {
@@ -55,18 +58,18 @@ class UserController extends Controller
                 return redirect()->back()->with('message', 'Password updated successfully');
             } else {
                 return redirect()->back()->withErrors([
-                    'password' => "Password doesn't metch"
+                    'password' => "Password doesn't match"
                 ]);
             }
         }
         
-        if($user->username) {            
+        if($user->name) {            
             $user->update([
-                'username' => $request->username
+                'name' => $request->name
             ]);
         }
 
-        return redirect()->back()->with('message', 'Update successfully');
+        return redirect()->back()->with('message', 'Data updated successfully');
     }
 
     public function soft_delete(User $user) {

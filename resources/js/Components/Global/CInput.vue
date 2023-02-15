@@ -1,5 +1,5 @@
 <template>
-    <label class="relative block" :class="disabled && 'pointer-events-none opacity-70'">
+    <label class="relative block" :class="disabled && 'pointer-events-none opacity-50 bg-gray-50'">
         <span v-if="isEmpty(modelValue)" class="absolute left-0 top-3 pointer-events-none opacity-40 whitespace-nowrap">
             {{ Helper.translate(placeholder) }}
         </span>

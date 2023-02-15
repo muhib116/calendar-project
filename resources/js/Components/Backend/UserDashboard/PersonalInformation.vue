@@ -2,7 +2,7 @@
     <div>
         <h1 class="font-semibold text-xl mb-4">{{ Helper.translate('Personal Information') }}</h1>
         <div class="grid usernameAndEmailWrapper items-center gap-5 flex-wrap">
-            <CInput type="text" v-model="form.username" :placeholder="Helper.translate('Username')"/>
+            <CInput type="text" v-model="form.name" :placeholder="Helper.translate('Username')"/>
             <CInput disabled="false" type="email" v-model="$page.props.auth.user.email" />
             <button @click="handleSave" class="bg-red-500 text-white text-bold rounded shadow px-4 py-2 whitespace-nowrap">
                 {{ Helper.translate('Update') }} / {{ Helper.translate('Save') }}
@@ -14,24 +14,17 @@
 <script setup>
 import CInput from '@/Components/Global/CInput.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
-import Helper from '@/Helper';
-import { ref } from 'vue'
-import { isEmpty, get } from 'lodash';
+import Helper from '@/Helper'
 
+const props = defineProps({
+    user: Object
+})
 const form = useForm({
-    username: null,
-});
-
+    name: props.user.name
+})
 const handleSave = () => {
-    form.put(route('user.accountUpdate'), {
-        onSuccess(e) {
-            if (isEmpty(e.props.errors)) {
-                form.reset();
-            }
-        }
-    })
+    form.put(route('user.account.update'))
 }
-
 </script>
 
 <style scoped>

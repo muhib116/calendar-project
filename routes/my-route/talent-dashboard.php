@@ -11,7 +11,7 @@ Route::middleware(['auth', 'verified', 'user-role:talent'])->group(function(){
     })->name('talent.dashboard');
     
     Route::get('/talent/dashboard/account', [TalentController::class, 'account'])->name('talent.account');
-    Route::put('/account-update', [TalentController::class, 'accountUpdate'])->name('user.accountUpdate');
+    Route::put('/talent/account/update', [TalentController::class, 'accountUpdate'])->name('talent.account.update');
     
     Route::get('/talent/dashboard/profile/setup', function () {
         return Inertia::render('Backend/TalentDashboard/ProfileSetup');

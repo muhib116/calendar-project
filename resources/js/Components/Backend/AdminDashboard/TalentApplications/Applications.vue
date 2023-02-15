@@ -9,7 +9,7 @@
                 <TabChanger :activeItems="talents.length" />
             </div>
             <div>
-                <button @click="activeComponent = 'Declined'" class="px-4 py-1 rounded bg-red-400 text-white font-bold">
+                <button @click="activeComponent = 'Declined'" class="px-4 py-1 rounded bg-red-400 text-white font-bold whitespace-nowrap">
                     {{ Helper.translate('Application declined') }}
                 </button>
             </div>

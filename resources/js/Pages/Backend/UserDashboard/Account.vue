@@ -4,7 +4,7 @@
             <LeftSide />
         </template>
         <template v-slot:content>
-            <PersonalInformation />
+            <PersonalInformation :user="user" />
             <PasswordChange />
             <DeleteAccount />
         </template>
@@ -17,6 +17,10 @@ import LeftSide from '@/Components/Backend/UserDashboard/LeftSide.vue'
 import PersonalInformation from '@/Components/Backend/UserDashboard/PersonalInformation.vue'
 import PasswordChange from '@/Components/Backend/UserDashboard/PasswordChange.vue'
 import DeleteAccount from '@/Components/Backend/UserDashboard/DeleteAccount.vue'
+
+defineProps({
+    user: Object
+})
 </script>
 
 
