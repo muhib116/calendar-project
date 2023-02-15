@@ -1,7 +1,7 @@
 <template>
     <div class="relative group">
         <span 
-            class="font-black w-10 h-10 grid content-center justify-center rounded-full p-2 text-xs cursor-pointer"
+            class="font-black w-10 h-10 grid content-center justify-center rounded-full p-2 text-xs cursor-pointer uppercase"
             :class="
                 user.role && user.role == 'talent' ? 'bg-blue-500' : 
                 user.role && user.role == 'admin' ? 'bg-green-500' : 
@@ -46,7 +46,10 @@
 
     const getTwoLatterOfName = (name) => {
         name = name.split(' ')
-        return name[0][0]+name[1][0]
+        if(name.length>1){
+            return name[0][0]+name[1][0]
+        }
+        return name[0][0]+name[0][1]
     }
 </script>
 
