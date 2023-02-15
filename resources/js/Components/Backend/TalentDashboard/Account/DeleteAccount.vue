@@ -28,7 +28,7 @@ const handleDelete = () => {
 }
 
 const handleSave = () => {
-    form.put(route('user.account.update'), {
+    form.put(route('talent.account.update'), {
         onSuccess(e) {
             if (isEmpty(e.props.errors)) {
                 form.reset();

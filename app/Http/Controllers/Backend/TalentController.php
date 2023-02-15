@@ -48,8 +48,9 @@ class TalentController extends Controller
                 'deleted_at' => now(),
                 'deleted_by' => auth()->id(),
             ]);
+            
             auth()->logout();
-            return redirect()->back()->with('message', 'Account deleted successfully');
+            return redirect()->route('home')->with('message', 'Account deleted successfully');
         }
 
         if (isset($request->old_password)) {

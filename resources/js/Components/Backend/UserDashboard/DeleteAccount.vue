@@ -16,8 +16,6 @@
 
 <script setup>
 import Helper from '@/Helper';
-import { ref } from 'vue'
-import { isEmpty, get } from 'lodash';
 import { useForm } from '@inertiajs/inertia-vue3';
 
 const form = useForm({
@@ -26,7 +24,7 @@ const form = useForm({
 
 const handleSave = () => {
     Helper.confirm('Are you sure to delete your account?', () => {
-        form.put(route('user.accountUpdate'))
+        form.put(route('user.account.update'))
     })
 }
 </script>
