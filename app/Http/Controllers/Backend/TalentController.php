@@ -179,12 +179,14 @@ class TalentController extends Controller
         }
     }
 
-    public function followTalents($id) {
+    public function followTalents(Request $request, $id) {
         $talent = User::findOrFail($id);
+        
         $follow = Follower::where([
             'user_id' => auth()->id(),
             'talent_id' => $id,
         ])->first();
+        
         if ($follow) {
             $follow->delete();
             $message = 'You are unfollowing '.'('.$talent->name.')';
@@ -199,13 +201,13 @@ class TalentController extends Controller
     }
     
     public function talentDetailsForUser($id) {
-        $talent = User::findOrFail($id);
+        $talent = User::with(['category'])->findOrFail($id);
         $isFollow = Follower::where([
             'user_id' => auth()->id(),
             'talent_id' => $id,
         ])->first();
         $talent->isFollow = $isFollow ? 1 : 0;
-        return Inertia::render('Backend/ItemDetails',[
+        return Inertia::render('Backend/ItemsProfile',[
             'talent' => $talent,
         ]);
     }

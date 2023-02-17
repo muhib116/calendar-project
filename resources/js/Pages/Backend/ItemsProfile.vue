@@ -7,7 +7,7 @@
                 </button>
                 <div class="grid grid-cols-3 gap-6">
                     <div class="video customRatio">
-                        <video controls autoplay>
+                        <video controls>
                             <source :src="`${$page.props.ziggy.url}/${talent.video_path}`">
                         </video>
                         <!-- <Video poster="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" /> -->

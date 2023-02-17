@@ -1,5 +1,6 @@
 <template>
     <Master>
+
         <Head title="Home" />
         <div class="wrapper grid h-[100vh] overflow-y-auto">
             <div class="p-4 bg-[#0b021a] relative flex items-center justify-center h-full">
@@ -20,11 +21,7 @@
                             <Notification />
                             <Profile />
                         </div>
-                        <button 
-                            v-else
-                            @click="showAuthModal = true" 
-                            class="font-black lg:px-6 px-3 py-2 border border-white border-opacity-50 text-white text-opacity-60 hover:text-opacity-100 rounded-full"
-                        >
+                        <button v-else @click="showAuthModal = true" class="font-black lg:px-6 px-3 py-2 border border-white border-opacity-50 text-white text-opacity-60 hover:text-opacity-100 rounded-full">
                             {{ Helper.translate('Sign Up') }}
                         </button>
                     </div>
@@ -47,7 +44,7 @@
                     </div>
 
                 </div>
-                <Footer class="mt-20 absolute bottom-0 left-0 w-full"/>
+                <Footer class="mt-20 absolute bottom-0 left-0 w-full" />
             </div>
         </div>
 
@@ -58,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Head, usePage } from '@inertiajs/inertia-vue3'
 import Master from '@/Components/Frontend/Master.vue'
 import CategoryWiseLatestItem from '@/Components/Frontend/CategoryWiseLatestItem.vue'
@@ -83,16 +80,16 @@ const props = defineProps({
 const currentPosition = ref(0)
 
 const categoryPear = ref([])
+const pearArray = ref([])
 
-onMounted(()=>{
-    // categoryPear.value = getCategoryPear(props.categories, currentIndex.value)
+onMounted(() => {
     handleCategoryPear(0)
 })
 
 const handleCategoryPear = (direction) => {
-    currentPosition.value += (direction + (1*direction));
+    currentPosition.value += (direction + (1 * direction));
 
-    if(direction < 0 && currentPosition.value < 0) {
+    if (direction < 0 && currentPosition.value < 0) {
         console.log('direction', direction);
         currentPosition.value = props.categories.length - 1;
     }
@@ -100,35 +97,13 @@ const handleCategoryPear = (direction) => {
     if (currentPosition.value > props.categories.length - 1) {
         currentPosition.value = 0;
     }
-    categoryPear.value = props.categories.splice(currentPosition.value, currentPosition.value+1);
+    categoryPear.value = props.categories.slice(currentPosition.value, currentPosition.value + 2);
 }
-
-
-// const prevPear = (category) => {
-//     currentIndex.value = currentIndex.value - 1;
-//     categoryPear.value = getCategoryPear(props.categories, currentIndex.value);
-// }
-
-// const nextPear = () => {
-//     currentIndex.value = currentIndex.value + 1;
-//     categoryPear.value = getCategoryPear(props.categories, currentIndex.value);
-// }
-
-// const getCategoryPear = (category, index) => {
-//     let start = 0;
-//     (category.length > index*2) ? start = index * 2 : currentIndex.value = 0;
-
-//     let target = [
-//         category[start],
-//         category[start+1],
-//     ] 
-//     return target;
-// }
 
 </script>
 
 <style scoped>
-    .wrapper{
-        grid-template-columns: 2fr 3fr;
-    }
+.wrapper {
+    grid-template-columns: 2fr 3fr;
+}
 </style>

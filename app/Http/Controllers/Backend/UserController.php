@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Follower;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,10 +48,13 @@ class UserController extends Controller
             return redirect()->route('home')->with('message', 'Account deleted successfully');
         }
 
-        if (isset($request->current_password)) {
+        if ($request->has('current_password')) {
             $request->validate([
+                'current_password' => 'required',
                 'password' => 'required|confirmed'
             ]);
+            // dd($user);
+            // dd(Hash::check('password', '$2y$10$Qg6HXFBgr48JN4ivd2R2yuJZrDI7YMK3BbQRvaRJH3kdOUurJi0kK'));
             if (Hash::check($request->password, $user->password)) {
                 $user->update([
                     'password' => Hash::make($request->password)
@@ -62,8 +66,10 @@ class UserController extends Controller
                 ]);
             }
         }
-        
-        if($user->name) {            
+        if($request->has('name')) {
+            $request->validate([
+                'name' => 'required'
+            ]);
             $user->update([
                 'name' => $request->name
             ]);
@@ -79,7 +85,7 @@ class UserController extends Controller
         $user->delete();
         return redirect()->back()->with('message', 'User deleted successfully!');
     }
-    
+
     public function restore_user($user) {
         $user = User::onlyTrashed()->find($user);
         $user->update([
@@ -87,6 +93,16 @@ class UserController extends Controller
         ]);
         $user->restore();
         return redirect()->back()->with('message', 'User restored successfully!');
+    }
+
+    public function userFollowing() {
+        $ids = Follower::where(['user_id' => auth()->id()])->pluck('talent_id');
+        $following = User::where(['role' => 'talent'])->with(['category'])->whereIn('id', $ids)->get();
+        
+        
+        return Inertia::render('Backend/UserDashboard/Following', [
+            'following' => $following
+        ]);
     }
 
     public function userDetails(User $user) {

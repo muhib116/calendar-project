@@ -19,9 +19,7 @@ Route::middleware(['auth', 'verified', 'user-role:user'])->group(function(){
     Route::get('/user/dashboard/account', [UserController::class, 'account'])->name('user.account');
     Route::put('user/account/update', [UserController::class, 'accountUpdate'])->name('user.account.update');
     
-    Route::get('/user/dashboard/following', function () {
-        return Inertia::render('Backend/UserDashboard/Following');
-    })->name('user.following');
+    Route::get('/user/dashboard/following', [UserController::class, 'userFollowing'])->name('user.following');
     
     Route::get('/user/dashboard/subscription', function () {
         return Inertia::render('Backend/UserDashboard/Subscription');
@@ -41,8 +39,8 @@ Route::middleware(['auth', 'verified', 'user-role:user'])->group(function(){
         return Inertia::render('Backend/CategoryWiseItem');
     })->name('category.items');
     
-    Route::get('/talent/{id}', [TalentController::class, 'talentDetailsForUser'])->name('item.details');
-    Route::post('/talent/{id}/follow', [TalentController::class, 'followTalents'])->name('item.followTalents');
+    Route::get('/talents/{id}', [TalentController::class, 'talentDetailsForUser'])->name('item.details');
+    Route::post('/talents/{id}/follow', [TalentController::class, 'followTalents'])->name('item.followTalents');
     
     Route::get('/payment/info', function () {
         return Inertia::render('Backend/Payment/Info');

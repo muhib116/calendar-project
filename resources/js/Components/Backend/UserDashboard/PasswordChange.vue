@@ -34,7 +34,7 @@ const form = useForm({
 });
 
 const handleSave = () => {
-    form.put(route('user.accountUpdate'), {
+    form.put(route('user.account.update'), {
         onSuccess(e) {
             if (isEmpty(e.props.errors)) {
                 form.reset();

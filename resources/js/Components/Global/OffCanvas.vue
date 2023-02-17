@@ -13,7 +13,7 @@
 
                 <div class="nav grid py-6">
                     <template v-for="(category, index) in $page.props.categories" :key="index">
-                        <Link @click="$emit('update:modelValue', false)" class="px-6 py-2 border-b border-opacity-5 font-semibold text-black text-opacity-80 hover:text-opacity-100 hover:text-[orangered]" :href="category.slug">
+                        <Link :href="route('category.items',category.slug)" @click="$emit('update:modelValue', false)" class="px-6 py-2 border-b border-opacity-5 font-semibold text-black text-opacity-80 hover:text-opacity-100 hover:text-[orangered]">
                         {{ Helper.translate(category.name, true) }}
                         </Link>
                     </template>

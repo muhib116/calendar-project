@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::middleware(['auth', 'verified', 'user-role:talent'])->group(function(){
+
+
+Route::middleware(['auth', 'user-role:talent'])->group(function(){
+
     Route::get('/talent/dashboard', function () {
         return Inertia::render('Backend/TalentDashboard/Guide');
     })->name('talent.dashboard');
