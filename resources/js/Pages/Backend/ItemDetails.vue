@@ -2,25 +2,40 @@
     <Master>
         <div class="px-4">
             <div class="container mx-auto py-5 relative">
-                <Link :href="route('category.items', 'actress')" class="mb-4 absolute right-full mr-2">
+                <button @click="back" type="button" class="mb-4 absolute right-full mr-2">
                     <BackIcon />
-                </Link>
+                </button>
                 <div class="grid grid-cols-3 gap-6">
                     <div class="video customRatio">
-                        <Video poster="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" />
+                        <video controls autoplay>
+                            <source :src="`${$page.props.ziggy.url}/${talent.video_path}`">
+                        </video>
+                        <!-- <Video poster="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" /> -->
                     </div>
                     <div class="grid grid-rows-3 items-baseline">
                         <div>
-                            <h1 class="text-xl font-bold">Muhibbullah Ansary</h1>
-                            <h2 class="text-gray-500">Creator/Artist</h2>
+                            <h1 class="text-xl font-bold">{{ Helper.translate(talent.name, true) }}</h1>
+                            <h2 class="text-gray-500">{{ Helper.translate(get(talent, 'category.name')) }}</h2>
                         </div>
                         <div class="grid gap-4">
-                            <Link :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-red-600 text-white font-bold text-center">Personalized Video: $50</Link>
-                            <Link :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-black text-white font-bold text-center">My Life</Link>
-                            <Link :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-sky-500 text-white font-bold text-center">Tip</Link>
+                            <Link :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-red-600 text-white font-bold text-center">
+                                {{ Helper.translate('Personalized Video') }}: {{ Helper.priceFormate(50) }}
+                            </Link>
+                            <Link :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-black text-white font-bold text-center">
+                                {{ Helper.translate('My Life') }}
+                            </Link>
+                            <Link :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-sky-500 text-white font-bold text-center">
+                                {{ Helper.translate('Tip') }}
+                            </Link>
                         </div>
-                        <button class="self-end sticky bottom-4 bg-[var(--btn-bg-color)] text-[var(--btn-text-color)] px-8 py-2 text-xl rounded font-semibold shadow mx-auto block">
-                            Follow
+                        <button @click="handleFollow(talent.id)" :disabled="followForm.processing" type="button" class="self-end flex items-center sticky bottom-4 bg-[var(--btn-bg-color)] text-[var(--btn-text-color)] px-8 py-2 text-xl rounded font-semibold shadow mx-auto disabled:opacity-80">
+                            <LoaderIcon v-if="followForm.processing" />
+                            <template v-if="talent.isFollow">
+                                {{ Helper.translate('Unfollow') }}
+                            </template>
+                            <template v-else>
+                                {{ Helper.translate('Follow') }}
+                            </template>
                         </button>
                     </div>
                     <div class="calendar flex flex-col customRatio">
@@ -39,8 +54,24 @@
 <script setup>
 import Master from './Master.vue';
 import Video from '@/Components/Global/Video.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link, useForm } from '@inertiajs/inertia-vue3';
 import BackIcon from '@/Icons/BackIcon.vue';
+import { get } from 'lodash';
+import Helper from '@/Helper';
+import LoaderIcon from '@/Components/Global/Icons/LoaderIcon.vue'
+
+const props = defineProps({
+    talent: Object,
+});
+
+const followForm = useForm({})
+const handleFollow = (id) => {
+    followForm.post(route('item.followTalents', id));
+}
+const back = () => {
+    history.back()
+}
+
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Backend\TalentController;
 use App\Http\Controllers\Backend\UserController;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -31,13 +34,15 @@ Route::middleware(['auth', 'verified', 'user-role:user'])->group(function(){
 
     // ------
 
-    Route::get('/category/{categorySlug}', function () {
+    Route::get('/category/{categorySlug}', function ($slug) {
+        $talents = User::whereHas('category', function($query) use($slug) {
+            return $query->where('slug', $slug);
+        })->with('category')->get();
         return Inertia::render('Backend/CategoryWiseItem');
     })->name('category.items');
     
-    Route::get('/details/{slug}', function () {
-        return Inertia::render('Backend/ItemDetails');
-    })->name('item.details');
+    Route::get('/talent/{id}', [TalentController::class, 'talentDetailsForUser'])->name('item.details');
+    Route::post('/talent/{id}/follow', [TalentController::class, 'followTalents'])->name('item.followTalents');
     
     Route::get('/payment/info', function () {
         return Inertia::render('Backend/Payment/Info');

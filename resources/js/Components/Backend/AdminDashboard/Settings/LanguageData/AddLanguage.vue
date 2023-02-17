@@ -21,13 +21,13 @@
                     <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.french, true) }}</span>
                 </label>
                 <label class="w-full mb-6 block relative">
-                    <h1 class="text-sm font-bold">Español</h1>
+                    <h1 class="text-sm font-bold">Portugues</h1>
                     <CInput 
                         type="text" 
                         placeholder="Enter text"
-                        v-model="form.spanish"
+                        v-model="form.portugues"
                     />
-                    <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.spanish, true) }}</span>
+                    <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.portugues, true) }}</span>
                 </label>
             </div>
             <div class="mt-5 flex gap-5 justify-center">
@@ -50,7 +50,7 @@ import Helper from "@/Helper"
 const form = useForm({
     english: null,
     french: null,
-    spanish: null,
+    portugues: null,
     settings: null,
 });
 

@@ -8,8 +8,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import axios from 'axios'
-import 'vue3-toastify/dist/index.css'
-
+import 'vue3-toastify/dist/index.css' 
 
 
 axios.defaults.baseURL = `${document.location.origin}/api/`;

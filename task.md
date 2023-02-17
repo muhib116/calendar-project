@@ -60,21 +60,21 @@ Meeting: 003;
     -- first time, render first 2 category and related video.
     -- on next and prev arrow click, Show next 2 category and related video.
 
-3:: user dashboard>account module. 30min
-    -- personal information.(disable email)
-    -- password change
-    -- account soft delete
+3:: ✅user dashboard>account module. 30min
+    -- ✅personal information.(disable email)
+    -- ✅password change
+    -- ✅account soft delete
 
-4:: talent dashboard>account module 5min
-    -- personal information.(disable email)
-    -- password change
-    -- account soft delete
-    -- rename email name to email
+4:: ✅talent dashboard>account module 5min
+    -- ✅personal information.(disable email)
+    -- ✅password change
+    -- ✅account soft delete
+    -- ✅rename email name to email
 
-5:: talent dashboard>profile setup module 35min
-    -- replace video
-    -- change category
-    -- when video selected, show Close icon component.
+5:: ✅talent dashboard>profile setup module 35min
+    -- ✅replace video
+    -- ✅change category
+    -- ✅when video selected, show Close icon component.
 
 6:: By clicking talents navigate to talents profile 50min
     -- talent profile render talents information, video.
@@ -84,6 +84,11 @@ Meeting: 003;
     -- render following talents.
     -- unfollow talents
     -- try video thumbnail https://codepen.io/aertmann/pen/mrVaPx
+
+Hey, how is it going. This is the Guide for talents (Not for users - I will send you the one for users later) For the languages, we will replace Spanish by Portugues. The guide for talents that I have sent is in both ENGLISH and FRANCAIS. Thanks
+
+
+
 
 
 Next meeting: 16/Fab/2023 at 11:00PM

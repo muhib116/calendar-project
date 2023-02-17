@@ -10,8 +10,10 @@
             <div class="py-10 px-8 bg-[#1c2130] text-white relative">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="font-black text-2xl">Calendars & Special videos</h1>
-                        <h2 class="text-white text-opacity-30 text-xl">For any occasion, from your preferred personality</h2>
+                        <h1 class="font-black text-2xl">{{ Helper.translate('Calendars & Special videos') }}</h1>
+                        <h2 class="text-white text-opacity-30 text-xl">
+                            {{ Helper.translate('For any occasion, from your preferred personality') }}
+                        </h2>
                     </div>
                     <div>
                         <div v-if="isLogin" class="flex gap-4 items-center justify-end">
@@ -23,23 +25,25 @@
                             @click="showAuthModal = true" 
                             class="font-black lg:px-6 px-3 py-2 border border-white border-opacity-50 text-white text-opacity-60 hover:text-opacity-100 rounded-full"
                         >
-                            Sign Up
+                            {{ Helper.translate('Sign Up') }}
                         </button>
                     </div>
                 </div>
 
                 <div class="grid mb-8 relative">
                     <div class="absolute w-full top-1/2 left-0 right-0 flex justify-between">
-                        <button class="-ml-5 opacity-50 hover:opacity-100">
+                        <button @click="handleCategoryPear(-1)" class="-ml-5 opacity-50 hover:opacity-100">
                             <AngleLeftIcon />
                         </button>
-                        <button class="-mr-5 opacity-50 hover:opacity-100">
+                        <button @click="handleCategoryPear(+1)" class="-mr-5 opacity-50 hover:opacity-100">
                             <AngleRightIcon />
                         </button>
                     </div>
                     <div class="grid mt-10 gap-5 px-[30px]">
-                        <CategoryWiseLatestItem title="Actors" />
-                        <CategoryWiseLatestItem title="Artists"/>
+                        <template v-for="(category, index) in categoryPear" :key="index">
+                            <CategoryWiseLatestItem :talents="category.talents" :title="category.name" />
+                        </template>
+                        <!-- <CategoryWiseLatestItem title="Artists"/> -->
                     </div>
 
                 </div>
@@ -54,8 +58,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { Head } from '@inertiajs/inertia-vue3'
+import { ref, computed, onMounted } from 'vue'
+import { Head, usePage } from '@inertiajs/inertia-vue3'
 import Master from '@/Components/Frontend/Master.vue'
 import CategoryWiseLatestItem from '@/Components/Frontend/CategoryWiseLatestItem.vue'
 import Search from '@/Components/Frontend/Home/Search.vue'
@@ -67,11 +71,60 @@ import Profile from '@/Components/Backend/Global/Components/Profile.vue'
 import Footer from '@/Components/Backend/Global/Footer.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
+import Helper from '@/Helper'
+
 
 const showAuthModal = ref(false)
 const props = defineProps({
     isLogin: Boolean,
+    categories: Array
 })
+
+const currentPosition = ref(0)
+
+const categoryPear = ref([])
+
+onMounted(()=>{
+    // categoryPear.value = getCategoryPear(props.categories, currentIndex.value)
+    handleCategoryPear(0)
+})
+
+const handleCategoryPear = (direction) => {
+    currentPosition.value += (direction + (1*direction));
+
+    if(direction < 0 && currentPosition.value < 0) {
+        console.log('direction', direction);
+        currentPosition.value = props.categories.length - 1;
+    }
+
+    if (currentPosition.value > props.categories.length - 1) {
+        currentPosition.value = 0;
+    }
+    categoryPear.value = props.categories.splice(currentPosition.value, currentPosition.value+1);
+}
+
+
+// const prevPear = (category) => {
+//     currentIndex.value = currentIndex.value - 1;
+//     categoryPear.value = getCategoryPear(props.categories, currentIndex.value);
+// }
+
+// const nextPear = () => {
+//     currentIndex.value = currentIndex.value + 1;
+//     categoryPear.value = getCategoryPear(props.categories, currentIndex.value);
+// }
+
+// const getCategoryPear = (category, index) => {
+//     let start = 0;
+//     (category.length > index*2) ? start = index * 2 : currentIndex.value = 0;
+
+//     let target = [
+//         category[start],
+//         category[start+1],
+//     ] 
+//     return target;
+// }
+
 </script>
 
 <style scoped>
