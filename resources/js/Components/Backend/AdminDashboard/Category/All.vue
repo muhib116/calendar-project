@@ -5,7 +5,7 @@
                 <component :is="components['PageSize']" />
             </div>
             <button @click="activeComponent = 'Add'" class="px-4 py-1 rounded bg-sky-500 text-white font-bold">
-                Add Category
+                {{ Helper.translate('Add Category') }}
             </button>
         </div>
 
@@ -18,27 +18,35 @@
                                 #
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Category
+                                {{ Helper.translate('Category') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Status
+                                {{ Helper.translate('Status') }}
+                            </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                {{ Helper.translate('Parent') }}
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
-                                Action
+                                {{ Helper.translate('Action') }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(category, index) in resultPerPage" :key="category.id" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ index+1 }}
+                                {{ Helper.translate(index+1, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ category.name }}
+                                {{ Helper.translate(category.name, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                 <span class="font-semibold" :class="category.status ? 'text-green-500' : 'text-red-500'">
-                                    {{ category.status ? 'Enabled' : 'Disabled' }}
+                                    {{ category.status ? Helper.translate('Enabled') : Helper.translate('Disabled') }}
+                                </span>
+                            </td>
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                <span class="font-semibold" :class="category.status ? 'text-green-500' : 'text-red-500'">
+                                    {{ category.status ? Helper.translate('Enabled') : Helper.translate('Disabled') }}
                                 </span>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
@@ -52,7 +60,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <Alert v-if="isEmpty(categories)" />
+                <Alert v-if="isEmpty(data)" />
             </div>
             <component :is="components['Pagination']" />
         </div>

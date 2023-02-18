@@ -28,6 +28,7 @@ class CategoryController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'status' => $request->status,
+            'parent_id' => $request->parent_id,
         ]);
 
         return redirect()->route('admin.categories')->with('message', 'Category created successfully!');
@@ -44,6 +45,7 @@ class CategoryController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'status' => $request->status,
+            'parent_id' => $request->parent_id,
         ]);
 
         return redirect()->route('admin.categories')->with('message', 'Category updated successfully!');

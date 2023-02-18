@@ -100,7 +100,7 @@ Next meeting: 17/Fab/2023 at 11:00PM
 -----------------------------------------
 Meeting: 005;
 
-4:: on admin->pages add type from option field. <CSelect /> (
+4::✅ on admin->pages add type from option field. <CSelect /> (
     -- value --
     privacy-policy
     terms-of-service
@@ -117,9 +117,9 @@ Meeting: 005;
     }]
 )
 
-5:: Add spanish language
+5::✅ Add spanish language
 
-6:: if user->following list empty show no result found.
+6::✅ if user->following list empty show no result found.
 
 7:: copy category module and make it Occasion module.
 

@@ -4,6 +4,10 @@
         <CInput type="text" v-model="form.title" :placeholder="Helper.translate('Title')" />
         <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.title, true) }}</span>
     </div> 
+    <div class="relative mb-6">
+        <CSelect type="text" v-model="form.type" :options="pageTypes" />
+        <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.title, true) }}</span>
+    </div>
     <ckeditor class="mb-4" :editor="ClassicEditor" v-model="form.description" :config="editorConfig"></ckeditor>
     <div class="flex gap-5 justify-end">
         <button @click="$emit('canceledit')" class="bg-red-500 text-white block font-semibold px-4 py-2 rounded mt-2">
@@ -22,6 +26,7 @@ import CInput from '@/Components/Global/CInput.vue'
 import { onMounted, ref, defineEmits } from 'vue'
 import Helper from '@/Helper'
 import { isEmpty } from 'lodash'
+import CSelect from '@/Components/Global/CSelect.vue'
 
 const props = defineProps({
     selectedPage: Object,
@@ -41,10 +46,20 @@ const editorConfig = ref({
     }
 })
 
+const pageTypes = [{
+    key: 'privacy-policy',
+    value: Helper.translate('Privacy policy')
+},
+{
+    key: 'terms-of-service',
+    value: Helper.translate('Terms of service')
+}]
+
 const form = useForm({
     id: null,
     title: null,
     slug: null, 
+    type: null, 
     settings: null,
     description: '',
 })
@@ -54,6 +69,7 @@ onMounted(()=>{
     form.id = selectedPage.id;
     form.title = selectedPage.title;
     form.slug = selectedPage.slug;
+    form.type = selectedPage.type;
     form.email = selectedPage.email;
     form.settings = selectedPage.settings;
     form.description = selectedPage.description;

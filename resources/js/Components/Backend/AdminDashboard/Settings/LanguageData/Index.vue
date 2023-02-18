@@ -5,11 +5,11 @@
             + {{ Helper.translate('Add') }}
         </button>
     </h1>
-    <div class="grid grid-cols-3 mt-4 gap-6">
-        <LanguageList title="English" lang="english" :handleEdit="handleEdit" :languages="$page.props.languages" />
-        <LanguageList title="Français" lang="french" :handleEdit="handleEdit" :languages="$page.props.languages" />
-        <LanguageList title="Portugues" lang="portugues" :handleEdit="handleEdit" :languages="$page.props.languages" />
-
+    <div class="grid grid-cols-4 mt-4 gap-6">
+        <LanguageList title="English" lang="english" :languages="$page.props.languages" />
+        <LanguageList title="Français" lang="french" :languages="$page.props.languages" />
+        <LanguageList title="Portugues" lang="portugues" :languages="$page.props.languages" />
+        <LanguageList title="Español" lang="spanish" :languages="$page.props.languages" />
     </div>
 
     <Modal v-model="showModal">
