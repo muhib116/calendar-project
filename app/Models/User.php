@@ -64,4 +64,11 @@ class User extends Authenticatable
     public function country() {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
+    public function fullowers() {
+        return $this->hasMany(Follower::class, 'talent_id', 'id');
+    }
+    public function userFollow() {
+        return $this->hasMany(Follower::class, 'talent_id', 'id');
+    }
 }

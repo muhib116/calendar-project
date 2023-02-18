@@ -1,5 +1,6 @@
 <template>
     <Master>
+
         <Head title="Home" />
         <div class="wrapper grid h-[100vh] overflow-y-auto">
             <div class="p-4 bg-[#0b021a] relative flex items-center justify-center h-full">
@@ -10,40 +11,40 @@
             <div class="py-10 px-8 bg-[#1c2130] text-white relative">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="font-black text-2xl">Calendars & Special videos</h1>
-                        <h2 class="text-white text-opacity-30 text-xl">For any occasion, from your preferred personality</h2>
+                        <h1 class="font-black text-2xl">{{ Helper.translate('Calendars & Special videos') }}</h1>
+                        <h2 class="text-white text-opacity-30 text-xl">
+                            {{ Helper.translate('For any occasion, from your preferred personality') }}
+                        </h2>
                     </div>
                     <div>
                         <div v-if="isLogin" class="flex gap-4 items-center justify-end">
                             <Notification />
                             <Profile />
                         </div>
-                        <button 
-                            v-else
-                            @click="showAuthModal = true" 
-                            class="font-black lg:px-6 px-3 py-2 border border-white border-opacity-50 text-white text-opacity-60 hover:text-opacity-100 rounded-full"
-                        >
-                            Sign Up
+                        <button v-else @click="showAuthModal = true" class="font-black lg:px-6 px-3 py-2 border border-white border-opacity-50 text-white text-opacity-60 hover:text-opacity-100 rounded-full">
+                            {{ Helper.translate('Sign Up') }}
                         </button>
                     </div>
                 </div>
 
                 <div class="grid mb-8 relative">
                     <div class="absolute w-full top-1/2 left-0 right-0 flex justify-between">
-                        <button class="-ml-5 opacity-50 hover:opacity-100">
+                        <button @click="handleCategoryPear(-1)" class="-ml-5 opacity-50 hover:opacity-100">
                             <AngleLeftIcon />
                         </button>
-                        <button class="-mr-5 opacity-50 hover:opacity-100">
+                        <button @click="handleCategoryPear(+1)" class="-mr-5 opacity-50 hover:opacity-100">
                             <AngleRightIcon />
                         </button>
                     </div>
                     <div class="grid mt-10 gap-5 px-[30px]">
-                        <CategoryWiseLatestItem title="Actors" />
-                        <CategoryWiseLatestItem title="Artists"/>
+                        <template v-for="(category, index) in categoryPear" :key="index">
+                            <CategoryWiseLatestItem :talents="category.talents" :title="category.name" />
+                        </template>
+                        <!-- <CategoryWiseLatestItem title="Artists"/> -->
                     </div>
 
                 </div>
-                <Footer class="mt-20 absolute bottom-0 left-0 w-full"/>
+                <Footer class="mt-20 absolute bottom-0 left-0 w-full" />
             </div>
         </div>
 
@@ -54,8 +55,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { Head } from '@inertiajs/inertia-vue3'
+import { ref, onMounted } from 'vue'
+import { Head, usePage } from '@inertiajs/inertia-vue3'
 import Master from '@/Components/Frontend/Master.vue'
 import CategoryWiseLatestItem from '@/Components/Frontend/CategoryWiseLatestItem.vue'
 import Search from '@/Components/Frontend/Home/Search.vue'
@@ -67,15 +68,42 @@ import Profile from '@/Components/Backend/Global/Components/Profile.vue'
 import Footer from '@/Components/Backend/Global/Footer.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
+import Helper from '@/Helper'
+
 
 const showAuthModal = ref(false)
 const props = defineProps({
     isLogin: Boolean,
+    categories: Array
 })
+
+const currentPosition = ref(0)
+
+const categoryPear = ref([])
+const pearArray = ref([])
+
+onMounted(() => {
+    handleCategoryPear(0)
+})
+
+const handleCategoryPear = (direction) => {
+    currentPosition.value += (direction + (1 * direction));
+
+    if (direction < 0 && currentPosition.value < 0) {
+        console.log('direction', direction);
+        currentPosition.value = props.categories.length - 1;
+    }
+
+    if (currentPosition.value > props.categories.length - 1) {
+        currentPosition.value = 0;
+    }
+    categoryPear.value = props.categories.slice(currentPosition.value, currentPosition.value + 2);
+}
+
 </script>
 
 <style scoped>
-    .wrapper{
-        grid-template-columns: 2fr 3fr;
-    }
+.wrapper {
+    grid-template-columns: 2fr 3fr;
+}
 </style>

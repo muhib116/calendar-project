@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -30,10 +32,14 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $countries = Country::where(['status' => 1])->get();
+        $categories = Category::where(['status' => 1])->get();
         return array_merge(parent::share($request), [
             'flash' => [
                 'message' => session('message')
             ],
+            'countries' => $countries,
+            'categories' => $categories,
             'auth' => [
                 'user' => $request->user(),
             ],

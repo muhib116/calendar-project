@@ -13,4 +13,8 @@ class Category extends Model
     // protected $casts = [
     //     'settings' => 'array',
     // ];
+
+    public function talents() {
+        return $this->hasMany(User::class, 'category_id', 'id');
+    }
 }

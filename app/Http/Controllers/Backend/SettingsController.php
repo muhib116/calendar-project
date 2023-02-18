@@ -57,13 +57,13 @@ class SettingsController extends Controller
         $request->validate([
             'english' => 'required|unique:languages,english,'.$except,
             'french' => 'required|unique:languages,french,'.$except,
-            'spanish' => 'required|unique:languages,spanish,'.$except,
+            'portugues' => 'required|unique:languages,portugues,'.$except,
         ]);
 
         $data = [
             'english' => $request->english,
             'french' => $request->french,
-            'spanish' => $request->spanish,
+            'portugues' => $request->portugues,
             'settings' => $request->settings,
         ];
         $lang = null;

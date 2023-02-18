@@ -7,6 +7,10 @@ let settings = await axios.get('settings')
 
 const Helper = {}
 
+export const test = () => {
+    return 'Test';
+}
+
 Helper.confirm = (msg=null, cb) => {
     let status = false
     Swal.fire({

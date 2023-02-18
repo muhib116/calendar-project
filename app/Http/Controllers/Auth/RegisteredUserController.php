@@ -43,8 +43,8 @@ class RegisteredUserController extends Controller
             $validation_item['first_name'] = ['required', 'string', 'max:255'];
             $validation_item['last_name'] = ['required', 'string', 'max:255'];
             $validation_item['username'] = ['required', 'string', 'max:255'];
-            $validation_item['category_id'] = ['required', 'max:255'];
-            $validation_item['category_id'] = ['required', 'string', 'max:255'];
+            // $validation_item['category_id'] = ['required', 'max:255'];
+            // $validation_item['category_id'] = ['required', 'string', 'max:255'];
             $validation_item['link'] = ['required', 'string', 'max:255'];
             $validation_item['video'] = ['required', 'mimes:mp4,ogx,oga,ogv,ogg,webm'];
         }
@@ -65,7 +65,7 @@ class RegisteredUserController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'username' => $request->username,
-            'country_id' => $request->category_id,
+            'country_id' => $request->country_id,
             'category_id' => $request->category_id,
             'video_path' => $path,
             'link' => $request->link,

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Follower;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +41,36 @@ class TalentController extends Controller
             'user' => $user
         ]);
     }
-    
+
+    public function ProfileSetup() {
+        $talent = User::with(['category'])->find(auth()->id());
+        $categories = Category::where('status', 1)->get();
+        return Inertia::render('Backend/TalentDashboard/ProfileSetup', [
+            'talent' => $talent,
+            'categories' => $categories
+        ]);
+    }
+
+    public function profileUpdate(Request $request) {
+        $user = User::find(auth()->id());
+        $file = $request->file('video_file'); 
+        try {
+            $fileName = time().'.'.$file->extension();
+            if($file && $file->move('uploads/', $fileName)) {
+                if(file_exists(public_path($user->video_path))) {
+                    unlink(public_path($user->video_path));
+                }
+                $user->video_path = 'uploads/'.$fileName;
+            }
+        } catch (\Throwable $th) {}
+        if ($request->category_id) {
+            $user->category_id = $request->category_id;
+        }
+        $user->save();
+
+        return redirect()->back()->with('message', 'Profile updated successfully');
+    }
+
     public function accountUpdate(Request $request) {
         $user = User::find(auth()->id());
 
@@ -147,7 +178,39 @@ class TalentController extends Controller
             ]);
         }
     }
+
+    public function followTalents(Request $request, $id) {
+        $talent = User::findOrFail($id);
+        
+        $follow = Follower::where([
+            'user_id' => auth()->id(),
+            'talent_id' => $id,
+        ])->first();
+        
+        if ($follow) {
+            $follow->delete();
+            $message = 'You are unfollowing '.'('.$talent->name.')';
+        } else {
+            Follower::create([
+                'user_id' => auth()->id(),
+                'talent_id' => $id
+            ]);
+            $message = 'You are following '.'('.$talent->name.')';
+        }
+        return redirect()->back()->with('message', $message);
+    }
     
+    public function talentDetailsForUser($id) {
+        $talent = User::with(['category'])->findOrFail($id);
+        $isFollow = Follower::where([
+            'user_id' => auth()->id(),
+            'talent_id' => $id,
+        ])->first();
+        $talent->isFollow = $isFollow ? 1 : 0;
+        return Inertia::render('Backend/ItemsProfile',[
+            'talent' => $talent,
+        ]);
+    }
     public function talentDetails(User $user) {
         return Inertia::render('Backend/AdminDashboard/TalentDetails', [
             'user' => $user

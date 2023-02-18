@@ -16,10 +16,7 @@
                         </th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                             {{ Helper.translate('Slug') }}
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                            {{ Helper.translate('Status') }}
-                        </th>
+                        </th> 
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
                             {{ Helper.translate('Action') }}
                         </th>
@@ -35,12 +32,7 @@
                         </td>
                         <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             {{ Helper.translate(page.slug, true) }}
-                        </td>
-                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                            <span class="font-semibold" :class="page.status ? 'text-green-500' : 'text-red-500'">
-                                {{ page.status ? Helper.translate('Enabled') : Helper.translate('Disabled') }}
-                            </span>
-                        </td>
+                        </td> 
                         
                         <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
                             <button @click="selectedPage = page" class="bg-gray-800 px-2 py-1 rounded text-white text-sm font-bold block">

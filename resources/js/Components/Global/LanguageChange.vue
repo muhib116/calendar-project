@@ -16,11 +16,10 @@
                 Français
             </label>
             <label @click="$emit('close')" class="flex items-center gap-2 cursor-pointer">
-                <input type="radio" v-model="language" value="spanish" />
-                Español
+                <input type="radio" v-model="language" value="portugues" />
+                Portugues
             </label>
         </div>
-
         <!-- <button class="block mx-auto px-6 uppercase py-1 bg-red-500 text-white mt-10 font-semibold rounded-3xl">Save</button> -->
     </div>
 </template>
