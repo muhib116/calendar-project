@@ -18,13 +18,16 @@
                             <h2 class="text-gray-500">{{ Helper.translate(get(talent, 'category.name')) }}</h2>
                         </div>
                         <div class="grid gap-4">
-                            <Link :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-red-600 text-white font-bold text-center">
-                                {{ Helper.translate('Personalized Video') }}: {{ Helper.priceFormate(50) }}
+                            
+
+
+                            <Link v-if="$page.props.wish" :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-red-600 text-white font-bold text-center">
+                                {{ Helper.translate('Personalized Video') }}: {{ Helper.priceFormate($page.props.wish.amount) }}
                             </Link>
-                            <Link :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-black text-white font-bold text-center">
+                            <Link v-if="$page.props.mylife" :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-black text-white font-bold text-center">
                                 {{ Helper.translate('My Life') }}
                             </Link>
-                            <Link :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-sky-500 text-white font-bold text-center">
+                            <Link v-if="$page.props.tips" :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-sky-500 text-white font-bold text-center">
                                 {{ Helper.translate('Tip') }}
                             </Link>
                         </div>

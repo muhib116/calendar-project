@@ -15,7 +15,7 @@
                                 <VideoIcon />
                                 <input type="file" @input="form.video_file = $event.target.files[0]" class="hidden">
                             </label>
-                            <video ref="profileVideo">
+                            <video ref="profileVideo" class="w-full">
                                 <source :src="`${$page.props.ziggy.url}/${talent.video_path}`">
                             </video>
                             <!-- <Video poster="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" class="" /> -->
@@ -28,20 +28,25 @@
                             </a>
                             <h1 class="">
                                 {{ Helper.translate('Change Category') }}
-                            </h1> 
-                            <select class="" v-model="form.category_id">
-                                <template v-for="(category, index) in categories" :key="index">
-                                    <option :value="category.id">{{ category.name }}</option>
-                                </template>
-                            </select>
+                            </h1>
+                            <div class="relative mb-6">
+                                <CSelect
+                                    v-model="form.category_id"
+                                    :options="getCategories"
+                                />
+                                <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.category_id, true) }}</span>
+                            </div>
                             <h1 class="">
                                 {{ Helper.translate('Change Subcategory') }}
                             </h1> 
-                            <select class="" v-model="form.sub_category_id">
-                                <template v-for="(category, index) in sub_categories" :key="index">
-                                    <option :value="category.id">{{ category.name }}</option>
-                                </template>
-                            </select>
+                            <div class="relative mb-6">
+                                <CSelect
+                                    v-model="form.sub_category_id"
+                                    :options="getSubCategories"
+                                />
+                                <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.sub_category_id, true) }}</span>
+                            </div>
+                            
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%
                             </progress>
@@ -61,7 +66,7 @@
                             <h2 class="absolute bottom-0 p-4 bg-white w-full bg-opacity-50 backdrop-blur-md font-semibold truncate">
                                 {{ Helper.translate('Calendar Name') }}
                             </h2>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -77,16 +82,13 @@ import VideoIcon from '@/Icons/VideoIcon.vue'
 import Video from '@/Components/Global/Video.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 import CloseIcon from '@/Icons/CloseIcon.vue'
+import CSelect from '@/Components/Global/CSelect.vue'
 import Helper from '@/Helper'
-import { onMounted, ref } from 'vue'
-import { isEmpty } from 'lodash'
+import { computed, onMounted, ref } from 'vue'
+import { filter, isEmpty, map } from 'lodash'
 
 const props = defineProps({
     categories: {
-        type: Array,
-        default: []
-    },
-    sub_categories: {
         type: Array,
         default: []
     },
@@ -98,11 +100,41 @@ const props = defineProps({
 
 const form = useForm({
     video_file: null,
-    category_id: null,
-    sub_category_id: null,
+    category_id: '',
+    sub_category_id: '',
 })
 
 const profileVideo = ref();
+
+const getCategories = computed(()=>{
+    if(!props.categories) return [{key: '', value: 'Select categories'}]; 
+    let filtered = props.categories.filter(item => item.parent_id == null);
+    if(!filtered) return [{key: '', value: 'Select categories'}]; 
+    filtered = filtered.map(item => {
+        return {
+            key: item.id,
+            value: item.name
+        }
+    })
+    filtered.unshift({key: '', value: 'Select categories'})
+
+    return filtered;
+});
+
+const getSubCategories = computed(()=>{
+    let subCategory = map(
+                        filter(props.categories, item => item.parent_id == form.category_id), 
+                        item => {
+                            return {
+                                key: item.id,
+                                value: item.name
+                            }
+                        }
+                    )
+    subCategory.unshift({key: '', value: 'Select subcategory'});
+    console.log(subCategory);
+    return subCategory;
+});
 
 onMounted(()=> {
     form.category_id = props.talent.category_id 
@@ -110,6 +142,7 @@ onMounted(()=> {
 })
 
 const handleSave = () => {
+    console.log(form.sub_category_id);
     form.post(route('talent.profile.update'), {
         onSuccess(e) {
             if(isEmpty(e.props.errors)) {

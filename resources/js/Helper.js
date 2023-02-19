@@ -74,7 +74,7 @@ Helper.logo = () => {
 }
 
 Helper.stripeKey = () => {
-    const data = {
+    let data = {
         public: '',
         privet: ''
     }

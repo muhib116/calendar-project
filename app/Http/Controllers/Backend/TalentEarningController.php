@@ -23,7 +23,8 @@ class TalentEarningController extends Controller
         ]);
 
         TalentEarning::updateOrCreate([
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'type' => 'wish',
         ], [
             'amount' => $request->amount,
             'status' => $request->status ? 1 : 0,
@@ -48,7 +49,8 @@ class TalentEarningController extends Controller
         ]);
 
         TalentEarning::updateOrCreate([
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'type' => 'mylife',
         ], [
             'amount' => $request->amount,
             'status' => $request->status ? 1 : 0,
@@ -68,16 +70,16 @@ class TalentEarningController extends Controller
 
     public function saveTipsAmount(Request $request) {
         $request->validate([
-            'amount' => 'numeric|min:50',
             'status' => 'required',
         ]);
 
         TalentEarning::updateOrCreate([
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'type' => 'tips',
         ], [
-            'amount' => $request->amount,
+            'amount' => 10,
             'status' => $request->status ? 1 : 0,
-            'type' => 'mylife',
+            'type' => 'tips',
             'user_id' => auth()->id(),
         ]);
 

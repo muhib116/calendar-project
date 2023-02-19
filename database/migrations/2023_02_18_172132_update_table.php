@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('is_parent')->default(false)->after('slug');
         });
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('sub_category_id')->default(false)->after('category_id');
+            $table->boolean('sub_category_id')->nullable()->after('category_id');
         });
     }
 

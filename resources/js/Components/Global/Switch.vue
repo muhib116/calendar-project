@@ -1,39 +1,34 @@
 <template>
-  <div class="relative">
-
-    <input type="radio" v-model="value" value="1" id="yes" />
-    <input type="radio" v-model="value" value="0" id="no" />
-    <div class="switch">
-      <label for="yes">On</label>
-      <label for="no">Off</label>
-      <span></span>
+    <div class="relative">
+        <input type="radio" v-model="selectedValue" :value='1' id="yes" />
+        <input type="radio" v-model="selectedValue" :value='0' id="no"/>
+        <div class="switch">
+          <label for="yes">On</label>
+          <label for="no">Off</label>
+          <span></span>
+        </div>
     </div>
-  </div>
 </template>
 
 <script setup>
-import { computed, ref, watch, onMounted } from 'vue'
+import { computed, ref } from 'vue';
 
 const props = defineProps({
   modelValue: {
-    type: [Number, Boolean],
+    type: [Boolean, Number],
     default: 0
   }
-});
-
-
-const value = ref(0);
-
-const emit = defineEmits(['update']);
-
-watch(() => {
-  emit('update:modelValue', value.value)
 })
 
-onMounted(() => {
-  value.value = props.modelValue;
-});
-
+const emit = defineEmits(['updated'])
+const selectedValue = computed({
+  get(){
+    return props.modelValue
+  },
+  set(value){
+    emit('update:modelValue', value)
+  }
+})
 </script>
 
 <style scoped>
