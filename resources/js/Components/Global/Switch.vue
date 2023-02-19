@@ -1,7 +1,7 @@
 <template>
     <div class="relative">
-        <input type="radio" name="rdo" id="yes" checked />
-        <input type="radio" name="rdo" id="no"/>
+        <input type="radio" v-model="selectedValue" :value='1' id="yes" checked />
+        <input type="radio" v-model="selectedValue" :value='0' id="no"/>
         <div class="switch">
           <label for="yes">On</label>
           <label for="no">Off</label>
@@ -11,7 +11,24 @@
 </template>
 
 <script setup>
+import { computed, ref } from 'vue';
 
+const props = defineProps({
+  modelValue: {
+    type: [Boolean, Number],
+    default: 0
+  }
+})
+
+const emit = defineEmits(['updated'])
+const selectedValue = computed({
+  get(){
+    return props.modelValue
+  },
+  set(value){
+    emit('update:modelValue', value)
+  }
+})
 </script>
 
 <style scoped>
