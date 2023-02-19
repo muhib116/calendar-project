@@ -121,11 +121,11 @@ Meeting: 005;
 
 6::✅ if user->following list empty show no result found.
 
-7:: copy category module and make it Occasion module.
+7:: ✅copy category module and make it Occasion module.
 
-8:: make wish module
-    -- table for save talent wish amount and status (minimum amount 30$).
-    -- if wish amount exist update amount else create.
+8:: ✅make wish module
+    -- ✅table for save talent wish amount and status (minimum amount 30$).
+    -- ✅if wish amount exist update amount else create.
     -- user wish for talent. (
         --user_id, talent_id, wish_amount, wish_details..., payment, transaction table.
     )
@@ -142,7 +142,7 @@ Meeting: 005;
 11:: user talent profile
     -- tips, mylyfe etc show if active.
 
-12:: sub category
+12:: ✅sub category
     talent registration
         -- category_id
         -- sub_category_id

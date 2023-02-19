@@ -44,7 +44,7 @@ class TalentController extends Controller
 
     public function ProfileSetup() {
         $talent = User::with(['category'])->find(auth()->id());
-        $categories = Category::where('status', 1)->get();
+        $categories = Category::where('status', 1)->where('parent_id', null)->get();
         return Inertia::render('Backend/TalentDashboard/ProfileSetup', [
             'talent' => $talent,
             'categories' => $categories
@@ -65,6 +65,9 @@ class TalentController extends Controller
         } catch (\Throwable $th) {}
         if ($request->category_id) {
             $user->category_id = $request->category_id;
+        }
+        if ($request->sub_category_id) {
+            $user->sub_category_id = $request->sub_category_id;
         }
         $user->save();
 

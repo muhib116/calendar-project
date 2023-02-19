@@ -12,7 +12,7 @@ use Inertia\Inertia;
 class CategoryController extends Controller
 {
     function index(){
-        $categories = Category::orderBy('id', 'desc')->get();
+        $categories = Category::with(['parent'])->orderBy('id', 'desc')->get();
         return Inertia::render('Backend/AdminDashboard/Categories', [
             'categories' => $categories
         ]);

@@ -33,13 +33,15 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $countries = Country::where(['status' => 1])->get();
-        $categories = Category::where(['status' => 1])->get();
+        $categories = Category::where(['status' => 1])->where('parent_id', null)->get();
+        $sub_categories = Category::where(['status' => 1])->where('parent_id', '!=', null)->get();
         return array_merge(parent::share($request), [
             'flash' => [
                 'message' => session('message')
             ],
             'countries' => $countries,
             'categories' => $categories,
+            'sub_categories' => $sub_categories,
             'auth' => [
                 'user' => $request->user(),
             ],

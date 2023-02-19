@@ -23,6 +23,9 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->nullable()->after('slug');
             $table->boolean('is_parent')->default(false)->after('slug');
         });
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('sub_category_id')->default(false)->after('category_id');
+        });
     }
 
     /**
@@ -41,6 +44,9 @@ return new class extends Migration
         Schema::table('categories', function (Blueprint $table) {
             $table->dropColumn('parent_id');
             $table->dropColumn('is_parent');
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('sub_category_id');
         });
     }
 };

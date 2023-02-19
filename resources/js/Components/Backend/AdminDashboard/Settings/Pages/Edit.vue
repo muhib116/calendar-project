@@ -84,7 +84,6 @@ const handleSave = () => {
             form.reset()
             emit('canceledit');
             let editorContent = document.querySelector('.ck-editor__main>.ck-content');
-            console.log(editorContent);
             if(editorContent) editorContent.innerHTML = '';
         }
     })

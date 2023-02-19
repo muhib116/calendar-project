@@ -60,7 +60,6 @@ const handleSave = () => {
             if (!isEmpty(e.props.errors)) return;
             form.reset()
             let editorContent = document.querySelector('.ck-editor__main>.ck-content');
-            console.log(editorContent);
             if (editorContent) editorContent.innerHTML = '';
         }
     })

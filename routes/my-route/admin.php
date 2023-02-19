@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CountryController;
+use App\Http\Controllers\Backend\OccasionController;
 use App\Http\Controllers\Backend\TalentController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,13 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         Route::post('/category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
         // categories end
+
+        // ocassions start
+        Route::get('/ocassions', [OccasionController::class, 'index'])->name('admin.ocassions');
+        Route::post('/ocassion', [OccasionController::class, 'store'])->name('admin.ocassion');
+        Route::post('/ocassion/{id}', [OccasionController::class, 'edit'])->name('admin.ocassion.edit');
+        Route::delete('/ocassion/delete/{id}', [OccasionController::class, 'delete'])->name('admin.ocassion.delete');
+        // ocassions end
 
         // country start
         Route::get('/countries', [CountryController::class, 'index'])->name('admin.countries');

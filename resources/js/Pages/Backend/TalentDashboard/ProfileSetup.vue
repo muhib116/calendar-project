@@ -34,6 +34,14 @@
                                     <option :value="category.id">{{ category.name }}</option>
                                 </template>
                             </select>
+                            <h1 class="">
+                                {{ Helper.translate('Change Subcategory') }}
+                            </h1> 
+                            <select class="" v-model="form.sub_category_id">
+                                <template v-for="(category, index) in sub_categories" :key="index">
+                                    <option :value="category.id">{{ category.name }}</option>
+                                </template>
+                            </select>
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%
                             </progress>
@@ -78,6 +86,10 @@ const props = defineProps({
         type: Array,
         default: []
     },
+    sub_categories: {
+        type: Array,
+        default: []
+    },
     talent: {
         type: Object,
         default: {}
@@ -87,12 +99,14 @@ const props = defineProps({
 const form = useForm({
     video_file: null,
     category_id: null,
+    sub_category_id: null,
 })
 
 const profileVideo = ref();
 
 onMounted(()=> {
     form.category_id = props.talent.category_id 
+    form.sub_category_id = props.talent.sub_category_id 
 })
 
 const handleSave = () => {
