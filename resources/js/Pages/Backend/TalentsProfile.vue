@@ -21,13 +21,13 @@
                             
 
 
-                            <Link v-if="$page.props.wish" :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-red-600 text-white font-bold text-center">
+                            <Link v-if="$page.props.wish" :href="route('payment.info', {id: talent.id, type: 'wish'})" class="px-4 py-2 rounded text-xl bg-red-600 text-white font-bold text-center">
                                 {{ Helper.translate('Personalized Video') }}: {{ Helper.priceFormate($page.props.wish.amount) }}
                             </Link>
-                            <Link v-if="$page.props.mylife" :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-black text-white font-bold text-center">
+                            <Link v-if="$page.props.mylife" :href="route('payment.info',{id: talent.id, type: 'mylife'})" class="px-4 py-2 rounded text-xl bg-black text-white font-bold text-center">
                                 {{ Helper.translate('My Life') }}
                             </Link>
-                            <Link v-if="$page.props.tips" :href="route('payment.info')" class="px-4 py-2 rounded text-xl bg-sky-500 text-white font-bold text-center">
+                            <Link v-if="$page.props.tips" :href="route('payment.info',{id: talent.id, type: 'tips'})" class="px-4 py-2 rounded text-xl bg-sky-500 text-white font-bold text-center">
                                 {{ Helper.translate('Tip') }}
                             </Link>
                         </div>

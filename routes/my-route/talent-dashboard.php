@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\PaymentRequestController;
 use App\Http\Controllers\Backend\TalentController;
 use App\Http\Controllers\Backend\TalentEarningController;
 use Illuminate\Support\Facades\Route;
@@ -33,8 +34,7 @@ Route::middleware(['auth', 'user-role:talent'])->group(function(){
         return Inertia::render('Backend/TalentDashboard/Analytics');
     })->name('talent.analytics');
     
-    Route::get('/talent/dashboard/payout', function () {
-        return Inertia::render('Backend/TalentDashboard/Payout');
-    })->name('talent.payout');
+    Route::get('/talent/dashboard/payout', [PaymentRequestController::class, 'index'])->name('talent.payout');
+    Route::post('/talent/dashboard/payout-request', [PaymentRequestController::class, 'payoutRequest'])->name('talent.payoutRequest');
 });
 

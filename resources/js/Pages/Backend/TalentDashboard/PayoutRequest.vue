@@ -3,7 +3,7 @@
         <button @click="$emit('close')" class="absolute right-4 top-4">
             <CloseIcon />
         </button>
-        <h1 class="text-xl font-semibold text-center">Request Payout</h1>
+        <h1 class="text-xl font-semibold text-center">{{ Helper.translate('Request Payout') }}</h1>
         <div class="flex gap-4 mt-5 justify-center">
             <button 
                 @click="activeComponent = 'Stripe'" 
@@ -29,6 +29,8 @@ import { ref } from 'vue'
 import Stripe from './PayoutComponent/Stripe.vue'
 import Bank from './PayoutComponent/Bank.vue'
 import CloseIcon from '@/Icons/CloseIcon.vue';
+import { useForm } from '@inertiajs/inertia-vue3';
+import Helper from '@/Helper';
 
 const components = {
     Stripe,
@@ -36,6 +38,7 @@ const components = {
 }
 
 const activeComponent = ref('Stripe')
+
 </script>
 
 <style lang="scss" scoped>

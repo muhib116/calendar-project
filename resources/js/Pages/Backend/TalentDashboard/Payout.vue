@@ -41,6 +41,15 @@ import Modal from '@/Components/Library/Modal.vue'
 import PayoutRequest from '@/Pages/Backend/TalentDashboard/PayoutRequest.vue'
 
 const payoutModal = ref(false)
+
+const props = defineProps({
+    requests: {
+        type: Array,
+        default: []
+    }
+})
+// requests
+
 </script>
 
 

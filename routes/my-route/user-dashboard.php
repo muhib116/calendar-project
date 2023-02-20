@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\TalentController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\PaymentController;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -42,14 +43,10 @@ Route::middleware(['auth', 'verified', 'user-role:user'])->group(function(){
     Route::get('/talents/{id}', [TalentController::class, 'talentDetailsForUser'])->name('item.details');
     Route::post('/talents/{id}/follow', [TalentController::class, 'followTalents'])->name('item.followTalents');
     
-    Route::get('/payment/info', function () {
-        return Inertia::render('Backend/Payment/Info');
-    })->name('payment.info');
+    Route::get('/payment-info/{id}/{type}', [PaymentController::class, 'info'])->name('payment.info');
+    Route::get('/payment/gateway/{id}/{type}', [PaymentController::class, 'gateway'])->name('payment.gateway');
     
     
-    Route::get('/payment/gateway', function () {
-        return Inertia::render('Backend/Payment/Gateway');
-    })->name('payment.gateway');
     
     Route::get('/payment/tip', function () {
         return Inertia::render('Backend/Payment/Tip');
