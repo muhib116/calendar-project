@@ -16,10 +16,12 @@ class FrontendController extends Controller
         $categories = Category::where('status', 1)->with(['talents' => function($q) {
             return $q->where('role', 'talent')->limit(4)->with(['category']);
         }])->get();
+        $categories_with_child = Category::where('parent_id', '=', null)->with('child')->get();
         // $relatedTalents = User::whereIn();
         return Inertia::render('Frontend/Home', [
             'countries' => $countries,
             'categories' => $categories,
+            'categories_with_child' => $categories_with_child,
             'isLogin' => Auth::check()
         ]);
     }

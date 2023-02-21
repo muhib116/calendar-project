@@ -17,8 +17,8 @@
                         </div>
                         <div class="flex justify-between mt-4">
                             <div>
-                                <h3 class="font-bold text-[14px]">Expiry Date</h3>
-                                <h3 class="text-[12px] text-gray-400">Enter the expiration date of the card</h3>
+                                <h3 class="font-bold text-[14px]">{{ Helper.translate('Expiry Date') }}</h3>
+                                <h3 class="text-[12px] text-gray-400">{{ Helper.translate('Enter the expiration date of the card') }}</h3>
                             </div>
                             <div>
                                 <input type="month" class="w-[250px] border-black border-opacity-10 font-semibold placeholder-gray-300 rounded-lg" />
@@ -26,8 +26,8 @@
                         </div>
                         <div class="flex justify-between mt-4">
                             <div>
-                                <h3 class="font-bold text-[14px]">CVC/CVV Number</h3>
-                                <h3 class="text-[12px] text-gray-400">Enter card verification code from the back of the card</h3>
+                                <h3 class="font-bold text-[14px]">{{ Helper.translate('CVC/CVV Number') }}</h3>
+                                <h3 class="text-[12px] text-gray-400">{{ Helper.translate('Enter card verification code from the back of the card') }}</h3>
                             </div>
                             <div>
                                 <input type="password" placeholder="CVC/CVV" class="w-[250px] border-black border-opacity-10 font-semibold placeholder-gray-300 rounded-lg" />
@@ -35,14 +35,14 @@
                         </div>
                         <div class="flex justify-between mt-4">
                             <div>
-                                <h3 class="font-bold text-[14px]">Cardholder Name</h3>
-                                <h3 class="text-[12px] text-gray-400">Enter cardholder's name</h3>
+                                <h3 class="font-bold text-[14px]">{{ Helper.translate('Cardholder Name') }}</h3>
+                                <h3 class="text-[12px] text-gray-400">{{ Helper.translate("Enter cardholder's name") }}</h3>
                             </div>
                             <div>
                                 <input type="text" placeholder="Cardholder Name" class="w-[250px] border-black border-opacity-10 font-semibold placeholder-gray-300 rounded-lg" />
                             </div>
                         </div>
-                        <button class="bg-blue-500 px-4 py-2 mt-4 rounded-lg text-white font-semibold w-full">Pay Now</button>
+                        <button class="bg-blue-500 px-4 py-2 mt-4 rounded-lg text-white font-semibold w-full">{{ Helper.translate('Pay Now') }}</button>
                     </div>
                     
                     <div class="border p-6 rounded-lg bg-gray-100">
@@ -57,33 +57,35 @@
                                 <h1 class="uppercase font-bold text-[14px] mt-2 text-white">Mr. Cardholder</h1>
                                 <h1 class="uppercase font-bold text-[14px] mt-2 text-white">1563 2156 8972</h1>
                                 <h1 class="uppercase font-bold text-[14px] mt-8 text-white">
-                                    Expiry Date : November / 2028
+                                    {{ Helper.translate('Expiry Date') }} : November / 2028
                                 </h1>
                             </div>
                         </div>
                         <div class="font-semibold flex justify-between gap-2 mt-8 text-sm">
                             <span class="text-gray-400">
-                                Product
+                                {{ Helper.translate('Product') }}
                             </span>
-                            <span class="">
-                                Calendar
+                            <span class="capitalize">
+                                {{ Helper.translate(type) }}
                             </span>
                         </div>
                         <div class="font-semibold flex justify-between mt-1 text-sm">
                             <span class="text-gray-400">
-                                Order number
+                                {{ Helper.translate('Order number') }}
                             </span>
                             <span class="">
-                                5645231
+                                {{ orderCode }}
                             </span>
                         </div>
                         <div class="font-bold grid text-gray-400 mt-8 text-sm border-t pt-4">
-                            <span class="">You have to Pay</span>
+                            <span class="">{{ Helper.translate('You have to Pay') }}</span>
                             <span class="text-black text-lg">
-                                549 
+                                {{ getNumber(Helper.getCommission(earning.amount) + earning.amount) }}
                                 <small class="text-[10px]">
-                                    .99
-                                    <span class="text-gray-400">USD</span>
+                                    <template v-if="getSent(Helper.getCommission(earning.amount) + earning.amount)">
+                                        .{{ getSent(Helper.getCommission(earning.amount) + earning.amount) }}
+                                    </template>
+                                    <span class="text-gray-400"> USD</span>
                                 </small>
                             </span>
                         </div>
@@ -101,13 +103,43 @@ import CheckIcon from '@/Icons/CheckIcon.vue'
 import masterCardImg from './icons/masterCard.jpg'
 import VisaIcon from './icons/VisaIcon.vue';
 import AmericanExpressIcon from '@/Icons/AmericanExpressIcon.vue'
+import Helper from '@/Helper';
+import { onMounted } from 'vue';
+
+const props = defineProps({
+    orderCode: String,
+    type: String,
+    talent: {
+        type: Object,
+        default: {}
+    },
+    earning: {
+        type: Object,
+        default: {}
+    },
+});
+
+onMounted(()=> {
+    let cashType = localStorage.getItem('cashType');
+    cashType = JSON.parse(cashType);
+    if (cashType.payType != props.type) {
+        window.history.back();
+    }
+});
+
+
+const getNumber = (amount) => {
+    if (String(amount).indexOf('.') == -1) return amount;
+    return String(amount).split('.')[0];
+}
+const getSent = (amount) => {
+    if (String(amount).indexOf('.') == -1) return null;
+    return String(amount).split('.')[1];
+}
 </script>
 
 <style scope>
     .cardWrapper{
         grid-template-columns: calc(100% - 450px) 450px;
-    }
-    .card{
-
-    }
+    } 
 </style>
