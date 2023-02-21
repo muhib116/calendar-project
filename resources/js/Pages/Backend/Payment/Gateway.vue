@@ -80,10 +80,10 @@
                         <div class="font-bold grid text-gray-400 mt-8 text-sm border-t pt-4">
                             <span class="">{{ Helper.translate('You have to Pay') }}</span>
                             <span class="text-black text-lg">
-                                {{ getNumber(getAmount(earning.amount, $page.props.settings.commission)) }}
+                                {{ getNumber(Helper.getCommission(earning.amount) + earning.amount) }}
                                 <small class="text-[10px]">
-                                    <template v-if="getSent(getAmount(earning.amount, $page.props.settings.commission))">
-                                        .{{ getSent(getAmount(earning.amount, $page.props.settings.commission)) }}
+                                    <template v-if="getSent(Helper.getCommission(earning.amount) + earning.amount)">
+                                        .{{ getSent(Helper.getCommission(earning.amount) + earning.amount) }}
                                     </template>
                                     <span class="text-gray-400"> USD</span>
                                 </small>
@@ -127,9 +127,7 @@ onMounted(()=> {
     }
 });
 
-const getAmount = (amount, commission) => {
-    return ((12/100) * amount) + amount;
-}
+
 const getNumber = (amount) => {
     if (String(amount).indexOf('.') == -1) return amount;
     return String(amount).split('.')[0];

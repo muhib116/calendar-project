@@ -17,11 +17,22 @@ class PaymentRequestController extends Controller
     }
 
     public function payoutRequest(Request $request) {
-        $request->validate([
-            'amount' => 'required|integer|min:25'
-        ]);
+        if ($request->bank_type == 'Stripe') {
+            $request->validate([
+                'amount' => 'required|integer|min:25',
+                'stripe_email' => 'email|required'
+            ]);
+        }
+        if ($request->bank_type == 'Bank') {
+            $request->validate([
+                'amount' => 'required|integer|min:200',
+                'bank_name' => 'required',
+                'account_number' => 'required',
+            ]);
+        }
         PaymentRequest::create([
             'user_id' => auth()->id(),
+            'invoice' => $this->getOrderCode(),
             'bank_type' => $request->bank_type,
             'amount' => $request->amount,
             'stripe_email' => $request->stripe_email,

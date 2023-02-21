@@ -34,9 +34,8 @@ Route::middleware(['auth', 'verified', 'user-role:user'])->group(function(){
     // ------
 
     Route::get('/category/{categorySlug}', function ($slug) {
-        $talents = User::whereHas('category', function($query) use($slug) {
-            return $query->where('slug', $slug);
-        })->with('category')->get();
+        // $talents = User::with('category')->get();
+        // return $talents;
         return Inertia::render('Backend/CategoryWiseItem');
     })->name('category.items');
     

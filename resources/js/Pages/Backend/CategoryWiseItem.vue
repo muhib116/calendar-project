@@ -9,11 +9,16 @@
         <div class="px-4">
             <div class="container mx-auto py-5">
                 <div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
-                    <Link :href="route('item.details', 'slug')" class="relative hover:shadow-xl transition-all">
-                        <img class="customRatio" src="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" alt="">
-                        <h2 class="absolute bottom-0 p-4 bg-white w-full bg-opacity-50 backdrop-blur-md border-t font-semibold truncate">User Name</h2>
-                    </Link>
-                    <Link :href="route('item.details', 'slug')" class="relative hover:shadow-xl transition-all">
+                    {{ talents }}
+                    <template v-for="(talent, index) in talents" :key="index">
+                        <Link :href="route('item.details', 'slug')" class="relative hover:shadow-xl transition-all">
+                            <img class="customRatio" src="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" alt="">
+                            <h2 class="absolute bottom-0 p-4 bg-white w-full bg-opacity-50 backdrop-blur-md border-t font-semibold truncate">
+                                {{ talent.name }}
+                            </h2>
+                        </Link>
+                    </template>
+                    <!-- <Link :href="route('item.details', 'slug')" class="relative hover:shadow-xl transition-all">
                         <img class="customRatio" src="https://images.unsplash.com/photo-1673605124954-132c332de83f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" alt="">
                         <h2 class="absolute bottom-0 p-4 bg-white w-full bg-opacity-50 backdrop-blur-md border-t font-semibold truncate">User Name</h2>
                     </Link>
@@ -40,7 +45,7 @@
                     <Link :href="route('item.details', 'slug')" class="relative hover:shadow-xl transition-all">
                         <img class="customRatio" src="https://images.unsplash.com/photo-1673861895743-43e136439ee4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60" alt="">
                         <h2 class="absolute bottom-0 p-4 bg-white w-full bg-opacity-50 backdrop-blur-md border-t font-semibold truncate">User Name</h2>
-                    </Link>
+                    </Link> -->
                 </div>
             </div>
         </div>
@@ -48,8 +53,15 @@
 </template>
 
 <script setup>
-    import Master from '@/Pages/Backend/Master.vue'
+    import Helper from '@/Helper';
+import Master from '@/Pages/Backend/Master.vue'
     import { Link } from '@inertiajs/inertia-vue3';
+    const props = defineProps({
+        talents: {
+            type: Array,
+            default: []
+        }
+    });
 </script>
 
 <style scoped>

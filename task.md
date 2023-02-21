@@ -155,7 +155,7 @@ Next meeting: 19/Fab/2023 at 11:00PM
 -----------------------------------------
 Meeting: 006;
 
-1:: talent registration.. category, sub category filter
+1:: ✅talent registration.. category, sub category filter
 2:: ✅From talent profile -> redirect payment info page with service name.
     -- ✅save information on continue payment click save info to local storage
             and redirect to payment gateway page.
@@ -166,6 +166,20 @@ Meeting: 006;
         -- ✅show service type
 
 3:: talent/dashboard/payout
-    bank information
+   ✅ bank information
         -- bank type
         input filds for stripe and bank.
+
+Next meeting: 19/Fab/2023 at 11:00PM
+-----------------------------------------
+Meeting: 007;
+
+1:: on talent/dashboard/payout
+    -- check if request amount is available.
+2:: on admin/dashboard/payments
+    -- show pending payment requests
+    -- By clicking pay  now button status update to paid
+    -- by clicking cancel button soft delete
+
+    -- show pending and soft deleted list on payout processed tab
+

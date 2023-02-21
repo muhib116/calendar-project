@@ -20,7 +20,7 @@
                 Bank
             </button>
         </div>
-        <component :is="components[activeComponent]" />
+        <component :is="components[activeComponent]" @close="$emit('close')" />
     </div>
 </template>
 

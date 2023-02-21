@@ -14,13 +14,13 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function getOrderCode() {
-        OrderCode::whereDate('created_at', Carbon::yesterday())->delete();
+        OrderCode::where('created_at', now()->subHour(24))->delete();
         $orderCode = OrderCode::create([]);
         $orderCode = OrderCode::orderBy('id', 'desc');
         $orderId = ($orderCode->count() == 0 ? 0 : $orderCode->first()->id) + 1;
-        $zeros = strlen($orderId) < 7 ? 7 - strlen($orderId) : '';
+        $zeros = strlen($orderId) < 7 ? 7 - strlen($orderId) : 0;
         $code = '';
-        for($i = 1; $i <= $zeros; $i++) $code .= str(rand(1,9));
+        for($i = 1; $i <= $zeros; $i++) $code .= '0';
         $code .= $orderId;
         return $code;
     }

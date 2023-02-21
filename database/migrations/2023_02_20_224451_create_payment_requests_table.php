@@ -16,12 +16,15 @@ return new class extends Migration
         Schema::create('payment_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->string('invoice')->nullable();
             $table->string('bank_type')->nullable();
             $table->double('amount')->default(0);
             $table->string('stripe_email')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('account_number')->nullable();
+            $table->boolean('status')->default(false);
             $table->json('settings')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -29,9 +29,9 @@ const form = useForm({
     bank_type: 'Stripe',
     amount: null,
     stripe_email: null,
-    bank_name: null,
-    account_number: null,
-    settings: null,
+    // bank_name: null,
+    // account_number: null,
+    // settings: null,
 });
 
 const confirmEmail = ref();
@@ -45,6 +45,7 @@ const handleSave = () => {
         onSuccess(page){
             if (isEmpty(page.props.errors)) {
                 form.reset();
+                confirmEmail.value = null;
                 emit('close')
             }
         }

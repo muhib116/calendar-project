@@ -129,12 +129,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
 import { useForm, usePage } from '@inertiajs/inertia-vue3'
 import axios from 'axios'
-import { isEmpty, map } from 'lodash'
+import { isEmpty, map, filter } from 'lodash'
 import Helper from '@/Helper'
 import { Link } from '@inertiajs/inertia-vue3'
 
@@ -143,14 +143,13 @@ const countries = ref([{
     value: '-select country-'
 }])
 
+const all_categories = ref([]);
+
 const categories = ref([{
     key: 0,
     value: '-select category-'
 }])
-const sub_categories = ref([{
-    key: 0,
-    value: '-select subcategory-'
-}])
+
 
 const emit = defineEmits('close')
 const form = useForm({
@@ -170,6 +169,24 @@ const form = useForm({
     is_agree: true,
     role: 'talent'
 })
+
+const sub_categories = computed(() => {
+    let sub = map(
+        filter(all_categories.value, item => item.parent_id == form.category_id),
+        item => {
+            return {
+                key: item.id,
+                value: item.name
+            }
+        }
+    )
+    sub.unshift({
+        key: 0,
+        value: '-select subcategory-'
+    })
+    return sub;
+});
+
 
 const submit = () => {
     if(form.country_id == 0){
@@ -197,22 +214,15 @@ const submit = () => {
 
 onMounted(async () => {
     let catRes = await axios.get('categories')
-    sub_categories.value = map(usePage().props.value.sub_categories, item => {
-        return {
-            key: item.id,
-            value: item.name
-        };
-    })
-    sub_categories.value.unshift({
-        key: 0,
-        value: '-select subcategory-'
-    });
     if(!isEmpty(catRes.data)){
+        all_categories.value = catRes.data;
         catRes.data.forEach(item => {
-            categories.value.push({
-                key: item.id,
-                value: item.name
-            })
+            if (!item.parent_id) {
+                categories.value.push({
+                    key: item.id,
+                    value: item.name
+                })
+            }
         })
     }
 
