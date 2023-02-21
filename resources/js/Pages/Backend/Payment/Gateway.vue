@@ -11,7 +11,7 @@
                                 <AmericanExpressIcon class="shrink-0 w-4 h-4"/>
                             </div>
                             <input type="text" class="w-full border-0 focus-within:ring-0 bg-transparent py-4">
-                            <div class="bg-blue-500 text-white w-7 h-7 flex items-center justify-center rounded-full mr-2">
+                            <div class="bg-blue-500 text-white w-7 h-7 flex items-center justify-center flex-shrink-0 rounded-full mr-2">
                                 <CheckIcon class="w-4" />
                             </div>
                         </div>

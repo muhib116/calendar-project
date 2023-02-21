@@ -183,3 +183,17 @@ Meeting: 007;
 
     -- show pending and soft deleted list on payout processed tab
 
+
+3:: select talents for frontend
+4:: category parent could not be same parent.
+5:: category refector.
+6:: rename talent_earnings to talents_earnings_type
+    -- make talent_earnings for user payment
+6:: add balance field to user table
+
+7:: on admin panel > wish request status column and done/button
+
+    talents_earnings
+        talent_id, user_id, amount, commission_amount, commission, type, gender, instructio.............
+
+        -- user can pay more. (look line)
