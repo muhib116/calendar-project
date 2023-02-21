@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <input type="radio" v-model="selectedValue" :value='1' id="yes" checked />
+        <input type="radio" v-model="selectedValue" :value='1' id="yes" />
         <input type="radio" v-model="selectedValue" :value='0' id="no"/>
         <div class="switch">
           <label for="yes">On</label>
