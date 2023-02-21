@@ -24,13 +24,17 @@ class CategoryController extends Controller
             'status' => ['required'],
         ]);
 
-        $category = Category::create([
+        $data = [
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'status' => $request->status,
-            'parent_id' => $request->parent_id,
-        ]);
+            'status' => $request->status
+        ];
 
+        if($request->paren_id){
+            $data['parent_id'] = $request->parent_id;
+        }
+
+        Category::create($data);
         return redirect()->route('admin.categories')->with('message', 'Category created successfully!');
     }
 

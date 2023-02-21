@@ -72,7 +72,7 @@ class RegisteredUserController extends Controller
             'link' => $request->link,
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role,
+            'role' => ($request->role) ? $request->role : 'admin',
             'is_agree' => $request->is_agree,
             'password' => Hash::make($request->password),
         ]);
