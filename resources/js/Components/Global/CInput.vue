@@ -25,7 +25,7 @@
         placeholder: String,
         characterLimit: Number, 
         modelValue: {
-            type: [String, Number, Object],
+            type: [String, Number],
             default: ''
         },
         disabled: {
