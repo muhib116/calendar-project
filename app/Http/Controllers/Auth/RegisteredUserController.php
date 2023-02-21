@@ -67,6 +67,7 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'country_id' => $request->country_id,
             'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id,
             'video_path' => $path,
             'link' => $request->link,
             'name' => $request->name,

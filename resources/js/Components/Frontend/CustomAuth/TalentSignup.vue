@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="flex gap-5 justify-between mb-6">
+        <div class="flex gap-5 justify-between flex-col mb-6">
             <div class="relative w-full">
                 <CSelect v-model="form.country_id" :options="countries" class="w-full" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
@@ -39,6 +39,12 @@
             </div>
             <div class="relative w-full">
                 <CSelect v-model="form.category_id" :options="categories" placeholder="select category" class="w-full" />
+                <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
+                    {{ Helper.translate(form.errors.category_id, true) }}
+                </span>
+            </div>
+            <div class="relative w-full">
+                <CSelect v-model="form.sub_category_id" :options="sub_categories" placeholder="select category" class="w-full" />
                 <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
                     {{ Helper.translate(form.errors.category_id, true) }}
                 </span>
@@ -126,9 +132,9 @@
 import { ref, onMounted } from 'vue'
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
-import { useForm } from '@inertiajs/inertia-vue3'
+import { useForm, usePage } from '@inertiajs/inertia-vue3'
 import axios from 'axios'
-import { isEmpty } from 'lodash'
+import { isEmpty, map } from 'lodash'
 import Helper from '@/Helper'
 import { Link } from '@inertiajs/inertia-vue3'
 
@@ -141,6 +147,10 @@ const categories = ref([{
     key: 0,
     value: '-select category-'
 }])
+const sub_categories = ref([{
+    key: 0,
+    value: '-select subcategory-'
+}])
 
 const emit = defineEmits('close')
 const form = useForm({
@@ -151,6 +161,7 @@ const form = useForm({
     email: '',
     country_id: '',
     category_id: 0,
+    sub_category_id: 0,
     video: '',
     link: '',
     password: '',
@@ -166,6 +177,9 @@ const submit = () => {
     }
     if(form.category_id == 0){
         form.category_id = ''
+    }
+    if(form.sub_category_id == 0){
+        form.sub_category_id = ''
     }
 
     form.name = `${form.first_name} ${form.last_name}`
@@ -183,6 +197,16 @@ const submit = () => {
 
 onMounted(async () => {
     let catRes = await axios.get('categories')
+    sub_categories.value = map(usePage().props.value.sub_categories, item => {
+        return {
+            key: item.id,
+            value: item.name
+        };
+    })
+    sub_categories.value.unshift({
+        key: 0,
+        value: '-select subcategory-'
+    });
     if(!isEmpty(catRes.data)){
         catRes.data.forEach(item => {
             categories.value.push({

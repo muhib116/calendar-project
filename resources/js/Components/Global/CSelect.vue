@@ -14,14 +14,13 @@
 
     const props = defineProps({
         options: Array,
-        modelValue: String
+        modelValue: [String, Number, Boolean]
     })
 
 
     const getModelValue = computed(() => props.modelValue)
     const emit = defineEmits()
     const updateValue = (e) => {
-        console.log(e.target.value, 'e.target.value');
         emit('update:modelValue', e.target.value)
     }
 

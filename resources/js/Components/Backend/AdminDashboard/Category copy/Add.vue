@@ -5,17 +5,13 @@
             {{ Helper.translate('Back') }}
         </button>
         <div class="max-w-[500px]">
-            <h1 class="text-lg font-semibold mb-4">{{ Helper.translate('Add Category') }}</h1>
+            <h1 class="text-lg font-semibold mb-4">{{ Helper.translate('Add Ocassion') }}</h1>
             <div class="relative mb-6">
-                <CInput type="text" v-model="form.name" :placeholder="Helper.translate('Category Name')" />
+                <CInput type="text" v-model="form.name" :placeholder="Helper.translate('Ocassion Name')" />
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.name, true) }}</span>
             </div>
             <div class="relative">
-                <CSelect :options="categories" v-model="form.parent_id"/>
-                <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.status, true) }}</span>
-            </div>
-            <div class="relative">
-                <CSelect :options="categoryStatus" v-model="form.status"/>
+                <CSelect :options="ocassionStatus" v-model="form.status"/>
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.status, true) }}</span>
             </div>
             <button
@@ -32,39 +28,22 @@
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
-import useCategory from '@/Pages/Backend/AdminDashboard/useCategory.js'
+import useOcassion from '@/Pages/Backend/AdminDashboard/useOcassion.js'
 import { useForm, usePage } from '@inertiajs/inertia-vue3'
 import { isEmpty, filter, map } from 'lodash'
 import { ref, onMounted } from 'vue'
 import Helper from '@/Helper'
 
-const { activeComponent, categoryStatus } = useCategory()
+const { activeComponent, ocassionStatus } = useOcassion()
 
 const form = useForm({
     name: '',
-    status: categoryStatus.value[0].key,
-    parent_id: null
+    status: ocassionStatus.value[0].key,
 })
 
-const parentCategories = ref([]);
-const categories = ref([]);
-const page = usePage();
-onMounted(()=>{
-    parentCategories.value = filter(page.props.value.categories, item => item.parent_id)
-    categories.value = map(filter(page.props.value.categories, item => isEmpty(item.parent_id)), item => {
-        return {
-            key: item.id,
-            value: item.name
-        };
-    })
-    categories.value.unshift({
-        key: null,
-        value: Helper.translate('Select parent')
-    });
-});
 
 const submit = () => {
-    form.post(route('admin.category'), {
+    form.post(route('admin.ocassion'), {
         onFinish: () => {
             if(isEmpty(form.errors)){
                 form.reset('name', 'status')

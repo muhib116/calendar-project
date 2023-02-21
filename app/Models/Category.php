@@ -17,4 +17,11 @@ class Category extends Model
     public function talents() {
         return $this->hasMany(User::class, 'category_id', 'id');
     }
+
+    public function parent() {
+        return $this->belongsTo(Category::class, 'parent_id', 'id');
+    }
+    public function child() {
+        return $this->belongsTo(Category::class, 'parent_id', 'id');
+    }
 }

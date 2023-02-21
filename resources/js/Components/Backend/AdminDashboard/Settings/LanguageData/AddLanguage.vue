@@ -29,6 +29,15 @@
                     />
                     <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.portugues, true) }}</span>
                 </label>
+                <label class="w-full mb-6 block relative">
+                    <h1 class="text-sm font-bold">Español</h1>
+                    <CInput 
+                        type="text" 
+                        placeholder="Enter text"
+                        v-model="form.spanish"
+                    />
+                    <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.spanish, true) }}</span>
+                </label>
             </div>
             <div class="mt-5 flex gap-5 justify-center">
                 <button @click="$emit('close')" class="px-3 py-1 rounded bg-red-500 font-semibold text-white shadow-lg">
@@ -51,6 +60,7 @@ const form = useForm({
     english: null,
     french: null,
     portugues: null,
+    spanish: null,
     settings: null,
 });
 

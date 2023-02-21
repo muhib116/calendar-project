@@ -32,20 +32,20 @@ const selectedValue = computed({
 </script>
 
 <style scoped>
-
 .switch {
-    position: absolute;
-    width: 150px;
-    height: 50px;
-    text-align: center;
-    background: #3e9b3c;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    -ms-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-    border-radius: 25px;
-  }
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  background: #3e9b3c;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 25px;
+}
+
 .switch span {
   position: absolute;
   width: 20px;
@@ -67,6 +67,7 @@ const selectedValue = computed({
   transition: all 0.2s ease;
   border-radius: 2px;
 }
+
 .switch span:after {
   content: "";
   display: block;
@@ -82,12 +83,14 @@ const selectedValue = computed({
   transition: all 0.2s ease;
   border-radius: 2px;
 }
+
 input[type=radio] {
   display: none;
 }
+
 .switch label {
   cursor: pointer;
-  color: rgba(0,0,0,0.2);
+  color: rgba(0, 0, 0, 0.2);
   width: 60px;
   line-height: 50px;
   -webkit-transition: all 0.2s ease;
@@ -96,32 +99,38 @@ input[type=radio] {
   -ms-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
+
 label[for=yes] {
   position: absolute;
   left: 0px;
   height: 20px;
 }
+
 label[for=no] {
   position: absolute;
   right: 0px;
 }
-#no:checked ~ .switch {
+
+#no:checked~.switch {
   background: #ff3b30;
 }
-#no:checked ~ .switch span {
+
+#no:checked~.switch span {
   background: #fff;
   margin-left: -8px;
 }
-#no:checked ~ .switch span:after {
+
+#no:checked~.switch span:after {
   background: #fff;
   height: 20px;
   margin-top: -8px;
   margin-left: 8px;
 }
-#yes:checked ~ .switch label[for=yes] {
+
+#yes:checked~.switch label[for=yes] {
   color: #fff;
 }
-#no:checked ~ .switch label[for=no] {
+
+#no:checked~.switch label[for=no] {
   color: #fff;
-}
-</style>
+}</style>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Follower;
+use App\Models\TalentEarning;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -44,16 +45,18 @@ class TalentController extends Controller
 
     public function ProfileSetup() {
         $talent = User::with(['category'])->find(auth()->id());
-        $categories = Category::where('status', 1)->get();
         return Inertia::render('Backend/TalentDashboard/ProfileSetup', [
             'talent' => $talent,
-            'categories' => $categories
         ]);
     }
 
     public function profileUpdate(Request $request) {
+        $request->validate([
+            'category_id' => 'required',
+            'sub_category_id' => 'required',
+        ]);
         $user = User::find(auth()->id());
-        $file = $request->file('video_file'); 
+        $file = $request->file('video_file');
         try {
             $fileName = time().'.'.$file->extension();
             if($file && $file->move('uploads/', $fileName)) {
@@ -63,9 +66,9 @@ class TalentController extends Controller
                 $user->video_path = 'uploads/'.$fileName;
             }
         } catch (\Throwable $th) {}
-        if ($request->category_id) {
-            $user->category_id = $request->category_id;
-        }
+
+        $user->category_id = $request->category_id;
+        $user->sub_category_id = $request->sub_category_id;
         $user->save();
 
         return redirect()->back()->with('message', 'Profile updated successfully');
@@ -207,8 +210,28 @@ class TalentController extends Controller
             'talent_id' => $id,
         ])->first();
         $talent->isFollow = $isFollow ? 1 : 0;
-        return Inertia::render('Backend/ItemsProfile',[
+
+        $wish = TalentEarning::where([
+            'user_id' => $id,
+            'type' => 'wish',
+            'status' => 1,
+        ])->first();
+        $tips = TalentEarning::where([
+            'user_id' => $id,
+            'type' => 'tips',
+            'status' => 1,
+        ])->first();
+        $mylife = TalentEarning::where([
+            'user_id' => $id,
+            'type' => 'mylife',
+            'status' => 1
+        ])->first();
+
+        return Inertia::render('Backend/TalentsProfile',[
             'talent' => $talent,
+            'wish' => $wish,
+            'tips' => $tips,
+            'mylife' => $mylife,
         ]);
     }
     public function talentDetails(User $user) {

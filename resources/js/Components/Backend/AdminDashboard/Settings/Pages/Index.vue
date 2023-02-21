@@ -1,6 +1,6 @@
 <template>
     <Create v-if="isEmpty(selectedPage) && size($page.props.pages) < 2" />
-    <Edit v-if="!isEmpty(selectedPage)" @cancel="selectedPage=null" :selectedPage="selectedPage" />
+    <Edit v-if="!isEmpty(selectedPage)" @canceledit="selectedPage=null" :selectedPage="selectedPage" />
 
     <div class="flex flex-col mt-4">
         <h1 class="text-lg my-2 mb-4 flex items-center gap-6">{{ Helper.translate('Page List') }}</h1>
@@ -17,6 +17,9 @@
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                             {{ Helper.translate('Slug') }}
                         </th> 
+                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                            {{ Helper.translate('Type') }}
+                        </th> 
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
                             {{ Helper.translate('Action') }}
                         </th>
@@ -32,6 +35,9 @@
                         </td>
                         <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                             {{ Helper.translate(page.slug, true) }}
+                        </td> 
+                        <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                            {{ Helper.translate(page.type, true) }}
                         </td> 
                         
                         <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">

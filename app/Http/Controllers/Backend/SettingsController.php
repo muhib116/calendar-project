@@ -58,12 +58,14 @@ class SettingsController extends Controller
             'english' => 'required|unique:languages,english,'.$except,
             'french' => 'required|unique:languages,french,'.$except,
             'portugues' => 'required|unique:languages,portugues,'.$except,
+            'spanish' => 'required|unique:languages,spanish,'.$except,
         ]);
 
         $data = [
             'english' => $request->english,
             'french' => $request->french,
             'portugues' => $request->portugues,
+            'spanish' => $request->spanish,
             'settings' => $request->settings,
         ];
         $lang = null;
@@ -85,6 +87,7 @@ class SettingsController extends Controller
             'slug' => str()->slug($request->title),
             'settings' => $request->settings,
             'description' => $request->description,
+            'type' => $request->type,
         ]);
         return redirect()->back()->with('message', 'Page created successfully');
     }

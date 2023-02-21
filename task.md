@@ -100,7 +100,7 @@ Next meeting: 17/Fab/2023 at 11:00PM
 -----------------------------------------
 Meeting: 005;
 
-4:: on admin->pages add type from option field. <CSelect /> (
+4::✅ on admin->pages add type from option field. <CSelect /> (
     -- value --
     privacy-policy
     terms-of-service
@@ -117,40 +117,55 @@ Meeting: 005;
     }]
 )
 
-5:: Add spanish language
+5::✅ Add spanish language
 
-6:: if user->following list empty show no result found.
+6::✅ if user->following list empty show no result found.
 
-7:: copy category module and make it Occasion module.
+7:: ✅copy category module and make it Occasion module.
 
-8:: make wish module
-    -- table for save talent wish amount and status (minimum amount 30$).
-    -- if wish amount exist update amount else create.
+8:: ✅make wish module
+    -- ✅table for save talent wish amount and status (minimum amount 30$).
+    -- ✅if wish amount exist update amount else create.
     -- user wish for talent. (
         --user_id, talent_id, wish_amount, wish_details..., payment, transaction table.
     )
 
-9:: Tips
-    -- talent activate tips. (
-        -- minimum tips automatically set 10$.
+9:: ✅Tips
+    -- ✅talent activate tips. (
+        -- ✅minimum tips automatically set 10$.
         -- user can pay more.
     )
 
-10:: My life
+10:: ✅My life
     -- yearly subscription minimum 50$
 
-11:: user talent profile
-    -- tips, mylyfe etc show if active.
+11:: ✅user talent profile
+    -- ✅tips, mylyfe etc show if active.
 
-12:: sub category
-    talent registration
-        -- category_id
-        -- sub_category_id
-    talent profile setup
-        -- category_id, sub_category_id
+12:: ✅sub category
+    ✅talent registration
+        -- ✅category_id
+        -- ✅sub_category_id
+    ✅talent profile setup
+        -- ✅category_id, sub_category_id
 
 
 
 Next meeting: 19/Fab/2023 at 11:00PM
 -----------------------------------------
 Meeting: 006;
+
+1:: talent registration.. category, sub category filter
+2:: From talent profile -> redirect payment info page with service name.
+    -- save information on continue payment click save info to local storage
+        and redirect to payment gateway page.
+        -- on continue payment click. show payment confirmation popup
+            -- popup will contain total amount and service charge + commission
+    -- on gateway generate unique order number
+            -- make One  helper table for generate unique number
+        -- show service type
+
+3:: talent/dashboard/payout
+    bank information
+        -- bank type
+        input filds for stripe and bank.

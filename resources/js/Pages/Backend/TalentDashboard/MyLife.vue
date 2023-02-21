@@ -32,10 +32,14 @@
 import { ref } from 'vue';
 import DashboardLayout from '../DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/TalentDashboard/LeftSide.vue'
-import useMyLife from '@/Pages/Backend/TalentDashboard/useMyLife.js'
+import useMyLife from '@/Pages/Backend/TalentDashboard/useMyLife.js' 
 
 const currentComponent = ref('Setup')
 const { components } = useMyLife()
+
+
+
+
 </script>
 
 
