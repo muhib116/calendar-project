@@ -38,7 +38,8 @@ class HandleInertiaRequests extends Middleware
         $settings = Settings::first();
         return array_merge(parent::share($request), [
             'flash' => [
-                'message' => session('message')
+                'message' => session('message'),
+                'error' => session('error'),
             ],
             'countries' => $countries,
             'categories' => $categories,

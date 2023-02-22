@@ -10,7 +10,11 @@
                 <CInput type="text" v-model="form.name" placeholder="Category Name" />
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.name, true) }}</span>
             </div>
-            <div class="relative">
+            <label class="flex items-center gap-1">
+                <input type="checkbox" v-model="isChild">
+                Make child category
+            </label>
+            <div class="relative" v-if="isChild">
                 <CSelect :options="categories" v-model="form.parent_id"/>
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.status, true) }}</span>
             </div>
@@ -48,13 +52,16 @@ const form = useForm({
     status: selectedCategory.value.status,
     parent_id: selectedCategory.value.parent_id
 })
-
+const isChild = ref(false);
 const parentCategories = ref([]);
 const categories = ref([]);
 
 onMounted(()=>{
+    if (selectedCategory.value.parent_id) {
+        isChild.value = true;
+    }
     parentCategories.value = filter(page.props.value.categories, item => item.is_parent)
-    categories.value = map(filter(page.props.value.categories, item => isEmpty(item.is_parent)), item => {
+    categories.value = map(page.props.value.parents, item => {
         return {
             key: item.id,
             value: item.name
@@ -67,6 +74,9 @@ onMounted(()=>{
 });
 
 const submit = () => {
+    if (!isChild.value) {
+        form.parent_id = null;
+    }
     form.post(route('admin.category.edit', form.id), {
         onFinish: () => {
             if(isEmpty(form.errors)){

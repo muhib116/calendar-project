@@ -56,7 +56,16 @@ class CountryController extends Controller
     }
 
     function delete($id){
-        Country::where('id', $id)->delete();
-        return redirect()->back()->with('message', 'Country deleted successfully!');
+        $country = Country::find($id);
+        if ($country) {
+            try {
+                $country->delete();
+            } catch (\Throwable $th) {
+                return redirect()->back()->with('error', 'Opps! This country cannot delete.');
+            }
+            return redirect()->back()->with('message', 'Country deleted successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Opps! Something wrong');
+        }
     }
 }

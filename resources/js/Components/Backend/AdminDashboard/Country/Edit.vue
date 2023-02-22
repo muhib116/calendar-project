@@ -37,15 +37,24 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import { isEmpty } from 'lodash'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import Helper from '@/Helper'
+import { onMounted } from 'vue'
 
 const { activeComponent, countryStatus, selectedCountry } = useCountry()
 const form = useForm({
-    id: selectedCountry.value.id,
-    country_code: selectedCountry.value.country_code,
-    phone_code: selectedCountry.value.phone_code,
-    name: selectedCountry.value.name,
-    status: countryStatus.value[0].key
+    id: null,
+    country_code: null,
+    phone_code: null,
+    name: null,
+    status: null,
 })
+
+onMounted(()=>{
+    form.id = selectedCountry.value.id;
+    form.country_code = selectedCountry.value.country_code;
+    form.phone_code = selectedCountry.value.phone_code;
+    form.name = selectedCountry.value.name;
+    form.status = selectedCountry.value.status; 
+});
 
 const submit = () => {
     form.post(route('admin.country.edit', form.id), {

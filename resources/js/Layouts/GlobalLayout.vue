@@ -11,6 +11,9 @@ watch(usePage().props, (props) => {
     if(props.flash.message){
         toast.success(props.flash.message)
     }
+    if(props.flash.error){
+        toast.error(props.flash.error)
+    }
 }, {deep: true})
 </script>
 

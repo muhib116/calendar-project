@@ -13,8 +13,10 @@ class CategoryController extends Controller
 {
     function index(){
         $categories = Category::with(['parent'])->orderBy('id', 'desc')->get();
+        $parents = Category::where('parent_id', '=', null)->get();
         return Inertia::render('Backend/AdminDashboard/Categories', [
-            'categories' => $categories
+            'categories' => $categories,
+            'parents' => $parents
         ]);
     }
 
@@ -30,7 +32,7 @@ class CategoryController extends Controller
             'status' => $request->status
         ];
 
-        if($request->paren_id){
+        if($request->parent_id){
             $data['parent_id'] = $request->parent_id;
         }
 

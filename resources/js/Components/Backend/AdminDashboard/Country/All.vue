@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import EditIcon from '@/Icons/EditIcon.vue'
 import useCountry from '@/Pages/Backend/AdminDashboard/useCountry.js'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
@@ -89,14 +89,16 @@ const countries = computed(() => {
     return usePage().props.value.countries
 })
 
-data.value = countries.value;
+watch(()=>{
+    data.value = countries.value;
+});
 
 const handleEdit = (country) => {
     activeComponent.value = 'Edit'
     selectedCountry.value = country
 }
 
-const deleteCountry = (id) => {
+const deleteCountry = (id) => { 
     Helper.confirm("Are you sure to delete?", ()=>{
         Inertia.delete(route('admin.country.delete', id))
     })

@@ -38,7 +38,7 @@
                     </div>
                     <div class="grid mt-10 gap-5 px-[30px]">
                         <template v-for="(category, index) in categoryPear" :key="index">
-                            <CategoryWiseLatestItem :talents="category.talents" :title="category.name" />
+                            <CategoryWiseLatestItem :talents="category.talents" :title="category.name" :category="category" />
                         </template>
                         <!-- <CategoryWiseLatestItem title="Artists"/> -->
                     </div>

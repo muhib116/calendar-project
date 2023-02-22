@@ -86,6 +86,13 @@ class UserController extends Controller
         return redirect()->back()->with('message', 'User deleted successfully!');
     }
 
+    public function visibility(User $user) {
+        $user->update([
+            'is_featured' => $user->is_featured ? 0 : 1
+        ]);
+        return redirect()->back()->with('message', 'Update successfully');
+    }
+
     public function restore_user($user) {
         $user = User::onlyTrashed()->find($user);
         $user->update([

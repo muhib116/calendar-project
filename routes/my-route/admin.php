@@ -61,6 +61,7 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         // users start
         Route::get('/users', [UserController::class, 'index'])->name('admin.users');
         Route::delete('/delete-user/{user}', [UserController::class, 'soft_delete'])->name('admin.delete_user');
+        Route::post('/visible-user/{user}', [UserController::class, 'visibility'])->name('admin.visibility');
         Route::delete('/restore-user/{user}', [UserController::class, 'restore_user'])->name('admin.restore_user');
     
         Route::get('/user/{id}', function () {

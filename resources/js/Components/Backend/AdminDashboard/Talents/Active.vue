@@ -44,7 +44,10 @@
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
                                 {{ Helper.translate('Files') }}
-                            </th>
+                            </th> 
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                                {{ Helper.translate('Show frontend') }}
+                            </th> 
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
                                 {{ Helper.translate('Action') }}
                             </th>
@@ -83,9 +86,12 @@
                                     Verified
                                 </template>
                             </td>
-                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-2">
-                                <!-- file_access -->
-                                <span class="text-green-500">Access</span>
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                <span v-if="file_access" class="text-green-500">Access</span>
+                            </td>
+                            <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                <button @click="handleFeatured(item.id)" v-if="item.is_featured" class="bg-green-100 rounded py-1 px-2">Show</button>
+                                <button @click="handleFeatured(item.id)" v-else class="bg-red-100 rounded py-1 px-2">Hidden</button>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap font-semibold">
                                 <div class="flex gap-2 justify-end">
@@ -137,6 +143,12 @@ const deletedTalents = computed(() => {
 const handleDeleteUser = (id) => {
     Helper.confirm("Are you sure to delete?", ()=>{
         Inertia.delete(route('admin.delete_user', id))
+    })
+}
+
+const handleFeatured = (id) => {
+    Helper.confirm("Are you sure change this?", ()=>{
+        Inertia.post(route('admin.visibility', id))
     })
 }
 

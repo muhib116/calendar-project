@@ -34,9 +34,9 @@ Route::middleware(['auth', 'verified', 'user-role:user'])->group(function(){
     // ------
 
     Route::get('/category/{categorySlug}', function ($slug) {
-        // $talents = User::with('category')->get();
-        // return $talents;
-        return Inertia::render('Backend/CategoryWiseItem');
+        $category = Category::where('slug', $slug)->first();
+        $talents = User::where('category_id', $category->id)->with('category')->get();
+        return Inertia::render('Backend/CategoryWiseItem', compact('talents', 'category'));
     })->name('category.items');
     
     Route::get('/talents/{id}', [TalentController::class, 'talentDetailsForUser'])->name('item.details');

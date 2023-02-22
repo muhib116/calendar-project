@@ -16,8 +16,8 @@ class FrontendController extends Controller
         $categories = Category::where('status', 1)->with(['talents' => function($q) {
             return $q->where('role', 'talent')->limit(4)->with(['category']);
         }])->get();
-        $categories_with_child = Category::where('parent_id', '=', null)->with('child')->get();
-        // $relatedTalents = User::whereIn();
+
+        $categories_with_child = Category::where('status', 1)->where('parent_id', '=', null)->with('child')->get();
         return Inertia::render('Frontend/Home', [
             'countries' => $countries,
             'categories' => $categories,
