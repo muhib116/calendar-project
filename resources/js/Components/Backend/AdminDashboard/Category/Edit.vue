@@ -73,7 +73,7 @@ const categories = computed(() => {
 
     return filteredCategories
 })
-
+// **
 const submit = () => {
     if (!isChild.value) {
         form.parent_id = null;
