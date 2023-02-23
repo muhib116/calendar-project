@@ -54,6 +54,7 @@ const form = useForm({
     status: selectedCategory.value.status,
     parent_id: selectedCategory.value.parent_id
 })
+
 const isChild = ref(!!selectedCategory.value.parent_id);
 const categories = computed(() => {
     let filteredCategories = page.props.value.categories.filter(item => {
@@ -72,12 +73,6 @@ const categories = computed(() => {
 
     return filteredCategories
 })
-
-// onMounted(()=>{
-//     if (selectedCategory.value.parent_id) {
-//         isChild.value = true;
-//     }
-// })
 
 const submit = () => {
     if (!isChild.value) {
