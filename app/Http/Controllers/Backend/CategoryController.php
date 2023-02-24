@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
     function store(Request $request){
         $request->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:'.Category::class],
+            'name' => ['required', 'string', 'max:255'],
             'status' => ['required'],
         ]);
 
@@ -34,19 +34,50 @@ class CategoryController extends Controller
 
         if($request->parent_id){
             $data['parent_id'] = $request->parent_id;
+            $exist = Category::where('parent_id', '!=', null)->where('name', $request->name)->get();
+            if (count($exist)) {
+                return back()->withErrors([
+                    'name' => 'The name has already been taken.'
+                ]);
+            }
+        } else {
+            $exist = Category::where('name', $request->name)->get();
+            if (count($exist)) {
+                return back()->withErrors([
+                    'name' => 'The name has already been taken.'
+                ]);
+            }
         }
 
         Category::create($data);
         return redirect()->route('admin.categories')->with('message', 'Category created successfully!');
     }
 
-    function edit(Request $request, $id){
+    function edit(Request $request, $id)
+    {
         $request->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:categories,name,'.$id],
+            'name' => ['required', 'string', 'max:255'],
             'status' => ['required'],
         ]);
 
         $category = Category::find($id);
+        if($request->parent_id){
+            $data['parent_id'] = $request->parent_id;
+            $exist = Category::where('id', '!=', $category->id)->where('parent_id', '!=', null)->where('name', $request->name)->get();
+            if (count($exist)) {
+                return back()->withErrors([
+                    'name' => 'The name has already been taken.'
+                ]);
+            }
+        } else {
+            $exist = Category::where('id', '!=', $category->id)->where('name', $request->name)->get();
+            if (count($exist)) {
+                return back()->withErrors([
+                    'name' => 'The name has already been taken.'
+                ]);
+            }
+        }
+        
         $category->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),

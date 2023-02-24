@@ -46,7 +46,7 @@
                                 {{ Helper.translate('Files') }}
                             </th> 
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
-                                {{ Helper.translate('Show frontend') }}
+                                {{ Helper.translate('Show in frontend') }}
                             </th> 
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-right">
                                 {{ Helper.translate('Action') }}
@@ -90,8 +90,8 @@
                                 <span v-if="file_access" class="text-green-500">Access</span>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <button @click="handleFeatured(item.id)" v-if="item.is_featured" class="bg-green-100 rounded py-1 px-2">Show</button>
-                                <button @click="handleFeatured(item.id)" v-else class="bg-red-100 rounded py-1 px-2">Hidden</button>
+                                <button @click="handleFeatured(item.id)" v-if="item.is_featured" class="bg-red-500 text-white font-semibold text-xs rounded py-1 px-2">Hide</button>
+                                <button @click="handleFeatured(item.id)" v-else class="bg-green-500 text-white font-semibold text-xs rounded py-1 px-2">Show</button>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap font-semibold">
                                 <div class="flex gap-2 justify-end">
@@ -133,7 +133,6 @@ const { components, data, resultPerPage, search } = useTable()
 
 const talents = computed(() => {
     data.value = usePage().props.value.talents
-    console.log(data.value[0]);
     return data.value
 })
 const deletedTalents = computed(() => { 

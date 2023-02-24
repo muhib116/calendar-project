@@ -55,6 +55,7 @@ const isChild = ref(false);
 const parentCategories = ref([]);
 const categories = ref([]);
 const page = usePage();
+
 onMounted(()=>{
     parentCategories.value = filter(page.props.value.categories, item => item.parent_id)
     categories.value = map(page.props.value.parents, item => {
