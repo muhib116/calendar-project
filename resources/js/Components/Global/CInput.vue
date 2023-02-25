@@ -1,6 +1,6 @@
 <template>
     <label class="relative block" :class="disabled && 'pointer-events-none opacity-50 bg-gray-50'">
-        <span v-if="isEmpty(modelValue)" class="absolute left-0 top-3 pointer-events-none opacity-40 whitespace-nowrap">
+        <span v-if="modelValue == null || !String(modelValue).length" class="absolute left-0 top-3 pointer-events-none opacity-40 whitespace-nowrap">
             {{ Helper.translate(placeholder) }}
         </span>
         <input @input="updateValue" :value="modelValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow bg-transparent">

@@ -5,13 +5,13 @@
             {{ Helper.translate('Back') }}
         </button>
         <div class="max-w-[500px]">
-            <h1 class="text-lg font-semibold mb-4">{{ Helper.translate('Add Ocassion') }}</h1>
+            <h1 class="text-lg font-semibold mb-4">{{ Helper.translate('Add Occasion') }}</h1>
             <div class="relative mb-6">
-                <CInput type="text" v-model="form.name" :placeholder="Helper.translate('Ocassion Name')" />
+                <CInput type="text" v-model="form.name" :placeholder="Helper.translate('Occasion Name')" />
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.name, true) }}</span>
             </div>
             <div class="relative">
-                <CSelect :options="ocassionStatus" v-model="form.status"/>
+                <CSelect :options="occasionStatus" v-model="form.status"/>
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.status, true) }}</span>
             </div>
             <button
@@ -28,17 +28,16 @@
 import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
-import useOcassion from '@/Pages/Backend/AdminDashboard/useOcassion.js'
-import { useForm, usePage } from '@inertiajs/inertia-vue3'
-import { isEmpty, filter, map } from 'lodash'
-import { ref, onMounted } from 'vue'
+import useOccasion from '@/Pages/Backend/AdminDashboard/useOccasion.js'
+import { useForm } from '@inertiajs/inertia-vue3'
+import { isEmpty } from 'lodash'
 import Helper from '@/Helper'
 
-const { activeComponent, ocassionStatus } = useOcassion()
+const { activeComponent, occasionStatus } = useOccasion()
 
 const form = useForm({
     name: '',
-    status: ocassionStatus.value[0].key,
+    status: occasionStatus.value[0].key,
 })
 
 

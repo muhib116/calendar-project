@@ -9,11 +9,11 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 
-class OccasionController extends Controller
+class OcassionController extends Controller
 {
     function index(){
         $ocassions = Occasion::orderBy('id', 'desc')->get();
-        return Inertia::render('Backend/AdminDashboard/Ocassion', [
+        return Inertia::render('Backend/AdminDashboard/Occasion', [
             'ocassions' => $ocassions
         ]);
     }

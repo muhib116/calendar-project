@@ -5,13 +5,13 @@
             {{ Helper.translate('Back') }}
         </button>
         <div class="max-w-[500px]">
-            <h1 class="text-lg font-semibold mb-4">{{ Helper.translate('Edit Ocassion') }}</h1>
+            <h1 class="text-lg font-semibold mb-4">{{ Helper.translate('Edit Occasion') }}</h1>
             <div class="relative mb-6">
-                <CInput type="text" v-model="form.name" placeholder="Ocassion Name" />
+                <CInput type="text" v-model="form.name" placeholder="Occasion Name" />
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.name, true) }}</span>
             </div>
             <div class="relative">
-                <CSelect :options="ocassionStatus" v-model="form.status"/>
+                <CSelect :options="occasionStatus" v-model="form.status"/>
                 <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.status, true) }}</span>
             </div>
             <button
@@ -29,26 +29,26 @@ import CInput from '@/Components/Global/CInput.vue'
 import CSelect from '@/Components/Global/CSelect.vue'
 import Checkbox from '@/Components/Global/Checkbox.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
-import useOcassion from '@/Pages/Backend/AdminDashboard/useOcassion.js'
+import useOccasion from '@/Pages/Backend/AdminDashboard/useOccasion.js'
 import { useForm } from '@inertiajs/inertia-vue3'
 import { isEmpty, filter, map } from 'lodash'
 import Helper from '@/Helper'
 import { onMounted } from '@vue/runtime-core'
 import { ref } from 'vue'
 
-const { activeComponent, selectedOcassion, ocassionStatus } = useOcassion()
+const { activeComponent, selectedOccasion, occasionStatus } = useOccasion()
 
 const form = useForm({
-    id: selectedOcassion.value.id,
-    name: selectedOcassion.value.name,
-    status: selectedOcassion.value.status, 
+    id: selectedOccasion.value.id,
+    name: selectedOccasion.value.name,
+    status: selectedOccasion.value.status, 
 })
 
 const submit = () => {
     form.post(route('admin.ocassion.edit', form.id), {
         onFinish: () => {
             if(isEmpty(form.errors)){
-                selectedOcassion.value = {}
+                selectedOccasion.value = {}
                 activeComponent.value = 'All'
             }
         }

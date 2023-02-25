@@ -1,7 +1,7 @@
 import { ref } from 'vue'
-import All from '@/Components/Backend/AdminDashboard/Ocassion/All.vue'
-import Add from '@/Components/Backend/AdminDashboard/Ocassion/Add.vue'
-import Edit from '@/Components/Backend/AdminDashboard/Ocassion/Edit.vue'
+import All from '@/Components/Backend/AdminDashboard/Occasion/All.vue'
+import Add from '@/Components/Backend/AdminDashboard/Occasion/Add.vue'
+import Edit from '@/Components/Backend/AdminDashboard/Occasion/Edit.vue'
 
 const components = {
     All,
@@ -10,10 +10,10 @@ const components = {
 }
 
 const activeComponent = ref('All')
-const selectedOcassion = ref({})
+const selectedOccasion = ref({})
 
-export default function useOcassion(){
-    const ocassionStatus = ref([
+export default function useOccasion(){
+    const occasionStatus = ref([
         {
             key: '',
             value: 'Select Status'
@@ -31,7 +31,7 @@ export default function useOcassion(){
     return {
         components,
         activeComponent,
-        selectedOcassion,
-        ocassionStatus
+        selectedOccasion,
+        occasionStatus
     }
 }

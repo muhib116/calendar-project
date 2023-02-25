@@ -13,7 +13,7 @@ class FrontendController extends Controller
 {
     function index(){
         $countries = Country::all();
-        $categories = Category::where('status', 1)->with(['talents' => function($q) {
+        $categories = Category::where('status', 1)->where('parent_id', '=', null)->with(['talents' => function($q) {
             return $q->where('role', 'talent')->limit(4)->with(['category']);
         }])->get();
 
@@ -25,6 +25,7 @@ class FrontendController extends Controller
             'isLogin' => Auth::check()
         ]);
     }
+
     function pages($slug){
         $page = Page::where('slug', $slug)->orderBy('id', 'desc')->first();
         return Inertia::render('Frontend/Page', ['page' => $page]);

@@ -1,6 +1,6 @@
 <template>
-    <Head :title="Helper.translate('Ocassion Management')" />
-    <DashboardLayout :header="false" :footer="false" :title="Helper.translate('Ocassion Management')">
+    <Head :title="Helper.translate('Occasion Management')" />
+    <DashboardLayout :header="false" :footer="false" :title="Helper.translate('Occasion Management')">
         <template v-slot:leftSidebar>
             <LeftSide />
         </template>
@@ -13,11 +13,11 @@
 <script setup>
     import DashboardLayout from './DashboardLayout.vue'
     import LeftSide from '@/Components/Backend/AdminDashboard/LeftSide.vue'
-    import useOcassion from '@/Pages/Backend/AdminDashboard/useOcassion.js'
+    import useOccasion from '@/Pages/Backend/AdminDashboard/useOccasion.js'
     import { Head } from '@inertiajs/inertia-vue3';
     import Helper from '@/Helper';
 
-    const { components, activeComponent } = useOcassion()
+    const { components, activeComponent } = useOccasion()
 </script>
 
 

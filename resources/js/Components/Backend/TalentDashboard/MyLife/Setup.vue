@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="text-lg">
-            {{ Helper.translate('Please setup a') }} <strong>{{ Helper.translate('yearly') }}</strong> {{ Helper.translate('subscription price') }} ({{ Helper.translate('min') }} {{ Helper.priceFormate(30) }}/{{ Helper.translate('year') }})
+            {{ Helper.translate('Please setup a') }} <strong>{{ Helper.translate('yearly') }}</strong> {{ Helper.translate('subscription price') }} ({{ Helper.translate('min') }} {{ Helper.priceFormate(50) }}/{{ Helper.translate('year') }})
         </h1>
 
         <div class="grid grid-cols-2 gap-6">

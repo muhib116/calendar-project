@@ -5,13 +5,13 @@
                 <component :is="components['PageSize']" />
             </div>
             <button @click="activeComponent = 'Add'" class="px-4 py-1 rounded bg-sky-500 text-white font-bold">
-                {{ Helper.translate('Add Ocassion') }}
+                {{ Helper.translate('Add Occasion') }}
             </button>
         </div>
 
         <div class="flex flex-col mt-4">
             <div class="overflow-x-auto">
-                <table class="w-full">
+                <table v-if="!isEmpty(data)" class="w-full">
                     <thead class="border-b whitespace-nowrap">
                         <tr>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -30,30 +30,30 @@
                     </thead>
                     <tbody>
                         {{ computedData }}
-                        <tr v-for="(ocassion, index) in resultPerPage" :key="ocassion.id" class="border-b">
+                        <tr v-for="(occasion, index) in resultPerPage" :key="occasion.id" class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ Helper.translate(index+1, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                {{ Helper.translate(ocassion.name, true) }}
+                                {{ Helper.translate(occasion.name, true) }}
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
-                                <span class="font-semibold" :class="ocassion.status ? 'text-green-500' : 'text-red-500'">
-                                    {{ ocassion.status ? Helper.translate('Enabled') : Helper.translate('Disabled') }}
+                                <span class="font-semibold" :class="occasion.status ? 'text-green-500' : 'text-red-500'">
+                                    {{ occasion.status ? Helper.translate('Enabled') : Helper.translate('Disabled') }}
                                 </span>
                             </td>
                             <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
-                                <button @click="handleEdit(ocassion)" class="bg-gray-800 px-2 py-1 rounded text-white text-sm font-bold block">
+                                <button @click="handleEdit(occasion)" class="bg-gray-800 px-2 py-1 rounded text-white text-sm font-bold block">
                                     <EditIcon class="w-4 h-4" />
                                 </button>
-                                <button @click="deleteOcassion(ocassion.id)" class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
+                                <button @click="deleteOcassion(occasion.id)" class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
                                     <CloseIcon class="w-4 h-4" />
                                 </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <Alert v-if="isEmpty(data)" />
+                <Alert v-else />
             </div>
             <component :is="components['Pagination']" />
         </div>
@@ -66,23 +66,23 @@ import CloseIcon from '@/Icons/CloseIcon.vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 import Helper from '@/Helper.js'
 import { Inertia } from '@inertiajs/inertia'
-import useOcassion from '@/Pages/Backend/AdminDashboard/useOcassion.js'
+import useOccasion from '@/Pages/Backend/AdminDashboard/useOccasion.js'
 import useTable from '@/Components/Backend/Global/Table/useTable.js'
 import Alert from '@/Components/Global/Alert.vue'
 import { isEmpty } from 'lodash'
-import { computed, onMounted, watch } from 'vue'
+import { watch } from 'vue'
 
 const { components, data, resultPerPage } = useTable()
-const { activeComponent, selectedOcassion } = useOcassion()
+const { activeComponent, selectedOccasion } = useOccasion()
 
 
 watch(()=>{
     data.value = usePage().props.value.ocassions
 })
 
-const handleEdit = (ocassion) => {
+const handleEdit = (occasion) => {
     activeComponent.value = 'Edit'
-    selectedOcassion.value = ocassion
+    selectedOccasion.value = occasion
 }
 
 const deleteOcassion = (id) => {
