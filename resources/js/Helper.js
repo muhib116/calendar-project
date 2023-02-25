@@ -40,7 +40,7 @@ Helper.dateFormate = (date) => {
 
 Helper.getCommission = (amount, commission=0) => {
     if(settings.data.commission){
-        commission = settings.data.commission;
+        commission = settings.data.commission
     }
     return ((amount*commission)/100);
 }

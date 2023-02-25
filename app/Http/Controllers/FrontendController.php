@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Page;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 

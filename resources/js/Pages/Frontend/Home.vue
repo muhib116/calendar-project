@@ -40,7 +40,6 @@
                         <template v-for="(category, index) in categoryPear" :key="index">
                             <CategoryWiseLatestItem :talents="category.talents" :title="category.name" :category="category" />
                         </template>
-                        <!-- <CategoryWiseLatestItem title="Artists"/> -->
                     </div>
 
                 </div>
