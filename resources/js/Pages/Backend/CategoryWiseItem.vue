@@ -8,10 +8,10 @@
 
         <div class="px-4">
             <div class="container mx-auto py-5">
-                <div v-if="!isEmpty(talents)" class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
+                <div v-if="!isEmpty(talents)" class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 items-end gap-6">
                     <template v-for="(talent, index) in talents" :key="index">
-                        <Link :href="route('item.details', talent.id)" class="relative hover:shadow-xl transition-all">
-                            <img class="customRatio" src="https://images.unsplash.com/photo-1673878034060-2d97a101563a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60" alt="">
+                        <Link :href="route('item.details', talent.id)" class="relative border hover:shadow-xl transition-all">
+                            <Video :poster="talent.video_path" />
                             <h2 class="absolute bottom-0 p-4 bg-white w-full bg-opacity-50 backdrop-blur-md border-t font-semibold truncate">
                                 {{ talent.name }}
                             </h2>
@@ -27,10 +27,11 @@
 </template>
 
 <script setup>
-    import Helper from '@/Helper';
+    import Helper from '@/Helper'
     import Master from '@/Pages/Backend/Master.vue'
-    import { Link } from '@inertiajs/inertia-vue3';
+    import { Link } from '@inertiajs/inertia-vue3'
     import { isEmpty } from 'lodash'
+    import Video from '@/Components/Global/Video.vue'
 
     const props = defineProps({
         talents: {

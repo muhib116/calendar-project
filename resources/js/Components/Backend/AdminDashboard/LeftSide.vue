@@ -72,6 +72,13 @@
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
+                :class="route().current('admin.contact') ? 'bg-[#130121] text-white' : ''"
+                :href="route('admin.contact')"
+            >
+                {{ Helper.translate('Contact Info') }}
+            </Link>
+            <Link 
+                class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
                 :class="route().current('admin.settings') ? 'bg-[#130121] text-white' : ''"
                 :href="route('admin.settings')"
             >

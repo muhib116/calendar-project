@@ -2,7 +2,7 @@
     <GlobalLayout>
         <div>
             <Header v-if="header" />
-            <div class="min-h-[89vh] pt-5">
+            <div class="min-h-[89vh]">
                 <slot></slot>
             </div>
             <Footer v-if="footer" />

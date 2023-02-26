@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="file" />
+        <input type="file" accept="video/*" />
         <div class="font-bold mt-5">
             Write title
             <div class="flex items-center gap-6">

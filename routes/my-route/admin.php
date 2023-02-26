@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CountryController;
 use App\Http\Controllers\Backend\OcassionController;
 use App\Http\Controllers\Backend\TalentController;
@@ -76,5 +77,7 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         Route::post('/save-page', [SettingsController::class, 'savepage'])->name('admin.savePage');
         Route::delete('/delete-page/{page}', [SettingsController::class, 'deletepage'])->name('admin.deleted.page');
         // settings end
+
+        Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact');
     });
 });

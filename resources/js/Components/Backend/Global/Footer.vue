@@ -2,9 +2,9 @@
     <footer class="bg-[var(--footer-bg-color)] text-white px-4 text-sm py-2 footerOuterWrapper">
         <div class="footerWrapper container mx-auto flex gap-4 justify-between items-center flex-wrap">
             <div class="links flex gap-[5px] md:gap-2 flex-wrap">
-                <!-- <Link :href="route('categories')" class="opacity-60 hover:opacity-100">
+                <Link :href="route('categories')" class="opacity-60 hover:opacity-100">
                     {{ Helper.translate('Categories') }}
-                </Link> -->
+                </Link>
 
                 <Link 
                     v-for="page in pages" 
@@ -17,6 +17,10 @@
 
                 <Link :href="route('contact')" class="opacity-60 hover:opacity-100">
                     {{ Helper.translate('Contact') }}
+                </Link>
+
+                <Link :href="route('faq')" class="opacity-60 hover:opacity-100">
+                    {{ Helper.translate('FAQ') }}
                 </Link>
             </div>
             <div class="opacity-60 flex gap-1 items-center">

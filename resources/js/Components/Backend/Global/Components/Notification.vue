@@ -21,6 +21,7 @@
 <script setup>
 import { usePage } from '@inertiajs/inertia-vue3'
 import { computed } from 'vue'
+import { get } from 'lodash'
 
 const user = computed(() => {
     if(usePage().props.value.auth.user){
