@@ -1,13 +1,24 @@
 <template>
+    <Head title="Contact Us" />
     <Master>
         <div class="px-4">
-            <div class="container mx-auto py-5 relative">
-                <Head title="Contact Us" />
-                <div>
-                    <h1 class="text-2xl mb-4 font-bold text-black">Contact Us</h1>
-                    <div class="">
-                        ****
+            <div class="wrapper border max-w-screen-xl mt-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-4xl lg:text-5xl font-bold leading-tight">
+                            Lets talk about everything!
+                        </h2>
+                        <div class="text-gray-700 mt-8">
+                            Hate forms? Send us an
+                            <span class="underline">email</span> instead.
+                        </div>
                     </div>
+                    <div class="mt-8 text-center">
+                        <SVGImage />
+                    </div>
+                </div>
+                <div class="grid items-center">
+                    <Form />
                 </div>
             </div>
         </div>
@@ -15,11 +26,15 @@
 </template>
 
 <script setup>
-import Master from '../Backend/Master.vue';
-import { Head } from '@inertiajs/inertia-vue3'
-
+import Master from "../Backend/Master.vue"
+import { Head } from "@inertiajs/inertia-vue3"
+import SVGImage from "@/Components/Frontend/Contact/SVGImage.vue"
+import Form from "@/Components/Frontend/Contact/Form.vue"
 </script>
 
-<style lang="scss" scoped>
 
+<style scoped>
+.wrapper{
+    background: linear-gradient(90deg, #0008 0%, transparent 50%);
+}
 </style>

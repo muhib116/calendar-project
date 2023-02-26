@@ -15,9 +15,9 @@
                     {{ Helper.translate(page.title, true) }}
                 </Link>
 
-                <!-- <Link :href="route('contact')" class="opacity-60 hover:opacity-100">
+                <Link :href="route('contact')" class="opacity-60 hover:opacity-100">
                     {{ Helper.translate('Contact') }}
-                </Link> -->
+                </Link>
             </div>
             <div class="opacity-60 flex gap-1 items-center">
                 &copy; {{ new Date().getFullYear() }}

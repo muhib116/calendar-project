@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-4 items-center">
+    <div v-if="user" class="flex gap-4 items-center">
         <button class="relative">
             <span class="absolute bottom-[50%] left-[55%] text-[10px] font-bold min-w-4 h-4 bg-[var(--notification-badge-color)] rounded-full grid content-center p-1">
                 0
@@ -19,7 +19,17 @@
 </template>
 
 <script setup>
+import { usePage } from '@inertiajs/inertia-vue3'
+import { computed } from 'vue'
 
+const user = computed(() => {
+    if(usePage().props.value.auth.user){
+        const { role, name } = get(usePage().props.value, 'auth.user')
+        return { role, name }
+    }
+
+    return null
+})
 </script>
 
 <style lang="scss" scoped>

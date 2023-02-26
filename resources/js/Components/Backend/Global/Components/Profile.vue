@@ -1,5 +1,5 @@
 <template>
-    <div class="relative group">
+    <div v-if="user" class="relative group">
         <span 
             class="font-black w-10 h-10 grid content-center justify-center rounded-full p-2 text-xs cursor-pointer uppercase"
             :class="
@@ -36,15 +36,20 @@
 
 <script setup>
     import { get } from 'lodash'
-    import { computed } from '@vue/reactivity'
+    import { computed } from 'vue'
     import { Link, usePage } from '@inertiajs/inertia-vue3'
 
     const user = computed(() => {
-        const { role, name } = get(usePage().props.value, 'auth.user')
-        return { role, name }
+        if(usePage().props.value.auth.user){
+            const { role, name } = get(usePage().props.value, 'auth.user')
+            return { role, name }
+        }
+
+        return null
     })
 
     const getTwoLatterOfName = (name) => {
+        if(!name) return
         name = name.split(' ')
         if(name.length>1){
             return name[0][0]+name[1][0]

@@ -6,7 +6,7 @@
         <textarea 
             :rows="rows"
             @input="updateValue" 
-            class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow"
+            class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow bg-transparent"
         ></textarea>
         <span class="customBorder"></span>
         <div 

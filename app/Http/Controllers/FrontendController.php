@@ -27,10 +27,16 @@ class FrontendController extends Controller
 
     function pages($slug){
         $page = Page::where('slug', $slug)->orderBy('id', 'desc')->first();
-        return Inertia::render('Frontend/Page', ['page' => $page]);
+        return Inertia::render('Frontend/Page', [
+            'isLogin' => Auth::check(),
+            'page' => $page
+        ]);
     }
     function contact(){
         return Inertia::render('Frontend/Contact');
+    }
+    function faq(){
+        return Inertia::render('Frontend/FAQ');
     }
     function categories(){
         return Inertia::render('Frontend/Categories');
