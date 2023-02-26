@@ -37,14 +37,20 @@ const editorConfig = ref({
     }
 })
 
-const pageTypes = [{
-    key: 'privacy-policy',
-    value: Helper.translate('Privacy policy')
-},
-{
-    key: 'terms-of-service',
-    value: Helper.translate('Terms of service')
-}]
+const pageTypes = [
+    {
+        key: null,
+        value: Helper.translate('-Select page type-')
+    },
+    {
+        key: 'privacy-policy',
+        value: Helper.translate('Privacy policy')
+    },
+    {
+        key: 'terms-of-service',
+        value: Helper.translate('Terms of service')
+    }
+]
 
 const form = useForm({
     title: null,

@@ -19,11 +19,19 @@
                 >
                     Add/Manage
                 </button>
-                <button class="font-semibold border rounded px-4 py-1">Preview</button>
+                <button
+                    @click="showPreview = true" 
+                    class="font-semibold border rounded px-4 py-1"
+                >
+                    Preview
+                </button>
             </div>
             <div class="mt-10">
                 <component :is="components[currentComponent]" />
             </div>
+            <Modal v-model="showPreview" class="w-full">
+                <Subscribe class="bg-white" @close="showPreview=false" :closeable="true"/>
+            </Modal>
         </template>
     </DashboardLayout>
 </template>
@@ -32,14 +40,13 @@
 import { ref } from 'vue';
 import DashboardLayout from '../DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/TalentDashboard/LeftSide.vue'
-import useMyLife from '@/Pages/Backend/TalentDashboard/useMyLife.js' 
+import useMyLife from '@/Pages/Backend/TalentDashboard/useMyLife.js'
+import Modal from '@/Components/Library/Modal.vue'
+import Subscribe from '@/Components/Backend/Subscribe.vue'
 
 const currentComponent = ref('Setup')
 const { components } = useMyLife()
-
-
-
-
+const showPreview = ref(false)
 </script>
 
 

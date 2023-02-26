@@ -197,3 +197,45 @@ Meeting: 007;
         talent_id, user_id, amount, commission_amount, commission, type, gender, instructio.............
 
         -- user can pay more. (look line)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Task by muhib:
+---------------------
+1. Upload cover picture in talent "My life" menu
+2. Make functional/dynamic 'Add/Manage' under "My life" menu, after clicking preview button, show the cover picture in banner section and show the video in bottom that talent uploaded in 'add/manage'
+3. Add our confirm modal in  T-Application's approved and decline button
+4. In frontend make contact page dynamic (controller, model, and migration created), use php strip_tag function to avoid the html tag
+5. In admin dashboard here is a menu called "Contact info", show the list of contact information submitted from frontend, if admin click on replay button change the "seen" value to 1 in DB, and make reply function in modal.
+6. and we a new page called "FAQ", we need to make this page from backend

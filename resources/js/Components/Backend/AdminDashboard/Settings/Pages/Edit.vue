@@ -1,11 +1,11 @@
 <template>
-    <h1 class="text-lg my-2 mb-4 flex items-center gap-6">{{ Helper.translate('Crate Page') }}</h1>
+    <h1 class="text-lg my-2 mb-4 flex items-center gap-6">{{ Helper.translate('Edit Page') }}</h1>
     <div class="relative mb-6">
         <CInput type="text" v-model="form.title" :placeholder="Helper.translate('Title')" />
         <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.title, true) }}</span>
     </div> 
     <div class="relative mb-6">
-        <CSelect type="text" v-model="form.type" :options="pageTypes" />
+        <CSelect v-model="form.type" :options="pageTypes" />
         <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.title, true) }}</span>
     </div>
     <ckeditor class="mb-4" :editor="ClassicEditor" v-model="form.description" :config="editorConfig"></ckeditor>
@@ -46,14 +46,20 @@ const editorConfig = ref({
     }
 })
 
-const pageTypes = [{
-    key: 'privacy-policy',
-    value: Helper.translate('Privacy policy')
-},
-{
-    key: 'terms-of-service',
-    value: Helper.translate('Terms of service')
-}]
+const pageTypes = [
+    {
+        key: null,
+        value: Helper.translate('-Select page type-')
+    },
+    {
+        key: 'privacy-policy',
+        value: Helper.translate('Privacy policy')
+    },
+    {
+        key: 'terms-of-service',
+        value: Helper.translate('Terms of service')
+    }
+]
 
 const form = useForm({
     id: null,

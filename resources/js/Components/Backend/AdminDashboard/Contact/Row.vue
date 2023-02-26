@@ -16,10 +16,7 @@
             {{ Helper.translate(item.email, true) }}
         </td>
         <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
-            <button @click="showReplayModal = true" class="bg-green-500 px-2 py-1 rounded text-white text-sm font-bold block">
-                <EyeIcon class="w-4 h-4" />
-            </button>
-            <button @click="showReplayModal = true" class="bg-sky-500 px-2 py-1 rounded text-white text-sm font-bold block">
+            <button @click="showReplyModal = true" class="bg-sky-500 px-2 py-1 rounded text-white text-sm font-bold block">
                 <ReplayIcon class="w-4 h-4" />
             </button>
             <button class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
@@ -27,8 +24,8 @@
             </button>
         </td>
     </tr>
-    <Modal v-model="showReplayModal">
-        Hello world
+    <Modal v-model="showReplyModal">
+        <Replay :item="item" @close="showReplyModal = false" />
     </Modal>
 </template>
 
@@ -37,13 +34,13 @@ import { ref } from 'vue'
 import Helper from '@/Helper.js'
 import CloseIcon from '@/Icons/CloseIcon.vue'
 import ReplayIcon from '@/Icons/ReplayIcon.vue'
-import EyeIcon from '@/Icons/EyeIcon.vue'
-import Modal from '@/Components/Modal.vue'
+import Modal from '@/Components/Library/Modal.vue'
+import Replay from './Replay.vue'
 
 defineProps({
     item: Object,
     index: [String, Number]
 })
 
-const showReplayModal = ref(true)
+const showReplyModal = ref(false)
 </script>

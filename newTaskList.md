@@ -18,3 +18,4 @@ ONCE A TALENT IS APPROVED THEY SHOULD GET AN EMAIL ND LET THEM KNOW THAT WAS APP
 
 Show calendar section on user when there in talent profile if the talent has any calendar that has isSalable true/1
 
+
