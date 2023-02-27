@@ -9,7 +9,7 @@
             <source :src="`${$page.props.ziggy.url}/${poster}`" type="video/ogg">
             <source :src="`${$page.props.ziggy.url}/${poster}`" type="video/mov">
         </video>
-        <button v-if="delete" class="absolute left-1/2 bottom-4 transform -translate-x-1/2 cursor-pointer p-2 rounded-full transition-all bg-red-400 hover:shadow-lg hover:bg-red-500 hover:bottom-5">
+        <button v-if="deletable" class="absolute left-1/2 bottom-4 transform -translate-x-1/2 cursor-pointer p-2 rounded-full transition-all bg-red-400 hover:shadow-lg hover:bg-red-500 hover:bottom-5">
             <CloseIcon class="w-4 h-4" />
         </button>
     </div>
@@ -30,7 +30,7 @@ defineProps({
         type: Boolean,
         default: false
     },
-    delete: {
+    deletable: {
         type: Boolean,
         default: false
     }

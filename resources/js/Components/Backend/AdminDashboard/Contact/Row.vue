@@ -1,5 +1,5 @@
 <template>
-    <tr class="border-b" :class="item.seen && 'font-semibold'">
+    <tr class="border-b" :class="!item.seen && 'font-semibold'">
         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
             {{ Helper.translate(index+1, true) }}
         </td>
