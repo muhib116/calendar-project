@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Follower;
 use App\Models\TalentEarning;
 use App\Models\User;
@@ -44,7 +43,7 @@ class TalentController extends Controller
     }
 
     public function ProfileSetup() {
-        $talent = User::with(['category'])->find(auth()->id());
+        $talent = User::with(['category'])->with(['calendars'])->find(auth()->id());
         return Inertia::render('Backend/TalentDashboard/ProfileSetup', [
             'talent' => $talent,
         ]);

@@ -65,8 +65,12 @@ class User extends Authenticatable
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function fullowers() {
+    public function followers() {
         return $this->hasMany(Follower::class, 'talent_id', 'id');
+    }
+
+    public function calendars() {
+        return $this->hasMany(Calendar::class, 'user_id', 'id');
     }
     public function userFollow() {
         return $this->hasMany(Follower::class, 'talent_id', 'id');

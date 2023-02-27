@@ -56,17 +56,7 @@
                         </div>
                     </div>
                     <div class="calendar flex flex-col customRatio">
-                        <div class="bg-red-100 h-full relative">
-                            <span class="price absolute top-4 right-4 shadow bg-sky-500 font-bold p-2 rounded text-white">
-                                <CameraIcon />
-                            </span>
-                            <img
-                                class="block h-full w-full object-cover object-center"
-                                src="https://images.unsplash.com/photo-1673762482215-33acd768cb46?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80">
-                            <h2 class="absolute bottom-0 p-4 bg-white w-full bg-opacity-50 backdrop-blur-md font-semibold truncate">
-                                {{ Helper.translate('Calendar Name') }}
-                            </h2>
-                        </div> 
+                        <CalendarPreview :calendar="getCalendar" />
                     </div>
                 </div>
             </div>
@@ -77,7 +67,6 @@
 <script setup>
 import DashboardLayout from '../DashboardLayout.vue'
 import LeftSide from '@/Components/Backend/TalentDashboard/LeftSide.vue'
-import CameraIcon from '@/Icons/CameraIcon.vue'
 import VideoIcon from '@/Icons/VideoIcon.vue'
 import Video from '@/Components/Global/Video.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
@@ -86,6 +75,7 @@ import CSelect from '@/Components/Global/CSelect.vue'
 import Helper from '@/Helper'
 import { computed, onMounted, ref } from 'vue'
 import { filter, isEmpty, map } from 'lodash'
+import CalendarPreview from '@/Components/Backend/TalentDashboard/CalendarPreview.vue'
 
 const props = defineProps({
     categories: {
@@ -96,6 +86,10 @@ const props = defineProps({
         type: Object,
         default: {}
     }
+})
+
+const getCalendar = computed(() => {
+    return props.talent.calendars.find(item => item.is_salable)
 })
 
 const form = useForm({
