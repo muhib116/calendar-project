@@ -76,7 +76,6 @@ import InputFontSize from './InputFontSize.vue'
 import { ref, computed } from 'vue'
 import useFont from '@/Components/Backend/TalentDashboard/Calendar/useFont.js'
 import CSelect from '@/Components/Global/CSelect.vue';
-import CInput from '@/Components/Global/CInput.vue';
 import { isEmpty } from 'lodash';
 
 const { calendarPayload, selectedCalendarIndex } = useCalendar()
