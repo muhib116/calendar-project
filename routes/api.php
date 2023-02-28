@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\fileUploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Models\Category;
@@ -48,3 +50,9 @@ Route::get('/pages', function(){
     $pages = Page::get();
     return response()->json($pages);
 });
+
+
+
+Route::get('media/{id}', [fileUploadController::class, 'media']);
+Route::delete('media/delete/{id}/{user_id}', [fileUploadController::class, 'mediaDelete']);
+Route::post('/edit-calendar/{id}/{user_id}', [CalendarController::class, 'update'])->name('calendar_update');

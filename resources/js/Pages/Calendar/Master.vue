@@ -2,10 +2,10 @@
     <div class="wrapper">
         <Navigation />
         <div class='grid _leftSidebarAndMainContent items-start m-auto min-h-screen bg-slate-100'>
-            <aside class="min-h-20">
+            <aside class="p-4 pl-10 h-full bg-white">
                 <LeftSidebar />
             </aside>
-            <main class="min-h-20">
+            <main class="p-4 relative select-none">
                 <slot></slot>
             </main>
         </div>

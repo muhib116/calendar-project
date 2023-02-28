@@ -3,18 +3,20 @@
 import axios from "axios"
 import { usePage } from "@inertiajs/inertia-vue3"
 import { cloneDeep, get, isEmpty } from 'lodash'
+import { ref } from "vue"
+import Helper from "@/Helper"
 // import { listOfMonth } from '@/calendarData'
 
+const allMedia = ref([])
 export default function useMedia() {
     // const { selectedMonth, calendarImages, setCalendarImages, setMedia } = useContext(calendarContext)
 
     let timeoutId = null
     const getMedia = () => {
-        console.log(usePage().props.value);
         clearTimeout(timeoutId)
         setTimeout(async () => {
-            let { data } = await axios.get(`media/${usePage().props.value.auth.user.id}`)
-            console.log(data);
+            allMedia.value = await axios.get(`media/${usePage().props.value.auth.user.id}`).then(({data}) => data)
+            return allMedia.value
         }, 1000)
     }
     
@@ -42,16 +44,21 @@ export default function useMedia() {
         setCalendarImages(myCalendarImages)
     }
 
-    const deleteMedia = async (mediaId) => {
-        let status = await axios.delete(`media/delete/${mediaId}/${auth.user.id}`)
-        if(status) {
-            getMedia()
-        }
+    const deleteMedia = (mediaId) => {
+        // if(!confirm('Are you sure to delete?')) return
+        Helper.confirm("Are you sure to delte?", async () => {
+            let status = await axios.delete(`media/delete/${mediaId}/${usePage().props.value.auth.user.id}`)
+            if(status) {
+                getMedia()
+            }
+        })
+
     }
 
     return {
         getMedia,
         handleImage,
-        deleteMedia
+        deleteMedia,
+        allMedia
     }
 }

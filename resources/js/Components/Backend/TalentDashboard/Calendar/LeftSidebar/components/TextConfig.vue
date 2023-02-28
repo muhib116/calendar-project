@@ -1,211 +1,97 @@
 <template>
     <div class="grid gap-3 py-4">
         <div class="grid grid-cols-2 gap-4">
-            <label class="flex items-center gap-2">
+            <label 
+                class="flex items-center gap-2 relative rounded shadow w-full"
+                :style="{backgroundColor: calendarPayload.settings[selectedCalendarIndex].text.style.color}"
+            >
                 <input
                     type="color"
                     name="color"
-                    class="bg-transparent rounded border border-gray-400 border-opacity-50 px-1 w-[80px] ml-6"
+                    class="border-gray-400 opacity-0 absolute"
                     placeholder="Enter your title"
-                    value="#000000" />
+                    v-model="calendarPayload.settings[selectedCalendarIndex].text.style.color"
+                />
             </label>
             <label class="grid items-center gap-2">
-                <select
-                    name="textAlign"
-                    class="bg-transparent rounded border border-gray-400 border-opacity-50 px-3 py-0"
-                >
-                    <option>-select-</option>
-                    <option value="left">Left</option>
-                    <option value="center">Center</option>
-                    <option value="right">Right</option>
-                </select>
+                <InputFontSize 
+                    v-model="calendarPayload.settings[selectedCalendarIndex].text.style.fontSize"
+                />
             </label>
         </div>
-        <div class="grid grid-cols-2 gap-4">
+
+        <div class="grid gap-4">
             <label class="grid items-center gap-2">
-                <div class="flex">
-                    <button class="px-2 text-lg">-</button
-                    ><span
-                        type="text"
-                        name="fontSize"
-                        class="bg-transparent text-center rounded border border-gray-400 border-opacity-50 px-2 w-[80px] py-0"
-                        >20</span
-                    ><button class="px-2 text-lg">+</button>
-                </div>
+                <CSelect 
+                    :options="[
+                        { key: null, value: '-Select-'},
+                        { key: 'left', value: 'Left'},
+                        { key: 'center', value: 'Center'},
+                        { key: 'right', value: 'Right'},
+                    ]" 
+                    v-model="calendarPayload.settings[selectedCalendarIndex].text.style.textAlign"
+                />
             </label>
             <label class="grid items-center gap-2">
-                <select
-                    name="textDecoration"
-                    class="bg-transparent rounded border border-gray-400 border-opacity-50 px-4 py-1 text-sm"
-                >
-                    <option>-select-</option>
-                    <option value="none">None</option>
-                    <option value="underline">Under Line</option>
-                    <option value="overline">Over Line</option>
-                </select>
+                <CSelect 
+                    :options="[
+                        {key: null, value: '-Select-'},
+                        {key: 'none', value: 'None'},
+                        {key: 'underline', value: 'Under Line'},
+                        {key: 'overline', value: 'Over Line'},
+                    ]"
+                    v-model="calendarPayload.settings[selectedCalendarIndex].text.style.textDecoration"
+                />
             </label>
         </div>
+
         <div class="grid items-center gap-2 mt-4">
-            <span class="font-semibold text-sm border px-4 py-2 flex justify-between items-center cursor-pointer">
+            <span @click="showFonts = !showFonts" class="font-semibold text-sm border px-4 py-2 flex justify-between items-center cursor-pointer">
                 Select Font
-                <svg
-                    class="w-4 h-4"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path d="M4.219 10.781 2.78 12.22l12.5 12.5.719.687.719-.687 12.5-12.5-1.438-1.438L16 22.562Z"></path>
-                </svg>
+                <svg class="w-4 h-4" viewBox="0 0 32 32"><path d="M4.219 10.781 2.78 12.22l12.5 12.5.719.687.719-.687 12.5-12.5-1.438-1.438L16 22.562Z"></path></svg>
             </span>
+            <div v-if="showFonts" class="border">
+                <div class="search -mb-[1px]">
+                    <input type="search" placeholder="Search Font" v-model="fontFilterText" class="w-full block border-t border-b border-transparent border-t-gray-100 border-b-gray-100" />
+                </div>
+                <div class="h-[480px] overflow-y-auto">
+                    <div 
+                        v-for="(item, index) in getFonts" :key="index" 
+                        class="px-4 py-2 border-b -mb-[1px] hover:bg-gray-100 cursor-pointer text-2xl"
+                        :class="item.isSelected && 'bg-gray-100'" 
+                        :style="{fontFamily: item.fontFamily, fontWeight: item.fontWeight}"
+                        @click="makeFontSelected(item, getFonts)"
+                    >
+                        ABeeZee
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<script setup></script>
-
-<style lang="scss" scoped></style>
-
-<!-- import React, { useEffect, useContext, useState } from 'react'
-import calendarContext from "@/context/calendarContext"
-import useTextConfig from '@/Components/useTextConfig.js'
+<script setup>
+import useCalendar from '@/Components/Backend/TalentDashboard/Calendar/useCalendar.js'
 import InputFontSize from './InputFontSize.vue'
-import useFont from '@/Components/useFont.js'
-import { cloneDeep } from 'lodash'
+import { ref, computed } from 'vue'
+import useFont from '@/Components/Backend/TalentDashboard/Calendar/useFont.js'
+import CSelect from '@/Components/Global/CSelect.vue';
+import CInput from '@/Components/Global/CInput.vue';
+import { isEmpty } from 'lodash';
 
-export default function TextConfig() {
-    const { 
-        calendarImages
-    } = useContext(calendarContext)
-    const { handleText, getPageName, handleFontFamily } = useTextConfig()
-    
-    const handleInput = (e) => {
-        let target = e.target
-        handleText(target)
-    }
+const { calendarPayload, selectedCalendarIndex } = useCalendar()
+const { fonts } = useFont()
+const fontFilterText = ref('')
+const showFonts = ref(false)
 
-    
-    const { fonts } = useFont()
-    const [FilteredFont, setFilteredFont] = useState(cloneDeep(fonts))
-    const handleFilter = (e) => {
-        let target = e.target
-        setFilteredFont(() => {
-            let res = fonts.filter(font => font.title.toLowerCase().indexOf(target.value.toLowerCase())>=0)
-            return res
-        })
-    }
-    const makeFontSelected = (title, FilteredFont) => {
-        FilteredFont.forEach(item => item.isSelected = item.title == title)
-    }
+const getFonts = computed(() => {
+    if(isEmpty(fontFilterText)) return fonts
+    return fonts.value.filter(font => font.title.toLowerCase().indexOf(fontFilterText.value.toLowerCase())>=0)
+})
 
-    const [ShowFont, setShowFont] = useState(false)
-
-    return (
-        <div className='grid gap-3 py-4'>
-            <div className="grid grid-cols-2 gap-4">
-                <label className='flex items-center gap-2'>
-                    {/* <span className="font-semibold">Text Color</span> */}
-                    <input 
-                        type='color' 
-                        name='color'
-                        value={
-                            calendarImages.find(item => {
-                                return (item.name == getPageName()) && item
-                            }).text.style.color
-                        }
-                        onInput={ handleInput } 
-                        className='bg-transparent rounded border border-gray-400 border-opacity-50 px-1 w-[80px] ml-6' 
-                        placeholder='Enter your title' 
-                    />
-                </label>
-
-                <label className='grid items-center gap-2'>
-                    {/* <span className="font-semibold">Text Align</span> */}
-                    <select 
-                        name='textAlign' 
-                        value={
-                            calendarImages.find(item => {
-                                return (item.name == getPageName()) && item
-                            }).text.style.textAlign
-                        }
-                        onInput={ handleInput } 
-                        className='bg-transparent rounded border border-gray-400 border-opacity-50 px-3 py-0'
-                    >
-                        <option value={null}>-select-</option>
-                        <option value="left">Left</option>
-                        <option value="center">Center</option>
-                        <option value="right">Right</option>
-                    </select>
-                </label>
-            </div>
-
-
-            <div className="grid grid-cols-2 gap-4">
-                <label className='grid items-center gap-2'>
-                    {/* <span className="font-semibold">Font Size</span> */}
-                    <InputFontSize />
-                </label>
-                <label className='grid items-center gap-2'>
-                    {/* <span className="font-semibold text-sm">Text Decoration</span> */}
-                    <select 
-                        name='textDecoration' 
-                        value={
-                            calendarImages.find(item => {
-                                return (item.name == getPageName()) && item
-                            }).text.style.textDecoration
-                        } 
-                        onInput={ handleInput } 
-                        className='bg-transparent rounded border border-gray-400 border-opacity-50 px-4 py-1 text-sm'
-                    >
-                        <option value={ null }>-select-</option>
-                        <option value="none">None</option>
-                        <option value="underline">Under Line</option>
-                        <option value="overline">Over Line</option>
-                    </select>
-                </label>
-            </div>
-            
-
-
-            {/* fonts start */}
-            <div className='grid items-center gap-2 mt-4'>
-                <span onClick={ () => setShowFont((prev) => !prev) } className="font-semibold text-sm border px-4 py-2 flex justify-between items-center cursor-pointer">
-                    Select Font
-                    <svg className='w-4 h-4' width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M4.219 10.781 2.78 12.22l12.5 12.5.719.687.719-.687 12.5-12.5-1.438-1.438L16 22.562Z"/></svg>
-                </span>
-                
-                {
-                    ShowFont && 
-                    <div className="fonts_wrapper" >
-                        <div className="search">
-                            <input type="search" onInput={ handleFilter } placeholder='Search' className='py-1 px-4 block w-full border border-gray-200 mb-4' />
-                        </div>
-                        <div className="body h-[680px] overflow-y-auto">
-                            {
-                                FilteredFont.map(font => (
-                                    font.fontWeight.map(weight => (
-                                        <div 
-                                            key={ font.title+'-'+weight } 
-                                            style={{ fontFamily: font.fontFamily, fontWeight: weight }}
-                                            className={[
-                                                'px-4 py-2 border -mb-[1px] hover:bg-gray-100 cursor-pointer text-2xl',
-                                                font.isSelected && 'bg-gray-100'
-                                            ].join(' ')}
-                                            onClick={() => {
-                                                handleFontFamily(font.fontFamily, weight)
-                                                makeFontSelected(font.title, FilteredFont)
-                                            }}
-                                        >
-                                            { font.title }
-                                        </div>
-                                    ))
-                                ))
-                            }
-                        </div>
-                    </div>
-                }
-            </div>
-            
-        </div>
-    )
-} -->
+const makeFontSelected = (item, FilteredFont) => {
+    FilteredFont.forEach(_item => _item.isSelected = _item.title == item.title)
+    calendarPayload.value.settings[selectedCalendarIndex.value].text.style.fontFamily = item.fontFamily
+    calendarPayload.value.settings[selectedCalendarIndex.value].text.style.fontWeight = item.fontWeight
+}
+</script>

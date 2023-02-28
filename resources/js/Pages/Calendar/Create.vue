@@ -11,6 +11,10 @@ import Master from './Master.vue';
 </script>
 
 <style scoped>
+._main_content_13zdg_4 {
+    display: grid;
+    grid-template-rows: 1fr 180px;
+}
 </style>
 
 
