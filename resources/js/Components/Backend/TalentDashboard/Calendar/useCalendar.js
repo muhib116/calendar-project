@@ -3,20 +3,19 @@ import { cloneDeep, get } from "lodash"
 // import { usePage } from '@inertiajs/inertia-vue3'
 // import { Inertia } from "@inertiajs/inertia"
 // import { toast } from "react-toastify"
-import { ref } from "vue"
-import { DemoImageListForCalendar } from '@/Components/Backend/TalentDashboard/Calendar/calendarData.js'
+import { ref, computed } from "vue"
+import { DemoImageListForCalendar, defaultWeeksList, weeksList } from '@/Components/Backend/TalentDashboard/Calendar/calendarData.js'
 // import axios from "axios"
-
 
 const calendarPayload = ref({
     year: new Date().getFullYear(),
-    month: -1, //-1 = cover, 12 = back
+    selectedPageIndex: 0,
     language: 'english',
-    week: 0,
+    weekStartDay: 0,
     theme: 'black',
     settings: cloneDeep(DemoImageListForCalendar)
 })
-const selectedCalendarIndex = ref(0)
+
 export default function useCalendar() 
 {
 
@@ -36,67 +35,68 @@ export default function useCalendar()
     // } = useContext(calendarContext)
     
     // const { auth } = usePage().props
-    // const getDateList = (selectedMonth, selectedYear) => 
-    // {
-    //     // Note: month and week index start from 0
-    //     const dateList = []
+    const getDateList = computed(() => {
+        let selectedMonth = calendarPayload.value.selectedPageIndex
+        let selectedYear = calendarPayload.value.year
+        // Note: month and week index start from 0
+        const dateList = []
 
-    //     // work with previous month---
-    //     let prevMonthLastDay = new Date(selectedYear, selectedMonth, 0).getDay()
-    //     let selectedMonthFirstDay = new Date(selectedYear, selectedMonth, 1).getDay()
-    //     let prevMonthLastDate    = new Date(selectedYear, selectedMonth, 0).getDate()
-    //     const selectedMonthFirstDayIndexAccordingToModifiedWeeks = weeks.english.findIndex(week => week == weeksList.english[selectedMonthFirstDay])
+        // work with previous month---
+        let prevMonthLastDay = new Date(selectedYear, selectedMonth, 0).getDay()
+        let selectedMonthFirstDay = new Date(selectedYear, selectedMonth, 1).getDay()
+        let prevMonthLastDate    = new Date(selectedYear, selectedMonth, 0).getDate()
+        const selectedMonthFirstDayIndexAccordingToModifiedWeeks = weeksList.value.find(item => item.key == selectedMonthFirstDay).key
 
-    //     for(let i=0; i < selectedMonthFirstDayIndexAccordingToModifiedWeeks; i++){
-    //         dateList.push({
-    //             date: (prevMonthLastDate-selectedMonthFirstDayIndexAccordingToModifiedWeeks)+(i+1),
-    //             isActive: false,
-    //             isInactive: true
-    //         })
-    //     }
+        for(let i=0; i < selectedMonthFirstDayIndexAccordingToModifiedWeeks; i++){
+            dateList.push({
+                date: (prevMonthLastDate-selectedMonthFirstDayIndexAccordingToModifiedWeeks)+(i+1),
+                isActive: false,
+                isInactive: true
+            })
+        }
 
-    //     // work with current month -----
-    //     const selectedMonthLastDate = new Date(selectedYear, selectedMonth+1, 0).getDate()
-    //     for(let i = 1; i <= selectedMonthLastDate; i++)
-    //     {
-    //         let isActive = false
-    //         let date = new Date()
-    //         if(date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === i){
-    //             isActive = true
-    //         }
+        // work with current month -----
+        const selectedMonthLastDate = new Date(selectedYear, selectedMonth+1, 0).getDate()
+        for(let i = 1; i <= selectedMonthLastDate; i++)
+        {
+            let isActive = false
+            let date = new Date()
+            if(date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === i){
+                isActive = true
+            }
 
-    //         dateList.push({
-    //             date: i,
-    //             isActive,
-    //             isInactive: false
-    //         })
-    //     }
+            dateList.push({
+                date: i,
+                isActive,
+                isInactive: false
+            })
+        }
         
-    //     // work with next month -----
-    //     const selectedMonthLastDay = new Date(selectedYear, selectedMonth+1, 0).getDay()
-    //     const selectedMonthLastDayIndexAccordingToModifiedWeeks = weeks.english.findIndex(week => week == weeksList.english[selectedMonthLastDay])
-    //     for(let i = 1; i < (7 - selectedMonthLastDayIndexAccordingToModifiedWeeks); i++){
-    //         dateList.push({
-    //             date: i,
-    //             isActive: false,
-    //             isInactive: true
-    //         })
-    //     }
+        // work with next month -----
+        const selectedMonthLastDay = new Date(selectedYear, selectedMonth+1, 0).getDay()
+        const selectedMonthLastDayIndexAccordingToModifiedWeeks = weeksList.value.find(item => item.key == selectedMonthLastDay).key
         
-    //     return dateList
-    // }
+        for(let i = 1; i < (7 - selectedMonthLastDayIndexAccordingToModifiedWeeks); i++){
+            dateList.push({
+                date: i,
+                isActive: false,
+                isInactive: true
+            })
+        }
+        
+        return dateList
+    })
 
-    // const weekChanger = (weekIndex) => {
-    //     let myWeeks = cloneDeep(weeksList)
-    //     let modifiedWeeks = {}
-    //     for(let language in myWeeks){
-    //         let weeksInSingleLanguage = myWeeks[language]
-    //         let splicedWeeks = weeksInSingleLanguage.splice(weekIndex)
-    //         modifiedWeeks[language] = (splicedWeeks.concat(weeksInSingleLanguage))
-    //     }
-    //     setSelectedWeek(weekIndex)
-    //     setWeeks(modifiedWeeks)
-    // }
+    const weekChanger = (weekIndex) => {
+        let myWeeks = cloneDeep(defaultWeeksList)
+        let modifiedWeeks = {}
+
+        let splicedWeeks = myWeeks.splice(weekIndex)
+        modifiedWeeks = (splicedWeeks.concat(myWeeks))
+
+        calendarPayload.weekStartDay = weekIndex
+        weeksList.value = modifiedWeeks
+    }
 
     // const saveCalendar = () => 
     // {
@@ -229,10 +229,13 @@ export default function useCalendar()
 
     //     return filteredImageData
     // }
+    const getPage = computed(() => {
+        return calendarPayload.value.settings[calendarPayload.value.selectedPageIndex]
+    })
 
     return {
-        // getDateList,
-        // weekChanger,
+        getDateList,
+        weekChanger,
         // saveCalendar,
         // updateCalendar,
         // deleteCalendar,
@@ -240,6 +243,6 @@ export default function useCalendar()
         // makeCalendarSaleable,
         // getSelectedCalendarData,
         calendarPayload,
-        selectedCalendarIndex
+        getPage
     }
 }

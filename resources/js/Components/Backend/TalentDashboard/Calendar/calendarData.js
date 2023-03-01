@@ -1,4 +1,6 @@
 import { cloneDeep } from 'lodash'
+import { ref } from 'vue'
+
 let DemoImages = [
     'https://images.unsplash.com/photo-1665686308827-eb62e4f6604d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
     'https://images.unsplash.com/photo-1669702055322-4813687f30c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
@@ -41,7 +43,7 @@ let DemoImages = [
 ]
 
 // this weeks data also available in calendarState.jsx
-const weeksList = [
+let defaultWeeksList = [
     {
         key: 0,
         value: 'Sunday'
@@ -71,82 +73,134 @@ const weeksList = [
         value: 'Saturday'
     }
 ]
+const weeksList = ref(cloneDeep(defaultWeeksList))
+
 // spanish: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
 // french: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
 // portuguese: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']
 
+// const listOfMonth = [
+//     {
+//         english: 'January',
+//         spanish: 'enero',
+//         french: 'Janvier',
+//         portuguese: 'Janeiro',
+//     },
+//     {
+//         english: 'February',
+//         spanish: 'Febrero',
+//         french: 'Février',
+//         portuguese: 'Fevereiro',
+//     },
+//     {
+//         english: 'March',
+//         spanish: 'Marzo',
+//         french: 'Mars',
+//         portuguese: 'Marchar',
+//     },
+//     {
+//         english: 'April',
+//         spanish: 'Abril',
+//         french: 'Avril',
+//         portuguese: 'abril',
+//     },
+//     {
+//         english: 'May',
+//         spanish: 'Mayo',
+//         french: 'Mai',
+//         portuguese: 'Poderia',
+//     },
+//     {
+//         english: 'June',
+//         spanish: 'Junio',
+//         french: 'Juin',
+//         portuguese: 'Junho',
+//     },
+//     {
+//         english: 'July',
+//         spanish: 'Julio',
+//         french: 'Juillet',
+//         portuguese: 'Julho',
+//     },
+//     {
+//         english: 'August',
+//         spanish: 'Agosto',
+//         french: 'Août',
+//         portuguese: 'Agosto',
+//     },
+//     {
+//         english: 'September',
+//         spanish: 'Septiembre',
+//         french: 'Septembre',
+//         portuguese: 'Setembro',
+//     },
+//     {
+//         english: 'October',
+//         spanish: 'Octubre',
+//         french: 'Octobre',
+//         portuguese: 'Outubro',
+//     },
+//     {
+//         english: 'November',
+//         spanish: 'Noviembre',
+//         french: 'Novembre',
+//         portuguese: 'novembro',
+//     },
+//     {
+//         english: 'December',
+//         spanish: 'Diciembre',
+//         french: 'Décembre',
+//         portuguese: 'dezembro',
+//     }
+// ]
 const listOfMonth = [
     {
-        english: 'January',
-        spanish: 'enero',
-        french: 'Janvier',
-        portuguese: 'Janeiro',
+        key: 0,
+        value: 'January'
     },
     {
-        english: 'February',
-        spanish: 'Febrero',
-        french: 'Février',
-        portuguese: 'Fevereiro',
+        key: 1,
+        value: 'February'
     },
     {
-        english: 'March',
-        spanish: 'Marzo',
-        french: 'Mars',
-        portuguese: 'Marchar',
+        key: 2,
+        value: 'March',
     },
     {
-        english: 'April',
-        spanish: 'Abril',
-        french: 'Avril',
-        portuguese: 'abril',
+        key: 3,
+        value: 'April',
     },
     {
-        english: 'May',
-        spanish: 'Mayo',
-        french: 'Mai',
-        portuguese: 'Poderia',
+        key: 4,
+        value: 'May',
     },
     {
-        english: 'June',
-        spanish: 'Junio',
-        french: 'Juin',
-        portuguese: 'Junho',
+        key: 5,
+        value: 'June',
     },
     {
-        english: 'July',
-        spanish: 'Julio',
-        french: 'Juillet',
-        portuguese: 'Julho',
+        key: 6,
+        value: 'July',
     },
     {
-        english: 'August',
-        spanish: 'Agosto',
-        french: 'Août',
-        portuguese: 'Agosto',
+        key: 7,
+        value: 'August',
     },
     {
-        english: 'September',
-        spanish: 'Septiembre',
-        french: 'Septembre',
-        portuguese: 'Setembro',
+        key: 8,
+        value: 'September',
     },
     {
-        english: 'October',
-        spanish: 'Octubre',
-        french: 'Octobre',
-        portuguese: 'Outubro',
+        key: 9,
+        value: 'October',
     },
     {
-        english: 'November',
-        spanish: 'Noviembre',
-        french: 'Novembre',
-        portuguese: 'novembro',
+        key: 10,
+        value: 'November',
     },
     {
-        english: 'December',
-        spanish: 'Diciembre',
-        french: 'Décembre',
-        portuguese: 'dezembro',
+        key: 11,
+        value: 'December',
     }
 ]
 const languageList = [
@@ -170,6 +224,7 @@ const languageList = [
 const yearList = []
 
 const defaultTextConfig = {
+    position: 'absolute',
     color: '#000000',
     textAlign: 'center',
     fontSize: 20,
@@ -180,7 +235,7 @@ const defaultTextConfig = {
     y: 0
 }
 
-const sampleTitle = ''
+const sampleTitle = 'This is moveable'
 const DemoImageListForCalendar = [
     {
         name: 'cover', 
@@ -310,6 +365,7 @@ for(selectedYear; selectedYear <= nextYearLimit; selectedYear++){
 
 
 export { 
+    defaultWeeksList,
     weeksList, 
     languageList, 
     yearList, 

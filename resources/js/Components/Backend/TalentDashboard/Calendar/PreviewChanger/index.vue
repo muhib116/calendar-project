@@ -1,4 +1,30 @@
-import { useContext, memo } from 'react'
+<template>
+  <div>
+
+  </div>
+</template>
+
+<script setup>
+
+</script>
+
+<style scoped>
+.wrapper > div{
+  width: 80px;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<!-- import { useContext, memo } from 'react'
 import classes from './index.module.css'
 import calendarContext from '../../../context/calendarContext'
 import CoverPage from '../CalendarPreview/CoverPage'
@@ -86,4 +112,4 @@ const PreviewChanger = () => {
 }
 
 
-export default memo(PreviewChanger)
+export default memo(PreviewChanger) -->

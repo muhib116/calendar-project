@@ -6,7 +6,7 @@
         </label>
         <label class="grid gap-2">
             <span class="font-semibold">Week start day</span>
-            <CSelect :options="weeksList" v-model="calendarPayload.week" />
+            <CSelect :options="defaultWeeksList" v-model="calendarPayload.weekStartDay" @change="weekChanger(calendarPayload.weekStartDay)" />
         </label>
         <label class="grid gap-2">
             <span class="font-semibold">Language</span>
@@ -38,10 +38,10 @@
 
 <script setup>
 import useCalendar from '@/Components/Backend/TalentDashboard/Calendar/useCalendar.js'
-import { weeksList, languageList, yearList } from '@/Components/Backend/TalentDashboard/Calendar/calendarData.js'
+import { defaultWeeksList, languageList, yearList } from '@/Components/Backend/TalentDashboard/Calendar/calendarData.js'
 import CSelect from '@/Components/Global/CSelect.vue';
 
-const { calendarPayload } = useCalendar()
+const { calendarPayload, weekChanger } = useCalendar()
 </script>
 
 <style lang="scss" scoped>
@@ -52,7 +52,7 @@ const { calendarPayload } = useCalendar()
 <!-- import { useContext } from 'react'
 import calendarContext from '../../../../context/calendarContext'
 import calendarIcon from '../../../../assets/icons/calendar.png'
-import { weeksList, languageList, yearList } from '../../../../calendarData'
+import { defaultWeeksList, languageList, yearList } from '../../../../calendarData'
 import useCalendar from '../../useCalendar'
 
 export default function CalendarConfig() {
@@ -108,7 +108,7 @@ export default function CalendarConfig() {
                     value={ activeWeekIndex }
                 >
                     {
-                        weeksList['english'].map((week, index) => (
+                        defaultWeeksList['english'].map((week, index) => (
                             <option key={ week } value={ index }>{ week }</option>
                         )) 
                     }

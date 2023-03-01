@@ -1,4 +1,66 @@
-import classes from './index.module.css'
+<template>
+  <div class="cover_photo wrapper h-full relative">
+    <div 
+      class="calendar shadow" 
+      :class="(getPage.name !== 'cover' && getPage.name !== 'back') ? 'h-[60%]' : 'h-full'"
+      id='calendar_main_wrapper'
+    >
+      <img 
+        v-if="!isEmpty(getPage.path)"
+        class="back_image h-full w-full block object-cover object-center"
+        :src="getPage.path"
+        alt='' 
+      />
+      <MoveableBox />
+    </div>
+    <Calendar v-if="getPage.name !== 'cover' && getPage.name !== 'back'" />
+  </div>
+</template>
+
+<script setup>
+  import useCalendar from '@/Components/Backend/TalentDashboard/Calendar/useCalendar.js'
+  import Calendar from '@/Components/Backend/TalentDashboard/Calendar/CalendarPreview/Calendar.vue'
+  import MoveableBox from '@/Components/Backend/TalentDashboard/Calendar/MoveableBox/index.vue'
+  import { isEmpty } from 'lodash'
+
+  const { getPage } = useCalendar()
+</script>
+
+<style scoped>
+.wrapper{
+  background-color: #fff;
+  width: 500px;
+  height: 800px;
+  margin: auto;
+  aspect-ratio: 1/1.6;
+  overflow: hidden;
+}
+.calendar{
+  background-color: #fff;
+}
+.body{
+  height: 100%;
+}
+.calendar .image{
+  height: 60%;
+  background-color: #fff;
+}
+.calendar .image img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cover_image,
+.back_image{
+  aspect-ratio: 1/1.4;
+  object-fit: cover;
+}
+</style>
+
+
+<!-- import classes from './index.module.css'
 import { listOfMonth } from '../../../calendarData';
 import useCalendar from '../useCalendar';
 import { useContext } from 'react';
@@ -77,4 +139,4 @@ const CalendarPreview = ({ img, style={}, selectedMonth, selectedYear }) =>
 }
 
 
-export default CalendarPreview
+export default CalendarPreview -->

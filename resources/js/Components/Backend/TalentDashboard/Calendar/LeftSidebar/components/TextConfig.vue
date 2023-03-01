@@ -3,19 +3,19 @@
         <div class="grid grid-cols-2 gap-4">
             <label 
                 class="flex items-center gap-2 relative rounded shadow w-full"
-                :style="{backgroundColor: calendarPayload.settings[selectedCalendarIndex].text.style.color}"
+                :style="{backgroundColor: calendarPayload.settings[calendarPayload.selectedPageIndex].text.style.color}"
             >
                 <input
                     type="color"
                     name="color"
                     class="border-gray-400 opacity-0 absolute"
                     placeholder="Enter your title"
-                    v-model="calendarPayload.settings[selectedCalendarIndex].text.style.color"
+                    v-model="calendarPayload.settings[calendarPayload.selectedPageIndex].text.style.color"
                 />
             </label>
             <label class="grid items-center gap-2">
                 <InputFontSize 
-                    v-model="calendarPayload.settings[selectedCalendarIndex].text.style.fontSize"
+                    v-model="calendarPayload.settings[calendarPayload.selectedPageIndex].text.style.fontSize"
                 />
             </label>
         </div>
@@ -29,7 +29,7 @@
                         { key: 'center', value: 'Center'},
                         { key: 'right', value: 'Right'},
                     ]" 
-                    v-model="calendarPayload.settings[selectedCalendarIndex].text.style.textAlign"
+                    v-model="calendarPayload.settings[calendarPayload.selectedPageIndex].text.style.textAlign"
                 />
             </label>
             <label class="grid items-center gap-2">
@@ -40,7 +40,7 @@
                         {key: 'underline', value: 'Under Line'},
                         {key: 'overline', value: 'Over Line'},
                     ]"
-                    v-model="calendarPayload.settings[selectedCalendarIndex].text.style.textDecoration"
+                    v-model="calendarPayload.settings[calendarPayload.selectedPageIndex].text.style.textDecoration"
                 />
             </label>
         </div>
@@ -78,7 +78,7 @@ import useFont from '@/Components/Backend/TalentDashboard/Calendar/useFont.js'
 import CSelect from '@/Components/Global/CSelect.vue';
 import { isEmpty } from 'lodash';
 
-const { calendarPayload, selectedCalendarIndex } = useCalendar()
+const { calendarPayload } = useCalendar()
 const { fonts } = useFont()
 const fontFilterText = ref('')
 const showFonts = ref(false)
@@ -90,7 +90,7 @@ const getFonts = computed(() => {
 
 const makeFontSelected = (item, FilteredFont) => {
     FilteredFont.forEach(_item => _item.isSelected = _item.title == item.title)
-    calendarPayload.value.settings[selectedCalendarIndex.value].text.style.fontFamily = item.fontFamily
-    calendarPayload.value.settings[selectedCalendarIndex.value].text.style.fontWeight = item.fontWeight
+    calendarPayload.value.settings[calendarPayload.value.selectedPageIndex].text.style.fontFamily = item.fontFamily
+    calendarPayload.value.settings[calendarPayload.value.selectedPageIndex].text.style.fontWeight = item.fontWeight
 }
 </script>

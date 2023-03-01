@@ -56,12 +56,16 @@ Helper.priceFormate = (price) => {
     return `$${price}`
 }
 
-Helper.translate = (text, isDynamic=false) => {
+Helper.translate = (text, isDynamic=false, language=null) => {
     let data = languages.data.find(item => {
         return item.english == text
     })
 
-    if(!isDynamic && data){
+    if(language && data && data[language]){
+        return data[language]
+    }
+
+    if(!isDynamic && data && data[localStorage.language]){
         return data[localStorage.language]
     }
     return text

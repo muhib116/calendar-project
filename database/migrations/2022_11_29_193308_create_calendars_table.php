@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('calendars', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->string('year', 10);
-            $table->string('month', 3);
-            $table->string('language', 50);
-            $table->string('week', 100);
-            $table->string('theme', 100);
+            $table->bigInteger('user_id')->nullable();
+            $table->string('year', 10)->nullable();
+            $table->tinyInteger('selectedPageIndex')->nullable();
+            $table->string('language', 50)->nullable();
+            $table->tinyInteger('weekStartDay')->nullable();
+            $table->string('theme', 100)->nullable();
             $table->boolean('is_salable')->nullable()->default(false);
             $table->json('settings')->nullable();
             $table->timestamps();
