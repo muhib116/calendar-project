@@ -27,12 +27,12 @@
                 <div class="bg-red-100 h-full relative">
                     <label class="price absolute top-4 right-4 shadow bg-sky-500 font-bold p-2 rounded text-white cursor-pointer">
                         <CameraIcon />
-                        <input type="file" hidden />
+                        <input type="file" @input="(e) => handleCover(e.target.files[0])" hidden />
                     </label>
                     <img
                         class="block w-full h-[200px] object-cover object-center"
                         style="height: 250px;"
-                        src="https://images.unsplash.com/photo-1673762482215-33acd768cb46?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80">
+                        :src="`${$page.props.asset}${get($page.props.auth, 'user.cover_image')}`">
                     <h2 class="absolute bottom-0 p-4 bg-white w-full bg-opacity-50 backdrop-blur-md font-semibold truncate cursor-pointer">
                         {{ Helper.translate('Please add a cover picture') }}
                     </h2>
@@ -47,8 +47,8 @@ import CInput from '@/Components/Global/CInput.vue'
 import Switch from '@/Components/Global/Switch.vue'
 import CameraIcon from '@/Icons/CameraIcon.vue'
 import { useForm, usePage } from '@inertiajs/inertia-vue3';
-import { onMounted } from 'vue'
-import { isEmpty } from 'lodash';
+import { onMounted, ref } from 'vue'
+import { isEmpty, get } from 'lodash';
 import Helper from '@/Helper';
 
 const form = useForm({
@@ -57,6 +57,10 @@ const form = useForm({
     type: 'mylife',
 });
 
+const coverForm = useForm({
+    image: null,
+})
+
 onMounted(()=> {
     let mylife = usePage().props.value.mylife;
     if (!isEmpty(mylife)) {
@@ -64,6 +68,17 @@ onMounted(()=> {
         form.status = mylife.status;
     }
 })
+
+const handleCover = (file) => {
+    coverForm.image = file;
+    Helper.confirm('Are you sure to update cover image?', () => {
+        saveCover();
+    })
+}
+
+const saveCover = () => {
+    coverForm.post(route('talent.saveCover'))
+}
 
 const handleSave = () => {
     form.post(route('talent.mylife.saveAmount'));

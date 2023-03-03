@@ -168,7 +168,7 @@ const talents = computed(() => {
 
 const handleAction = (data) => {
     if (selectedTalent.value) {
-        if (confirm('Are you sure?')) {
+        Helper.confirm('Are you sure?', ()=>{
             loading.value = true;
             Inertia.post(route('talent.approve', selectedTalent.value), {
                 status: data
@@ -183,7 +183,7 @@ const handleAction = (data) => {
                     loading.value = false;
                 }
             });
-        }
+        })
     }
 }
  

@@ -44,6 +44,7 @@ class HandleInertiaRequests extends Middleware
             'countries' => $countries,
             'categories' => $categories,
             'settings' => $settings,
+            'asset' => asset(''),
             'auth' => [
                 'user' => $request->user(),
             ],
