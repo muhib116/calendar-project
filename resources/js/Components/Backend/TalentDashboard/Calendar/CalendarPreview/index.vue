@@ -2,34 +2,46 @@
   <div class="cover_photo wrapper h-full relative">
     <div 
       class="calendar shadow" 
-      :class="(getPage.name !== 'cover' && getPage.name !== 'back') ? 'h-[60%]' : 'h-full'"
+      :class="(page.name !== 'cover' && page.name !== 'back') ? 'h-[60%]' : 'h-full'"
       id='calendar_main_wrapper'
     >
       <img 
-        v-if="!isEmpty(getPage.path)"
+        v-if="!isEmpty(page.path)"
         class="back_image h-full w-full block object-cover object-center"
-        :src="getPage.path"
+        :src="page.path"
         alt='' 
       />
-      <MoveableBox />
+      <MoveableBox :selectedPageIndex="selectedPageIndex" />
     </div>
-    <Calendar v-if="getPage.name !== 'cover' && getPage.name !== 'back'" />
+    <Calendar 
+      v-if="page.name !== 'cover' && page.name !== 'back'"
+      :selectedPageIndex="selectedPageIndex"
+    />
   </div>
 </template>
 
 <script setup>
+  import { computed } from 'vue'
   import useCalendar from '@/Components/Backend/TalentDashboard/Calendar/useCalendar.js'
   import Calendar from '@/Components/Backend/TalentDashboard/Calendar/CalendarPreview/Calendar.vue'
   import MoveableBox from '@/Components/Backend/TalentDashboard/Calendar/MoveableBox/index.vue'
   import { isEmpty } from 'lodash'
 
-  const { getPage } = useCalendar()
+  const props = defineProps({
+    selectedPageIndex: {
+      type: [Number, String],
+      default: 0
+    }
+  })
+  const { getSelectedPage } = useCalendar()
+  const page = computed(() => getSelectedPage(props.selectedPageIndex))
 </script>
 
 <style scoped>
 .wrapper{
   background-color: #fff;
-  width: 500px;
+  min-width: 500px;
+  max-width: 500px;
   height: 800px;
   margin: auto;
   aspect-ratio: 1/1.6;

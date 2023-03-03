@@ -1,11 +1,25 @@
 <template>
-  <div>
-
+  <div class="p-4 bg-white h-full w-full overflow-x-auto self-end">
+    <div class="_wrapper_1u2xi_1 h-full flex gap-2  overflow-x-auto text-xs w-full">
+      <div v-for="(item, index) in pages" :key="item.name" class="cursor-pointer p-1 text-center grid items-end border rounded hover:shadow active:scale-95 min-w-[80px] max-w-[80px] false">
+        <div class="w-full h-[100px] overflow-hidden">
+          <CalendarPage :selectedPageIndex="index" class="h-full relative" style="transform: scale(0.14); transform-origin: left top; height: 700px;" />
+        </div>
+        {{ getSelectedPage(index).name.slice(0, 3) }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
+  import { computed } from 'vue'
+  import CalendarPage from '@/Components/Backend/TalentDashboard/Calendar/CalendarPreview/index.vue'
+  import useCalendar from '@/Components/Backend/TalentDashboard/Calendar/useCalendar.js'
 
+  const { calendarPayload, getSelectedPage } = useCalendar()
+  const pages = computed(() => {
+    return calendarPayload.value.settings
+  })
 </script>
 
 <style scoped>
@@ -46,7 +60,7 @@ const PreviewChanger = () => {
     <div className={[classes.wrapper, 'h-full flex gap-2  overflow-x-auto text-xs w-full', !isPreview && 'justify-center'].join(' ')}>
       <div 
         onClick={ () => handleMonth(-1) } 
-        className={ ['cursor-pointer p-1 text-center grid items-end border rounded hover:shadow active:scale-95 min-w-[80px]',
+        className={ ['cursor-pointer p-1 text-center grid items-end border rounded hover:shadow active:scale-95 min-w-[80px] max-w-[80px]',
           (selectedMonth === -1) && 'shadow scale-95 border-red-500'
         ].join(' ') }
       >
@@ -68,7 +82,7 @@ const PreviewChanger = () => {
             onClick={ () => handleMonth(index) } 
             key={ 'previewChangerKey-'+index } 
             className={ [
-              'cursor-pointer p-1 text-center grid items-end border min-w-[80px] hover:shadow-md active:scale-95 rounded',
+              'cursor-pointer p-1 text-center grid items-end border min-w-[80px] max-w-[80px] hover:shadow-md active:scale-95 rounded',
               (selectedMonth === index) && 'shadow scale-95 border-red-500'
             ].join(' ') } 
           >
@@ -91,7 +105,7 @@ const PreviewChanger = () => {
       }
       <div 
         onClick={ () => handleMonth(12) } 
-        className={ ['cursor-pointer p-1 text-center grid items-end border min-w-[80px] rounded hover:shadow active:scale-95',
+        className={ ['cursor-pointer p-1 text-center grid items-end border min-w-[80px] max-w-[80px] rounded hover:shadow active:scale-95',
           (selectedMonth === 12) && 'shadow scale-95 border-red-500'
         ].join(' ') }
       >

@@ -35,8 +35,8 @@ export default function useCalendar()
     // } = useContext(calendarContext)
     
     // const { auth } = usePage().props
-    const getDateList = computed(() => {
-        let selectedMonth = calendarPayload.value.selectedPageIndex
+    const getDateList = (selectedPageIndex) => {
+        let selectedMonth = selectedPageIndex
         let selectedYear = calendarPayload.value.year
         // Note: month and week index start from 0
         const dateList = []
@@ -85,7 +85,7 @@ export default function useCalendar()
         }
         
         return dateList
-    })
+    }
 
     const weekChanger = (weekIndex) => {
         let myWeeks = cloneDeep(defaultWeeksList)
@@ -229,9 +229,9 @@ export default function useCalendar()
 
     //     return filteredImageData
     // }
-    const getPage = computed(() => {
-        return calendarPayload.value.settings[calendarPayload.value.selectedPageIndex]
-    })
+    const getSelectedPage = (index) => {
+        return calendarPayload.value.settings[index]
+    }
 
     return {
         getDateList,
@@ -243,6 +243,6 @@ export default function useCalendar()
         // makeCalendarSaleable,
         // getSelectedCalendarData,
         calendarPayload,
-        getPage
+        getSelectedPage
     }
 }

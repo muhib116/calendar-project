@@ -225,6 +225,8 @@ const yearList = []
 
 const defaultTextConfig = {
     position: 'absolute',
+    top: 0,
+    left: 0,
     color: '#000000',
     textAlign: 'center',
     fontSize: 20,
