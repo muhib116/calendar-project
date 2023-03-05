@@ -18,10 +18,10 @@
           <div class='grid grid-cols-7'>
             <span 
                 v-if="selectedPageIndex > 0 && selectedPageIndex < 13"
-                v-for="(item, index) in getDateList(selectedPageIndex)"
+                v-for="(item, index) in getDateList((selectedPageIndex-1))"
                 :key="`item-${index}`"
                 class="text-semibold text-center px-2 py-2"
-                :class="[item.isInactive && 'opacity-30', item.isActive && 'bg-red-400 font-bold']"
+                :class="[item.isInactive && 'opacity-30']"
             >
                 {{ item.date }}
             </span>
@@ -43,5 +43,4 @@ const props = defineProps({
   }
 })
 const { calendarPayload, getDateList } = useCalendar()
-
 </script>

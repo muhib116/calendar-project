@@ -15,12 +15,18 @@
               Add Text
             </button>
       </div>
-
+      {{ $page.component }}
       <div class='flex gap-4 items-center'>
         <a href="#guid">Guide</a>
-        <button class="text-red-500" >Preview</button>
-        <button  class='bg-green-500 text-white rounded-full shadow py-1 px-4'>Save</button>
-        <Link :href="route('calendar')">Create</Link>
+        <button v-if="$page.component == 'Calendar/Create'" class="text-red-500" >Preview</button>
+        <button 
+          v-if="$page.component == 'Calendar/Create'" 
+          class='bg-green-500 text-white rounded-full shadow py-1 px-4'
+          @click="saveCalendar"
+        >
+          Save
+        </button>
+        <Link v-if="$page.component != 'Calendar/Create'" :href="route('calendar')">Create</Link>
         <Link :href="route('my_calendars')">My calenders</Link>
       </div>
     </div>
@@ -32,8 +38,11 @@ import SettingsIcon from '@/Icons/SettingsIcon.vue'
 import ImageIcon from '@/Icons/ImageIcon.vue'
 import TextIcon from '@/Icons/TextIcon.vue'
 import useLeftSidebar from './LeftSidebar/useLeftSidebar'
+import useCalendar from '@/Components/Backend/TalentDashboard/Calendar/useCalendar.js'
+import { Link } from '@inertiajs/inertia-vue3'
 
 const { activeComponent } = useLeftSidebar()
+const { saveCalendar } = useCalendar()
 </script>
 
 <style lang="scss" scoped>

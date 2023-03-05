@@ -18,14 +18,14 @@ class CalendarController extends Controller
         $calendar = new Calendar;
         $calendar->user_id = $data['user_id'];
         $calendar->year = $data['year'];
-        $calendar->month = $data['month'];
+        $calendar->selectedPageIndex = $data['selectedPageIndex'];
         $calendar->language = $data['language'];
-        $calendar->week = $data['week'];
+        $calendar->weekStartDay = $data['weekStartDay'];
         $calendar->theme = $data['theme'];
         $calendar->settings = $data['settings'];
         $calendar->save();
 
-        return redirect()->route('my_calendars');
+        return redirect()->route('my_calendars')->with('message', 'Calendar created!');
     }
 
     function update(Request $request) {
@@ -39,9 +39,9 @@ class CalendarController extends Controller
         }else{
             $payload = [
                 'year' => $data['year'],
-                'month' => $data['month'],
+                'selectedPageIndex' => $data['selectedPageIndex'],
                 'language' => $data['language'],
-                'week' => $data['week'],
+                'weekStartDay' => $data['weekStartDay'],
                 'theme' => $data['theme'],
                 'settings' => $data['settings'],
             ];
@@ -65,12 +65,12 @@ class CalendarController extends Controller
             Calendar::where(['id' => $request->id])->where(['user_id' => $request->user_id])->update($payload);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Calendar price updated!');
     }
 
     function delete($calendar_id){
         Calendar::where(['id' => $calendar_id])->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Calendar deleted!');
     }
 
     function makeCalendarSalable(Request $request, $calendar_id){
@@ -83,6 +83,6 @@ class CalendarController extends Controller
             'is_salable' => 1
         ]);
 
-        return \Redirect::back();
+        return redirect()->back()->with('message', 'Calendar added to profile');
     }
 }

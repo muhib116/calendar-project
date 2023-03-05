@@ -2,17 +2,12 @@
     <div class="flex gap-5 items-start">
         <div class="w-52 h-[330px] relative">
             <a href="calendar/edit/1">
-                <div class=" _wrapper_mogvh_1 h-full relative" style="width: 200px; height: auto; pointer-events: none;">
-                    <div class="_calendar_mogvh_9 shadow h-full" id="calendar_main_wrapper">
-                        <img class="_back_image_mogvh_27 h-full w-full block object-cover object-center" src="http://127.0.0.1:8001/media/110-bb9f330c5caa837453be11d50f1fadc1-photo-1584293406330-efdc2a30a0a3.avif" alt="">
+                <div class="border h-full relative w-[200px] pointer-events-none">
+                    <div class="shadow h-full" id="calendar_main_wrapper">
+                        <img v-if="getImage(item)" class="h-full w-full block object-cover object-center" :src="getImage(item)" alt="">
                     </div>
-                    <div class="pointer-events-none react-draggable" style="transform: translate(0px, 0px);">
-                        <textarea title="Double Click to Edit" class="pointer-events-auto absolute top-0 z-30 p-0 border-none text-left bg-transparent resize-none" name="title" readonly="" style="color: rgb(0, 0, 0); text-align: center; font-weight: 400; text-decoration: none; x: 0px; y: 0px;"></textarea>
-                    </div>
+                    <h1 class="whitespace-nowrap mt-2 text-center font-bold">{{ getCoverName(item) }}</h1>
                 </div>
-                <h1>
-
-                </h1>
             </a>
         </div>
         <label>
@@ -20,9 +15,9 @@
         </label>
         <div class="flex gap-4 items-baseline">
             <button class="px-4 py-1 bg-green-500 rounded shadow">Update</button>
-            <button class="px-4 py-1 bg-red-500 text-white rounded shadow">Delete</button>
-            <label class="flex gap-2 items-center cursor-pointer">
-                <input type="radio" name="saleable" checked="">
+            <button @click="deleteCalendar(item.id)" class="px-4 py-1 bg-red-500 text-white rounded shadow">Delete</button>
+            <label @click="makeCalendarSaleable(item.id)" class="flex gap-2 items-center cursor-pointer">
+                <input type="radio" value="1" v-model="item.is_salable">
                 Move to profile
             </label>
         </div>
@@ -30,9 +25,21 @@
 </template>
 
 <script setup>
+    import useCalendar from './useCalendar'
+
     defineProps({
         item: Object
     })
+
+    const getCoverName = (item) => {
+        return item.settings[0].text.title || ''
+    }
+
+    const getImage = (item) => {
+        return item.settings[0].path
+    }
+
+    const { deleteCalendar, makeCalendarSaleable } = useCalendar()
 </script>
 
 <style lang="scss" scoped>

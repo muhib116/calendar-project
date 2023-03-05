@@ -62,7 +62,7 @@
                         :style="{fontFamily: item.fontFamily, fontWeight: item.fontWeight}"
                         @click="makeFontSelected(item, getFonts)"
                     >
-                        ABeeZee
+                        {{ item.title }}
                     </div>
                 </div>
             </div>
@@ -73,12 +73,12 @@
 <script setup>
 import useCalendar from '@/Components/Backend/TalentDashboard/Calendar/useCalendar.js'
 import InputFontSize from './InputFontSize.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import useFont from '@/Components/Backend/TalentDashboard/Calendar/useFont.js'
 import CSelect from '@/Components/Global/CSelect.vue';
 import { isEmpty } from 'lodash';
 
-const { calendarPayload } = useCalendar()
+const { calendarPayload, getSelectedPage } = useCalendar()
 const { fonts } = useFont()
 const fontFilterText = ref('')
 const showFonts = ref(false)
@@ -93,4 +93,9 @@ const makeFontSelected = (item, FilteredFont) => {
     calendarPayload.value.settings[calendarPayload.value.selectedPageIndex].text.style.fontFamily = item.fontFamily
     calendarPayload.value.settings[calendarPayload.value.selectedPageIndex].text.style.fontWeight = item.fontWeight
 }
+
+onMounted(() => {
+    let selectedPage = getSelectedPage(calendarPayload.value.selectedPageIndex)
+    selectedPage.text.title = 'Calendar Page Title'
+})
 </script>

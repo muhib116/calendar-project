@@ -2,14 +2,20 @@
 import { cloneDeep, get } from "lodash"
 // import { usePage } from '@inertiajs/inertia-vue3'
 // import { Inertia } from "@inertiajs/inertia"
-// import { toast } from "react-toastify"
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import { ref, computed } from "vue"
 import { DemoImageListForCalendar, defaultWeeksList, weeksList } from '@/Components/Backend/TalentDashboard/Calendar/calendarData.js'
-// import axios from "axios"
+import axios from "axios"
+import { usePage } from "@inertiajs/inertia-vue3"
+import { Inertia } from "@inertiajs/inertia";
+import Helper from "@/Helper";
+
 
 const calendarPayload = ref({
+    user_id: null,
     year: new Date().getFullYear(),
-    selectedPageIndex: 0,
+    selectedPageIndex: new Date().getMonth() + 1,
     language: 'english',
     weekStartDay: 0,
     theme: 'black',
@@ -18,23 +24,7 @@ const calendarPayload = ref({
 
 export default function useCalendar() 
 {
-
-    // const { 
-    //     serverData, 
-    //     activeWeekIndex, 
-    //     setSelectedWeek, 
-    //     calendarTheme, 
-    //     calendarImages, 
-    //     setCalendarImages, 
-    //     selectedMonth, 
-    //     selectedYear, 
-    //     calendarPrice,
-    //     weeks, 
-    //     setWeeks, 
-    //     language
-    // } = useContext(calendarContext)
-    
-    // const { auth } = usePage().props
+    const auth = computed(() => usePage().props.value.auth)
     const getDateList = (selectedPageIndex) => {
         let selectedMonth = selectedPageIndex
         let selectedYear = calendarPayload.value.year
@@ -45,7 +35,10 @@ export default function useCalendar()
         let prevMonthLastDay = new Date(selectedYear, selectedMonth, 0).getDay()
         let selectedMonthFirstDay = new Date(selectedYear, selectedMonth, 1).getDay()
         let prevMonthLastDate    = new Date(selectedYear, selectedMonth, 0).getDate()
-        const selectedMonthFirstDayIndexAccordingToModifiedWeeks = weeksList.value.find(item => item.key == selectedMonthFirstDay).key
+
+        const selectedMonthFirstDayIndexAccordingToModifiedWeeks = weeksList.value.findIndex((item) => {
+            return (item.value == defaultWeeksList[selectedMonthFirstDay].value)
+        })
 
         for(let i=0; i < selectedMonthFirstDayIndexAccordingToModifiedWeeks; i++){
             dateList.push({
@@ -74,7 +67,9 @@ export default function useCalendar()
         
         // work with next month -----
         const selectedMonthLastDay = new Date(selectedYear, selectedMonth+1, 0).getDay()
-        const selectedMonthLastDayIndexAccordingToModifiedWeeks = weeksList.value.find(item => item.key == selectedMonthLastDay).key
+        const selectedMonthLastDayIndexAccordingToModifiedWeeks = weeksList.value.findIndex((item) => {
+            return (item.value == defaultWeeksList[selectedMonthLastDay].value)
+        })
         
         for(let i = 1; i < (7 - selectedMonthLastDayIndexAccordingToModifiedWeeks); i++){
             dateList.push({
@@ -98,53 +93,40 @@ export default function useCalendar()
         weeksList.value = modifiedWeeks
     }
 
-    // const saveCalendar = () => 
-    // {
-    //     let data = {
-    //         user_id: auth.user.id,
-    //         year: selectedYear,
-    //         month: selectedMonth,
-    //         language,
-    //         week: activeWeekIndex,
-    //         theme: calendarTheme,
-    //         settings: calendarImages
-    //     }
+    const getSelectedPage = (index) => {
+        return calendarPayload.value.settings[index]
+    }
 
-    //     let isValid = true
-    //     calendarImages.forEach(item => {
-    //         if(item.path == ''){
-    //             isValid = false
-    //         }
-    //     })
+    const saveCalendar = () => 
+    {
+        calendarPayload.value.user_id = auth.value.user.id
+        let isValid = !calendarPayload.value.settings.find(item => item.path == '')
+        if(!isValid){
+            toast.error('Some calendar\'s image is missing !', {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
+            return
+        }
 
-    //     if(!isValid){
-    //         toast.error('Some calendar image is missing !', {
-    //             position: "top-right",
-    //             autoClose: 4000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //             theme: "light",
-    //         })
-    //         return
-    //     }
-
-    //     Inertia.post(route('calendar_save', data))
-    //     toast.success('Calendar Saved !', {
-    //         position: "top-right",
-    //         autoClose: 4000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "light",
-    //     })
-
-    //     setCalendarImages(cloneDeep(DemoImageListForCalendar))
-    // }
+        console.log(Inertia.post(route('calendar_save', calendarPayload.value)));
+        toast.success('Calendar Created Successfully !', {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        })
+    }
 
     // const updateCalendar = () => {
     //     let data = {
@@ -182,67 +164,47 @@ export default function useCalendar()
     //     Inertia.post(route('calendar_price_update', data))
     // }
 
-    // const deleteCalendar = (calendar_id) => {
-    //     Inertia.delete(route('calendar_delete', calendar_id))
-    //     toast.warn('Calendar Deleted !', {
-    //         position: "top-right",
-    //         autoClose: 4000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "light",
-    //     })
-    // }
-
-    // const makeCalendarSaleable = (calendar_id) => {
-    //     Inertia.post(route('salable', calendar_id))
-    //     toast.success('Now This Calendar Is Salable !', {
-    //         position: "top-right",
-    //         autoClose: 4000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "light",
-    //     })
-    // }
-
-    // const getSelectedCalendarData = () => 
-    // {
-    //     const monthName = get(listOfMonth, `${selectedMonth}.english`)
-    //     let filteredImageData = {}
-    //     if(monthName){
-    //         filteredImageData = calendarImages.find(img => img.name == monthName)
-    //     }else{
-    //         if(selectedMonth == '-1'){
-    //             // cover photo
-    //             filteredImageData = calendarImages.find(img => img.name == 'cover')
-    //         }
-    //         if(selectedMonth == '12'){
-    //             // back photo
-    //             filteredImageData = calendarImages.find(img => img.name == 'back')
-    //         }
-    //     }
-
-    //     return filteredImageData
-    // }
-    const getSelectedPage = (index) => {
-        return calendarPayload.value.settings[index]
+    const deleteCalendar = (calendar_id) => {
+        Helper.confirm('Are you sure to delete?', () => {
+            Inertia.delete(route('calendar_delete', calendar_id))
+            toast.warn('Calendar Deleted !', {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
+        })
     }
+
+    const makeCalendarSaleable = (calendar_id) => {
+        Inertia.post(route('salable', calendar_id))
+        // toast.success('Calendar added to profile !', {
+        //     position: "top-right",
+        //     autoClose: 4000,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     progress: undefined,
+        //     theme: "light",
+        // })
+    }
+    
 
     return {
         getDateList,
         weekChanger,
-        // saveCalendar,
+        saveCalendar,
         // updateCalendar,
-        // deleteCalendar,
+        deleteCalendar,
         // updateCalendarPrice,
-        // makeCalendarSaleable,
+        makeCalendarSaleable,
         // getSelectedCalendarData,
         calendarPayload,
-        getSelectedPage
+        getSelectedPage,
     }
 }

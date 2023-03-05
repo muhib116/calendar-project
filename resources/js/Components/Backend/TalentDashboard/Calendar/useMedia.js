@@ -1,16 +1,12 @@
-// import { useContext } from "react"
-// import calendarContext from "@/context/calendarContext"
 import axios from "axios"
 import { usePage } from "@inertiajs/inertia-vue3"
-import { cloneDeep, get, isEmpty } from 'lodash'
 import { ref } from "vue"
 import Helper from "@/Helper"
-// import { listOfMonth } from '@/calendarData'
+import useCalendar from "./useCalendar"
 
 const allMedia = ref([])
 export default function useMedia() {
-    // const { selectedMonth, calendarImages, setCalendarImages, setMedia } = useContext(calendarContext)
-
+    const { calendarPayload } = useCalendar()
     let timeoutId = null
     const getMedia = () => {
         clearTimeout(timeoutId)
@@ -21,32 +17,12 @@ export default function useMedia() {
     }
     
     const handleImage = (image) => {
-        let monthName = get(listOfMonth, `${selectedMonth}.english`)
-        let myCalendarImages = cloneDeep(calendarImages)
-        let filteredImageData = {}
-
-        if(monthName){
-            filteredImageData = myCalendarImages.find(img => img.name == monthName)
-        }else{
-            if(selectedMonth == '-1'){
-                // cover photo
-                filteredImageData = myCalendarImages.find(img => img.name == 'cover')
-            }
-            if(selectedMonth == '12'){
-                // back photo
-                filteredImageData = myCalendarImages.find(img => img.name == 'back')
-            }
-        }
-        
-        if(isEmpty(filteredImageData)) return
-
-        filteredImageData.path = image
-        setCalendarImages(myCalendarImages)
+        const { selectedPageIndex, settings } = calendarPayload.value
+        settings[selectedPageIndex].path = image
     }
 
     const deleteMedia = (mediaId) => {
-        // if(!confirm('Are you sure to delete?')) return
-        Helper.confirm("Are you sure to delte?", async () => {
+        Helper.confirm("Are you sure to delete?", async () => {
             let status = await axios.delete(`media/delete/${mediaId}/${usePage().props.value.auth.user.id}`)
             if(status) {
                 getMedia()
