@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\TalentEarning; 
+use App\Models\Post;
+use App\Models\TalentEarning;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -16,6 +18,18 @@ class TalentEarningController extends Controller
         ]);
     }
 
+    public function saveCover(Request $request) {
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->hashName();
+            $file->move('uploads/cover', $name);
+            User::find(auth()->id())->update([
+                'cover_image' => 'uploads/cover/'.$name
+            ]);
+        } else {
+            return redirect()->back()->with('error', 'Opps! Something wrong');
+        }
+    }
     public function saveWishAmount(Request $request) {
         $request->validate([
             'amount' => 'numeric|min:30',
@@ -37,8 +51,10 @@ class TalentEarningController extends Controller
 
     public function myLife() {
         $mylife = TalentEarning::where('user_id', auth()->id())->where('type', 'mylife')->first();
+        $posts = Post::where('user_id', auth()->id())->get();
         return Inertia::render('Backend/TalentDashboard/MyLife', [
-            'mylife' => $mylife
+            'mylife' => $mylife,
+            'posts' => $posts
         ]);
     }
 

@@ -58,7 +58,7 @@
             </Link>
             <Link 
                 class="px-4 py-1 border font-semibold hover:bg-[#130121] hover:text-white rounded relative"
-                :class="route().current('admin.occasions') ? 'bg-[#130121] text-white' : ''"
+                :class="route().current('admin.ocassions') ? 'bg-[#130121] text-white' : ''"
                 :href="route('admin.ocassions')"
             >
                 {{ Helper.translate('Occasion') }}

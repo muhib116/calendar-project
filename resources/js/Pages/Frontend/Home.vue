@@ -68,6 +68,7 @@ import Footer from '@/Components/Backend/Global/Footer.vue'
 import AngleLeftIcon from '@/Icons/AngleLeftIcon.vue'
 import AngleRightIcon from '@/Icons/AngleRightIcon.vue'
 import Helper from '@/Helper'
+import { values, size } from 'lodash'
 
 
 const showAuthModal = ref(false)
@@ -87,16 +88,15 @@ onMounted(() => {
 
 const handleCategoryPear = (direction) => {
     currentPosition.value += (direction + (1 * direction));
-
     if (direction < 0 && currentPosition.value < 0) {
-        console.log('direction', direction);
-        currentPosition.value = props.categories.length - 1;
+        currentPosition.value = size(props.categories) - 1;
     }
 
-    if (currentPosition.value > props.categories.length - 1) {
+    if (currentPosition.value > size(props.categories) - 1) {
+
         currentPosition.value = 0;
     }
-    categoryPear.value = props.categories.slice(currentPosition.value, currentPosition.value + 2);
+    categoryPear.value = values(props.categories).slice(currentPosition.value, currentPosition.value + 2);
 }
 
 </script>

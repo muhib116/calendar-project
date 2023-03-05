@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\PaymentRequestController;
 use App\Http\Controllers\Backend\TalentController;
 use App\Http\Controllers\Backend\TalentEarningController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,9 +25,12 @@ Route::middleware(['auth', 'user-role:talent'])->group(function(){
     Route::get('/talent/dashboard/tips', [TalentEarningController::class, 'tips'])->name('talent.tips');
     
     Route::get('/talent/dashboard/my-life', [TalentEarningController::class, 'myLife'])->name('talent.myLife');
+    Route::post('/talent/dashboard/my-life/post', [PostController::class, 'store'])->name('talent.myLife.post');
+    Route::post('/talent/dashboard/my-life/postDelete/{id}', [PostController::class, 'postDelete'])->name('talent.myLife.postDelete');
 
     Route::get('/talent/dashboard/wish-request', [TalentEarningController::class, 'wishRequest'])->name('talent.wish.request');
     Route::post('/talent/dashboard/save-wish-request', [TalentEarningController::class, 'saveWishAmount'])->name('talent.wish.saveAmount');
+    Route::post('/talent/dashboard/save-cover', [TalentEarningController::class, 'saveCover'])->name('talent.saveCover');
     Route::post('/talent/dashboard/save-mylife-amount', [TalentEarningController::class, 'saveMylifeAmount'])->name('talent.mylife.saveAmount');
     Route::post('/talent/dashboard/save-tips-amount', [TalentEarningController::class, 'saveTipsAmount'])->name('talent.tips.saveAmount');
     
