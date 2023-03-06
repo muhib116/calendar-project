@@ -17,7 +17,7 @@
       </div>
       {{ $page.component }}
       <div class='flex gap-4 items-center'>
-        <a href="#guid">Guide</a>
+        <Link :href="route('talent.dashboard')">Guide</Link>
         <button v-if="$page.component == 'Calendar/Create'" class="text-red-500" >Preview</button>
         <button 
           v-if="$page.component == 'Calendar/Create'" 

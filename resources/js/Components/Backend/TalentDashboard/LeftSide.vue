@@ -5,67 +5,68 @@
             :class="route().current('talent.dashboard') ? 'bg-gray-100' : ''"
             :href="route('talent.dashboard')"
         >
-            Guide
+            {{ Helper.translate('Guide') }}
         </Link>
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
             :class="route().current('talent.account') ? 'bg-gray-100' : ''"
             :href="route('talent.account')"
         >
-            Account
+            {{ Helper.translate('Account') }}
         </Link>
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
             :class="route().current('talent.profile.setup') ? 'bg-gray-100' : ''"
             :href="route('talent.profile.setup')"
         >
-            Profile Setup
+            {{ Helper.translate('Profile Setup') }}
         </Link>
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
             :class="route().current('talent.tips') ? 'bg-gray-100' : ''"
             :href="route('talent.tips')"
         >
-            Tips
+            {{ Helper.translate('Tips') }}
         </Link>
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
             :class="route().current('talent.myLife') ? 'bg-gray-100' : ''"
             :href="route('talent.myLife')"
         >
-            My Life
+            {{ Helper.translate('My Life') }}
         </Link>
-        <Link 
+        <Link :href="route('my_calendars')"
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
         >
-            Calendar
+            {{ Helper.translate('Calendars') }}
         </Link>
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
             :class="route().current('talent.wish.request') ? 'bg-gray-100' : ''"
             :href="route('talent.wish.request')"
         >
-            Wish Request
+            {{ Helper.translate('Wish Request') }}
         </Link>
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
             :class="route().current('talent.analytics') ? 'bg-gray-100' : ''"
             :href="route('talent.analytics')"
         >
-            Analytics
+            {{ Helper.translate('Analytics') }}
         </Link>
         <Link 
             class="px-4 py-2 border font-semibold hover:bg-gray-100"
             :class="route().current('talent.payout') ? 'bg-gray-100' : ''"
             :href="route('talent.payout')"
         >
-            Payout
+            {{ Helper.translate('Payout') }}
         </Link>
     </div>
 </template>
 
 <script setup>
-    import { Link } from '@inertiajs/inertia-vue3';
+import Helper from '@/Helper'
+import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <style lang="scss" scoped>

@@ -26,6 +26,7 @@
 
 <script setup>
     import useCalendar from './useCalendar'
+    import { onMounted } from 'vue'
 
     defineProps({
         item: Object
@@ -40,6 +41,9 @@
     }
 
     const { deleteCalendar, makeCalendarSaleable } = useCalendar()
+    onMounted(() => {
+       console.log('mounted'); 
+    })
 </script>
 
 <style lang="scss" scoped>
