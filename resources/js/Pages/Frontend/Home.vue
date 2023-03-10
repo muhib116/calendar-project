@@ -55,7 +55,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { Head, usePage } from '@inertiajs/inertia-vue3'
+import { Head } from '@inertiajs/inertia-vue3'
 import Master from '@/Components/Frontend/Master.vue'
 import CategoryWiseLatestItem from '@/Components/Frontend/CategoryWiseLatestItem.vue'
 import Search from '@/Components/Frontend/Home/Search.vue'
@@ -74,7 +74,7 @@ import { values, size } from 'lodash'
 const showAuthModal = ref(false)
 const props = defineProps({
     isLogin: Boolean,
-    categories: Array
+    categories_with_talent: Array
 })
 
 const currentPosition = ref(0)
@@ -89,14 +89,14 @@ onMounted(() => {
 const handleCategoryPear = (direction) => {
     currentPosition.value += (direction + (1 * direction));
     if (direction < 0 && currentPosition.value < 0) {
-        currentPosition.value = size(props.categories) - 1;
+        currentPosition.value = size(props.categories_with_talent) - 1;
     }
 
-    if (currentPosition.value > size(props.categories) - 1) {
+    if (currentPosition.value > size(props.categories_with_talent) - 1) {
 
         currentPosition.value = 0;
     }
-    categoryPear.value = values(props.categories).slice(currentPosition.value, currentPosition.value + 2);
+    categoryPear.value = values(props.categories_with_talent).slice(currentPosition.value, currentPosition.value + 2);
 }
 
 </script>

@@ -27,6 +27,13 @@
                 >
                     {{ Helper.translate('Pages') }}
                 </button>
+                <button 
+                    @click="activeComponent = 'Faq'"
+                    class="border px-4 py-2 rounded"
+                    :class="activeComponent == 'Faq' && 'bg-gray-800 text-white font-medium'"
+                >
+                    {{ Helper.translate('Faq') }}
+                </button>
             </div>
             <div class="">
                 <component :is="components[activeComponent]" />

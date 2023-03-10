@@ -6,11 +6,10 @@
                 <div class="flex flex-col justify-between">
                     <div>
                         <h2 class="text-4xl lg:text-5xl font-bold leading-tight">
-                            Lets talk about everything!
+                            {{ Helper.translate('Lets talk about everything!') }}
                         </h2>
                         <div class="text-gray-700 mt-8">
-                            Hate forms? Send us an
-                            <span class="underline">email</span> instead.
+                            {{ Helper.translate('Hate forms? Send us an email instead.') }}
                         </div>
                     </div>
                     <div class="mt-8 text-center">
@@ -30,11 +29,14 @@ import Master from "../Backend/Master.vue"
 import { Head } from "@inertiajs/inertia-vue3"
 import SVGImage from "@/Components/Frontend/Contact/SVGImage.vue"
 import Form from "@/Components/Frontend/Contact/Form.vue"
+import Helper from "@/Helper"
+
+
 </script>
 
 
 <style scoped>
-.wrapper{
+.wrapper {
     background: linear-gradient(90deg, #0008 0%, transparent 50%);
 }
 </style>

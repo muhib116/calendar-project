@@ -12,16 +12,16 @@ class FrontendController extends Controller
 {
     function index(){
         $countries = Country::all();
-        $categories = Category::where('status', 1)->where('parent_id', '=', null)->with(['talents' => function($q) {
-            return $q->where('role', 'talent')->where('status', 0)->limit(4)->with(['category']);
+        $categories_with_talent = Category::where('status', 1)->where('parent_id', '=', null)->with(['talents' => function($q) {
+            return $q->where('role', 'talent')->where('status', 1)->limit(4)->with(['category']);
         }])->withCount('talents')->having('talents_count', '>', 0)->get();
 
-        $categories =  collect($categories)->filter(fn($item) => count($item->talents) > 0);
+        $categories_with_talent =  collect($categories_with_talent)->filter(fn($item) => count($item->talents) > 0);
         
         $categories_with_child = Category::where('status', 1)->where('parent_id', '=', null)->with('child')->get();
         return Inertia::render('Frontend/Home', [
             'countries' => $countries,
-            'categories' => $categories,
+            'categories_with_talent' => $categories_with_talent,
             'categories_with_child' => $categories_with_child,
             'isLogin' => Auth::check()
         ]);

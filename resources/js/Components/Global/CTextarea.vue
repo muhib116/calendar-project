@@ -5,7 +5,7 @@
         </span>
         <textarea 
             :rows="rows"
-            @input="updateValue" 
+            v-model="inputValue"
             class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow bg-transparent"
         ></textarea>
         <span class="customBorder"></span>
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue'
+    import { computed, ref } from 'vue'
     import Helper from '@/Helper'
     
     const props = defineProps({
@@ -33,14 +33,29 @@
     const writtenCharacter = ref(0)
 
     const emit = defineEmits()
-    const updateValue = (e) => {
-        let value = e.target.value
-        writtenCharacter.value = value.length
-        if(value.length >= props.characterLimit){
-            e.target.value = value.slice(0, (props.characterLimit - 1))
+
+    const inputValue = computed({
+        get(){
+            return props.modelValue
+        },
+        set(value){
+            let localValue = value;
+            writtenCharacter.value = localValue.length
+            if(localValue.length >= props.characterLimit){
+                localValue = localValue.slice(0, (props.characterLimit - 1))
+            }
+            emit('update:modelValue', localValue)
         }
-        emit('update:modelValue', e.target.value)
-    }
+    })
+    
+    // const updateValue = (e) => {
+    //     let value = e.target.value
+    //     writtenCharacter.value = value.length
+    //     if(value.length >= props.characterLimit){
+    //         e.target.value = value.slice(0, (props.characterLimit - 1))
+    //     }
+    //     emit('update:modelValue', e.target.value)
+    // }
 </script>
 
 <style scoped>

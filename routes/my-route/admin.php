@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CountryController;
+use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Backend\OcassionController;
 use App\Http\Controllers\Backend\TalentController;
 use App\Http\Controllers\Backend\UserController;
@@ -78,6 +79,14 @@ Route::middleware(['auth', 'verified', 'user-role:admin'])->group(function()
         Route::delete('/delete-page/{page}', [SettingsController::class, 'deletepage'])->name('admin.deleted.page');
         // settings end
 
+        // contact
         Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact');
+        Route::post('/contact/{id}/seen', [ContactController::class, 'seen'])->name('admin.seenContact');
+        Route::post('/contact/{contact}/replay', [ContactController::class, 'replay'])->name('admin.replayContact');
+
+        // faq
+        Route::post('/faq/store', [FaqController::class, 'store'])->name('admin.saveFaq');
+        Route::delete('/faq/delete/{faq}', [FaqController::class, 'delete'])->name('admin.deleteFaq');
+        Route::post('/faq/update/{faq}', [FaqController::class, 'update'])->name('admin.updateFaq');
     });
 });

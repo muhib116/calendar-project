@@ -17,7 +17,7 @@
         </td>
         <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex justify-end gap-2">
             <button @click="showReplyModal = true" class="bg-sky-500 px-2 py-1 rounded text-white text-sm font-bold block">
-                <ReplayIcon class="w-4 h-4" />
+                <ReplayIcon @click="handleSeen(item)" class="w-4 h-4" />
             </button>
             <button class="bg-red-500 px-2 py-1 rounded text-white text-sm font-bold block">
                 <CloseIcon class="w-4 h-4" />
@@ -36,6 +36,7 @@ import CloseIcon from '@/Icons/CloseIcon.vue'
 import ReplayIcon from '@/Icons/ReplayIcon.vue'
 import Modal from '@/Components/Library/Modal.vue'
 import Replay from './Replay.vue'
+import { Inertia } from '@inertiajs/inertia'
 
 defineProps({
     item: Object,
@@ -43,4 +44,15 @@ defineProps({
 })
 
 const showReplyModal = ref(false)
+
+const handleSeen = (item) => {
+    if (Number(item.seen) == 0) {
+        Inertia.post(route('admin.seenContact', item.id), {}, {
+            onSuccess() {
+                Inertia.reload({only: ['contacts']})
+            }
+        })
+    }
+}
+
 </script>

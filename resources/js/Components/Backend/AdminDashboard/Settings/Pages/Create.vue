@@ -6,11 +6,11 @@
     </div>
     <div class="relative w-full">
         <CSelect v-model="form.type" :options="pageTypes" placeholder="Select Type" class="w-full" />
-        <span class="absolute top-full left-0 text-xs text-red-500 mt-[2px]">
-            {{ Helper.translate(form.errors.type, true) }}
-        </span>
+        <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.type, true) }}</span>
     </div>
-    <ckeditor class="mb-4" :editor="ClassicEditor" v-model="form.description" :config="editorConfig"></ckeditor>
+    <div class="block mt-8">
+        <ckeditor class="mb-4" :editor="ClassicEditor" v-model="form.description" :config="editorConfig"></ckeditor>
+    </div>
     <button @click="handleSave" class="bg-green-500 text-white ml-auto block font-semibold px-4 py-2 rounded mt-2"> Save </button>
 </template>
 

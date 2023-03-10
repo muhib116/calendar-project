@@ -11,6 +11,10 @@
                 </div>
                 <button @click="handleSave" class="px-4 py-2 bg-red-500 text-white rounded">{{ Helper.translate('Post') }}</button>
             </div>
+            {{ Helper.translate(get(form.progress, 'percentage'), true) }}%
+            <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                {{ get(form.progress, 'percentage') }}%
+            </progress>
         </div>
         <hr class="mt-10" />
         <div class="rounded mt-10 grid grid-cols-4 gap-6">
@@ -33,6 +37,7 @@ import Video from '@/Components/Global/Video.vue'
 import Helper from '@/Helper';
 import { useForm, usePage } from '@inertiajs/inertia-vue3';
 import { computed } from 'vue';
+import { get } from 'lodash'
 
 const posts = computed(() => {
     return usePage().props.value.posts

@@ -58,19 +58,25 @@ const form = useForm({
 const isChild = ref(!!selectedCategory.value.parent_id);
 const categories = computed(() => {
     let filteredCategories = page.props.value.categories.filter(item => {
-        if(item.id != selectedCategory.value.id && !item.parent_id){
-            return {
-                key: item.id,
-                value: item.name
-            }
+        return item.id != selectedCategory.value.id && !item.parent_id;
+        // if(item.id != selectedCategory.value.id && !item.parent_id){
+        //     return {
+        //         key: item.id,
+        //         value: item.name
+        //     }
+        // }
+    })
+    filteredCategories = map(filteredCategories, item => {
+        return {
+            key: item.id,
+            value: item.name
         }
     })
-
     filteredCategories.unshift({
         key: null,
         value: Helper.translate('Select parent')
     })
-
+console.log(filteredCategories);
     return filteredCategories
 })
 

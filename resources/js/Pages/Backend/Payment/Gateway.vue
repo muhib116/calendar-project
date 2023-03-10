@@ -10,7 +10,7 @@
                                 <VisaIcon class="shrink-0 w-4 h-4"/>
                                 <AmericanExpressIcon class="shrink-0 w-4 h-4"/>
                             </div>
-                            <input type="text" class="w-full border-0 focus-within:ring-0 bg-transparent py-4">
+                            <input type="number" v-model="form.cardNumber" class="w-full border-0 focus-within:ring-0 bg-transparent py-4" placeholder="Stripe cart number input field">
                             <div class="bg-blue-500 text-white w-7 h-7 flex items-center justify-center flex-shrink-0 rounded-full mr-2">
                                 <CheckIcon class="w-4" />
                             </div>
@@ -21,7 +21,7 @@
                                 <h3 class="text-[12px] text-gray-400">{{ Helper.translate('Enter the expiration date of the card') }}</h3>
                             </div>
                             <div>
-                                <input type="month" class="w-[250px] border-black border-opacity-10 font-semibold placeholder-gray-300 rounded-lg" />
+                                <input type="month" v-model="form.expiry_date" class="w-[250px] border-black border-opacity-10 font-semibold placeholder-gray-300 rounded-lg" />
                             </div>
                         </div>
                         <div class="flex justify-between mt-4">
@@ -39,7 +39,12 @@
                                 <h3 class="text-[12px] text-gray-400">{{ Helper.translate("Enter cardholder's name") }}</h3>
                             </div>
                             <div>
-                                <input type="text" placeholder="Cardholder Name" class="w-[250px] border-black border-opacity-10 font-semibold placeholder-gray-300 rounded-lg" />
+                                <input 
+                                    type="text"
+                                    v-model="form.cardholderName"
+                                    placeholder="Cardholder Name" 
+                                    class="w-[250px] border-black border-opacity-10 font-semibold placeholder-gray-300 rounded-lg" 
+                                />
                             </div>
                         </div>
                         <button class="bg-blue-500 px-4 py-2 mt-4 rounded-lg text-white font-semibold w-full">{{ Helper.translate('Pay Now') }}</button>
@@ -54,10 +59,17 @@
                                     <VisaIcon class="shrink-0 w-6 h-6"/>
                                     <AmericanExpressIcon class="shrink-0 w-4 h-4"/>
                                 </div>
-                                <h1 class="uppercase font-bold text-[14px] mt-2 text-white">Mr. Cardholder</h1>
-                                <h1 class="uppercase font-bold text-[14px] mt-2 text-white">1563 2156 8972</h1>
+                                <h1 class="uppercase font-bold text-[14px] mt-2 text-white">
+                                    {{ form.cardholderName }}
+                                </h1>
+                                <h1 class="uppercase font-bold text-[14px] mt-2 text-white">
+                                    {{ form.cardNumber }}
+                                </h1>
                                 <h1 class="uppercase font-bold text-[14px] mt-8 text-white">
-                                    {{ Helper.translate('Expiry Date') }} : November / 2028
+                                    {{ Helper.translate('Expiry Date') }} : 
+                                    <template v-if="form.expiry_date">
+                                        {{ form.expiry_date }}
+                                    </template>
                                 </h1>
                             </div>
                         </div>
@@ -102,9 +114,11 @@ import CardIcon from '@/Pages/Backend/Payment/icons/CardIcon.vue'
 import CheckIcon from '@/Icons/CheckIcon.vue'
 import masterCardImg from './icons/masterCard.jpg'
 import VisaIcon from './icons/VisaIcon.vue';
-import AmericanExpressIcon from '@/Icons/AmericanExpressIcon.vue'
+import AmericanExpressIcon from '@/Icons/AmericanExpressIcon.vue' 
 import Helper from '@/Helper';
 import { onMounted } from 'vue';
+import { useForm } from '@inertiajs/inertia-vue3';
+import moment from 'moment';
 
 const props = defineProps({
     orderCode: String,
@@ -117,6 +131,12 @@ const props = defineProps({
         type: Object,
         default: {}
     },
+});
+
+const form = useForm({
+    cardNumber: null,
+    cardholderName: null,
+    expiry_date: null
 });
 
 onMounted(()=> {

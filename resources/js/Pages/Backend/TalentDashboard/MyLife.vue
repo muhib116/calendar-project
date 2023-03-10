@@ -30,7 +30,13 @@
                 <component :is="components[currentComponent]" />
             </div>
             <Modal v-model="showPreview" class="w-full">
-                <Subscribe class="bg-white" @close="showPreview=false" :closeable="true"/>
+                <Subscribe 
+                    class="bg-white" 
+                    @close="showPreview=false" 
+                    :closeable="true"
+                    :user="$page.props.auth.user"
+                    :posts="$page.props.posts"
+                />
             </Modal>
         </template>
     </DashboardLayout>
@@ -43,6 +49,7 @@ import LeftSide from '@/Components/Backend/TalentDashboard/LeftSide.vue'
 import useMyLife from '@/Pages/Backend/TalentDashboard/useMyLife.js'
 import Modal from '@/Components/Library/Modal.vue'
 import Subscribe from '@/Components/Backend/Subscribe.vue'
+import { get } from 'lodash'
 
 const currentComponent = ref('Setup')
 const { components } = useMyLife()

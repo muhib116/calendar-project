@@ -184,8 +184,8 @@ Meeting: 007;
     -- show pending and soft deleted list on payout processed tab
 
 
-3:: select talents for frontend
-4:: category parent could not be same parent.
+3:: ✅select talents for frontend
+4:: ✅category parent could not be same parent.
 5:: category refector.
 6:: rename talent_earnings to talents_earnings_type
     -- make talent_earnings for user payment
@@ -200,21 +200,21 @@ Meeting: 007;
 
 
 ----------------------------
-select type on page create.
+✅select type on page create.
 
-show talent on frontend after approve.
+✅show talent on frontend after approve.
 
-payment select occasion without
+✅payment select occasion without
 
-category which has talent
+✅category which has talent
 
 on left sidebar..
 	sub category will dropdown under category
 
-payment->card number will change on input
+✅payment->card number will change on input
 
 
-page type will unique
+✅page type will unique
 page type default value
 
 
@@ -250,8 +250,22 @@ page type default value
 Task by muhib:
 ---------------------
 1. ✅Upload cover picture in talent "My life" menu
-2. ✅Make functional/dynamic 'Add/Manage' under "My life" menu, after clicking preview button, show the cover   picture in banner section and show the video in bottom that talent uploaded in 'add/manage'
+2. ✅Make functional/dynamic 'Add/Manage' under "My life" menu, after clicking preview button, show the cover 
+    picture in banner section and show the video in bottom that talent uploaded in 'add/manage'
 3. ✅Add our confirm modal in  T-Application's approved and decline button
-4. In frontend make contact page dynamic (controller, model, and migration created), use php strip_tag function to avoid the html tag
-5. In admin dashboard here is a menu called "Contact info", show the list of contact information submitted from frontend, if admin click on replay button change the "seen" value to 1 in DB, and make reply function in modal.
-6. and we have a new page called "FAQ", we need to make this page from backend
+4. ✅In frontend make contact page dynamic (controller, model, and migration created), 
+    use php strip_tag function to avoid the html tag
+5. ✅ In admin dashboard here is a menu called "Contact info", show the list of contact information 
+    submitted from frontend, if admin click on replay button change the "seen" value to 1 in DB, and make reply function in modal.
+6. ✅and we have a new page called "FAQ", we need to make this page from backend
+
+
+
+
+
+
+
+
+
+--------------------
+Textarea component character limit issue.

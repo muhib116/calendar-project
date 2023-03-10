@@ -141,7 +141,6 @@ function handleBefore() {
     data.occassion_id = validate('occassion_id');
     data.instruction = validate('instruction');
     data.payType = props.type;
-
     let amount = Helper.getCommission(props.earning.amount) + props.earning.amount;
 
     if (!isEmpty(form.errors)) {

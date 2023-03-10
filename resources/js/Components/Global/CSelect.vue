@@ -2,7 +2,10 @@
     <label class="relative block">
         <span v-if="!modelValue && isEmpty(modelValue)" class="absolute left-0 top-3 opacity-40">{{ placeholder }}</span>
         <select @input="updateValue" v-model="getModelValue" :type="type" class="myInput border border-none focus:outline-none px-0 py-3 block w-full remove-shadow">
-            <option v-for="(option, index) in options" :value="getKey(option)" :key="index">{{ getValue(option) }}</option>
+            <template v-for="(option, index) in options" :key="index">
+                <option value="" v-if="!getKey(option)" selected>{{ getValue(option) }}</option>
+                <option v-else :value="getKey(option)">{{ getValue(option) }}</option>
+            </template>
         </select>
         <span class="customBorder"></span>
     </label>

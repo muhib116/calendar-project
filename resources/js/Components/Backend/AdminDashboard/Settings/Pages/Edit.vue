@@ -6,9 +6,11 @@
     </div> 
     <div class="relative mb-6">
         <CSelect v-model="form.type" :options="pageTypes" />
-        <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.title, true) }}</span>
+        <span class="absolute top-full left-0 text-xs text-red-500">{{ Helper.translate(form.errors.type, true) }}</span>
     </div>
-    <ckeditor class="mb-4" :editor="ClassicEditor" v-model="form.description" :config="editorConfig"></ckeditor>
+    <div class="block pt-8">
+        <ckeditor class="mb-4" :editor="ClassicEditor" v-model="form.description" :config="editorConfig"></ckeditor>
+    </div>
     <div class="flex gap-5 justify-end">
         <button @click="$emit('canceledit')" class="bg-red-500 text-white block font-semibold px-4 py-2 rounded mt-2">
             {{ Helper.translate('Cancel') }}

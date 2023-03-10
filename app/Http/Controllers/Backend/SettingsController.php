@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\Settings;
@@ -14,11 +15,13 @@ class SettingsController extends Controller
     function index(){
         $settings = Settings::first();
         $pages = Page::orderBy('id', 'DESC')->get();
+        $faqs = Faq::orderBy('id', 'DESC')->get();
         $languages = Language::orderBy('id', 'DESC')->get();
         return Inertia::render('Backend/AdminDashboard/Settings/Index', [
             'settings' => $settings,
             'pages' => $pages,
             'languages' => $languages,
+            'faqs' => $faqs,
         ]);
     }
 
@@ -81,6 +84,7 @@ class SettingsController extends Controller
         $except = $request->id ? $request->id : Page::class;
         $request->validate([
             'title' => 'required|unique:pages,title,'.$except,
+            'type' => 'required|unique:pages,type,'.$except,
         ]);
         Page::updateOrCreate(['id' => $request->id],[
             'title' => $request->title,
