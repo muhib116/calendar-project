@@ -10,6 +10,8 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 import axios from 'axios'
 import 'vue3-toastify/dist/index.css' 
 
+import CategoryHelper from '@/CategoryHelper'
+
 
 axios.defaults.baseURL = `${document.location.origin}/api/`;
 const appName = window.document.getElementsByTagName('title')[0]?.innerText
@@ -22,6 +24,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(CKEditor)
+            .use(CategoryHelper, props.initialPage.props)
             .mount(el);
     },
 })

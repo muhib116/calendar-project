@@ -208,8 +208,8 @@ Meeting: 007;
 
 ✅category which has talent
 
-on left sidebar..
-	sub category will dropdown under category
+✅on left sidebar..
+	✅sub category will dropdown under category
 
 ✅payment->card number will change on input
 
