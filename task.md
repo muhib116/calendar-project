@@ -186,12 +186,12 @@ Meeting: 007;
 
 3:: ✅select talents for frontend
 4:: ✅category parent could not be same parent.
-5:: category refector.
+5:: ✅category refector.
 6:: rename talent_earnings to talents_earnings_type
     -- make talent_earnings for user payment
 6:: add balance field to user table
 
-7:: on admin panel > wish request status column and done/button
+7:: on ad;min panel > wish request status column and done/button
 
     talents_earnings
         talent_id, user_id, amount, commission_amount, commission, type, gender, instructio.............
@@ -218,35 +218,6 @@ Meeting: 007;
 page type default value
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Task by muhib:
 ---------------------
 1. ✅Upload cover picture in talent "My life" menu
@@ -259,6 +230,29 @@ Task by muhib:
     submitted from frontend, if admin click on replay button change the "seen" value to 1 in DB, and make reply function in modal.
 6. ✅and we have a new page called "FAQ", we need to make this page from backend
 
+
+
+----------------------------
+14-03-2023
+ADMIN SHOULD HAVE THEIR OWN LOGIN PANEL NOT SAME AS WEBSITE LOGIN
+
+HOME PAGE/LANDING PAGE: HERE PLEASE ADD THE NAME OF THE PERSON ON THE VIDEO. WHEN WE (TALENTS/USERS WHO ARE LOGGED IN) CLICK ON A VIDEO IT SHOULD REDIRECT US TO THE TALENT PROFILE PAGE. IF THE PERSON WHO CLICKS ON IT DOES NOT HAVE AN ACCOUNT OR IS NOT LOGGED IN THEN HE SHOULD BE REDIRECTED TO THE SIGN UP/SIGN IN PAGE.
+
+SUBCATEGORIES SHOULD BE ADDED UNDER CATEGORIES ON ‘BECOME A TALENT PAGE’, ‘PROFILE SET UP PAGE’ FOR TALENT AND IN THE ADMIN/CATEGORY PAGE
+
+=> WE ARE MISSING CATEGORIES PAGE, FAQ PAGE, AND CONTACT PAGE ON THE BOTTOM OF THE WEBSITE PAGES WE ONLY SEE TERMS AND PRIVACY.
+
+WHEN A USER CREATE AN ACCOUNT, THEY SHOULD GET A VERIFICATION EMAIL TO ACTIVATE THEIR USER ACCOUNT BEFORE HAVING ACCESS TO THE WEBSITE.
+
+ALL CHECKED BOX TERMS SHOULD BE UNCHECKED. USER OR TALENT WILL HAVE TO CHECK THEM BEOFRE PROCEEDING AND CREATE AN ACCOUNT OR SUBMITTING THE REQUEST TO BECOME A TALENT.
+
+THE RED COLOR ON MESSAGE AND NOTIFICATION SHOULD ONLY APPEAR IF A MESSAGE OR NOTIFICATION IS ACTUALLY RECEIVED.
+
+AFTER BECOME A TALENT REQUEST IS SENT, THERE SHOULD BE A POP UP TO LET THE APPLICANT KNOW THAT THEIR REQUEST HAS BEEN SUBMITTED.
+
+ONCE A TALENT IS APPROVED THEY SHOULD GET AN EMAIL ND LET THEM KNOW THAT WAS APPROVE/DECLINE – IN CASE OF APPROVAL THEY SHOULD GET A LINK AND WHEN THEY CLICK ON THE LINK IT SHOULD FIRST TAKE THAM TO A PAGE TO SET UP THEIR PASSWORD AND AFTER THAT THEY SHOULD BE REDIRECTED TO THE PROFILE SET UP PAGE TO ADD A VIDEO, PICTURE AND FILL ALL MANDATORY INFORMATION.
+
+Show calendar section on user when there in talent profile if the talent has any calendar that has isSalable true/1
 
 
 
