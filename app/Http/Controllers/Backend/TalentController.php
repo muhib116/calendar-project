@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Follower;
-use App\Models\TalentEarning;
+use App\Models\TalentEarningType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -210,17 +210,17 @@ class TalentController extends Controller
         ])->first();
         $talent->isFollow = $isFollow ? 1 : 0;
 
-        $wish = TalentEarning::where([
+        $wish = TalentEarningType::where([
             'user_id' => $id,
             'type' => 'wish',
             'status' => 1,
         ])->first();
-        $tips = TalentEarning::where([
+        $tips = TalentEarningType::where([
             'user_id' => $id,
             'type' => 'tips',
             'status' => 1,
         ])->first();
-        $mylife = TalentEarning::where([
+        $mylife = TalentEarningType::where([
             'user_id' => $id,
             'type' => 'mylife',
             'status' => 1

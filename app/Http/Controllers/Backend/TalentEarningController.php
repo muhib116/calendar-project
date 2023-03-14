@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Models\TalentEarning;
+use App\Models\TalentEarningType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,7 +12,7 @@ use Inertia\Inertia;
 class TalentEarningController extends Controller
 {
     public function wishRequest() {
-        $wish = TalentEarning::where('user_id', auth()->id())->where('type', 'wish')->first();
+        $wish = TalentEarningType::where('user_id', auth()->id())->where('type', 'wish')->first();
         return Inertia::render('Backend/TalentDashboard/WishRequest', [
             'wish' => $wish
         ]);
@@ -36,7 +36,7 @@ class TalentEarningController extends Controller
             'status' => 'required',
         ]);
 
-        TalentEarning::updateOrCreate([
+        TalentEarningType::updateOrCreate([
             'user_id' => auth()->id(),
             'type' => 'wish',
         ], [
@@ -50,7 +50,7 @@ class TalentEarningController extends Controller
     }
 
     public function myLife() {
-        $mylife = TalentEarning::where('user_id', auth()->id())->where('type', 'mylife')->first();
+        $mylife = TalentEarningType::where('user_id', auth()->id())->where('type', 'mylife')->first();
         $posts = Post::where('user_id', auth()->id())->get();
         return Inertia::render('Backend/TalentDashboard/MyLife', [
             'mylife' => $mylife,
@@ -64,7 +64,7 @@ class TalentEarningController extends Controller
             'status' => 'required',
         ]);
 
-        TalentEarning::updateOrCreate([
+        TalentEarningType::updateOrCreate([
             'user_id' => auth()->id(),
             'type' => 'mylife',
         ], [
@@ -78,7 +78,7 @@ class TalentEarningController extends Controller
     }
 
     public function tips() {
-        $tips = TalentEarning::where('user_id', auth()->id())->where('type', 'tips')->first();
+        $tips = TalentEarningType::where('user_id', auth()->id())->where('type', 'tips')->first();
         return Inertia::render('Backend/TalentDashboard/Tips', [
             'tips' => $tips
         ]);
@@ -89,7 +89,7 @@ class TalentEarningController extends Controller
             'status' => 'required',
         ]);
 
-        TalentEarning::updateOrCreate([
+        TalentEarningType::updateOrCreate([
             'user_id' => auth()->id(),
             'type' => 'tips',
         ], [

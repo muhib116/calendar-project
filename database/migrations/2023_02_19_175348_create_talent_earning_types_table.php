@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('talent_earnings', function (Blueprint $table) {
+        Schema::create('talent_earning_types', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('type');
             $table->double('amount');
-            $table->string('transaction_id')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
         });
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('talent_wishes');
+        Schema::dropIfExists('talent_earning_types');
     }
 };
